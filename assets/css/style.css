@@ -345,5 +345,71 @@ nav a {
 }
 
 
+/* Form */
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 3rem;
+    border-radius: 8px;
+    border: 1px solid pink;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin-top: 1rem;
+    justify-content: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 0.5rem;
+}
+
+textarea {
+    height: 150px;
+}
+
+button[type="submit"] {
+    background-color: #ff96de;
+    color: #221f1f;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+    margin: 0.5rem;
+    text-align: center;
+}
+
+button[type="submit"]:hover {
+    background-color: #b35700;
+}
+
+form h1 {
+    margin: 0.5rem;
+    text-align: center;
+}
+
+
 
 /* Media Queries */
