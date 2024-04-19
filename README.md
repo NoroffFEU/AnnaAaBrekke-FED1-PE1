@@ -6,11 +6,11 @@ Use this file to describe your project.
 
 Client
 
-Name: Serena, the blogger of "Wherever Forever"
-Industry: Travel and Influencer Marketing
-Business Size: Solo entrepreneur
-Location: Global
-Mission: To transform the personal travel diaries of Serena into an engaging travel blog that highlights must-visit places, recommended cafés, restaurants, activities, and unforgettable experiences. Each blog post will also feature a standout memory and an inspirational quote or thought from Serena's travels.
+- Name: Serena, the blogger of "Wherever Forever"
+- Industry: Travel and Influencer Marketing
+- Business Size: Solo entrepreneur
+- Location: Global
+- Mission: To transform the personal travel diaries of Serena into an engaging travel blog that highlights must-visit places, recommended cafés, restaurants, activities, and unforgettable experiences. Each blog post will also feature a standout memory and an inspirational quote or thought from Serena's travels.
 
 
 Project Overview:
