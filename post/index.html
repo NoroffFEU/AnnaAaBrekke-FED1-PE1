@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Post</title>
+    <title>Wherever Forever</title>
     <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/ead288c181.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
 
     <header>
         <nav class="logo">
-          <a href="index.html">Wherever Forever</a>
+          <a href="/index.html">Wherever Forever</a>
         </nav>
         
         <nav class="website-nav">
@@ -22,91 +26,68 @@
     </header>
     
     <section id="post">
-        <div class="filter-buttons">
-            <div class="filter-buttons">
-                <button class="country" value="Croatia">Croatia</button>
-                <button class="country" value="Denmark">Denmark</button>
-                <button class="country" value="Egypt">Egypt</button>
-                <button class="country" value="France">France</button>
-                <button class="country" value="Greece">Greece</button>
-                <button class="country" value="Indonesia">Indonesia</button>
-                <button class="country" value="Jordan">Jordan</button>
-                <button class="country" value="Norway">Norway</button>
-                <button class="country" value="Philippines">Philippines</button>
-                <button class="country" value="Portugal">Portugal</button>
-                <button class="country" value="Sri Lanka">Sri Lanka</button>
-                <button class="country" value="Thailand">Thailand</button>
-                <button class="country" value="USA">USA</button>
-                <button class="country" value="Vietnam">Vietnam</button>
-            </div>
-        </div>
         <article>
-        <div class="grid-post">
-            <img class="post-img" src="/assets/images/snorkel_whale.webp" alt="" id="">
-            <div class="post-info">
-                <h1 class="post-title">Lombok Paradise</h1>
-                <div class="tags">
-                    <button class="tag" value="beach">Beach</button>
-                    <button class="tag" value="tropical">Tropical Paradise</button>
-                    <button class="tag" value="surf">Surf</button>
-                    <button class="tag" value="food">Food</button>
-                    <button class="prices" value="cheap">$$</button>
-                </div>
-            </div>
-            <div class="post-columns">
-                <h2 class="intro"></h2>
-                    <p class="post-text">Discover pristine white beaches, catch the perfect surf, and embrace the ultimate chill vibes.</p>
-            </div>
-            <div class="post-columns">
-                <h3 class="memory">Core Memory</h3>
+            <div class="main-post">
+                <div class="post-header">
+                    <img class="post-img" src="/assets/images/snorkel_whale.webp" alt="Scenic view of Snorkel with Whale" id="">
+                    <h1 class="post-title">Lombok Paradise</h1>
+                    <time datetime="2024-04-18">April 18, 2024</time>
+                    <div class="tags">
+                        <button class="tag" value="beach">Beach</button>
+                        <button class="tag" value="tropical">Tropical Paradise</button>
+                        <button class="tag" value="surf">Surf</button>
+                        <button class="tag" value="food">Food</button>
+                        <button class="prices" value="cheap">$$</button>
+                    </div>
+                 </div>
+                <section class="intro">
+                    <h2 class="intro-title">Intro</h2>
+                    <p>Discover pristine white beaches, catch the perfect surf, and embrace the ultimate chill vibes.</p>
+                </section>
+                <section class="memory">
+                    <h3>Core Memory</h3>
                     <p>Reflect on the unforgettable experiences that define this adventure. Describe an early morning when the beach is quiet, and the first rays of the sun paint the waves in golden hues. Share a moment when you caught the perfect wave, feeling the rush as the cool water splashed around you.</p>
-            </div>
-            <div class="post-columns">
-                <h3 class="Activities">Activities</h3>
+                </section>
+                <section class="activities">
+                    <h3>Activities</h3>
                     <p>Surfing: Whether you’re a beginner or a seasoned pro, find the best spots to ride the waves.</p>
                     <p>Beach Yoga: Experience relaxation and rejuvenation with yoga sessions on the soft sands, under the open sky.</p>
-            </div>
-            <div class="post-columns">
-                <div class="column">
-                    <h3 class="Places to See">Places to See</h3>
+                </section>
+                <section class="places-to-see">
+                    <h3>Places to See</h3>
                         <p>Hidden Cove: A secluded paradise perfect for those seeking tranquility.</p>
-                        <img src="">
-                </div>
-                <div class="column">
-                    <p>Sunset Beach: Renowned for its stunning sunsets and vibrant nightlife.</p>
-                    <img src="">
-                </div>
-            </div>
-            <div class="post-columns">
-                <h3 class="Food">Places to Eat</h3>
-                <div class="column">
-                    <p>Loki: Acaii Bowls and Smoothies. Fun and chill vibe.</p>
-                    <img src="">
-                </div>
-                <div class="column">
-                    <p>Far Out: Nasurang and great local food. Service is so good.</p>
-                    <img src="">
-                </div>
-            <div class="post-columns">
-                <h4>Gallery</h4>
-                    <div class="gallery">
-                        <img src="">
-                        <img src="">
-                        <img src="">
-                        <img src="">
+                        <img src="" alt="Hidden Cove">
+                        <p>Sunset Beach: Renowned for its stunning sunsets and vibrant nightlife.</p>
+                        <img src="" alt="Sunset Beach">
+                </section>
+                <section class="food">
+                    <h3>Places to Eat</h3>
+                        <p>Loki: Acai Bowls and Smoothies. Fun and chill vibe.</p>
+                        <img src="" alt="Loki Restaurant">
+                        <p>Far Out: Nasi Goreng and great local food. Service is so good.</p>
+                        <img src="" alt="Far Out Restaurant">
+                </section>
+                <section class="gallery">
+                    <h4>Gallery</h4>
+                    <div class="gallery-grid">
+                        <img src="" alt="Gallery Image 1">
+                        <img src="" alt="Gallery Image 2">
+                        <img src="" alt="Gallery Image 3">
+                        <img src="" alt="Gallery Image 4">
+                        <img src="" alt="Gallery Image 5">
+                        <img src="" alt="Gallery Image 6">
                     </div>
-            </div>
-            <div class="map">
-                map
+                </section>
+                <div class="map">
+                  map??
+                </div>
             </div>
         </article>
     </section>
-
+        
     <footer>
         <nav class="footer-nav">
-            <nav class="logo">
-                <a href="index.html">Wherever Forever</a>
-            </nav>
+            <a href="index.html" class="logo">Wherever Forever</a>
             <ul>
                 <li>&copy; 2023 All rights reserved</li>
                 <li><a href="privacypolicy.html">Privacy Policy</a></li>

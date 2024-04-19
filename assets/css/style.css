@@ -1,12 +1,14 @@
-
 body {
     background-color: rgb(164, 236, 212);
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     background-image: url(/assets/images/spring_flower_kid.jpeg);
     background-position: center top;
     background-repeat: no-repeat;
     background-color: hsl(180, 7%, 97%);
+    padding: 1rem;
 }
+
+/* Header */
 
 header {
     background-color: rgba(204, 204, 204, 0.5);
@@ -94,12 +96,12 @@ nav a {
     margin: 0;
     padding: 0;
     background-color: #cbd1cf68;  
-    justify-content: center;
+    justify-content: flex-start; 
+    scroll-snap-type: x mandatory; 
 }
 
 .slide-arrow {
     position: absolute;
-    display: flex;
     top: 0;
     bottom: 0;
     margin: auto;
@@ -112,6 +114,7 @@ nav a {
     cursor: pointer;
     opacity: 0.5;
     transition: opacity 100ms;
+    user-select: none; 
 }
 
 .slide-arrow:hover,
@@ -132,9 +135,9 @@ nav a {
 }
 
 .slide {
-    width: 20%;
+    width: 100%;
     height: 100%;
-    flex: 1 0 100%;
+    flex: none;
     background-color: white;
     border-radius: 5px;
     padding: 1rem;
@@ -143,20 +146,25 @@ nav a {
     justify-content: center;
     align-items: center;
     margin: 1rem;
+    scroll-snap-align: start;
+    transition: transform 300ms ease-in-out;
 }
 
 .slide img {
     height: calc(100% - 12rem);
+    object-fit: cover;
 }
 
 .slide h3 {
     font-size: 30px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Added for text readability */
 }
 
 .slide p {
     font-size: 24px;
     font-weight: 500;
     margin-top: 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Added for text readability */
 }
 
 /* Grid Layout */
@@ -199,7 +207,8 @@ nav a {
     margin: 1rem;
 }
 
-.grid-post {
+.grid-post,
+.main-post {
     border: 1px solid #ccc;
     padding: 1rem;
     background-color: #fff;
@@ -255,6 +264,63 @@ nav a {
     border-color: greenyellow;
     margin: 2px;
 }
+
+/* Post Page */
+
+.main-post {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    box-shadow: o 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.post-header {
+    text-align: center;
+    padding: 1rem;
+}
+
+#post .post-title {
+    font-size: 42px;
+    margin: 1rem;
+}
+
+#post h2, h3, h4 {
+    font-size: 28px;
+}
+
+#post p {
+    font-size: 22px;
+}
+
+.memory {
+    background-color: linear-gradient(to bottom, #ffffff 0%, #f9e9f6b6 100%);
+    color: #272220; 
+    padding: 1rem;
+    text-align: center;
+    border: 1px #ccc;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+    border-radius:  2rem; 
+    margin-left: 5rem;
+    margin-right: 5rem;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.2rem;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: auto;
+}
+
+
+#intro, #activities, #places-to-see, #food {
+    margin: 1rem;
+    padding: 0.5rem;
+}
+
 
 /* Footer */
 .footer-nav {
