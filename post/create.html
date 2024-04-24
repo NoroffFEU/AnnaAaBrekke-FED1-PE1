@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>Create Blog Post</title>
     <link rel="stylesheet" href="/assets/css/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,14 +17,22 @@
     ></script>
   </head>
 
-  <form id="loginForm">
-    <h1>Login</h1>
-    <input type="email" id="ownerEmail" placeholder="Email" required />
-    <input type="password" id="ownerPassword" placeholder="Password" required />
-    <button type="submit">Login</button>
+  <form id="createPostForm">
+    <h1>Create Post</h1>
+    <input type="text" id="postTitle" placeholder="Title" required />
+    <!-- <input type="file" id="postImage" accept="image/*" required /> -->
+    <textarea id="postContent" placeholder="Content" required></textarea>
+    <input
+      type="text"
+      id="postTags"
+      placeholder="Tags (comma separated)"
+      required
+    />
+    <button type="submit">Create Post</button>
   </form>
 
-  <div class="login-message"></div>
+  <div class="create-message"></div>
 
-  <script type="module" src="../assets/js/login.js"></script>
+  <script type="module" src="../assets/js/createBlogPost.js"></script>
+  <script type="module" src="../assets/js/main.js"></script>
 </html>

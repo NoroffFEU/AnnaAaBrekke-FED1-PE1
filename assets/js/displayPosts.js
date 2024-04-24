@@ -1,18 +1,25 @@
-import { getPosts } from "/getBlogPosts.js";
+import { getPosts } from "./api.mjs";
 
 export async function displayPosts() {
-    try {
-        const posts = await getPosts();
-        console.log("Posts is here:", posts);
-        return posts; // Make sure to return the posts
-    } catch (error) {
-        console.error("Error displaying the posts:", error);
-        throw error; // Rethrow the error to be handled by the caller
-    }
-}
+  const postContainer = document.querySelectorAll(".grid-post");
 
-export async function postContainer (posts) {
+  postContainer.forEach(async (postContainer) => {
+    postContainer.innerHTML = "";
+
     try {
-        
+      const posts = await getPosts();
+      posts.forEach((post) => {
+        const postElement = document.createElement("div");
+        postElement.classList.add("post");
+        postElement.innerHTML = `
+          <h2>${post.title}</h2>
+          <p>${post.body}</p>
+          <p>Tags: ${post.tags.join(", ")}</p>
+        `;
+        postContainer.appendChild(postElement);
+      });
+    } catch (error) {
+      console.error("Error displaying the posts:", error);
     }
+  });
 }

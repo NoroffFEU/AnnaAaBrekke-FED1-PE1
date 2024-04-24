@@ -1,26 +1,25 @@
-import { registerUser } from './api.js'; // Adjust the path as needed
+import { registerUser } from "./api.mjs"; // Adjust the path as needed
 
-document.getElementById('registerForm').addEventListener('submit', async (event) => {
+document
+  .getElementById("registerForm")
+  .addEventListener("submit", async (event) => {
     event.preventDefault();
     const registerData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        password: document.getElementById('password').value
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      password: document.getElementById("password").value,
     };
     try {
-        const response = await registerUser(registerData);
-        document.getElementsByClassName('register-message')[0].textContent = 'Registration successful!';
-        
-        // Redirect to login page after registration if needed login.html
+      const response = await registerUser(registerData);
+      document.getElementsByClassName("register-message")[0].textContent =
+        "Registration successful!";
 
-        
+      // Redirect to login page after registration if needed login.html
     } catch (error) {
-        document.getElementsByClassName('register-message')[0].textContent = 'Registration failed: ' + error.message;
+      document.getElementsByClassName("register-message")[0].textContent =
+        "Registration failed: " + error.message;
     }
-});
-
-
-
+  });
 
 // import { getPosts } from "./getBlogPosts.js";
 
