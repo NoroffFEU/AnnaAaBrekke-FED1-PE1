@@ -17,22 +17,50 @@
     ></script>
   </head>
 
-  <form id="createPostForm">
-    <h1>Create Post</h1>
-    <input type="text" id="postTitle" placeholder="Title" required />
-    <!-- <input type="file" id="postImage" accept="image/*" required /> -->
-    <textarea id="postContent" placeholder="Content" required></textarea>
-    <input
-      type="text"
-      id="postTags"
-      placeholder="Tags (comma separated)"
-      required
-    />
-    <button type="submit">Create Post</button>
-  </form>
+  <body>
+
+    <form id="createPostForm">
+      <h1>Create Post</h1>
+      <input type="file" id="postImage" accept="image/*"> 
+      <input type="text" id="postTitle" placeholder="Post Title" required>
+      <textarea id="postContent" placeholder="Post Content" required></textarea>
+      <button type="submit">Create Post</button>
+    </form>
+  
 
   <div class="create-message"></div>
 
+  <div class="create-headline">
+    <h1>All posts you have created is stored here</h1>
+  </div>
+
+  <div class="post-container">
+    <div class="grid-post">
+      <img
+        class="post-img"
+        src="/assets/images/snorkel_whale.webp"
+        alt=""
+        id=""
+      />
+      <div class="post-info">
+        <h3 class="post-title">Lombok Paradise</h3>
+        <p class="post-text">
+          Discover pristine white beaches, catch the perfect surf, and
+          embrace the ultimate chill vibes.
+        </p>
+        <!-- <div class="tags">
+          <button class="tag" value="beach">Beach</button>
+          <button class="tag" value="tropical">Tropical Paradise</button>
+          <button class="tag" value="surf">Surf</button>
+          <button class="tag" value="food">Food</button>
+          <button class="prices" value="cheap">$$</button>
+        </div> -->
+        <div class="more-buttons">
+          <button class="read-more">Read More</button>
+        </div>
+      </div>
+    </div>
+
   <script type="module" src="../assets/js/createBlogPost.js"></script>
-  <script type="module" src="../assets/js/main.js"></script>
+</body>
 </html>

@@ -17,7 +17,8 @@ const loginData = {
 
 try {
   const loginResponse = await loginOwner(loginData);
-  console.log("Login good;", loginResponse);
+  console.log("Login successfull;", loginResponse);
+  if (loginResponse && loginResponse.data && loginResponse.data.accessToken);
   localStorage.setItem(`token`, loginResponse.data.accessToken);
 } catch (error) {
   console.error("Login failed:", error);
@@ -69,34 +70,28 @@ export async function performLogin(loginData) {
 }
 
 // Fetch all products
-export async function getPosts(name) {
-  try {
-    const response = await fetch(`${apiUrlUser}/${name}`);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching posts:", error);
-    throw error;
-  }
-}
-
-// Fetch a single product by ID
-export async function getSinglePost(name, id) {
-  try {
-    const response = await fetch(`${apiUrlUser}/${name}/${id}`);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching the selected post:", error);
-    throw error;
-  }
-}
+// Fetch all posts, with Authorization header if needed
+// export async function getPosts(name, accessToken) {
+//   // accessToken parameter added
+//   try {
+//     const headers = {};
+//     if (accessToken) {
+//       headers["Authorization"] = `Bearer ${accessToken}`;
+//     }
+//     const response = await fetch(`${apiUrlUser}/${name}`, {
+//       method: "GET",
+//       headers: headers,
+//     });
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! status: ${response.status}`);
+//     }
+//     const data = await response.json();
+//     return data;
+//   } catch (error) {
+//     console.error("Error fetching posts:", error);
+//     throw error;
+//   }
+// }
 
 // avatar: {
 //     url: "https://img.service.com/avatar.jpg", // Optional
