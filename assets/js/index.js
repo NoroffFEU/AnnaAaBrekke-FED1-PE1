@@ -1,48 +1,48 @@
-import { getSinglePost } from "./get.js"; // Path to your get.js module
+// import { getPosts } from "./get.js"; // Path to your get.js module
 
-document.addEventListener("DOMContentLoaded", async () => {
-  const name = "SerenaTravel"; // This should match the identifier used by your API
-  const accessToken = localStorage.getItem("token"); // This is required if the API needs authentication
+// document.addEventListener("DOMContentLoaded", async () => {
+//   const name = "SerenaTravel"; // This should match the identifier used by your API
+//   const accessToken = localStorage.getItem("token"); // This is required if the API needs authentication
 
-  try {
-    // Fetch and display all posts
-    const allPosts = await getSinglePost(name, accessToken);
-    console.log("Fetched posts:", allPosts);
-    displayPosts(allPosts); // Use this function to add the posts to the DOM
-  } catch (error) {
-    console.error("Error fetching posts:", error);
-    // Display an error message to the user
-  }
-});
+//   try {
+//     // Fetch and display all posts
+//     const allPosts = await getPosts(name, accessToken);
+//     console.log("Fetched posts:", allPosts);
+//     displayPosts(allPosts); // Use this function to add the posts to the DOM
+//   } catch (error) {
+//     console.error("Error fetching posts:", error);
+//     // Display an error message to the user
+//   }
+// });
 
-//(this is the same as on cerateblodpost - maybe import later)
-function displayPosts(posts) {
-  const postContainer = document.getElementById("homePosts"); // Ensure this ID matches your container for posts
-  postContainer.innerHTML = ""; // Clear existing posts (if necessary)
+// //(this is the same as on cerateblodpost - maybe import later)
+// function displayPosts(posts) {
+//   const postContainer = document.getElementById("homePosts"); // Ensure this ID matches your container for posts
+//   postContainer.innerHTML = ""; // Clear existing posts (if necessary)
 
-  posts.forEach((post) => {
-    const postElement = createPostElement(post); // Create a DOM element for each post
-    postContainer.appendChild(postElement); // Append the post element to the container
-  });
-}
+//   posts.forEach((post) => {
+//     const postElement = createPostElement(post); // Create a DOM element for each post
+//     postContainer.appendChild(postElement); // Append the post element to the container
+//   });
+// }
 
-function createPostElement(post) {
-  console.log("Creating element for:", post); // Inspect the post object
-  const postElement = document.createElement("div");
-  postElement.classList.add("grid-post");
+// function createPostElement(post) {
+//   console.log("Creating element for:", post); // Inspect the post object
+//   const postElement = document.createElement("div");
+//   postElement.classList.add("grid-post");
 
-  postElement.innerHTML = `
-          <div class="post-info">
-          <img src="${post.data.image}" alt="Posted Image" class="post-image"> 
-              <h3 class="post-title">${post.data.title}</h3>
-              <p class="post-text">${post.data.body}</p>
-              <div class="more-buttons">
-                  <button class="read-more">Read More</button>
-              </div>
-          </div>
-      `;
-  return postElement;
-}
+//   postElement.innerHTML = `
+//           <div class="post-info">
+//           <img src="${post.data.image}" alt="Posted Image" class="post-image">
+//               <h3 class="post-title">${post.data.title}</h3>
+//               <p class="post-text">${post.data.body}</p>
+//               <div class="more-buttons">
+//                   <button class="read-more">Read More</button>
+//               </div>
+//           </div>
+//       `;
+//   return postElement;
+// }
 
 // document.addEventListener("DOMContentLoaded", async () => {
 //     const name = "SerenaTravel"; // Ensure this is defined according to your API requirements

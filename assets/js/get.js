@@ -1,26 +1,33 @@
 import { apiUrlUser } from "./api.mjs";
 
-// In api.mjs
-export async function getPosts(name, accessToken = null) {
+export async function getPosts(name, accessToken = null, queryParams = {}) {
   const headers = {
     "Content-Type": "application/json",
   };
 
-  // Optionally add an Authorization header if an access token is provided
   if (accessToken) {
     headers["Authorization"] = `Bearer ${accessToken}`;
   }
 
+  // Construct query string from queryParams object
+  const queryString = new URLSearchParams(queryParams).toString();
+
   try {
-    const response = await fetch(`${apiUrlUser}/${name}`, {
-      method: "GET",
-      headers: headers,
-    });
+    const response = await fetch(
+      `${apiUrlUser}/${name}${queryString ? "?" + queryString : ""}`,
+      {
+        method: "GET",
+        headers: headers,
+      }
+    );
+
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      const errorDetails = await response.text(); // Assuming error details are in text format
+      throw new Error(
+        `HTTP error! Status: ${response.status} - ${errorDetails}`
+      );
     }
 
-    // Optionally, handle different response formats here
     const data = await response.json();
     if (!Array.isArray(data) && data.posts) {
       return data.posts; // Assuming the API might wrap posts in a "posts" property
@@ -32,15 +39,29 @@ export async function getPosts(name, accessToken = null) {
   }
 }
 
-// Fetch a single product by ID
-export async function getSinglePost(name, id) {
+export async function getSinglePost(name, id, accessToken = null) {
+  const headers = {
+    "Content-Type": "application/json",
+  };
+
+  if (accessToken) {
+    headers["Authorization"] = `Bearer ${accessToken}`;
+  }
+
   try {
-    const response = await fetch(`${apiUrlUser}/${name}/${id}`);
+    const response = await fetch(`${apiUrlUser}/${name}/${id}`, {
+      method: "GET",
+      headers: headers,
+    });
+
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const errorDetails = await response.text();
+      throw new Error(
+        `HTTP error! Status: ${response.status} - ${errorDetails}`
+      );
     }
-    const data = await response.json();
-    return data;
+
+    return await response.json();
   } catch (error) {
     console.error("Error fetching the selected post:", error);
     throw error;
