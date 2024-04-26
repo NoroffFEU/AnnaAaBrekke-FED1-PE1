@@ -2,9 +2,6 @@
 // Add edit button and redirect to edit page - edit page similar to create post, but confrim changes and change innerhtml
 // Add delete button and delete - need to log in again to delete and then innerhtml gone
 
-
-
-
 // async function editPost(name, postData) {
 //   const accessToken = localStorage.getItem("token"); // Ensure token is retrieved here
 //   if (!accessToken) {
@@ -33,3 +30,8 @@
 //     throw error;
 //   }
 // }
+
+//login
+//editpage - add all just like fetch and display
+//then add delete button
+//

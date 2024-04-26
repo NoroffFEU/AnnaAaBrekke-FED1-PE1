@@ -43,11 +43,11 @@ function setupFormHandler() {
     event.preventDefault();
     console.log("Form submission prevented.");
 
-    // const image = document.getElementById("postImage").files[0];
+    const image = document.getElementById("postImage").files[0];
     const title = document.getElementById("postTitle").value;
     const body = document.getElementById("postContent").value;
 
-    const postData = { title, body };
+    const postData = { image, title, body };
     console.log("Submitting post data:", postData);
 
     try {
@@ -57,6 +57,7 @@ function setupFormHandler() {
       // Note that we are now accessing the properties through 'response.data'
       createdPosts.push({
         id: response.data.id,
+        media: response.data.media, // Add banner URL to the object
         title: response.data.title,
         body: response.data.body,
         author: response.data.author,
@@ -103,10 +104,11 @@ async function createPost(name, postData) {
   }
 }
 
-export async function displayPosts(posts) {
+export async function displayPosts(posts, limit = Infinity) {
   const postContainer = document.querySelector(".post-container");
   postContainer.innerHTML = ""; // Clear existing posts to prevent duplication
-  posts.forEach((post) => {
+  posts.slice(0, limit).forEach((post) => {
+    // Slice the posts array to limit the number of displayed posts
     const postElement = createPostElement(post);
     postContainer.appendChild(postElement);
     // Add event listener to each post element
@@ -125,20 +127,25 @@ function redirectToPostPage(postId) {
 }
 
 function createPostElement(post) {
+  const postData = post.data || post;
+
+  console.log("Post:", postData);
+
   const postElement = document.createElement("div");
   postElement.classList.add("grid-post");
+
   postElement.innerHTML = `
     <div class="post-info">
-      <h3 class="post-title">${post.title}</h3>
-      <p class="post-text">${post.body}</p>
+      <img src="${postData.media}" alt="Post Image" class="post-img">
+      <h3 class="post-title">${postData.title}</h3>
+      <p class="post-text">${postData.body}</p>
       <div class="more-buttons">
         <button class="read-more">Read More</button>
       </div>
     </div>
   `;
+
   return postElement;
 }
-
-export { createdPosts }; // Export createdPosts if needed
 
 // <img src="${post.data.image}" alt="Posted Image" class="post-image">
