@@ -35,7 +35,7 @@ function init() {
 function setupFormHandler() {
   const form = document.getElementById("createPostForm");
   if (!form) {
-    console.log("No form found on this page."); // Log a message if the form is not found
+    console.log("No form expected on this page, none found."); // Log a message if the form is not found
     return; // Exit the function if there is no form
   }
 
@@ -53,9 +53,21 @@ function setupFormHandler() {
     try {
       const response = await createPost("SerenaTravel", postData);
       console.log("Post created successfully:", response);
-      createdPosts.push(response); // add response to createdPosts
-      savePosts(); // Save posts to localStorage
-      displayPosts([response]); // Display new post
+
+      // Note that we are now accessing the properties through 'response.data'
+      createdPosts.push({
+        id: response.data.id,
+        title: response.data.title,
+        body: response.data.body,
+        author: response.data.author,
+        created: response.data.created,
+        updated: response.data.updated,
+        tags: response.data.tags,
+        // ... any other properties you want to save
+      });
+
+      savePosts(); // Save the updated array to localStorage
+      displayPosts([response.data]); // Update the display with the new post
     } catch (error) {
       console.error("Failed to create post:", error);
       alert("Failed to create post. Please try again.");
@@ -93,10 +105,23 @@ async function createPost(name, postData) {
 
 export async function displayPosts(posts) {
   const postContainer = document.querySelector(".post-container");
+  postContainer.innerHTML = ""; // Clear existing posts to prevent duplication
   posts.forEach((post) => {
     const postElement = createPostElement(post);
     postContainer.appendChild(postElement);
+    // Add event listener to each post element
+    postElement.addEventListener("click", () => {
+      const postTitle = post.data.title; // Retrieve the ID of the clicked post
+      const postId = post.data.id; // Retrieve the ID of the clicked post
+      redirectToPostPage(postId);
+      console.log("Clicked post ID:", postTitle, postId);
+    });
   });
+}
+
+function redirectToPostPage(postId) {
+  // Redirect to post/index.html with the post ID as a query parameter
+  window.location.href = `post/index.html?id=${postId}`;
 }
 
 function createPostElement(post) {
@@ -104,8 +129,8 @@ function createPostElement(post) {
   postElement.classList.add("grid-post");
   postElement.innerHTML = `
     <div class="post-info">
-      <h3 class="post-title">${post.data.title}</h3>
-      <p class="post-text">${post.data.body}</p>
+      <h3 class="post-title">${post.title}</h3>
+      <p class="post-text">${post.body}</p>
       <div class="more-buttons">
         <button class="read-more">Read More</button>
       </div>
@@ -113,5 +138,7 @@ function createPostElement(post) {
   `;
   return postElement;
 }
+
+export { createdPosts }; // Export createdPosts if needed
 
 // <img src="${post.data.image}" alt="Posted Image" class="post-image">
