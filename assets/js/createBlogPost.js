@@ -43,11 +43,24 @@ function setupFormHandler() {
     event.preventDefault();
     console.log("Form submission prevented.");
 
-    const image = document.getElementById("postImage").files[0];
+    const media = document.getElementById("postImage").files[0];
     const title = document.getElementById("postTitle").value;
-    const body = document.getElementById("postContent").value;
+    const author = document.getElementById("postAuthor").value;
+    const date = document.getElementById("postDate").value;
+    const tags = document
+      .getElementById("postTags")
+      .value.split(",")
+      .map((tag) => tag.trim());
+    const body = document.getElementById("postIntro").value;
 
-    const postData = { image, title, body };
+    const postData = {
+      media,
+      title,
+      author,
+      date,
+      tags,
+      body,
+    };
     console.log("Submitting post data:", postData);
 
     try {
@@ -60,11 +73,10 @@ function setupFormHandler() {
         media: response.data.media, // Add banner URL to the object
         title: response.data.title,
         body: response.data.body,
-        author: response.data.author,
+        author: response.data.author.name,
         created: response.data.created,
         updated: response.data.updated,
         tags: response.data.tags,
-        // ... any other properties you want to save
       });
 
       savePosts(); // Save the updated array to localStorage
@@ -113,8 +125,8 @@ export async function displayPosts(posts, limit = Infinity) {
     postContainer.appendChild(postElement);
     // Add event listener to each post element
     postElement.addEventListener("click", () => {
-      const postTitle = post.data.title; // Retrieve the ID of the clicked post
-      const postId = post.data.id; // Retrieve the ID of the clicked post
+      const postTitle = post.data && post.data.title; // maybe not need this.....??
+      const postId = post.data && post.data.id;
       redirectToPostPage(postId);
       console.log("Clicked post ID:", postTitle, postId);
     });
@@ -126,6 +138,8 @@ function redirectToPostPage(postId) {
   window.location.href = `post/index.html?id=${postId}`;
 }
 
+// this is for the home page posts container
+
 function createPostElement(post) {
   const postData = post.data || post;
 
@@ -134,10 +148,34 @@ function createPostElement(post) {
   const postElement = document.createElement("div");
   postElement.classList.add("grid-post");
 
+  // Create tags HTML if tags are present in postData
+  let tagsHtml = "";
+  if (postData.tags && postData.tags.length > 0) {
+    tagsHtml =
+      '<div class="tags">' +
+      postData.tags
+        .map(
+          (tag) =>
+            `<button class="tag" value="${tag.value}">${tag.label}</button>`
+        )
+        .join("") +
+      "</div>";
+  }
+
+  // Add the tagsHtml right after the author div
   postElement.innerHTML = `
     <div class="post-info">
       <img src="${postData.media}" alt="Post Image" class="post-img">
       <h3 class="post-title">${postData.title}</h3>
+      <div class="post-author">
+        <a href="link-to-author-profile.html" rel="author">${
+          postData.author
+        }</a>
+      </div>
+      ${tagsHtml} 
+      <time datetime="${postData.created}">${new Date(
+    postData.created
+  ).toLocaleDateString()}</time>
       <p class="post-text">${postData.body}</p>
       <div class="more-buttons">
         <button class="read-more">Read More</button>

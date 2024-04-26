@@ -24,25 +24,50 @@
       </nav>
     </header>
 
-
     <form id="createPostForm">
       <h1>Create Post</h1>
-      <input type="file" id="postImage" accept="image/*"> 
-      <input type="text" id="postTitle" placeholder="Post Title" required>
-      <textarea id="postContent" placeholder="Post Content" required></textarea>
+
+      <input type="file" id="postImage" accept="image/*" />
+      <input type="text" id="postTitle" placeholder="Post Title" required />
+      <input type="text" id="postAuthor" placeholder="Author Name" required />
+      <!-- <input type="url" id="authorProfileLink" placeholder="Author Profile Link"> -->
+      <input
+        type="date"
+        id="postDate"
+        placeholder="Publication Date"
+        required
+      />
+      <input type="text" id="postTags" placeholder="Tags (comma-separated)" />
+      <!-- <input type="text" id="postPrice" placeholder="Price Rating (e.g., $$)" required> -->
+      <textarea id="postIntro" placeholder="Post Intro" required></textarea>
+
+      <!-- Detailed Sections
+      <textarea id="postMemory" placeholder="Core Memory" required></textarea>
+      <textarea id="postActivities" placeholder="Activities" required></textarea>
+      <textarea id="postPlacesToSee" placeholder="Places to See" required></textarea>
+      <textarea id="postFood" placeholder="Places to Eat" required></textarea> -->
+
+      <!-- Gallery Images -->
+      <!-- Assuming you want to allow uploading multiple images for the gallery -->
+      <input type="file" id="galleryImage1" accept="image/*" />
+      <input type="file" id="galleryImage2" accept="image/*" />
+      <input type="file" id="galleryImage3" accept="image/*" />
+      <input type="file" id="galleryImage4" accept="image/*" />
+      <input type="file" id="galleryImage5" accept="image/*" />
+      <input type="file" id="galleryImage6" accept="image/*" />
+
       <button type="submit">Create Post</button>
     </form>
-  
 
-  <div class="create-message"></div>
+    <div class="create-message"></div>
 
-  <div class="create-headline">
-    <h1>All posts you have created is stored here</h1>
-  </div>
+    <div class="create-headline">
+      <h1>All posts you have created is stored here</h1>
+    </div>
 
-  <div class="post-container">
-    <div class="grid-post">
-      <img
+    <div class="post-container">
+      <div class="grid-post">
+        <!-- <img
         class="post-img"
         src="/assets/images/snorkel_whale.webp"
         alt=""
@@ -61,13 +86,13 @@
           <button class="tag" value="food">Food</button>
           <button class="prices" value="cheap">$$</button>
         </div> -->
-        <div class="more-buttons">
+        <!-- <div class="more-buttons">
           <button class="read-more">Read More</button>
-        </div>
+        </div> -->
+        -->
       </div>
     </div>
 
-  <script type="module" src="../assets/js/createBlogPost.js"></script>
-
-</body>
+    <script type="module" src="../assets/js/createBlogPost.js"></script>
+  </body>
 </html>
