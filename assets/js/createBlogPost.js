@@ -46,7 +46,7 @@ function setupFormHandler() {
     const media = document.getElementById("postImage").files[0];
     const title = document.getElementById("postTitle").value;
     const author = document.getElementById("postAuthor").value;
-    const date = document.getElementById("postDate").value;
+    // const date = document.getElementById("postDate").value;
     const tags = document
       .getElementById("postTags")
       .value.split(",")
@@ -57,7 +57,7 @@ function setupFormHandler() {
       media,
       title,
       author,
-      date,
+      // date,
       tags,
       body,
     };
