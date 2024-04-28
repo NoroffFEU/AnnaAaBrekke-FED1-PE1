@@ -116,21 +116,25 @@ async function createPost(name, postData) {
   }
 }
 
-export async function displayPosts(posts, limit = Infinity) {
+export async function displayPosts(posts) {
   const postContainer = document.querySelector(".post-container");
   postContainer.innerHTML = ""; // Clear existing posts to prevent duplication
-  posts.slice(0, limit).forEach((post) => {
-    // Slice the posts array to limit the number of displayed posts
-    const postElement = createPostElement(post);
-    postContainer.appendChild(postElement);
-    // Add event listener to each post element
-    postElement.addEventListener("click", () => {
-      const postTitle = post.data && post.data.title; // maybe not need this.....??
-      const postId = post.data && post.data.id;
-      redirectToPostPage(postId);
-      console.log("Clicked post ID:", postTitle, postId);
+
+  // Ensure there are posts to display
+  if (posts && posts.length > 0) {
+    posts.slice(28, 35).forEach((post) => {
+      const postElement = createPostElement(post);
+      postContainer.appendChild(postElement);
+      // Add event listener to each post element
+      postElement.addEventListener("click", () => {
+        const postId = post.id; // Assuming each post has an 'id' property
+        redirectToPostPage(postId);
+        console.log("Clicked post ID:", postId);
+      });
     });
-  });
+  } else {
+    console.log("No posts to display");
+  }
 }
 
 function redirectToPostPage(postId) {

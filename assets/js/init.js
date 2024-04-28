@@ -12,7 +12,7 @@ async function fetchAndDisplayPosts() {
       savePosts(posts); // Save fetched posts to local storage
     }
     // Display only the first twelve posts (still do not work...)
-    displayPosts(posts, 12);
+    displayPosts(posts);
   } catch (error) {
     console.error("Failed to fetch posts:", error);
     alert("Failed to load posts. Please try again.");
