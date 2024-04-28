@@ -1,17 +1,18 @@
 import { apiUrlUser } from "./api.mjs";
 console.log(apiUrlUser);
 
-let createdPosts = []; // Initialize an array to store created posts at the very top
+let locallyCreatedPosts = []; // Initialize an array to store created posts at the very top
 
-export async function savePosts() {
-  localStorage.setItem("posts", JSON.stringify(createdPosts));
+export async function saveCreatedPosts() {
+  localStorage.setItem("posts", JSON.stringify(locallyCreatedPosts));
 }
 
-export async function loadPosts() {
+export async function loadCreatedPosts() {
   const storedPosts = localStorage.getItem("posts");
   if (storedPosts) {
-    createdPosts = JSON.parse(storedPosts);
-    displayPosts(createdPosts);
+    locallyCreatedPosts = JSON.parse(storedPosts);
+    console.log("Loaded posts:", locallyCreatedPosts); // Should show the array of posts
+    displayPosts(locallyCreatedPosts);
   }
 }
 
@@ -19,11 +20,11 @@ console.log("Checking script execution post-import.");
 
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", function () {
-    loadPosts();
+    loadCreatedPosts();
     init();
   });
 } else {
-  loadPosts();
+  loadCreatedPosts();
   init();
 }
 
@@ -51,7 +52,7 @@ function setupFormHandler() {
       .getElementById("postTags")
       .value.split(",")
       .map((tag) => tag.trim());
-    const body = document.getElementById("postIntro").value;
+    const body = document.getElementById("postContent").value;
 
     const postData = {
       media,
@@ -68,7 +69,7 @@ function setupFormHandler() {
       console.log("Post created successfully:", response);
 
       // Note that we are now accessing the properties through 'response.data'
-      createdPosts.push({
+      locallyCreatedPosts.push({
         id: response.data.id,
         media: response.data.media, // Add banner URL to the object
         title: response.data.title,
@@ -79,7 +80,7 @@ function setupFormHandler() {
         tags: response.data.tags,
       });
 
-      savePosts(); // Save the updated array to localStorage
+      saveCreatedPosts(); // Save the updated array to localStorage
       displayPosts([response.data]); // Update the display with the new post
     } catch (error) {
       console.error("Failed to create post:", error);
@@ -108,8 +109,8 @@ async function createPost(name, postData) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    const createdPost = await response.json();
-    return createdPost;
+    const locallyCreatedPosts = await response.json();
+    return locallyCreatedPosts;
   } catch (error) {
     console.error("Error creating post:", error);
     throw error;
@@ -122,7 +123,7 @@ export async function displayPosts(posts) {
 
   // Ensure there are posts to display
   if (posts && posts.length > 0) {
-    posts.slice(28, 35).forEach((post) => {
+    posts.slice(0, 12).forEach((post) => {
       const postElement = createPostElement(post);
       postContainer.appendChild(postElement);
       // Add event listener to each post element
@@ -152,6 +153,10 @@ function createPostElement(post) {
   const postElement = document.createElement("div");
   postElement.classList.add("grid-post");
 
+  const defaultImage = `https://placehold.co/600x400`;
+
+  const imageSrc = postData.media || defaultImage;
+
   // Create tags HTML if tags are present in postData
   let tagsHtml = "";
   if (postData.tags && postData.tags.length > 0) {
@@ -169,8 +174,8 @@ function createPostElement(post) {
   // Add the tagsHtml right after the author div
   postElement.innerHTML = `
     <div class="post-info">
-      <img src="${postData.media}" alt="Post Image" class="post-img">
-      <h3 class="post-title">${postData.title}</h3>
+    <img src="${imageSrc}" onError="this.onerror=null; this.src='${defaultImage}';" alt="Post Image" class="post-img">
+    <h3 class="post-title">${postData.title}</h3>
       <div class="post-author">
         <a href="link-to-author-profile.html" rel="author">${
           postData.author
@@ -180,7 +185,6 @@ function createPostElement(post) {
       <time datetime="${postData.created}">${new Date(
     postData.created
   ).toLocaleDateString()}</time>
-      <p class="post-text">${postData.body}</p>
       <div class="more-buttons">
         <button class="read-more">Read More</button>
       </div>
@@ -191,3 +195,6 @@ function createPostElement(post) {
 }
 
 // <img src="${post.data.image}" alt="Posted Image" class="post-image">
+{
+  /* <p class="post-text">${postData.body}</p> */
+}

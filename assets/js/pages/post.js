@@ -50,12 +50,12 @@ function displaySinglePost(post) {
   `;
   mainPostContent.appendChild(postHeader);
 
-  const introSection = document.createElement("section");
-  introSection.classList.add("intro");
-  introSection.innerHTML = `
+  const contentSection = document.createElement("section");
+  contentSection.classList.add("content");
+  contentSection.innerHTML = `
     <p class="post-text">${post.body}</p>
   `;
-  mainPostContent.appendChild(introSection);
+  mainPostContent.appendChild(contentSection);
 
   // const gallerySection = document.createElement("section");
   // gallerySection.classList.add("gallery");

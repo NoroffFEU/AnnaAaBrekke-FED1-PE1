@@ -1,27 +1,48 @@
 import { getPosts } from "./get.js"; // Handles fetching posts from the server
-import { savePosts, loadPosts, displayPosts } from "./createBlogPost.js"; // Handles local storage and displaying posts
+import {
+  saveCreatedPosts,
+  loadCreatedPosts,
+  displayPosts,
+} from "./createBlogPost.js"; // Handles local storage and displaying posts
+import { latestPostsCarousel } from "./carousel.js"; // Displays a carousel of the latest posts
+import { sortedPostsByDateCreated } from "./sort.js"; // Import the sorting function
 
 // Function to fetch posts from the server and display them
 async function fetchAndDisplayPosts() {
+  console.log("Attempting to fetch and display posts...");
   try {
-    let posts = await loadPosts(); // First try to load posts from local storage
+    console.log("Loading posts from local storage...");
+    let homePosts = await loadCreatedPosts(); // First try to load posts from local storage
 
-    if (!posts || !posts.length) {
-      // If no posts are found in local storage, fetch from server
-      posts = await getPosts("SerenaTravel"); // Fetch posts
-      savePosts(posts); // Save fetched posts to local storage
+    if (!homePosts || !homePosts.length) {
+      console.log("No posts in local storage, fetching from server...");
+      homePosts = await getPosts("SerenaTravel"); // Fetch posts
+      saveCreatedPosts(homePosts); // Save fetched posts to local storage
+      console.log("Posts saved to local storage");
+    } else {
+      console.log(`Loaded posts from local storage`);
     }
-    // Display only the first twelve posts (still do not work...)
-    displayPosts(posts);
+
+    console.log("Sorting posts by creation date...");
+    homePosts = sortedPostsByDateCreated(homePosts); // Use the imported sorting function
+    console.log(`Fetched posts:`, homePosts); // Ensure this logs an array
+
+    console.log("Displaying posts...");
+    displayPosts(homePosts); // Assuming displayPosts can handle and limit the posts on its own
+    console.log("Posts displayed");
+
+    console.log("Creating carousel for latest posts...");
+    latestPostsCarousel(homePosts); // Assuming latestPostsCarousel can handle and limit the posts on its own
+    console.log("Latest posts carousel created");
   } catch (error) {
     console.error("Failed to fetch posts:", error);
-    alert("Failed to load posts. Please try again.");
+    // alert("Failed to load posts. Please try again.");
   }
 }
 
 // Initialize the page by fetching and displaying posts
 function init() {
-  console.log("DOM Content Loaded or already ready");
+  console.log("DOM Content Loaded or already ready, initializing...");
   fetchAndDisplayPosts();
 }
 
