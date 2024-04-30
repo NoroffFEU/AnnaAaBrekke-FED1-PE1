@@ -44,7 +44,14 @@ function setupFormHandler() {
     event.preventDefault();
     console.log("Form submission prevented.");
 
-    const media = document.getElementById("postImage").files[0];
+    // Assuming there's an input for the media URL and another for the alt text
+    const mediaUrl = document.getElementById("postImage").value;
+    const mediaAlt = "Description of the image"; // Update this with a real input or dynamic data if necessary
+
+    const media = {
+      url: mediaUrl,
+      alt: mediaAlt,
+    };
     const title = document.getElementById("postTitle").value;
     const author = document.getElementById("postAuthor").value;
     // const date = document.getElementById("postDate").value;
@@ -58,7 +65,6 @@ function setupFormHandler() {
       media,
       title,
       author,
-      // date,
       tags,
       body,
     };
@@ -77,7 +83,7 @@ function setupFormHandler() {
         author: response.data.author.name,
         created: response.data.created,
         updated: response.data.updated,
-        tags: response.data.tags,
+        tags: response.data.tags.map((tag) => tag.label || tag), // Ensure tag structure is consistent
       });
 
       saveCreatedPosts(); // Save the updated array to localStorage
@@ -109,9 +115,10 @@ async function createPost(name, postData) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
+
     const locallyCreatedPosts = await response.json();
     return locallyCreatedPosts;
-  } catch (error) {
+    } catch (error) {
     console.error("Error creating post:", error);
     throw error;
   }
@@ -155,7 +162,9 @@ function createPostElement(post) {
 
   const defaultImage = `https://placehold.co/600x400`;
 
-  const imageSrc = postData.media || defaultImage;
+  // Ensure media object exists and has a url, otherwise use defaultImage (this helped when not work: if, 30.april)
+  const imageSrc = postData.media && postData.media.url ? postData.media.url : defaultImage;
+  const imageAlt = postData.media && postData.media.alt ? postData.media.alt : "Default image description";
 
   // Create tags HTML if tags are present in postData
   let tagsHtml = "";
@@ -174,7 +183,7 @@ function createPostElement(post) {
   // Add the tagsHtml right after the author div
   postElement.innerHTML = `
     <div class="post-info">
-    <img src="${imageSrc}" onError="this.onerror=null; this.src='${defaultImage}';" alt="Post Image" class="post-img">
+    <img src="${imageSrc}" onError="this.onerror=null; this.src='${defaultImage}';" alt="${imageAlt}" class="post-img">
     <h3 class="post-title">${postData.title}</h3>
       <div class="post-author">
         <a href="link-to-author-profile.html" rel="author">${

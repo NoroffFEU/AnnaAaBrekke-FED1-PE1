@@ -7,6 +7,7 @@ console.log("The link", postId);
 
 if (!postId) {
   console.error("No post ID in URL parameters");
+  // alert("No post ID provided. Please check the URL and try again.");
 } else {
   console.log("Fetching single post with ID:", postId);
   fetchAndDisplaySinglePost(postId);
@@ -21,15 +22,18 @@ async function fetchAndDisplaySinglePost(postId) {
     displaySinglePost(post);
   } catch (error) {
     console.error("Error fetching or displaying single post:", error);
+    // alert("Failed to fetch post details. Please refresh the page or try again later.");
   }
 }
 
 function displaySinglePost(post) {
   const mainPostContent = document.querySelector(".main-post");
   mainPostContent.innerHTML = "";
-  // Accessing the first image and alt text from the media array
-  const imgSrc = post.media[0].url; // Assuming post.media is an array of media objects
-  const imgAlt = post.media[0].alt;
+
+  // Ensure media object exists and has url and alt properties, otherwise use default values
+  const defaultImage = 'https://placehold.co/600x400';
+  const imgSrc = post.media && post.media.url ? post.media.url : defaultImage;
+  const imgAlt = post.media && post.media.alt ? post.media.alt : "Default image description";
 
   const postHeader = document.createElement("div");
   postHeader.classList.add("post-header");
@@ -56,6 +60,22 @@ function displaySinglePost(post) {
     <p class="post-text">${post.body}</p>
   `;
   mainPostContent.appendChild(contentSection);
+
+  // if (post.galleryImages && post.galleryImages.length > 0) {
+  //   const gallerySection = document.createElement("section");
+  //   gallerySection.classList.add("gallery");
+  //   gallerySection.innerHTML = `
+  //     <h4>Gallery</h4>
+  //     <div class="gallery-grid">
+  //       ${post.galleryImages
+  //         .map(
+  //           (img) =>
+  //             `<img src="${img.url}" alt="${img.alt}" class="gallery-img"/>`
+  //         )
+  //         .join("")}
+  //     </div>
+  //   `;
+  // }
 
   // const gallerySection = document.createElement("section");
   // gallerySection.classList.add("gallery");

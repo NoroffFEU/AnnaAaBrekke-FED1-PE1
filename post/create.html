@@ -27,20 +27,34 @@
     <form id="createPostForm">
       <h1>Create Post</h1>
 
-      <input type="file" id="postImage" accept="image/*" />
+      <input type="text" id="postImage" accept="image/*" placeholder="Image URL" required />
+      <input type="text" id="postImageAlt" placeholder="Image Alt Text" required />
       <input type="text" id="postTitle" placeholder="Post Title" required />
       <input type="text" id="postAuthor" placeholder="Author Name" required />
-      <!-- <input type="url" id="authorProfileLink" placeholder="Author Profile Link"> -->
+      <input type="text" id="postTags" placeholder="Tags (comma-separated)" />
+      <textarea id="postContent" placeholder="Post Content" required></textarea>
+
+      <!-- Gallery Images with placeholders for URLs and Alt Texts -->
+      <!-- <input type="url" id="galleryImage1" placeholder="Gallery Image URL 1" />
+      <input type="text" id="galleryImage1Alt" placeholder="Gallery Image 1 Alt Text" />
+      <input type="url" id="galleryImage2" placeholder="Gallery Image URL 2" />
+      <input type="text" id="galleryImage2Alt" placeholder="Gallery Image 2 Alt Text" /> -->
+
+
+      <!-- <input type="file" id="postImage" accept="image/*" />
+      <input type="text" id="postTitle" placeholder="Post Title" required />
+      <input type="text" id="postAuthor" placeholder="Author Name" required />
+      < <input type="url" id="authorProfileLink" placeholder="Author Profile Link"> -->
       <!-- <input
         type="date"
         id="postDate"
         placeholder="Publication Date"
         required
       /> -->
-      <input type="text" id="postTags" placeholder="Tags (comma-separated)" />
+      <!-- <input type="text" id="postTags" placeholder="Tags (comma-separated)" /> -->
       <!-- <input type="text" id="postPrice" placeholder="Price Rating (e.g., $$)" required> -->
       <!-- <textarea id="postIntro" placeholder="Post Intro" required></textarea> -->
-      <textarea id="postContent" placeholder="Post Content" required></textarea>
+      <!-- <textarea id="postContent" placeholder="Post Content" required></textarea> --> 
 
       <!-- Detailed Sections
       <textarea id="postMemory" placeholder="Core Memory" required></textarea>
@@ -50,12 +64,12 @@
 
       <!-- Gallery Images -->
       <!-- Assuming you want to allow uploading multiple images for the gallery -->
-      <input type="file" id="galleryImage1" accept="image/*" />
+      <!-- <input type="file" id="galleryImage1" accept="image/*" />
       <input type="file" id="galleryImage2" accept="image/*" />
       <input type="file" id="galleryImage3" accept="image/*" />
       <input type="file" id="galleryImage4" accept="image/*" />
       <input type="file" id="galleryImage5" accept="image/*" />
-      <input type="file" id="galleryImage6" accept="image/*" />
+      <input type="file" id="galleryImage6" accept="image/*" /> -->
 
       <button type="submit">Create Post</button>
     </form>
