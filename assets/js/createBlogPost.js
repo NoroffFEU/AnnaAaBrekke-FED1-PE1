@@ -166,44 +166,32 @@ function createPostElement(post) {
   const imageSrc = postData.media && postData.media.url ? postData.media.url : defaultImage;
   const imageAlt = postData.media && postData.media.alt ? postData.media.alt : "Default image description";
 
-  // Create tags HTML if tags are present in postData
-  let tagsHtml = "";
-  if (postData.tags && postData.tags.length > 0) {
-    tagsHtml =
-      '<div class="tags">' +
-      postData.tags
-        .map(
-          (tag) =>
-            `<button class="tag" value="${tag.value}">${tag.label}</button>`
-        )
-        .join("") +
-      "</div>";
-  }
+ // Handle tags safely, check if they exist and are iterable
+ let tagsHtml = "";
+ if (post.tags && Array.isArray(post.tags)) {
+   tagsHtml = post.tags.map(tag => {
+     // Assuming each tag is an object with a 'label' property, adjust as necessary
+     const tagLabel = tag.label || tag; // This will use 'tag' as the label if 'label' property does not exist . do not think it exists
+     return `<button class="tag" value="${tagLabel}">${tagLabel}</button>`;
+   }).join("");
+ } else {
+   console.log("No tags to display or tags are not in expected format.");
+ }
 
-  // Add the tagsHtml right after the author div
-  postElement.innerHTML = `
-    <div class="post-info">
+// Add the tagsHtml right after the author div
+postElement.innerHTML = `
+  <div class="post-info">
     <img src="${imageSrc}" onError="this.onerror=null; this.src='${defaultImage}';" alt="${imageAlt}" class="post-img">
     <h3 class="post-title">${postData.title}</h3>
-      <div class="post-author">
-        <a href="link-to-author-profile.html" rel="author">${
-          postData.author
-        }</a>
-      </div>
-      ${tagsHtml} 
-      <time datetime="${postData.created}">${new Date(
-    postData.created
-  ).toLocaleDateString()}</time>
-      <div class="more-buttons">
-        <button class="read-more">Read More</button>
-      </div>
+    <div class="post-author">${postData.author}</div>
+    <time datetime="${postData.created}">${new Date(postData.created).toLocaleDateString()}</time>
+    <div class="tags">${tagsHtml}</div>
+    <div class="more-buttons">
+      <button class="read-more">Read More</button>
     </div>
-  `;
+  </div>
+`;
 
   return postElement;
 }
 
-// <img src="${post.data.image}" alt="Posted Image" class="post-image">
-{
-  /* <p class="post-text">${postData.body}</p> */
-}
