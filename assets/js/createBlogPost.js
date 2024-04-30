@@ -7,33 +7,113 @@ export async function saveCreatedPosts() {
   localStorage.setItem("posts", JSON.stringify(locallyCreatedPosts));
 }
 
-export async function loadCreatedPosts() {
-  const storedPosts = localStorage.getItem("posts");
-  if (storedPosts) {
-    locallyCreatedPosts = JSON.parse(storedPosts);
-    console.log("Loaded posts:", locallyCreatedPosts); // Should show the array of posts
-    displayPosts(locallyCreatedPosts);
+async function createPost(name, postData) {
+  const accessToken = localStorage.getItem("token");
+  if (!accessToken) {
+    throw new Error("No access token found, please login.");
+  }
+
+  try {
+    const response = await fetch(`${apiUrlUser}/${name}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(postData),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error creating post:", error);
+    throw error;
   }
 }
 
-console.log("Checking script execution post-import.");
+export async function displayPosts(posts) {
+  const postContainer = document.querySelector(".post-container");
+  postContainer.innerHTML = ""; // Clear existing posts to prevent duplication
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", function () {
-    loadCreatedPosts();
-    init();
-  });
-} else {
-  loadCreatedPosts();
-  init();
+  // Ensure there are posts to display
+  if (posts && posts.length > 0) {
+    posts.slice(0, 12).forEach((post) => {
+      const postElement = createPostElement(post);
+      postContainer.appendChild(postElement);
+      // Add event listener to each post element
+      postElement.addEventListener("click", () => {
+        const postId = post.id; // Assuming each post has an 'id' property
+        redirectToPostPage(postId);
+        console.log("Clicked post ID:", postId);
+      });
+    });
+  } else {
+    console.log("No posts to display");
+  }
 }
 
-function init() {
-  console.log("Already ready");
-  setupFormHandler(); // Call setupFormHandler within init
+// this is for the home page posts container
+
+function createPostElement(post) {
+  const postData = post.data || post;
+
+  console.log("Post:", postData);
+
+  const postElement = document.createElement("div");
+  postElement.classList.add("grid-post");
+
+  const defaultImage = `https://placehold.co/600x400`;
+
+  // Ensure media object exists and has a url, otherwise use defaultImage (this helped when not work: if, 30.april)
+  const imageSrc =
+    postData.media && postData.media.url ? postData.media.url : defaultImage;
+  const imageAlt =
+    postData.media && postData.media.alt
+      ? postData.media.alt
+      : "Default image description";
+
+  // Handle tags safely, check if they exist and are iterable
+  let tagsHtml = "";
+  if (post.tags && Array.isArray(post.tags)) {
+    tagsHtml = post.tags
+      .map((tag) => {
+        // Assuming each tag is an object with a 'label' property, adjust as necessary
+        const tagLabel = tag.label || tag; // This will use 'tag' as the label if 'label' property does not exist . do not think it exists
+        return `<button class="tag" value="${tagLabel}">${tagLabel}</button>`;
+      })
+      .join("");
+  } else {
+    console.log("No tags to display or tags are not in expected format.");
+  }
+
+  // Add the tagsHtml right after the author div
+  postElement.innerHTML = `
+  <div class="post-info">
+    <img src="${imageSrc}" onError="this.onerror=null; this.src='${defaultImage}';" alt="${imageAlt}" class="post-img">
+    <h3 class="post-title">${postData.title}</h3>
+    <div class="post-author">${postData.author}</div>
+    <time datetime="${postData.created}">${new Date(
+    postData.created
+  ).toLocaleDateString()}</time>
+    <div class="tags">${tagsHtml}</div>
+    <div class="more-buttons">
+      <button class="read-more">Read More</button>
+    </div>
+  </div>
+`;
+
+  return postElement;
 }
 
-function setupFormHandler() {
+function redirectToPostPage(postId) {
+  // Redirect to post/index.html with the post ID as a query parameter
+  window.location.href = `post/index.html?id=${postId}`;
+}
+
+function createFormHandler() {
   const form = document.getElementById("createPostForm");
   if (!form) {
     console.log("No form expected on this page, none found."); // Log a message if the form is not found
@@ -95,103 +175,25 @@ function setupFormHandler() {
   });
 }
 
-async function createPost(name, postData) {
-  const accessToken = localStorage.getItem("token");
-  if (!accessToken) {
-    throw new Error("No access token found, please login.");
-  }
+function init() {
+  console.log("Already ready");
+  loadCreatedPosts();
+  createFormHandler(); // Call createFormHandler within init
+}
 
-  try {
-    const response = await fetch(`${apiUrlUser}/${name}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify(postData),
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-
-    const locallyCreatedPosts = await response.json();
-    return locallyCreatedPosts;
-    } catch (error) {
-    console.error("Error creating post:", error);
-    throw error;
+export async function loadCreatedPosts() {
+  const storedPosts = localStorage.getItem("posts");
+  if (storedPosts) {
+    locallyCreatedPosts = JSON.parse(storedPosts);
+    console.log("Loaded posts:", locallyCreatedPosts); // Should show the array of posts
+    displayPosts(locallyCreatedPosts);
   }
 }
 
-export async function displayPosts(posts) {
-  const postContainer = document.querySelector(".post-container");
-  postContainer.innerHTML = ""; // Clear existing posts to prevent duplication
+document.addEventListener("DOMContentLoaded", init);
 
-  // Ensure there are posts to display
-  if (posts && posts.length > 0) {
-    posts.slice(0, 12).forEach((post) => {
-      const postElement = createPostElement(post);
-      postContainer.appendChild(postElement);
-      // Add event listener to each post element
-      postElement.addEventListener("click", () => {
-        const postId = post.id; // Assuming each post has an 'id' property
-        redirectToPostPage(postId);
-        console.log("Clicked post ID:", postId);
-      });
-    });
-  } else {
-    console.log("No posts to display");
-  }
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", init);
+} else {
+  init();
 }
-
-function redirectToPostPage(postId) {
-  // Redirect to post/index.html with the post ID as a query parameter
-  window.location.href = `post/index.html?id=${postId}`;
-}
-
-// this is for the home page posts container
-
-function createPostElement(post) {
-  const postData = post.data || post;
-
-  console.log("Post:", postData);
-
-  const postElement = document.createElement("div");
-  postElement.classList.add("grid-post");
-
-  const defaultImage = `https://placehold.co/600x400`;
-
-  // Ensure media object exists and has a url, otherwise use defaultImage (this helped when not work: if, 30.april)
-  const imageSrc = postData.media && postData.media.url ? postData.media.url : defaultImage;
-  const imageAlt = postData.media && postData.media.alt ? postData.media.alt : "Default image description";
-
- // Handle tags safely, check if they exist and are iterable
- let tagsHtml = "";
- if (post.tags && Array.isArray(post.tags)) {
-   tagsHtml = post.tags.map(tag => {
-     // Assuming each tag is an object with a 'label' property, adjust as necessary
-     const tagLabel = tag.label || tag; // This will use 'tag' as the label if 'label' property does not exist . do not think it exists
-     return `<button class="tag" value="${tagLabel}">${tagLabel}</button>`;
-   }).join("");
- } else {
-   console.log("No tags to display or tags are not in expected format.");
- }
-
-// Add the tagsHtml right after the author div
-postElement.innerHTML = `
-  <div class="post-info">
-    <img src="${imageSrc}" onError="this.onerror=null; this.src='${defaultImage}';" alt="${imageAlt}" class="post-img">
-    <h3 class="post-title">${postData.title}</h3>
-    <div class="post-author">${postData.author}</div>
-    <time datetime="${postData.created}">${new Date(postData.created).toLocaleDateString()}</time>
-    <div class="tags">${tagsHtml}</div>
-    <div class="more-buttons">
-      <button class="read-more">Read More</button>
-    </div>
-  </div>
-`;
-
-  return postElement;
-}
-
