@@ -40,7 +40,7 @@ export async function displayPosts(posts) {
 
   // Ensure there are posts to display
   if (posts && posts.length > 0) {
-    posts.slice(0, 12).forEach((post) => {
+    posts.slice(6, 30).forEach((post) => {
       const postElement = createPostElement(post);
       postContainer.appendChild(postElement);
       // Add event listener to each post element

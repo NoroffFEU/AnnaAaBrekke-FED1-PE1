@@ -195,7 +195,7 @@ nav a {
 
 .country:hover,
 .read-more:hover {
-  background-color: #aef1f7bc;
+  background-color: #f2d8efbc;
   color: #fff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -232,12 +232,42 @@ nav a {
 }
 
 .post-info {
+  max-width: 400px; /* Adjusts the width of the column */
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
   text-align: center;
+}
+
+.post-info .post-author {
+  display: block;
+  font-style: italic;
+  color: #c396bc;
+  font-size: 18px;
+  margin-top: 5px;
+  padding: 5px 0;
+}
+
+.post-info .post-date {
+  display: block;
+  color: #555;
+  font-size: 18px;
+  padding: 5px 0;
+  margin-bottom: 1rem;
 }
 
 .post-title {
   font-weight: bold;
   margin-bottom: 5px;
+}
+
+.post-country {
+  color: #131212;
+  font-size: 15px;
+  margin-top: 1rem;
+  background-color: #f8e4f5;
 }
 
 .tag {
@@ -253,7 +283,7 @@ nav a {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.prices {
+/* .prices {
   background-color: #f2f2f2e2;
   border-radius: 10px;
   padding: 5px 10px;
@@ -263,7 +293,7 @@ nav a {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   border-color: greenyellow;
   margin: 2px;
-}
+} */
 
 /* Post Page */
 
@@ -413,3 +443,10 @@ form h1 {
 }
 
 /* Media Queries */
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .post-container {
+    grid-template-columns: 1fr; /* Makes the columns stack vertically */
+  }
+}
