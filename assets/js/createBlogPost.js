@@ -89,16 +89,20 @@ function createPostElement(post) {
     console.log("No tags to display or tags are not in expected format.");
   }
 
+  const country = postData.country || "No country specified"; // Fallback if no country is specified
+  const author = postData.author || "Anonymous"; // Fallback if no author is specified
+
   // Add the tagsHtml right after the author div
   postElement.innerHTML = `
   <div class="post-info">
     <img src="${imageSrc}" onError="this.onerror=null; this.src='${defaultImage}';" alt="${imageAlt}" class="post-img">
     <h3 class="post-title">${postData.title}</h3>
-    <div class="post-author">${postData.author}</div>
-    <time datetime="${postData.created}">${new Date(
-    postData.created
+    <div class="post-author">${author}</div>
+    <time class="post-date" datetime="${post.created}">${new Date(
+    post.updated
   ).toLocaleDateString()}</time>
     <div class="tags">${tagsHtml}</div>
+    <div class="post-country">${country}</div>
     <div class="more-buttons">
       <button class="read-more">Read More</button>
     </div>
@@ -140,6 +144,7 @@ function createFormHandler() {
       .value.split(",")
       .map((tag) => tag.trim());
     const body = document.getElementById("postContent").value;
+    const country = document.getElementById("postCountry").value; // Retrieve country value
 
     const postData = {
       media,
@@ -147,7 +152,9 @@ function createFormHandler() {
       author,
       tags,
       body,
+      country,
     };
+
     console.log("Submitting post data:", postData);
 
     try {
@@ -164,6 +171,7 @@ function createFormHandler() {
         created: response.data.created,
         updated: response.data.updated,
         tags: response.data.tags.map((tag) => tag.label || tag), // Ensure tag structure is consistent
+        country: response.data.country || country, // Ensure the country is stored locally
       });
 
       saveCreatedPosts(); // Save the updated array to localStorage

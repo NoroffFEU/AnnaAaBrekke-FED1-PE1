@@ -31,21 +31,26 @@ function displaySinglePost(post) {
   mainPostContent.innerHTML = "";
 
   // Ensure media object exists and has url and alt properties, otherwise use default values
-  const defaultImage = 'https://placehold.co/600x400';
+  const defaultImage = "https://placehold.co/600x400";
   const imgSrc = post.media && post.media.url ? post.media.url : defaultImage;
-  const imgAlt = post.media && post.media.alt ? post.media.alt : "Default image description";
+  const imgAlt =
+    post.media && post.media.alt ? post.media.alt : "Default image description";
 
-    // Handle tags safely, check if they exist and are iterable
-    let tagsHtml = "";
-    if (post.tags && Array.isArray(post.tags)) {
-      tagsHtml = post.tags.map(tag => {
+  // Handle tags safely, check if they exist and are iterable
+  let tagsHtml = "";
+  if (post.tags && Array.isArray(post.tags)) {
+    tagsHtml = post.tags
+      .map((tag) => {
         // Assuming each tag is an object with a 'label' property, adjust as necessary
         const tagLabel = tag.label || tag; // This will use 'tag' as the label if 'label' property does not exist
         return `<button class="tag" value="${tagLabel}">${tagLabel}</button>`;
-      }).join("");
-    } else {
-      console.log("No tags to display or tags are not in expected format.");
-    }  
+      })
+      .join("");
+  } else {
+    console.log("No tags to display or tags are not in expected format.");
+  }
+
+  // const country = post.country ? post.country : 'Unknown Country';  // Add fallback if no country is specified
 
   const postHeader = document.createElement("div");
   postHeader.classList.add("post-header");
@@ -53,11 +58,10 @@ function displaySinglePost(post) {
     <img class="post-img" src="${imgSrc}" alt="${imgAlt}" />
     <h1 class="post-title">${post.title}</h1>
     <div class="post-author"${post.author}</div>
-    <time datetime="${post.created}">${new Date(
+    <time class="post-date" datetime="${post.created}">${new Date(
     post.updated
   ).toLocaleDateString()}</time>
     <div class="tags">${tagsHtml}</div>
-
   `;
   mainPostContent.appendChild(postHeader);
 
@@ -67,6 +71,8 @@ function displaySinglePost(post) {
     <p class="post-text">${post.body}</p>
   `;
   mainPostContent.appendChild(contentSection);
+
+  // <div class="post-country">${country}</div>
 
   // if (post.galleryImages && post.galleryImages.length > 0) {
   //   const gallerySection = document.createElement("section");
