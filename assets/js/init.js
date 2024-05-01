@@ -5,7 +5,8 @@ import {
   displayPosts,
 } from "./createBlogPost.js"; // Handles local storage and displaying posts
 import { latestPostsCarousel } from "./carousel.js"; // Displays a carousel of the latest posts
-import { sortedPostsByDateCreated } from "./sort.js"; // Import the sorting function
+import { sortPostByNewest, sortPostsByOldest } from "./sort.js"; // Import the sorting function
+import { addSortButtonsEventListener } from "./eventHandlers.js";
 
 // Function to fetch posts from the server and display them
 async function fetchAndDisplayPosts() {
@@ -23,9 +24,9 @@ async function fetchAndDisplayPosts() {
       console.log(`Loaded posts from local storage`);
     }
 
-    console.log("Sorting posts by creation date...");
-    homePosts = sortedPostsByDateCreated(homePosts); // Use the imported sorting function
-    console.log(`Fetched posts:`, homePosts); // Ensure this logs an array
+    // console.log("Sorting posts by creation date...");
+    // homePosts = sortedPostsByDateCreated(homePosts); // Use the imported sorting function
+    // console.log(`Fetched posts:`, homePosts); // Ensure this logs an array
 
     console.log("Displaying posts...");
     displayPosts(homePosts); // Assuming displayPosts can handle and limit the posts on its own
@@ -40,10 +41,21 @@ async function fetchAndDisplayPosts() {
   }
 }
 
+
 // Initialize the page by fetching and displaying posts
-function init() {
+async function init() {
   console.log("DOM Content Loaded or already ready, initializing...");
-  fetchAndDisplayPosts();
+  const posts = (await loadCreatedPosts()) || [];
+  console.log("Posts loaded:", posts.length);
+
+  await fetchAndDisplayPosts(posts);
+  console.log("Posts fetched and displayed.");
+
+  addSortButtonsEventListener(posts);
+  console.log("Sort buttons event listeners added.");
+
+  addFilterButtonsEventListener(); // Assume filters don't need posts directly
+  console.log("Filter buttons event listeners added.");
 }
 
-document.addEventListener("DOMContentLoaded", init); // Ensure this runs after the DOM is fully loaded
+document.addEventListener("DOMContentLoaded", init);
