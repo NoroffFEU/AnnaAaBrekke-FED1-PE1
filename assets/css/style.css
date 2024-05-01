@@ -207,8 +207,7 @@ nav a {
   margin: 1rem;
 }
 
-.grid-post,
-.main-post {
+.grid-post {
   border: 1px solid #ccc;
   padding: 1rem;
   background-color: #fff;
@@ -216,6 +215,25 @@ nav a {
   flex-direction: column;
   align-items: center;
   border-radius: 4px;
+}
+
+.main-post {
+  max-width: 600px; /* Makes the container narrow */
+  margin: 3rem auto; /* Centers the container on the page */
+  padding: 1.5rem; /* Adds some padding inside the container */
+  background-color: #f8f9faf0; /* Light grey background */
+  border: 1px solid #dee2e6; /* Subtle border */
+  border-radius: 8px; /* Rounded corners for a modern look */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  color: #333; /* Dark grey text for readability */
+  line-height: 1.6; /* Improves readability of the text */
+  text-align: center;
+}
+
+.main-post img {
+  width: 80%;
+  height: auto;
+  object-fit: contain;
 }
 
 .post-img {

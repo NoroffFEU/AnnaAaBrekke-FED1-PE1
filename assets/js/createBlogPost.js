@@ -161,20 +161,20 @@ function createFormHandler() {
       const response = await createPost("SerenaTravel", postData);
       console.log("Post created successfully:", response);
 
-      // Note that we are now accessing the properties through 'response.data'
-      locallyCreatedPosts.push({
-        id: response.data.id,
-        media: response.data.media, // Add banner URL to the object
-        title: response.data.title,
-        body: response.data.body,
-        author: response.data.author.name,
-        created: response.data.created,
-        updated: response.data.updated,
-        tags: response.data.tags.map((tag) => tag.label || tag), // Ensure tag structure is consistent
-        country: response.data.country || country, // Ensure the country is stored locally
-      });
+      // // Note that we are now accessing the properties through 'response.data'
+      // locallyCreatedPosts.push({
+      //   id: response.data.id,
+      //   media: response.data.media, // Add banner URL to the object
+      //   title: response.data.title,
+      //   body: response.data.body,
+      //   author: response.data.author.name,
+      //   created: response.data.created,
+      //   updated: response.data.updated,
+      //   tags: response.data.tags.map((tag) => tag.label || tag), // Ensure tag structure is consistent
+      //   country: response.data.country || country, // Ensure the country is stored locally
+      // });
 
-      saveCreatedPosts(); // Save the updated array to localStorage
+      // saveCreatedPosts(); // Save the updated array to localStorage
       displayPosts([response.data]); // Update the display with the new post
     } catch (error) {
       console.error("Failed to create post:", error);
