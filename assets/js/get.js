@@ -39,6 +39,9 @@ export async function getPosts(name, accessToken = null, queryParams = {}) {
   }
 }
 
+console.log("getPosts module loaded");
+
+
 export async function getSinglePost(name, id, accessToken = null) {
   const headers = {
     "Content-Type": "application/json",

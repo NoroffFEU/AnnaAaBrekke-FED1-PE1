@@ -9,53 +9,56 @@ import { sortPostByNewest, sortPostsByOldest } from "./sort.js"; // Import the s
 import { addSortButtonsEventListener } from "./eventHandlers.js";
 
 // Function to fetch posts from the server and display them
-async function fetchAndDisplayPosts() {
-  console.log("Attempting to fetch and display posts...");
+export async function fetchAndDisplayPosts() {
+  console.log("fetchAndDisplayPosts started");
+  let homePosts = [];
   try {
     console.log("Loading posts from local storage...");
-    let homePosts = await loadCreatedPosts(); // First try to load posts from local storage
+    homePosts = await loadCreatedPosts(); // First try to load posts from local storage
+    // console.log("Loaded from local storage:", homePosts.data);
 
-    if (!homePosts || !homePosts.length) {
+    if (!homePosts || !homePosts.data || homePosts.data.length === 0) {
       console.log("No posts in local storage, fetching from server...");
       homePosts = await getPosts("SerenaTravel"); // Fetch posts
-      saveCreatedPosts(homePosts); // Save fetched posts to local storage
+      saveCreatedPosts(homePosts.data); // Save fetched posts to local storage
       console.log("Posts saved to local storage");
     } else {
       console.log(`Loaded posts from local storage`);
     }
 
-    // console.log("Sorting posts by creation date...");
-    // homePosts = sortedPostsByDateCreated(homePosts); // Use the imported sorting function
-    // console.log(`Fetched posts:`, homePosts); // Ensure this logs an array
+    homePosts.data = sortPostByNewest(homePosts.data);
 
     console.log("Displaying posts...");
-    displayPosts(homePosts); // Assuming displayPosts can handle and limit the posts on its own
+    displayPosts(homePosts.data); // Assuming displayPosts can handle and limit the posts on its own
     console.log("Posts displayed");
 
     console.log("Creating carousel for latest posts...");
-    latestPostsCarousel(homePosts); // Assuming latestPostsCarousel can handle and limit the posts on its own
+    latestPostsCarousel(homePosts.data.slice(0, 3)); // Assuming latestPostsCarousel can handle and limit the posts on its own
     console.log("Latest posts carousel created");
   } catch (error) {
     console.error("Failed to fetch posts:", error);
     // alert("Failed to load posts. Please try again.");
   }
+
+  return homePosts;
 }
 
-
-// Initialize the page by fetching and displaying posts
 async function init() {
-  console.log("DOM Content Loaded or already ready, initializing...");
-  const posts = (await loadCreatedPosts()) || [];
-  console.log("Posts loaded:", posts.length);
+  console.log("Initializing application...");
+  const homePosts = await fetchAndDisplayPosts(); // Call fetchAndDisplayPosts and wait for it to finish
+  console.log("Posts fetched and displayed:", homePosts);
 
-  await fetchAndDisplayPosts(posts);
-  console.log("Posts fetched and displayed.");
-
-  addSortButtonsEventListener(posts);
+  // Call addSortButtonsEventListener with the returned homePosts object
+  addSortButtonsEventListener(homePosts);
   console.log("Sort buttons event listeners added.");
 
-  addFilterButtonsEventListener(); // Assume filters don't need posts directly
-  console.log("Filter buttons event listeners added.");
+  // addFilterButtonsEventListener(); // Assume filters don't need posts directly
+  // console.log("Filter buttons event listeners added.");
 }
 
-document.addEventListener("DOMContentLoaded", init);
+console.log(document.readyState);
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", init);
+} else {
+  init();
+}

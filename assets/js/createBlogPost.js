@@ -6,6 +6,7 @@ let locallyCreatedPosts = []; // Initialize an array to store created posts at t
 export async function saveCreatedPosts() {
   localStorage.setItem("posts", JSON.stringify(locallyCreatedPosts));
 }
+console.log("saveCreatedPosts module loaded");
 
 async function createPost(name, postData) {
   const accessToken = localStorage.getItem("token");
@@ -37,12 +38,14 @@ async function createPost(name, postData) {
 export async function displayPosts(posts) {
   const postContainer = document.querySelector(".post-container");
   postContainer.innerHTML = ""; // Clear existing posts to prevent duplication
+  console.log("displayPosts module loaded");
 
   // Ensure there are posts to display
   if (posts && posts.length > 0) {
-    posts.slice(6, 30).forEach((post) => {
+    posts.slice(0, 12).forEach((post) => {
       const postElement = createPostElement(post);
       postContainer.appendChild(postElement);
+
       // Add event listener to each post element
       postElement.addEventListener("click", () => {
         const postId = post.id; // Assuming each post has an 'id' property
@@ -55,12 +58,14 @@ export async function displayPosts(posts) {
   }
 }
 
+console.log("displayPosts module loaded");
+
 // this is for the home page posts container
 
 function createPostElement(post) {
   const postData = post.data || post;
 
-  console.log("Post:", postData);
+  // console.log("Post:", postData);
 
   const postElement = document.createElement("div");
   postElement.classList.add("grid-post");
@@ -197,6 +202,8 @@ export async function loadCreatedPosts() {
     displayPosts(locallyCreatedPosts);
   }
 }
+
+console.log(" loadCreatedPosts module loaded");
 
 document.addEventListener("DOMContentLoaded", init);
 
