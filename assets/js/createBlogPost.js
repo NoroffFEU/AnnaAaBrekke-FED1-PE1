@@ -1,4 +1,6 @@
 import { apiUrlUser } from "./api.mjs";
+import { handlePostClick } from "./eventHandlers.js";
+import { redirectToPostPage } from "./routingUtils.js";
 console.log(apiUrlUser);
 
 let locallyCreatedPosts = []; // Initialize an array to store created posts at the very top
@@ -47,10 +49,10 @@ export async function displayPosts(posts) {
       postContainer.appendChild(postElement);
 
       // Add event listener to each post element
-      postElement.addEventListener("click", () => {
-        const postId = post.id; // Assuming each post has an 'id' property
-        redirectToPostPage(postId);
-        console.log("Clicked post ID:", postId);
+      const moreButton = postElement.querySelector(".read-more");
+      moreButton.addEventListener("click", () => {
+        handlePostClick(post);
+        redirectToPostPage(post.id);
       });
     });
   } else {
@@ -115,11 +117,6 @@ function createPostElement(post) {
 `;
 
   return postElement;
-}
-
-function redirectToPostPage(postId) {
-  // Redirect to post/index.html with the post ID as a query parameter
-  window.location.href = `post/index.html?id=${postId}`;
 }
 
 function createFormHandler() {

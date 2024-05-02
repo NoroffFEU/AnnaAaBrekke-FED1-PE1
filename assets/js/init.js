@@ -5,8 +5,12 @@ import {
   displayPosts,
 } from "./createBlogPost.js"; // Handles local storage and displaying posts
 import { latestPostsCarousel } from "./carousel.js"; // Displays a carousel of the latest posts
-import { sortPostByNewest, sortPostsByOldest } from "./sort.js"; // Import the sorting function
-import { addSortButtonsEventListener } from "./eventHandlers.js";
+import { sortPostByNewest } from "./sort.js"; // Import the sorting function
+import {
+  addSortButtonsEventListener,
+  handlePostClick,
+  setupCarouselClickEvents,
+} from "./eventHandlers.js";
 
 // Function to fetch posts from the server and display them
 export async function fetchAndDisplayPosts() {
@@ -33,7 +37,7 @@ export async function fetchAndDisplayPosts() {
     console.log("Posts displayed");
 
     console.log("Creating carousel for latest posts...");
-    latestPostsCarousel(homePosts.data.slice(0, 3)); // Assuming latestPostsCarousel can handle and limit the posts on its own
+    latestPostsCarousel(homePosts.data.slice(0, 3));
     console.log("Latest posts carousel created");
   } catch (error) {
     console.error("Failed to fetch posts:", error);
@@ -48,9 +52,19 @@ async function init() {
   const homePosts = await fetchAndDisplayPosts(); // Call fetchAndDisplayPosts and wait for it to finish
   console.log("Posts fetched and displayed:", homePosts);
 
+  setupCarouselClickEvents(); // Assuming latestPostsCarousel can handle and limit the posts on its own
+  console.log("Next and prev buttons event listeners added.");
+
   // Call addSortButtonsEventListener with the returned homePosts object
   addSortButtonsEventListener(homePosts);
   console.log("Sort buttons event listeners added.");
+
+  const posts = document.querySelectorAll(".post");
+  posts.forEach((post) => {
+    post.addEventListener("click", () => {
+      handlePostClick(post);
+    });
+  });
 
   // addFilterButtonsEventListener(); // Assume filters don't need posts directly
   // console.log("Filter buttons event listeners added.");

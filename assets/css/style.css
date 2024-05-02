@@ -91,26 +91,37 @@ nav a {
   margin-top: 1rem;
 }
 
-/* Carousel (add the source later) */
+/* Carousel based somewhat on: https://webdesign.tutsplus.com/how-to-build-a-simple-carousel-with-vanilla-javascript--cms-41734t */
 
-.slider-wrapper {
-  margin: 1rem;
+#latestPostCarousel {
   position: relative;
+  margin: 1rem auto;
   overflow: hidden;
+  width: 100%; /* or a specific max-width */
 }
 
 .slides-container {
-  height: calc(100vh - 2rem);
-  width: 100%;
   display: flex;
-  overflow: scroll;
-  scroll-behavior: smooth;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  background-color: #cbd1cf68;
-  justify-content: flex-start;
+  flex-wrap: nowrap;
+  overflow-x: auto;
   scroll-snap-type: x mandatory;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: auto; /* Adjust based on content */
+  background-color: #c4a4bf88;
+}
+
+.slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .slide-arrow {
@@ -135,33 +146,17 @@ nav a {
   opacity: 1;
 }
 
-#slide-arrow-prev {
-  left: 0;
-  padding-left: 0.25rem;
-  border-radius: 0 2rem 2rem 0;
-}
-
-#slide-arrow-next {
-  right: 0;
-  padding-left: 0.75rem;
+#slideArrowPrev {
+  left: 1rem;
   border-radius: 2rem 0 0 2rem;
 }
 
-.slide {
-  width: 100%;
-  height: 100%;
-  flex: none;
-  background-color: white;
-  border-radius: 5px;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 1rem;
-  scroll-snap-align: start;
-  transition: transform 300ms ease-in-out;
+#slideArrowNext {
+  right: 1rem;
+  border-radius: 0 2rem 2rem 0;
 }
+
+/* 
 
 .slide img {
   height: calc(100% - 12rem);
@@ -171,14 +166,14 @@ nav a {
 .slide h3 {
   font-size: 30px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Added for text readability */
-}
+/* } */
 
-.slide p {
+/* .slide p {
   font-size: 24px;
   font-weight: 500;
   margin-top: 0;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Added for text readability */
-}
+ 
 
 /* Sort (based on this: https://www.jeffastor.com/blog/building-a-dropdown-menu-in-10-lines-of-javascript/ */
 

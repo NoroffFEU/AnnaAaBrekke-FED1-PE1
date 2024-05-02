@@ -1,5 +1,6 @@
 import { displayPosts } from "./createBlogPost.js";
 import { sortPostByNewest, sortPostsByOldest } from "./sort.js";
+import { redirectToPostPage } from "./routingUtils.js";
 
 export function addSortButtonsEventListener(posts) {
   const sortNew = document.querySelector(".sort-newest");
@@ -43,4 +44,28 @@ export function addSortButtonsEventListener(posts) {
       dropdown.classList.add("closed");
     }
   });
+}
+
+// Click on next and previous button
+
+export function setupCarouselClickEvents() {
+  const slidesContainer = document.getElementById("slidesContainer");
+  const slideWidth = document.querySelector(".slide").clientWidth;
+  const prevButton = document.getElementById("slideArrowPrev");
+  const nextButton = document.getElementById("slideArrowNext");
+
+  nextButton.addEventListener("click", () => {
+    slidesContainer.scrollLeft += slideWidth;
+  });
+
+  prevButton.addEventListener("click", () => {
+    slidesContainer.scrollLeft -= slideWidth;
+  });
+}
+
+// When click on read more/check it out button redirect to post main page
+export function handlePostClick(post) {
+  const postId = post.id; // Assuming each post has an 'id' property
+  redirectToPostPage(postId);
+  console.log("Clicked post ID:", postId);
 }
