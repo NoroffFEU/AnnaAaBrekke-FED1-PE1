@@ -33,4 +33,14 @@ export function addSortButtonsEventListener(posts) {
       console.error("Posts data is not an array.");
     }
   });
+
+  let dropdown = document.querySelector(".dropdown-sort");
+
+  dropdown.addEventListener("click", (e) => {
+    if (dropdown.classList.contains("closed")) {
+      dropdown.classList.remove("closed");
+    } else {
+      dropdown.classList.add("closed");
+    }
+  });
 }

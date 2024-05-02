@@ -1,13 +1,17 @@
 body {
   background-color: rgb(164, 236, 212);
   font-family: "Montserrat", sans-serif;
-  background-image: url(/assets/images/spring_flower_kid.jpeg);
+  background-image: url(/assets/images/DALL·E\ 2024-05-02\ 14.44.46\ -\ A\ realistic\ travel\ photo\ capturing\ the\ back\ of\ a\ girl\ walking\ through\ a\ vibrant\ spring\ field\ of\ flowers\ towards\ an\ ocean\ horizon\ at\ sunset.\ The\ sky\ ab.webp);
   background-position: center top;
   background-repeat: no-repeat;
+  background-size: contain;
   background-color: hsl(180, 7%, 97%);
   padding: 1rem;
 }
 
+#loginBody {
+  background-size: cover;
+}
 /* Header */
 
 header {
@@ -56,6 +60,15 @@ nav a {
 
 .headline {
   height: 400px;
+}
+
+.headline h1 {
+  margin-top: 1rem;
+}
+
+.headline h2 {
+  font-family: cursive; /* fix latrr */
+  font-weight: 600;
 }
 
 .column {
@@ -165,6 +178,57 @@ nav a {
   font-weight: 500;
   margin-top: 0;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Added for text readability */
+}
+
+/* Sort (based on this: https://www.jeffastor.com/blog/building-a-dropdown-menu-in-10-lines-of-javascript/ */
+
+#sortByDate {
+  box-sizing: border-box;
+}
+
+#sortByDate ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+#sortByDate a {
+  text-decoration: none;
+}
+
+.dropdown-sort {
+  transition: all 0.2s ease-in-out;
+  overflow: hidden;
+  margin: 1rem;
+  background: rgb(248, 248, 248);
+  border: solid 2px rgb(222, 222, 222);
+  width: 140px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.dropdown-title {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px 0 10px;
+}
+
+.sort-opt {
+  height: 114px;
+}
+
+.sort-opt li {
+  font-size: 18px;
+  font-weight: 500;
+  padding: 14px 10px;
+  border-top: solid 1px rgb(202, 202, 202);
+}
+
+.dropdown-sort.closed .sort-opt {
+  height: 0px;
+}
+.dropdown-sort.closed .dropdown-title span {
+  transform: rotate(180deg);
 }
 
 /* Grid Layout */
@@ -466,5 +530,12 @@ form h1 {
 @media (max-width: 768px) {
   .post-container {
     grid-template-columns: 1fr; /* Makes the columns stack vertically */
+  }
+}
+
+@media (max-width: 950px) {
+  body {
+    background-size: cover;
+    background-position: bottom;
   }
 }

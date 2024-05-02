@@ -109,7 +109,7 @@ function createPostElement(post) {
     <div class="tags">${tagsHtml}</div>
     <div class="post-country">${country}</div>
     <div class="more-buttons">
-      <button class="read-more">Read More</button>
+      <button class="read-more">Check it out!</button>
     </div>
   </div>
 `;
