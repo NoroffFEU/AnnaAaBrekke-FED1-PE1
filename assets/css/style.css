@@ -59,11 +59,11 @@ nav a {
 }
 
 .headline {
-  height: 400px;
+  height: 250px;
 }
 
 .headline h1 {
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .headline h2 {
@@ -122,6 +122,7 @@ nav a {
   align-items: center;
   padding: 20px;
   box-sizing: border-box;
+  transition: transform 0.5s; /* Smooth transition */
 }
 
 .slide-arrow {
@@ -132,7 +133,7 @@ nav a {
   height: 4rem;
   background-color: white;
   border: none;
-  width: 2rem;
+  width: 3rem;
   font-size: 3rem;
   padding: 0;
   cursor: pointer;

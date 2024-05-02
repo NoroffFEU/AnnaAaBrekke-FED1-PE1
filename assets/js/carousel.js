@@ -32,25 +32,31 @@ export function latestPostsCarousel(posts) {
       li.className = `slide ${index === 0 ? "active" : ""}`;
       li.innerHTML = `
         <div class="post-info">
-          <img src="${post.media.url}" onError="this.onerror=null; this.src='${defaultImage}'" alt="${post.media.alt}" class="post-img">
+          <img src="${
+            post.media.url
+          }" onError="this.onerror=null; this.src='${defaultImage}'" alt="${
+        post.media.alt
+      }" class="post-img">
           <h2>${post.title}</h2>
           <div class="post-country">${post.country}</div>
           <p>${truncatedBody}</p>
-          <p><small>Posted on: ${new Date(post.created).toLocaleDateString()}</small></p>
+          <p><small>Posted on: ${new Date(
+            post.created
+          ).toLocaleDateString()}</small></p>
           <div class="post-author">${post.author}</div>
           <button class="read-more">Read More</button>
         </div>
       `;
 
-      carouselContainer.appendChild(li);;
+      carouselContainer.appendChild(li);
       console.log(`Slides added for post: ${post.id}`);
 
       const readMoreButton = li.querySelector(".read-more");
       readMoreButton.addEventListener("click", () => {
         handlePostClick(post);
         redirectToPostPage(post.id);
+      });
     });
-  });
     console.log("Carousel has been created");
   } catch (error) {
     console.error("Error creating latest posts carousel:", error);
@@ -58,7 +64,7 @@ export function latestPostsCarousel(posts) {
 }
 
 // Slide to next and previous post
- 
+
 export function navigateCarousel(direction) {
   const slides = document.querySelectorAll(".slide");
   const activeSlide = document.querySelector(".slide.active");
@@ -66,13 +72,12 @@ export function navigateCarousel(direction) {
 
   if (direction === "next") {
     newIndex = (newIndex + 1) % slides.length;
-    console.log("Next slide works")
+    console.log("Next slide works");
   } else {
     newIndex = (newIndex - 1 + slides.length) % slides.length;
-    console.log("prev slide works")
+    console.log("prev slide works");
   }
 
-  slides.forEach(slide =>
-  slide.classList.remove("active"));
-  slides[newIndex].classList.add("active")
+  slides.forEach((slide) => slide.classList.remove("active"));
+  slides[newIndex].classList.add("active");
 }
