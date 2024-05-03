@@ -76,13 +76,35 @@ function displaySinglePost(post) {
   const shareUrl = `${window.location.origin}/post/index.html?id=${postId}`;
 
   const sharePost = document.createElement("div");
-  sharePost.classList.add(".share");
-  sharePost.innerHTML = "";
-
+  sharePost.classList.add("share");
   sharePost.innerHTML = `
-  <button class = "share-button"><a href="${shareUrl}" target="_blank">Share this post</a></button>
-  `;
+            <h3 class = "share-title">Share this post</h3>
+    `;
 
+  // sharePost.innerHTML = `
+  // <button class = "share-button"><a href="${shareUrl}" target="_blank">Share this post</a></button>
+  // `;
+
+  const shareInput = document.createElement("input");
+  shareInput.classList.add("share-link");
+  shareInput.value = shareUrl;
+  shareInput.readOnly = true; // make the input read-only
+  
+  const copyButton = document.createElement("button");
+  copyButton.classList.add("copy-button");
+  copyButton.textContent = "Copy";
+  copyButton.addEventListener("click", () => {
+    shareInput.select();
+    document.execCommand("copy");
+    // Optionally, provide feedback to the user
+    copyButton.textContent = "Copied!";
+    setTimeout(() => {
+      copyButton.textContent = "Copy";
+    }, 1500);
+  });
+  
+  sharePost.appendChild(shareInput);
+  sharePost.appendChild(copyButton);
   mainPostContent.appendChild(sharePost);
 
   // <div class="post-country">${country}</div>

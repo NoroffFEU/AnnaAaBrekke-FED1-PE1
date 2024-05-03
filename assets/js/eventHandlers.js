@@ -88,9 +88,14 @@ export function handlePostClick(post) {
 
 // // based on this https://css-tricks.com/how-to-use-the-web-share-api/
 
-// export function handleShareToggle() {
-//   const shareButton = document.querySelectorAll(".share-button");
-//   shareButton.addEventListener("click", () => {
+export function handleShareButton() {
+  const shareButton = document.querySelectorAll(".share-button");
+  shareButton.addEventListener("mouseenter", () => {
+
+
+  });
+}
+        
 //     if (navigator.share) {
 //       navigator
 //         .share({

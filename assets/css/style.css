@@ -262,8 +262,7 @@ nav a {
 }
 
 .country,
-.read-more,
-.share-button {
+.read-more {
   background-color: #f2f2f2e2;
   color: #333;
   border: none;
@@ -426,17 +425,46 @@ h4 {
   font-size: 22px;
 }
 
-.share-button a {
+/* .share-button a {
   text-decoration: none;
   color: #000000;
-}
+} */
 
-.share-button:hover {
-  background-color: #d8eef2bc;
-  color: #fff;
+.copy-button:hover {
+  background-color: #f5f4adbc;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
+.share-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.share-link {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.copy-button {
+  background-color: #f1ed7dc4;
+  color: #000000;
+  border: 1px solid grey;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 /* 
 .memory {
   background-color: linear-gradient(to bottom, #ffffff 0%, #f9e9f6b6 100%);
