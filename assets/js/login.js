@@ -15,9 +15,9 @@ const loginData = {
 
 try {
   const loginResponse = await loginOwner(loginData);
-  console.log("Login successfull;", loginResponse);
-  if (loginResponse && loginResponse.data && loginResponse.data.accessToken);
-  localStorage.setItem(`token`, loginResponse.data.accessToken);
+  if (loginResponse && loginResponse.data && loginResponse.data.accessToken) {
+    localStorage.setItem(`token`, loginResponse.data.accessToken);
+  }
 } catch (error) {
   console.error("Login failed:", error);
 }
@@ -58,16 +58,40 @@ export async function loginOwner(loginData) {
 export async function performLogin(loginData) {
   try {
     const loginResponse = await loginOwner(loginData);
-    console.log("Login successful:", loginResponse);
-    if (loginResponse.data && loginResponse.data.accessToken) {
-      localStorage.setItem("token", loginResponse.data.accessToken); // Assuming token is directly available
-      return loginResponse; // Return the login response for possible use later
-    } else {
-      throw new Error("Access token not found in logn response");
-    }
+    localStorage.setItem("token", loginResponse.data.accessToken);
+    localStorage.setItem("loginTime", new Date().getTime());
+    console.log("Login successful:", loginResponse); // Move this log statement here
+    return loginResponse;
   } catch (error) {
     console.error("Login failed:", error);
-    throw error; // Rethrowing error to be handled in the calling scope
+    throw error;
+  }
+}
+
+export function isTokenTimeLong() {
+  const loginTime = localStorage.getItem("loginTime");
+  if (!loginTime) return true; // If login time is not set, token overdue
+  const currentTime = new Date().getTime();
+  const timeLeft = currentTime - parseInt(loginTime);
+  const timeRunOut = 2 * 60 * 1000; // Token expires after 2 min test
+  return timeLeft >= timeRunOut;
+}
+
+export function logout() {
+  console.log("logging out..");
+  localStorage.removeItem("token");
+  localStorage.removeItem("loginTime");
+  window.location.href = "../account/login.html";
+}
+
+export function checkLoginStatus() {
+  if (!isTokenTimeLong()) {
+    // Token is not expired, return true to indicate the user is logged in
+    return true;
+  } else {
+    // Token is expired, log out and redirect to the login page
+    logout();
+    return false;
   }
 }
 
@@ -83,11 +107,12 @@ document
 
     try {
       const loginResponse = await performLogin(loginData);
+      console.log("Login successful:", loginResponse);
       localStorage.setItem("token", loginResponse.data.accessToken); // Store the token in local storage
       document.getElementsByClassName("login-message")[0].textContent =
         "Login successful!";
 
-      // Redirect to edit page after successful login
+      // // Redirect to edit page after successful login
       window.location.href = "/post/create.html";
     } catch (error) {
       document.getElementsByClassName("login-message")[0].textContent =
@@ -95,7 +120,10 @@ document
     }
   });
 
-// export async function logout() {
-//   localStorage.removeItem("token");
-//   window.location.href = "../account/login.html";
-// }
+// Check login status when the document is ready
+document.addEventListener("DOMContentLoaded", () => {
+  if (!checkLoginStatus()) {
+    // If not logged in or token expired, redirect to login page
+    window.location.href = "../account/login.html";
+  }
+});

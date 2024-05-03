@@ -2,6 +2,7 @@ import { displayPosts } from "./createBlogPost.js";
 import { sortPostByNewest, sortPostsByOldest } from "./sort.js";
 import { redirectToPostPage } from "./routingUtils.js";
 // import { logout } from "./login.js";
+// import { logout } from "./login.js";
 
 export function addSortButtonsEventListener(posts) {
   const sortNew = document.querySelector(".sort-newest");
@@ -87,7 +88,7 @@ export function handlePostClick(post) {
 }
 
 // export function handleLogoutClicked() {
-//   const logoutButton = document.querySelectorAll(".logout-button");
+//   const logoutButton = document.querySelector(".logout-button");
 //   if (logoutButton) {
 //     logoutButton.addEventListener("click", logout);
 //   }

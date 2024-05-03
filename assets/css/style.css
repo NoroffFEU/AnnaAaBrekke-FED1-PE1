@@ -5,7 +5,7 @@ body {
   background-position: center top;
   background-repeat: no-repeat;
   background-size: contain;
-  background-color: hsl(180, 7%, 97%);
+  background-color: hsla(180, 100%, 96%, 0.526);
   padding: 1rem;
 }
 
@@ -134,6 +134,13 @@ nav a {
 
 .slide li {
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.8);
+}
+
+.slide img {
+  max-width: 100%;
+  max-height: 50vh;
+  width: auto; /* Ensure the image keeps its aspect ratio */
+  height: auto;
 }
 
 .slide-arrow {
@@ -286,7 +293,7 @@ nav a {
 .post-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+  gap: 2rem;
   margin: 1rem;
 }
 
@@ -299,6 +306,73 @@ nav a {
   align-items: center;
   border-radius: 4px;
 }
+
+.grid-post img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto; /* Ensure the image keeps its aspect ratio */
+  height: auto;
+  margin-bottom: 0.25rem;
+}
+
+#aboutBoxes,
+#contact {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.box {
+  background: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px;
+  width: 300px;
+}
+
+.box img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.box li {
+  margin-bottom: 5px;
+  font-size: 20px;
+  list-style: none;
+}
+
+.box ul {
+  padding-left: 0.25rem;
+}
+
+.box h3,
+.box h4 {
+  margin-top: 0;
+}
+
+#contact h2 {
+  padding-left: 1rem;
+  font-weight: 600;
+}
+
+.contact-form,
+.contact-image {
+  flex: 1;
+  min-width: 300px; /* Ensures that the form and image do not get too small */
+  padding: 20px;
+}
+
+.contact-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Main Post */
 
 .main-post {
   max-width: 600px; /* Makes the container narrow */
@@ -382,6 +456,15 @@ nav a {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.gallery {
+  display: flex;
+  justify-content: center;
+}
+
+.gallery img {
+  width: 100vw;
 }
 
 /* .prices {
