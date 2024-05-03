@@ -84,3 +84,25 @@ export function handlePostClick(post) {
   redirectToPostPage(postId);
   console.log("Clicked post ID:", postId);
 }
+
+
+// // based on this https://css-tricks.com/how-to-use-the-web-share-api/
+
+// export function handleShareToggle() {
+//   const shareButton = document.querySelectorAll(".share-button");
+//   shareButton.addEventListener("click", () => {
+//     if (navigator.share) {
+//       navigator
+//         .share({
+//           title: "post",
+//           url: "",
+//         })
+//         .then(() => {
+//           console.log("Thanks for sharing!");
+//         })
+//         .catch(console.error);
+//     } else {
+//       // fallback
+//     }
+//   });
+// }

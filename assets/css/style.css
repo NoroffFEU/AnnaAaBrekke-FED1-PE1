@@ -12,6 +12,7 @@ body {
 #loginBody {
   background-size: cover;
 }
+
 /* Header */
 
 header {
@@ -261,7 +262,8 @@ nav a {
 }
 
 .country,
-.read-more {
+.read-more,
+.share-button {
   background-color: #f2f2f2e2;
   color: #333;
   border: none;
@@ -424,6 +426,18 @@ h4 {
   font-size: 22px;
 }
 
+.share-button a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.share-button:hover {
+  background-color: #d8eef2bc;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* 
 .memory {
   background-color: linear-gradient(to bottom, #ffffff 0%, #f9e9f6b6 100%);
   color: #272220;
@@ -453,7 +467,7 @@ h4 {
 #food {
   margin: 1rem;
   padding: 0.5rem;
-}
+} */
 
 /* Footer */
 .footer-nav {

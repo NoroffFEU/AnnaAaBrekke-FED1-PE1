@@ -1,4 +1,5 @@
 import { getSinglePost } from "../get.js";
+// import { apiUrl } from "../api.mjs";
 
 const urlParams = new URLSearchParams(window.location.search);
 console.log("The URL:", urlParams);
@@ -71,6 +72,18 @@ function displaySinglePost(post) {
     <p class="post-text">${post.body}</p>
   `;
   mainPostContent.appendChild(contentSection);
+
+  const shareUrl = `${window.location.origin}/post/index.html?id=${postId}`;
+
+  const sharePost = document.createElement("div");
+  sharePost.classList.add(".share");
+  sharePost.innerHTML = "";
+
+  sharePost.innerHTML = `
+  <button class = "share-button"><a href="${shareUrl}" target="_blank">Share this post</a></button>
+  `;
+
+  mainPostContent.appendChild(sharePost);
 
   // <div class="post-country">${country}</div>
 
