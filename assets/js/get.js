@@ -1,28 +1,17 @@
 import { apiUrlUser } from "./api.mjs";
 
-export async function getPosts(name, accessToken = null, queryParams = {}) {
-  const headers = {
-    "Content-Type": "application/json",
-  };
-
-  if (accessToken) {
-    headers["Authorization"] = `Bearer ${accessToken}`;
-  }
-
-  // Construct query string from queryParams object
+export async function getPosts(name, queryParams = {}) {
   const queryString = new URLSearchParams(queryParams).toString();
 
   try {
-    const response = await fetch(
-      `${apiUrlUser}/${name}${queryString ? "?" + queryString : ""}`,
+    const response = await fetch(`${apiUrlUser}/${name}${queryString ? "?" + queryString : ""}`,
       {
         method: "GET",
-        headers: headers,
       }
     );
 
     if (!response.ok) {
-      const errorDetails = await response.text(); // Assuming error details are in text format
+      const errorDetails = await response.text();
       throw new Error(
         `HTTP error! Status: ${response.status} - ${errorDetails}`
       );
@@ -30,7 +19,7 @@ export async function getPosts(name, accessToken = null, queryParams = {}) {
 
     const data = await response.json();
     if (!Array.isArray(data) && data.posts) {
-      return data.posts; // Assuming the API might wrap posts in a "posts" property
+      return data.posts;
     }
     return data;
   } catch (error) {
@@ -38,8 +27,6 @@ export async function getPosts(name, accessToken = null, queryParams = {}) {
     throw error;
   }
 }
-
-console.log("getPosts module loaded");
 
 
 export async function getSinglePost(name, id, accessToken = null) {

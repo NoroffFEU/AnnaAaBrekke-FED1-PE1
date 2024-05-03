@@ -1,6 +1,7 @@
 import { displayPosts } from "./createBlogPost.js";
 import { sortPostByNewest, sortPostsByOldest } from "./sort.js";
 import { redirectToPostPage } from "./routingUtils.js";
+// import { logout } from "./login.js";
 
 export function addSortButtonsEventListener(posts) {
   const sortNew = document.querySelector(".sort-newest");
@@ -85,17 +86,20 @@ export function handlePostClick(post) {
   console.log("Clicked post ID:", postId);
 }
 
+// export function handleLogoutClicked() {
+//   const logoutButton = document.querySelectorAll(".logout-button");
+//   if (logoutButton) {
+//     logoutButton.addEventListener("click", logout);
+//   }
+// }
 
-// // based on this https://css-tricks.com/how-to-use-the-web-share-api/
+// // // based on this https://css-tricks.com/how-to-use-the-web-share-api/
 
-export function handleShareButton() {
-  const shareButton = document.querySelectorAll(".share-button");
-  shareButton.addEventListener("mouseenter", () => {
+// export function handleShareButton() {
+//   const shareButton = document.querySelectorAll(".share-button");
+//   shareButton.addEventListener("mouseenter", () => {});
+// }
 
-
-  });
-}
-        
 //     if (navigator.share) {
 //       navigator
 //         .share({

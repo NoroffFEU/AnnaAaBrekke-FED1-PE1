@@ -78,7 +78,7 @@ function displaySinglePost(post) {
   const sharePost = document.createElement("div");
   sharePost.classList.add("share");
   sharePost.innerHTML = `
-            <h3 class = "share-title">Share this post</h3>
+      <h3 class = "share-title">Share this post</h3>
     `;
 
   // sharePost.innerHTML = `
@@ -89,20 +89,21 @@ function displaySinglePost(post) {
   shareInput.classList.add("share-link");
   shareInput.value = shareUrl;
   shareInput.readOnly = true; // make the input read-only
-  
+
   const copyButton = document.createElement("button");
   copyButton.classList.add("copy-button");
   copyButton.textContent = "Copy";
   copyButton.addEventListener("click", () => {
+    // add to eventHandlers file later?
     shareInput.select();
-    document.execCommand("copy");
-    // Optionally, provide feedback to the user
+    document.execCommand("copy"); // fix this later
+    // Feedback to user when copied sucsessfully
     copyButton.textContent = "Copied!";
     setTimeout(() => {
       copyButton.textContent = "Copy";
     }, 1500);
   });
-  
+
   sharePost.appendChild(shareInput);
   sharePost.appendChild(copyButton);
   mainPostContent.appendChild(sharePost);

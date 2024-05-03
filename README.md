@@ -20,15 +20,15 @@ Project Overview:
 Website Functionality Requirements:
 
 Blog Feed Page (/index.html):
-- Interactive banner carousel for 3 latest posts.
-- Buttons to navigate the carousel.
-- The carousel loops around from last to first post and vice versa.
-- Static list of 12 latest posts in a thumbnail grid.
-- Thumbnails are clickable and lead to respective blog posts.
+- Interactive banner carousel for 3 latest posts. ✅
+- Buttons to navigate the carousel.✅
+- The carousel loops around from last to first post and vice versa.✅
+- Static list of 12 latest posts in a thumbnail grid.✅
+- Thumbnails are clickable and lead to respective blog posts.✅
 
 Blog Post Public Page (/post/index.html):
-- Displays post details: title, date, images, and content.
-- Unique shareable URL with a post ID.
+- Displays post details: title, date, images, and content.✅
+- Unique shareable URL with a post ID.✅
 
 Blog Post Edit Page (/post/edit.html):
 - Accessible only when the owner is logged in.
@@ -40,3 +40,8 @@ Account Login Page (/account/login.html):
 
 Account Register Page (/account/register.html):
 - Register form for creating a new account with name, email, and password. (Registration system for future team members to create accounts and post content.)
+
+
+For the user (public visitor), there's no need for them to log in. They will simply access the public endpoints, such as fetching posts, without authentication.
+
+For the owner (manager of the blog), they need to log in to access certain features like creating or managing posts. After logging in, they will receive an access token that they can use to authenticate their requests to protected endpoints, such as creating or updating posts.

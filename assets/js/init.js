@@ -12,6 +12,8 @@ import {
   setupCarouselClickEvents,
 } from "./eventHandlers.js";
 
+
+
 // Function to fetch posts from the server and display them
 export async function fetchAndDisplayPosts() {
   console.log("fetchAndDisplayPosts started");
