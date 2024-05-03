@@ -54,6 +54,7 @@ async function init() {
 
   setupCarouselClickEvents(); // Assuming latestPostsCarousel can handle and limit the posts on its own
   console.log("Next and prev buttons event listeners added.");
+  // navigateCarousel();
 
   // Call addSortButtonsEventListener with the returned homePosts object
   addSortButtonsEventListener(homePosts);

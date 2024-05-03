@@ -65,19 +65,61 @@ export function latestPostsCarousel(posts) {
 
 // Slide to next and previous post
 
-export function navigateCarousel(direction) {
-  const slides = document.querySelectorAll(".slide");
-  const activeSlide = document.querySelector(".slide.active");
-  let newIndex = Array.from(slides).indexOf(activeSlide);
+// export function navigateCarousel(direction) {
+//   const slidesContainer = document.getElementById("slidesContainer");
+//   const slideWidth = document.querySelector(".slide").clientWidth;
+//   const maxScrollLeft = slidesContainer.scrollWidth - slidesContainer.clientWidth;
+//   const currentScrollLeft = slidesContainer.scrollLeft;
 
-  if (direction === "next") {
-    newIndex = (newIndex + 1) % slides.length;
-    console.log("Next slide works");
-  } else {
-    newIndex = (newIndex - 1 + slides.length) % slides.length;
-    console.log("prev slide works");
-  }
+//   if ( direction === "next") {
+//     slidesContainer.scrollTo( {
+//       left: currentScrollLeft + slideWidth,
+//       behavior: "smooth"
+//     });
+//     if (currentScrollLeft + slideWidth >= maxScrollLeft) {
+//       slidesContainer.scrollTo({
+//         left: 0,
+//         behavior: "smooth"
+//       });
+//     }
+//   } else {
+//     slidesContainer.scrollTo({
+//       left: currentScrollLeft - slideWidth,
+//       behavior: "smooth"
+//     });
+//     if (currentScrollLeft === 0) {
+//       slidesContainer.scrollTo({
+//         left: maxScrollLeft,
+//         behavior: "smooth"
+//       });
+//     }
+//   }
+// }
 
-  slides.forEach((slide) => slide.classList.remove("active"));
-  slides[newIndex].classList.add("active");
-}
+// export function navigateCarousel(direction) {
+//   const slides = document.querySelectorAll(".slide");
+//   const activeSlide = document.querySelector(".slide.active");
+//   let currentIndex = Array.from(slides).indexOf(activeSlide);
+
+//   let newIndex;
+
+//   if (direction === "next") {    // Move to the next slide, looping to the first slide if at the end
+//     newIndex = currentIndex === slides.length - 1 ? 0 : currentIndex + 1;
+//     console.log("Next slide works");
+//   } else {
+//     // Move to the previous slide, looping to the last slide if at the beginning
+//     newIndex = currentIndex === 0 ? slides.length - 1 : currentIndex - 1;
+//     console.log("prev slide works");
+//   }
+
+//   slides.forEach((slide) => slide.classList.remove("active"));
+//   slides[newIndex].classList.add("active");
+// }
+
+// let rotateY = 0;
+
+// // Function to rotate the carousel
+// export function rotateCarousel() {
+// rotateY = -newIndex * 60; /* Adjust the rotation angle as desired */
+// slides.style.transform = `translateZ(-200px) rotateY(${rotateY}deg)`;
+// }

@@ -91,7 +91,7 @@ nav a {
   margin-top: 1rem;
 }
 
-/* Carousel based somewhat on: https://webdesign.tutsplus.com/how-to-build-a-simple-carousel-with-vanilla-javascript--cms-41734t */
+/* Carousel based somewhat on:https://www.youtube.com/watch?v=9HcxHDS2w1s & https://webdesign.tutsplus.com/how-to-build-a-simple-carousel-with-vanilla-javascript--cms-41734t */
 
 #latestPostCarousel {
   position: relative;
@@ -111,10 +111,15 @@ nav a {
   width: 100%;
   height: auto; /* Adjust based on content */
   background-color: #c4a4bf88;
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
 }
 
 .slide {
+  display: flex;
   flex: 0 0 100%;
+  /* max-width: 1000px; */
+  /* gap: 0;
+  margin-left: 0; */
   scroll-snap-align: start;
   display: flex;
   flex-direction: column;
@@ -122,7 +127,12 @@ nav a {
   align-items: center;
   padding: 20px;
   box-sizing: border-box;
-  transition: transform 0.5s; /* Smooth transition */
+  transition: transform 0.5s ease-in-out;
+  transition-delay: 200ms;
+}
+
+.slide li {
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.8);
 }
 
 .slide-arrow {
@@ -140,6 +150,7 @@ nav a {
   opacity: 0.5;
   transition: opacity 100ms;
   user-select: none;
+  box-shadow: 5px 5px 5px -2px rgba(0, 0, 0, 0.5);
 }
 
 .slide-arrow:hover,
@@ -156,6 +167,18 @@ nav a {
   right: 1rem;
   border-radius: 0 2rem 2rem 0;
 }
+/* 
+/* Define 3D transformations for each slide */ /*
+.slide:nth-child(1) /*{
+  transform: rotateY(0deg) translateZ(300px);
+}
+.slide:nth-child(2) {
+  transform: rotateY(45deg) translateZ(300px);
+}
+.slide:nth-child(3) {
+  transform: rotateY(90deg) translateZ(300px);
+} */
+/* Add more transformations for additional slides as needed */
 
 /* 
 
@@ -174,7 +197,6 @@ nav a {
   font-weight: 500;
   margin-top: 0;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Added for text readability */
- 
 
 /* Sort (based on this: https://www.jeffastor.com/blog/building-a-dropdown-menu-in-10-lines-of-javascript/ */
 

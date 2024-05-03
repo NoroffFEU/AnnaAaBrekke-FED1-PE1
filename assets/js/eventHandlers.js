@@ -51,15 +51,30 @@ export function addSortButtonsEventListener(posts) {
 export function setupCarouselClickEvents() {
   const slidesContainer = document.getElementById("slidesContainer");
   const slideWidth = document.querySelector(".slide").clientWidth;
+  const slideCount = document.querySelectorAll(".slide").length;
   const prevButton = document.getElementById("slideArrowPrev");
   const nextButton = document.getElementById("slideArrowNext");
 
   nextButton.addEventListener("click", () => {
     slidesContainer.scrollLeft += slideWidth;
+    // If at the end, scroll back to the beginning
+    if (slidesContainer.scrollLeft >= (slideCount - 1) * slideWidth) {
+      slidesContainer.scrollTo({
+        left: 0,
+        behavior: "smooth",
+      });
+    }
   });
 
   prevButton.addEventListener("click", () => {
     slidesContainer.scrollLeft -= slideWidth;
+    // If at the beginning, scroll to the end
+    if (slidesContainer.scrollLeft <= 0) {
+      slidesContainer.scrollTo({
+        left: (slideCount - 1) * slideWidth,
+        behavior: "smooth",
+      });
+    }
   });
 }
 
