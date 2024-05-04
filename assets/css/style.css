@@ -6,10 +6,11 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
   background-color: hsla(180, 100%, 96%, 0.526);
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 
-#loginBody {
+#loginBody,
+#registerBody {
   background-size: cover;
 }
 
@@ -580,6 +581,64 @@ h4 {
   padding: 0.5rem;
 } */
 
+/* After logged in */
+
+#loginBody h1 {
+  text-align: center;
+}
+
+#loginBody .chooseWhereNext {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  background-color: black;
+  color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#loginBody .chooseWhereNext button {
+  background-color: #719ce5e2;
+  color: #333;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+}
+
+
+/* .editNavButton {
+  background-color: #719ce5e2;
+  color: #333;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+/* } */
+
+/* .createNavButton {
+  background-color: #eed563e2;
+  color: #333;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+/* } */ */ */
+
 /* Footer */
 .footer-nav {
   background-color: rgba(204, 204, 204, 0.5);
@@ -643,28 +702,41 @@ textarea {
   height: 150px;
 }
 
+form h1 {
+  margin: 0.5rem;
+  text-align: center;
+}
+
+/* Components?*/
+
 button[type="submit"] {
-  background-color: #ff96de;
   color: #221f1f;
   border: none;
-  padding: 10px 20px;
   border-radius: 10px;
   cursor: pointer;
   font-size: 18px;
   font-weight: 600;
   transition: background-color 0.3s ease;
   margin-top: 1rem;
-  margin: 0.5rem;
   text-align: center;
 }
 
-button[type="submit"]:hover {
-  background-color: #b35700;
+.login-button {
+  background-color: #ff96de;
+  padding: 10px 20px;
 }
 
-form h1 {
-  margin: 0.5rem;
-  text-align: center;
+.login-button:hover {
+  background-color: #ff73ef;
+}
+
+.register-button {
+  background-color: rgb(255, 203, 250);
+  padding: 5px 10px;
+}
+
+.register-button:hover {
+  background-color: #b4f3f7;
 }
 
 /* Media Queries */

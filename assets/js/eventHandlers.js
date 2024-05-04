@@ -87,6 +87,23 @@ export function handlePostClick(post) {
   console.log("Clicked post ID:", postId);
 }
 
+
+// export function addRegisterButtonListener() {
+//   const registerButtonListener = () => {
+//     // Redirect to the register page
+//     window.location.href = "/register.html"; // Replace 'register.html' with the actual URL of your register page
+//   };
+
+//   // Add event listener for the register button
+//   document.addEventListener("DOMContentLoaded", () => {
+//     const registerButton = document.querySelector(".register-button");
+//     if (registerButton) {
+//       registerButton.addEventListener("click", registerButtonListener);
+//     }
+//   });
+// }
+
+
 // export function handleLogoutClicked() {
 //   const logoutButton = document.querySelector(".logout-button");
 //   if (logoutButton) {
