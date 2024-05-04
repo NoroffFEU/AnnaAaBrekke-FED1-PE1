@@ -87,7 +87,6 @@ export function handlePostClick(post) {
   console.log("Clicked post ID:", postId);
 }
 
-
 // export function addRegisterButtonListener() {
 //   const registerButtonListener = () => {
 //     // Redirect to the register page
@@ -102,7 +101,6 @@ export function handlePostClick(post) {
 //     }
 //   });
 // }
-
 
 // export function handleLogoutClicked() {
 //   const logoutButton = document.querySelector(".logout-button");

@@ -18,20 +18,22 @@
   </head>
 
   <body id="loginBody">
+    <form id="loginForm">
+      <h1>Login</h1>
+      <input type="email" id="ownerEmail" placeholder="Email" required />
+      <input
+        type="password"
+        id="ownerPassword"
+        placeholder="Password"
+        required
+      />
+      <button class="login-button" type="submit">Login</button>
+      <button class="register-button" type="submit">Register</button>
+    </form>
 
-  <form id="loginForm">
-    <h1>Login</h1>
-    <input type="email" id="ownerEmail" placeholder="Email" required />
-    <input type="password" id="ownerPassword" placeholder="Password" required />
-    <button class="login-button" type="submit">Login</button>
-    <button class="register-button" type="submit">Register</button>
-  </form>
+    <div class="login-message"></div>
 
-  <div class="login-message"></div>
-
-
-
-  <script type="module" src="../assets/js/login.js"></script>
-´
-</body>
+    <script type="module" src="../assets/js/login.js"></script>
+    ´
+  </body>
 </html>

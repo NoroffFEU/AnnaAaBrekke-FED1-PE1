@@ -1,9 +1,7 @@
-export const apiUrlUser = "https://v2.api.noroff.dev/blog/posts";
-export const apiUrl = "https://v2.api.noroff.dev/";
+export const apiUrlUser = `https://v2.api.noroff.dev/blog/posts`;
+export const apiUrl = `https://v2.api.noroff.dev/`;
 export const apiUrlLogin = `${apiUrl}auth/login`;
 export const apiUrlRegister = `${apiUrl}auth/register`;
-
-
 
 // Fetch all products
 // Fetch all posts, with Authorization header if needed

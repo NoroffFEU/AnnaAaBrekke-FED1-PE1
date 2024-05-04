@@ -1,19 +1,22 @@
 import { apiUrlLogin } from "./api.mjs";
+// import { register } from "./register.js"
 // import { addRegisterButtonListener } from "./eventHandlers.js";
 
-const loginData = {
-  email: "annaas00208@stud.noroff.no",
-  password: "firstRegisterApiPasswordSerena",
-};
+// const loginData = {
+//   email: "annaas00208@stud.noroff.no",
+//   password: "firstRegisterApiPasswordSerena",
+// };
 
-try {
-  const loginResponse = await loginOwner(loginData);
-  if (loginResponse && loginResponse.data && loginResponse.data.accessToken) {
-    localStorage.setItem(`token`, loginResponse.data.accessToken);
-  }
-} catch (error) {
-  console.error("Login failed:", error);
-}
+// try {
+//   const loginResponse = await loginOwner(loginData);
+//   if (loginResponse && loginResponse.data && loginResponse.data.accessToken) {
+//     localStorage.setItem(`token`, loginResponse.data.accessToken);
+//   }
+// } catch (error) {
+//   console.error("Login failed:", error);
+// }
+
+// HereYouGo
 
 export async function loginOwner(loginData) {
   const response = await fetch(`${apiUrlLogin}`, {

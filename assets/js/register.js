@@ -1,26 +1,32 @@
 import { apiUrlRegister } from "./api.mjs";
 
-const registerData = {
-  name: "SerenaTravel",
-  email: "annaas00208@stud.noroff.no",
-  password: "firstRegisterApiPasswordSerena",
-  venueManager: true, // Assuming this field is always true for new registrations
-};
+// const registerData = {
+//   name: "SerenaTravel",
+//   email: "annaas00208@stud.noroff.no",
+//   password: "firstRegisterApiPasswordSerena",
+//   venueManager: true, // Assuming this field is always true for new registrations
+// };
 
-export async function registerUser(registerData) {
-  const response = await fetch(`${apiUrlRegister}`, {
-    method: `POST`,
+// HereYouGo
+
+const method = "post";
+
+export async function register(registerData) {
+  const body = json.stringify(registerData);
+  const response = await fetch(apiUrlRegister, {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(registerData),
+    method,
+    body,
   });
 
   if (!response.ok) {
     throw new Error(`HTTP error! Status: ${response.status}`);
   }
 
-  return await response.json();
+  const result = await response.json();
+  console.log(result);
 }
 
 document
@@ -40,19 +46,18 @@ document
     console.log("Confirm Password:", confirmPassword);
 
     if (newPassword === confirmPassword) {
-      const newLoginData = {
+      const registerData = {
         name: newName,
         email: newEmail,
         password: newPassword,
-        venueManager: registerData.venueManager,
       };
 
-      console.log("New Registration Data:", newLoginData);
+      console.log("New Registration Data:", registerData);
 
       //now make the new loginData for loggin in - checkif it works... test- then delete later?
 
       try {
-        await registerUser(newLoginData);
+        await register(registerData);
         document.getElementsByClassName("register-message")[0].textContent =
           "Registration successful! Log in with your new account.";
 
@@ -69,7 +74,9 @@ document
         "Registration failed: Passwords do not match.";
     }
   });
+
 // import { getPosts } from "./getBlogPosts.js";
+
 
 // const registerData = {
 //     name: "SerenaTravel",
