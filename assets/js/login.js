@@ -1,4 +1,6 @@
 import { apiUrlLogin } from "./api.mjs";
+// import { register } from "./register.js";
+
 // import { register } from "./register.js"
 // import { addRegisterButtonListener } from "./eventHandlers.js";
 
@@ -18,20 +20,24 @@ import { apiUrlLogin } from "./api.mjs";
 
 // HereYouGo
 
-export async function loginOwner(loginData) {
-  const response = await fetch(`${apiUrlLogin}`, {
-    method: "POST",
+const method = "post";
+
+export async function loginOwner(registerData) {
+  const body = JSON.stringify(registerData);
+  const response = await fetch(apiUrlLogin, {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(loginData),
+    method,
+    body,
   });
 
   if (!response.ok) {
     throw new Error(`HTTP error! Status: ${response.status}`);
   }
 
-  return await response.json();
+  const loginResponse = await response.json();
+  console.log("you are registered correct", loginResponse);
 }
 
 // Perform login and save the token
