@@ -12,8 +12,6 @@ import {
   setupCarouselClickEvents,
 } from "./eventHandlers.js";
 
-
-
 // Function to fetch posts from the server and display them
 export async function fetchAndDisplayPosts() {
   console.log("fetchAndDisplayPosts started");
@@ -25,7 +23,7 @@ export async function fetchAndDisplayPosts() {
 
     if (!homePosts || !homePosts.data || homePosts.data.length === 0) {
       console.log("No posts in local storage, fetching from server...");
-      homePosts = await getPosts("SerenaTravel"); // Fetch posts
+      homePosts = await getPosts("SerenaTravel"); // Fetch posts (NEED TO FIX A VARIABLE FOR SERENATRAVEL DATA.NAME)
       saveCreatedPosts(homePosts.data); // Save fetched posts to local storage
       console.log("Posts saved to local storage");
     } else {

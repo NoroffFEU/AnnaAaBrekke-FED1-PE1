@@ -5,6 +5,7 @@ const urlParams = new URLSearchParams(window.location.search);
 console.log("The URL:", urlParams);
 const postId = urlParams.get("id");
 console.log("The link", postId);
+const name = post.user.name;
 
 if (!postId) {
   console.error("No post ID in URL parameters");
@@ -16,7 +17,7 @@ if (!postId) {
 
 async function fetchAndDisplaySinglePost(postId) {
   try {
-    const response = await getSinglePost("SerenaTravel", postId);
+    const response = await getSinglePost(name, postId);
     const post = response.data;
 
     console.log("Post data received:", post);

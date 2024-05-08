@@ -26,8 +26,109 @@
 
     <button class="logout-button" type="submit">Logout</button>
 
-    <!-- <form id="createPostForm">
-      <h1>Create Post</h1>
+    <h1>Select the post you want to edit</h1>
+
+    <div class="post-container">
+      <div class="grid-post"></div>
+    </div>
+
+    DISPLAY ALL THE POSTS ON EDIT.HTML
+    ADD EDIT BUTTON AND DELETE BUTTON TO THE grid-post INNERHTML
+    IF USER CLICKS EDIT THEN EDIT FORMS DISPLAYS ON SCREEN AND FETCHES THE INPUT VALUE FROM CREATEFORM AND INSERT IT AND THEN USER CAN EDIT INPUT AND WHEN CLICK UPDATES IT WILL UPDATE THAT SPESIFIC POST
+    IF USER CLICKS ON DELETE BUTTON - THEN REMOVES IT - GIVE ALERT TO USER - REMOVER FROM LOCALSTROAGE. 
+
+
+    <form id="fetchIdEdit">
+      <label for="pasteId">Insert ID of post you want to edit</label>
+      <input type="text" id="id" name="id" placeholder="Post ID" required />
+
+      <button type="submit">Confirm</button>
+    </form>
+
+    <form id="editPostForm">
+      <h1>Edit Post</h1>
+
+      <label for="postImage">Image URL:</label>
+      <input
+        type="url"
+        id="postImage"
+        name="postImage"
+        placeholder="Image URL"
+        required
+      />
+
+      <label for="postImageAlt">Image Alt Text:</label>
+      <input
+        type="text"
+        id="postImageAlt"
+        name="postImageAlt"
+        placeholder="Image Alt Text"
+        required
+      />
+
+      <label for="postTitle">Post Title:</label>
+      <input
+        type="text"
+        id="postTitle"
+        name="postTitle"
+        placeholder="Post Title"
+        required
+      />
+
+      <label for="postAuthor">Author Name:</label>
+      <input
+        type="text"
+        id="postAuthor"
+        name="postAuthor"
+        placeholder="Author Name"
+        required
+      />
+
+      <label for="postTags">Tags (comma-separated):</label>
+      <input
+        type="text"
+        id="postTags"
+        name="postTags"
+        placeholder="Tags (comma-separated)"
+      />
+
+      <label for="postContent">Post Content:</label>
+      <textarea
+        id="postContent"
+        name="postContent"
+        placeholder="Post Content"
+        required
+      ></textarea>
+
+      <label for="postCountry">Country:</label>
+      <select id="postCountry" name="country" required>
+        <option value="">Select Country</option>
+        <option value="Denmark">Denmark</option>
+        <option value="France">France</option>
+        <option value="Greece">Greece</option>
+        <option value="Indonesia">Indonesia</option>
+        <option value="Jordan">Jordan</option>
+        <option value="Norway">Norway</option>
+        <option value="Philippines">Philippines</option>
+        <option value="Portugal">Portugal</option>
+        <option value="Sri Lanka">Sri Lanka</option>
+        <option value="Thailand">Thailand</option>
+        <option value="USA">USA</option>
+        <option value="Vietnam">Vietnam</option>
+      </select>
+
+      <button type="submit">Update Post</button>
+    </form>
+
+    <form id="delete">
+      <label for="pasteId">Insert ID of post you want to delete</label>
+      <input type="text" id="id" name="id" placeholder="Post ID" required />
+
+      <button type="submit">DELETE</button>
+    </form>
+
+    <!-- <form id="editPostForm">
+      <h1>edit Post</h1>
 
       <input
         type="text"
@@ -63,19 +164,16 @@
         <option value="Vietnam">Vietnam</option>
       </select>
 
-      <button type="submit">Create Post</button>
+      <button type="submit">edit Post</button>
     </form>
 
-    <div class="create-message"></div>
+    <div class="edit-message"></div>
 
-    <div class="create-headline">
-      <h1>All posts you have created is stored here</h1>
+    <div class="edit-headline">
+      <h1>All posts you have editd is stored here</h1>
     </div> -->
 
-    <div class="post-container">
-      <div class="grid-post"></div>
-    </div>
 
-    <script type="module" src="../assets/js/.js"></script>
+    <script type="module" src="../assets/js/editBlogPost.js"></script>
   </body>
 </html>

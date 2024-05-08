@@ -29,25 +29,60 @@
     <form id="createPostForm">
       <h1>Create Post</h1>
 
+      <label for="postImage">Image URL:</label>
       <input
-        type="text"
+        type="url"
         id="postImage"
-        accept="image/*"
+        name="postImage"
         placeholder="Image URL"
         required
       />
+
+      <label for="postImageAlt">Image Alt Text:</label>
       <input
         type="text"
         id="postImageAlt"
+        name="postImageAlt"
         placeholder="Image Alt Text"
         required
       />
-      <input type="text" id="postTitle" placeholder="Post Title" required />
-      <input type="text" id="postAuthor" placeholder="Author Name" required />
-      <input type="text" id="postTags" placeholder="Tags (comma-separated)" />
-      <textarea id="postContent" placeholder="Post Content" required></textarea>
+
+      <label for="postTitle">Post Title:</label>
+      <input
+        type="text"
+        id="postTitle"
+        name="postTitle"
+        placeholder="Post Title"
+        required
+      />
+
+      <label for="postAuthor">Author Name:</label>
+      <input
+        type="text"
+        id="postAuthor"
+        name="postAuthor"
+        placeholder="Author Name"
+        required
+      />
+
+      <label for="postTags">Tags (comma-separated):</label>
+      <input
+        type="text"
+        id="postTags"
+        name="postTags"
+        placeholder="Tags (comma-separated)"
+      />
+
+      <label for="postContent">Post Content:</label>
+      <textarea
+        id="postContent"
+        name="postContent"
+        placeholder="Post Content"
+        required
+      ></textarea>
+
       <label for="postCountry">Country:</label>
-      <select id="postCountry" id="postCountry" name="country" required>
+      <select id="postCountry" name="country" required>
         <option value="">Select Country</option>
         <option value="Denmark">Denmark</option>
         <option value="France">France</option>
@@ -63,49 +98,13 @@
         <option value="Vietnam">Vietnam</option>
       </select>
 
-      <!-- Gallery Images with placeholders for URLs and Alt Texts -->
-      <!-- <input type="url" id="galleryImage1" placeholder="Gallery Image URL 1" />
-      <input type="text" id="galleryImage1Alt" placeholder="Gallery Image 1 Alt Text" />
-      <input type="url" id="galleryImage2" placeholder="Gallery Image URL 2" />
-      <input type="text" id="galleryImage2Alt" placeholder="Gallery Image 2 Alt Text" /> -->
-
-      <!-- <input type="file" id="postImage" accept="image/*" />
-      <input type="text" id="postTitle" placeholder="Post Title" required />
-      <input type="text" id="postAuthor" placeholder="Author Name" required />
-      < <input type="url" id="authorProfileLink" placeholder="Author Profile Link"> -->
-      <!-- <input
-        type="date"
-        id="postDate"
-        placeholder="Publication Date"
-        required
-      /> -->
-      <!-- <input type="text" id="postTags" placeholder="Tags (comma-separated)" /> -->
-      <!-- <input type="text" id="postPrice" placeholder="Price Rating (e.g., $$)" required> -->
-      <!-- <textarea id="postIntro" placeholder="Post Intro" required></textarea> -->
-      <!-- <textarea id="postContent" placeholder="Post Content" required></textarea> -->
-
-      <!-- Detailed Sections
-      <textarea id="postMemory" placeholder="Core Memory" required></textarea>
-      <textarea id="postActivities" placeholder="Activities" required></textarea>
-      <textarea id="postPlacesToSee" placeholder="Places to See" required></textarea>
-      <textarea id="postFood" placeholder="Places to Eat" required></textarea> -->
-
-      <!-- Gallery Images -->
-      <!-- Assuming you want to allow uploading multiple images for the gallery -->
-      <!-- <input type="file" id="galleryImage1" accept="image/*" />
-      <input type="file" id="galleryImage2" accept="image/*" />
-      <input type="file" id="galleryImage3" accept="image/*" />
-      <input type="file" id="galleryImage4" accept="image/*" />
-      <input type="file" id="galleryImage5" accept="image/*" />
-      <input type="file" id="galleryImage6" accept="image/*" /> -->
-
       <button type="submit">Create Post</button>
     </form>
 
     <div class="create-message"></div>
 
     <div class="create-headline">
-      <h1>All posts you have created is stored here</h1>
+      <h1>All posts you have created are stored here</h1>
     </div>
 
     <div class="post-container">
@@ -136,6 +135,6 @@
       </div>
     </div>
 
-    <script type="module" src="../assets/js/createBlogPost.js"></script>
+    <script type="module" src="../assets/js/editBlogPost.js"></script>
   </body>
 </html>
