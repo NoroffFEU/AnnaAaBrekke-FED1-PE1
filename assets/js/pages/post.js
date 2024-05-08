@@ -30,6 +30,7 @@ async function fetchAndDisplaySinglePost(postId) {
 function displaySinglePost(post) {
   const mainPostContent = document.querySelector(".main-post");
   mainPostContent.innerHTML = "";
+  
 
   // Ensure media object exists and has url and alt properties, otherwise use default values
   const defaultImage = "https://placehold.co/600x400";

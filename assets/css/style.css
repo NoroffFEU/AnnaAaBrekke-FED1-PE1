@@ -14,6 +14,16 @@ body {
   background-size: cover;
 }
 
+#editBody {
+  background-image: url(/assets/images/beach-water.webp);
+  background-color: #515457;
+  background-size: cover;
+}
+
+#createBody {
+  background-image: url(/assets/images/beach-water.webp);
+}
+
 /* Header */
 
 header {

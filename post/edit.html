@@ -1,17 +1,81 @@
-    
-      
-      
-      
-      <table id="sortByDate" class="table-sortable">
-        <thead>
-          <tr>
-            <th>New</th>
-            <th>Old</th>
-          </tr>
-        </thead>
-      </table>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Blog Post</title>
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/ead288c181.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-      <button class="logout-button" type="submit">Logout</button>
+  <body id="editBody">
+    <header>
+      <nav class="logo">
+        <a href="/index.html">Wherever Forever</a>
+      </nav>
+    </header>
 
+    <button class="logout-button" type="submit">Logout</button>
 
-      // https://www.youtube.com/watch?v=8SL_hM1a0yo
+    <!-- <form id="createPostForm">
+      <h1>Create Post</h1>
+
+      <input
+        type="text"
+        id="postImage"
+        accept="image/*"
+        placeholder="Image URL"
+        required
+      />
+      <input
+        type="text"
+        id="postImageAlt"
+        placeholder="Image Alt Text"
+        required
+      />
+      <input type="text" id="postTitle" placeholder="Post Title" required />
+      <input type="text" id="postAuthor" placeholder="Author Name" required />
+      <input type="text" id="postTags" placeholder="Tags (comma-separated)" />
+      <textarea id="postContent" placeholder="Post Content" required></textarea>
+      <label for="postCountry">Country:</label>
+      <select id="postCountry" id="postCountry" name="country" required>
+        <option value="">Select Country</option>
+        <option value="Denmark">Denmark</option>
+        <option value="France">France</option>
+        <option value="Greece">Greece</option>
+        <option value="Indonesia">Indonesia</option>
+        <option value="Jordan">Jordan</option>
+        <option value="Norway">Norway</option>
+        <option value="Philippines">Philippines</option>
+        <option value="Portugal">Portugal</option>
+        <option value="Sri Lanka">Sri Lanka</option>
+        <option value="Thailand">Thailand</option>
+        <option value="USA">USA</option>
+        <option value="Vietnam">Vietnam</option>
+      </select>
+
+      <button type="submit">Create Post</button>
+    </form>
+
+    <div class="create-message"></div>
+
+    <div class="create-headline">
+      <h1>All posts you have created is stored here</h1>
+    </div> -->
+
+    <div class="post-container">
+      <div class="grid-post"></div>
+    </div>
+
+    <script type="module" src="../assets/js/.js"></script>
+  </body>
+</html>

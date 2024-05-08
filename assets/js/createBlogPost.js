@@ -96,8 +96,9 @@ function createPostElement(post) {
     console.log("No tags to display or tags are not in expected format.");
   }
 
-  const country = postData.country || "No country specified"; // Fallback if no country is specified
-  const author = postData.author || "Anonymous"; // Fallback if no author is specified
+  const country = postData.country || "No country specified";
+
+  const author = typeof postData.author === "object" ? postData.author.name || "Anonymous" : postData.author || "Anonymous";
 
   // Add the tagsHtml right after the author div
   postElement.innerHTML = `
@@ -165,14 +166,14 @@ function createFormHandler() {
 
       // // Note that we are now accessing the properties through 'response.data'
       // locallyCreatedPosts.push({
-      //   id: response.data.id,
-      //   media: response.data.media, // Add banner URL to the object
-      //   title: response.data.title,
-      //   body: response.data.body,
-      //   author: response.data.author.name,
-      //   created: response.data.created,
-      //   updated: response.data.updated,
-      //   tags: response.data.tags.map((tag) => tag.label || tag), // Ensure tag structure is consistent
+      // //   id: response.data.id,
+      // //   media: response.data.media, // Add banner URL to the object
+      // //   title: response.data.title,
+      // //   body: response.data.body,
+      // //   author: response.data.author.name,
+      // //   created: response.data.created,
+      // //   updated: response.data.updated,
+      // //   tags: response.data.tags.map((tag) => tag.label || tag), // Ensure tag structure is consistent
       //   country: response.data.country || country, // Ensure the country is stored locally
       // });
 
