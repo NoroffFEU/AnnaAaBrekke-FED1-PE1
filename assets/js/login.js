@@ -7,8 +7,12 @@ import { apiUrlLogin } from "./api.mjs";
 
 // const loginData = {
 //   email: "annaas00208@stud.noroff.no",
-//   password: "firstRegisterApiPasswordSerena",
+//   password: "HereYouGo",
 // };
+
+
+//serena@...
+//HereYouGo
 
 // try {
 //   const loginResponse = await loginOwner(loginData);
@@ -21,11 +25,15 @@ import { apiUrlLogin } from "./api.mjs";
 
 // HereYouGo
 
+
 const method = "post";
 
 // Login function that sends a request to the login endpoint
 export async function loginOwner(loginData) {
+  console.log("Attempting to log in with the following data:", loginData);
+
   const body = JSON.stringify(loginData);
+
   const response = await fetch(apiUrlLogin, {
     headers: {
       "Content-Type": "application/json",
@@ -40,26 +48,36 @@ export async function loginOwner(loginData) {
     throw new Error(`HTTP error! Status: ${response.status}`);
   }
 
-  const result = await response.json();
-  console.log("Login Result:", result);
-  return result;
+  const { data } = await response.json();
+  const { accessToken, ...user } = data;
+
+  console.log("Received login response data:", data);
+  console.log("Extracted accessToken and user information:", { accessToken, user });
+
+  return { accessToken, user };
 }
 
 // Perform login and save the token
-// export async function performLogin(loginData) {
-//   try {
-//     const loginResponse = await loginOwner(loginData);
-//     localStorage.setItem("token", loginResponse.accessToken);
-//     localStorage.setItem("loginTime", new Date().getTime());
-//     localStorage.setItem("user", JSON.stringify(loginResponse)); // Store the entire user data for navigation
+export async function saveLogin(loginData) {
+  try {
+    console.log("Saving login data for:", loginData);
 
-//     console.log("Login successful:", loginResponse);
-//     return loginResponse;
-//   } catch (error) {
-//     console.error("Login failed:", error);
-//     throw error;
-//   }
-// }
+    const { accessToken, user } = await loginOwner(loginData);
+
+    // Store access token and user details in local storage
+    console.log("Storing access token and user data in local storage.");
+    localStorage.setItem("token", accessToken);
+    localStorage.setItem("user", JSON.stringify(user)); // Store only user data
+
+    console.log("Login successful:", { accessToken, user });
+    return { accessToken, user };
+  } catch (error) {
+    console.error("Login failed with error:", error);
+    throw error;
+  }
+}
+
+
 
 // // Check if the token has expired
 // export function isTokenExpired() {
