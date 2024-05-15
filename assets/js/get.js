@@ -1,4 +1,5 @@
 import { apiUrlUser } from "./api.mjs";
+// import { getName } from "./userName";
 
 export async function getPosts(name, queryParams = {}) {
   const queryString = new URLSearchParams(queryParams).toString();
@@ -29,31 +30,31 @@ export async function getPosts(name, queryParams = {}) {
 }
 
 
-export async function getSinglePost(name, id, accessToken = null) {
+
+export async function getSinglePost(name, id) {
+  // Define the headers inside the function to ensure they are used in the fetch call
   const headers = {
     "Content-Type": "application/json",
   };
 
-  if (accessToken) {
-    headers["Authorization"] = `Bearer ${accessToken}`;
-  }
-
   try {
+    // Perform the GET request using the constructed URL
     const response = await fetch(`${apiUrlUser}/${name}/${id}`, {
       method: "GET",
       headers: headers,
     });
 
+    // Check if the response was successful
     if (!response.ok) {
       const errorDetails = await response.text();
-      throw new Error(
-        `HTTP error! Status: ${response.status} - ${errorDetails}`
-      );
+      throw new Error(`HTTP error! Status: ${response.status} - ${errorDetails}`);
     }
 
+    // Parse the response into JSON
     return await response.json();
   } catch (error) {
     console.error("Error fetching the selected post:", error);
-    throw error;
+    throw error;  // Rethrowing the error to be handled by the caller
   }
 }
+

@@ -11,6 +11,9 @@ import {
   handlePostClick,
   setupCarouselClickEvents,
 } from "./eventHandlers.js";
+import { getName } from "./userName.js";
+
+const name = getName();
 
 // Function to fetch posts from the server and display them
 export async function fetchAndDisplayPosts() {
@@ -23,7 +26,7 @@ export async function fetchAndDisplayPosts() {
 
     if (!homePosts || !homePosts.data || homePosts.data.length === 0) {
       console.log("No posts in local storage, fetching from server...");
-      homePosts = await getPosts("SerenaTravel"); // Fetch posts (NEED TO FIX A VARIABLE FOR SERENATRAVEL DATA.NAME)
+      homePosts = await getPosts(name); // Fetch posts (NEED TO FIX A VARIABLE FOR SERENATRAVEL DATA.NAME)
       saveCreatedPosts(homePosts.data); // Save fetched posts to local storage
       console.log("Posts saved to local storage");
     } else {

@@ -57,25 +57,22 @@ export async function loginOwner(loginData) {
   return { accessToken, user };
 }
 
-// Perform login and save the token
 export async function saveLogin(loginData) {
   try {
     console.log("Saving login data for:", loginData);
-
     const { accessToken, user } = await loginOwner(loginData);
-
-    // Store access token and user details in local storage
-    console.log("Storing access token and user data in local storage.");
-    localStorage.setItem("token", accessToken);
-    localStorage.setItem("user", JSON.stringify(user)); // Store only user data
-
     console.log("Login successful:", { accessToken, user });
+
+    localStorage.setItem("token", accessToken);
+    localStorage.setItem("user", JSON.stringify(user));
+
     return { accessToken, user };
   } catch (error) {
     console.error("Login failed with error:", error);
-    throw error;
+    throw new Error(`Login failed: ${error.message || "Unknown error"}`);
   }
 }
+
 
 
 

@@ -26,17 +26,12 @@
 
     <button class="logout-button" type="submit">Logout</button>
 
-    <h1>Select the post you want to edit</h1>
-
-    <div class="post-container">
-      <div class="grid-post"></div>
-    </div>
-
-    DISPLAY ALL THE POSTS ON EDIT.HTML
-    ADD EDIT BUTTON AND DELETE BUTTON TO THE grid-post INNERHTML
-    IF USER CLICKS EDIT THEN EDIT FORMS DISPLAYS ON SCREEN AND FETCHES THE INPUT VALUE FROM CREATEFORM AND INSERT IT AND THEN USER CAN EDIT INPUT AND WHEN CLICK UPDATES IT WILL UPDATE THAT SPESIFIC POST
-    IF USER CLICKS ON DELETE BUTTON - THEN REMOVES IT - GIVE ALERT TO USER - REMOVER FROM LOCALSTROAGE. 
-
+    DISPLAY ALL THE POSTS ON EDIT.HTML ADD EDIT BUTTON AND DELETE BUTTON TO THE
+    grid-post INNERHTML IF USER CLICKS EDIT THEN EDIT FORMS DISPLAYS ON SCREEN
+    AND FETCHES THE INPUT VALUE FROM CREATEFORM AND INSERT IT AND THEN USER CAN
+    EDIT INPUT AND WHEN CLICK UPDATES IT WILL UPDATE THAT SPESIFIC POST IF USER
+    CLICKS ON DELETE BUTTON - THEN REMOVES IT - GIVE ALERT TO USER - REMOVER
+    FROM LOCALSTROAGE.
 
     <form id="fetchIdEdit">
       <label for="pasteId">Insert ID of post you want to edit</label>
@@ -45,7 +40,11 @@
       <button type="submit">Confirm</button>
     </form>
 
-    <form id="editPostForm">
+    <div class="post-container">
+      <div class="grid-post"></div>
+    </div>
+
+    <form id="editPostForm" method="PUT">
       <h1>Edit Post</h1>
 
       <label for="postImage">Image URL:</label>
@@ -74,6 +73,8 @@
         placeholder="Post Title"
         required
       />
+
+      <!-- <input type="hidden" id="postId" name="postId" value="123"> -->
 
       <label for="postAuthor">Author Name:</label>
       <input
@@ -172,7 +173,6 @@
     <div class="edit-headline">
       <h1>All posts you have editd is stored here</h1>
     </div> -->
-
 
     <script type="module" src="../assets/js/editBlogPost.js"></script>
   </body>

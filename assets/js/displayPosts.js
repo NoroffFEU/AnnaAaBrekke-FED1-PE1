@@ -1,4 +1,4 @@
-import { getPosts } from "./api.mjs";
+// import { getPosts } from "./api.mjs";
 
 // export async function displayPosts(name) {
 //     const postContainer = document.querySelector(".post-container");
@@ -15,7 +15,6 @@ import { getPosts } from "./api.mjs";
 //         console.error("Error displaying posts:", error);
 //     }
 // }
-
 
 // function createPostElement(post) {
 //   // Create elements based on your HTML structure for `.grid-post`

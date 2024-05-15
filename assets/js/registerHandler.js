@@ -27,9 +27,9 @@ export function setRegisterFormListener() {
         document.getElementsByClassName("register-message")[0].textContent =
           "Registration successful! Log in with your new account.";
 
-        // Store relevant data in local storage for login purposes
-        localStorage.setItem("email", registerData.email);
-        localStorage.setItem("password", registerData.password);
+        // // Store relevant data in local storage for login purposes
+        // localStorage.setItem("email", registerData.email);
+        // localStorage.setItem("password", registerData.password);
 
         // Redirect to login page
         window.location.href = "../account/login.html";

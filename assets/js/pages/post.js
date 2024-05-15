@@ -1,11 +1,12 @@
 import { getSinglePost } from "../get.js";
+import { getName } from "../userName.js";
 // import { apiUrl } from "../api.mjs";
 
 const urlParams = new URLSearchParams(window.location.search);
 console.log("The URL:", urlParams);
 const postId = urlParams.get("id");
 console.log("The link", postId);
-const name = post.user.name;
+const name = getName(); // need to fix this - because i created post with user SerenaTravel (but do not work to log in with... - and new user is "Serena" - may have to create new...
 
 if (!postId) {
   console.error("No post ID in URL parameters");
@@ -31,7 +32,6 @@ async function fetchAndDisplaySinglePost(postId) {
 function displaySinglePost(post) {
   const mainPostContent = document.querySelector(".main-post");
   mainPostContent.innerHTML = "";
-  
 
   // Ensure media object exists and has url and alt properties, otherwise use default values
   const defaultImage = "https://placehold.co/600x400";

@@ -3,38 +3,72 @@
 // Add delete button and delete - need to log in again to delete and then innerhtml gone
 
 // editBlogPosts.js
+// editBlogPosts.js
 import { loadCreatedPosts, displayPosts } from "./createBlogPost.js";
 import { sortPostByNewest } from "./sort.js";
-
+// import { populateEditForm } from "./populateForm.js";
+import { setupEditFormEventHandler } from "./editHandler.js";
+// Fetch and display posts to select for editing
 async function fetchAndDisplayPostsForEdit() {
-  console.log("fetchAndDisplayPostsForEdit started");
-  let editPosts = loadCreatedPosts();
-
-  if (!editPosts || editPosts.length === 0) {
-    console.log("No posts in local storage");
-  } else {
-    console.log(`Loaded posts from local storage`);
+  try {
+    let editPosts = await loadCreatedPosts();
+    if (!editPosts || editPosts.length === 0) {
+      console.log("No posts in local storage");
+      document.getElementById('post-container').innerHTML = '<p>No posts available for editing.</p>';
+    } else {
+      console.log("Posts on edit page loaded");
+      editPosts = sortPostByNewest(editPosts);
+      displayPosts(editPosts, true);  // Assuming displayPosts handles edit button setup
+    }
+  } catch (error) {
+    console.error("Failed to load posts:", error);
+    document.getElementById('post-container').innerHTML = '<p>Error loading posts. Please try again later.</p>';
   }
-
-  editPosts = sortPostByNewest(editPosts);
-
-  console.log("Displaying posts for edit...");
-  displayPosts(editPosts, true);
-  console.log("Posts for edit displayed");
 }
 
-async function initEditPage() {
-  console.log("Initializing edit page...");
-  await fetchAndDisplayPostsForEdit();
-}
+document.addEventListener("DOMContentLoaded", () => {
+  fetchAndDisplayPostsForEdit(); // This might be conditional based on page role
+  // populateEditForm();
+  setupEditFormEventHandler();
+});
 
-document.addEventListener("DOMContentLoaded", initEditPage);
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initEditPage);
-} else {
-  initEditPage();
-}
+// document.getElementById("editPostForm").style.display = "none";
+
+// document.addEventListener('DOMContentLoaded', function () {
+//   const editButtons = document.querySelectorAll(".grid-post button");
+
+//   editButtons.forEach(button => {
+//       button.addEventListener("click", function() {
+//           const postId = this.parentNode.getAttribute("data-post-id");
+//           showEditForm(postId);
+//       });
+//   });
+// })
+
+// function showEditForm(postId) {
+//   // Example: Fetch post details from a data structure or the DOM
+//   const postElement = document.querySelector(`[data-post-id="${postId}"]`);
+//   const form = document.getElementById('editPostForm');
+
+//   // Populate the form with the post's existing data
+//   document.getElementById('postTitle').value = postElement.querySelector('h2').innerText;
+//   // Add other fields as necessary...
+
+//   // Display the form
+//   form.style.display = 'block';
+
+//   // Optional: Adjust the form's position or additional UI elements
+//   form.scrollIntoView();
+// }
+
+// document.addEventListener("DOMContentLoaded", initEditPage);
+
+// if (document.readyState === "loading") {
+//   document.addEventListener("DOMContentLoaded", initEditPage);
+// } else {
+//   initEditPage();
+// }
 
 // import { apiUrlUser } from "./api.mjs";
 

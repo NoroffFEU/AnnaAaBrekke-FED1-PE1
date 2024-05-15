@@ -2,7 +2,12 @@
 import { apiUrlUser } from "./api.mjs";
 import { handlePostClick } from "./eventHandlers.js";
 import { redirectToPostPage } from "./routingUtils.js";
+import { handleEditClick } from "./editHandler.js";
+import { handleDeleteClick } from "./deleteHandler.js";
+import { getName } from "./userName.js";
 console.log(apiUrlUser);
+
+const name = getName();
 
 let locallyCreatedPosts = [];
 
@@ -48,35 +53,13 @@ export async function createPost(name, postData) {
   }
 }
 
-export async function deletePostApi(name, postId) {
-  const accessToken = localStorage.getItem("token");
-  if (!accessToken) {
-    throw new Error("No access token found, please login.");
-  }
-
-  try {
-    const response = await fetch(`${apiUrlUser}/${name}/${postId}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    console.log(`Post with ID ${postId} deleted successfully.`);
-  } catch (error) {
-    console.error(`Error deleting post with ID ${postId}:`, error);
-    throw error;
-  }
-}
-
 export function displayPosts(posts, includeEditButtons = false) {
   const postContainer = document.querySelector(".post-container");
-  postContainer.innerHTML = ""; // Clear existing posts to prevent duplication
+  if (!postContainer) {
+    console.error("post-container does not exist in the DOM.");
+    return;
+  }
+  // postContainer.innerHTML = ""; // Clear existing posts to prevent duplication
 
   if (posts && posts.length > 0) {
     posts.slice(0, 12).forEach((post) => {
@@ -86,10 +69,15 @@ export function displayPosts(posts, includeEditButtons = false) {
       if (includeEditButtons) {
         postElement
           .querySelector(".edit-post")
-          .addEventListener("click", handleEditClick);
+          .addEventListener("click", (event) => {
+            const postId = post.id; // Retrieve the post ID from the data-id attribute
+            handleEditClick(event, postId); // Pass the event object and the post ID
+          });
         postElement
           .querySelector(".delete-post")
-          .addEventListener("click", handleDeleteClick);
+          .addEventListener("click", () => {
+            handleDeleteClick(post.id);
+          });
       } else {
         postElement
           .querySelector(".read-more")
@@ -98,6 +86,7 @@ export function displayPosts(posts, includeEditButtons = false) {
             redirectToPostPage(post.id);
           });
       }
+      
     });
   } else {
     console.log("No posts to display");
@@ -165,41 +154,34 @@ function createPostElement(post, includeEditButtons = false) {
   </div>
 `;
 
+  // Add event listeners for edit and delete buttons if includeEditButtons is true
+  if (includeEditButtons) {
+    const editButton = postElement.querySelector(".edit-post");
+    const deleteButton = postElement.querySelector(".delete-post");
+
+    editButton.addEventListener("click", () => {
+      handleEditClick(post.id); // Call handleEditClick function with post ID
+    });
+
+    deleteButton.addEventListener("click", () => {
+      handleDeleteClick(post.id); // Call handleDeleteClick function with post ID
+    });
+  }
+
   return postElement;
 }
 
-function handleEditClick(event) {
-  const postId = event.target.dataset.id;
-  console.log(`Editing post with ID: ${postId}`);
-  // Implement the logic to edit the post or redirect to an edit form
-}
+// Implement the logic to edit the post or redirect to an edit form
 
 // DET ER HER!!!!
 
-async function handleDeleteClick(event) {
-  // Retrieve the logged-in user's name
-  const name = event.target.dataset.author; // Retrieve the author from data attribute DET ER HERR!!!!!!
-
-  const postId = event.target.dataset.id;
-  console.log(`Deleting post with ID: ${postId}`);
-  if (confirm("Are you sure you want to delete this post?")) {
-    try {
-      await deletePostApi(name, postId);
-      deletePost(postId);
-    } catch (error) {
-      console.error(`Failed to delete post with ID ${postId}:`, error);
-      alert("Failed to delete post. Please try again.");
-    }
-  }
-}
-
-function deletePost(postId) {
-  locallyCreatedPosts = locallyCreatedPosts.filter(
-    (post) => post.id !== postId
-  );
-  saveCreatedPosts(locallyCreatedPosts);
-  displayPosts(locallyCreatedPosts, true);
-}
+// function deletePost(postId) {
+//   locallyCreatedPosts = locallyCreatedPosts.filter(
+//     (post) => post.id !== postId
+//   );
+//   saveCreatedPosts(locallyCreatedPosts);
+//   displayPosts(locallyCreatedPosts, true);
+// }
 
 function createFormHandler() {
   const form = document.getElementById("createPostForm");
@@ -240,23 +222,23 @@ function createFormHandler() {
     console.log("Submitting post data:", postData);
 
     try {
-      // const response = await createPost("SerenaTravel", postData);
-      // console.log("Post created successfully:", response);
+      const response = await createPost(name, postData);
+      console.log("Post created successfully:", response);
 
-      // locallyCreatedPosts.push({
-      //   id: response.data.id,
-      //   media: response.data.media,
-      //   title: response.data.title,
-      //   body: response.data.body,
-      //   author: response.data.author.name,
-      //   created: response.data.created,
-      //   updated: response.data.updated,
-      //   tags: response.data.tags.map((tag) => tag.label || tag),
-      //   country: response.data.country || country,
-      // });
+      locallyCreatedPosts.push({
+        id: response.data.id,
+        media: response.data.media,
+        title: response.data.title,
+        body: response.data.body,
+        author: response.data.author.name,
+        created: response.data.created,
+        updated: response.data.updated,
+        tags: response.data.tags.map((tag) => tag.label || tag),
+        country: response.data.country || country,
+      });
 
-      // saveCreatedPosts(locallyCreatedPosts);
-      displayPosts([response.data]);
+      saveCreatedPosts(locallyCreatedPosts);
+      displayPosts(postData);
     } catch (error) {
       console.error("Failed to create post:", error);
       alert("Failed to create post. Please try again.");
