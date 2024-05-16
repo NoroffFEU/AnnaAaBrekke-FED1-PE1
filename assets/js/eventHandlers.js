@@ -131,43 +131,47 @@ export async function handleEditClick(post) {
     // Handle error appropriately, such as displaying an error message to the user
   }
 }
-
-export function setupEditFormEventHandler() {
+export async function setupEditFormEventHandler() {
   const editPostForm = document.getElementById("editPostForm");
-  editPostForm.addEventListener("submit", async (event) => {
-    event.preventDefault(); // Prevent the default form submission
 
-    // Update/edit the post
-    const postId = document.getElementById("postId").value; // Get the post ID from the form
-    const formData = {
-      title: document.getElementById("postTitle").value,
-      media: {
-        url: document.getElementById("postImage").value,
-        alt: document.getElementById("postImageAlt").value,
-      },
-      author: {
-        name: document.getElementById("postAuthor").value,
-      },
-      tags: document
-        .getElementById("postTags")
-        .value.split(",")
-        .map((tag) => tag.trim()),
-      body: document.getElementById("postContent").value,
-      country: document.getElementById("postCountry").value,
-    };
+  // Check if the edit form element exists before proceeding
+  if (editPostForm) {
+    editPostForm.addEventListener("submit", async (event) => {
+      event.preventDefault(); // Prevent the default form submission
 
-    try {
-      await editPostApi(postId, formData); // Call the editPostApi function to update the post
-      editPostForm.classList.add("editFormHidden");
+      // Update/edit the post
+      const postId = document.getElementById("postId").value; // Get the post ID from the form
+      const formData = {
+        title: document.getElementById("postTitle").value,
+        media: {
+          url: document.getElementById("postImage").value,
+          alt: document.getElementById("postImageAlt").value,
+        },
+        author: {
+          name: document.getElementById("postAuthor").value,
+        },
+        tags: document
+          .getElementById("postTags")
+          .value.split(",")
+          .map((tag) => tag.trim()),
+        body: document.getElementById("postContent").value,
+        country: document.getElementById("postCountry").value,
+      };
 
-      console.log("Post updated successfully");
-      // Optionally, you can perform further actions after the post is updated
-    } catch (error) {
-      console.error("Failed to update post:", error);
-      // Handle error appropriately, such as displaying an error message to the user
-    }
-  });
+      try {
+        await editPostApi(postId, formData); // Call the editPostApi function to update the post
+        editPostForm.classList.add("editFormHidden");
+
+        console.log("Post updated successfully");
+        // Optionally, you can perform further actions after the post is updated
+      } catch (error) {
+        console.error("Failed to update post:", error);
+        // Handle error appropriately, such as displaying an error message to the user
+      }
+    });
+  }
 }
+
 
 // export function addRegisterButtonListener() {
 //   const registerButtonListener = () => {

@@ -54,27 +54,25 @@ export async function createPost(name, postData) {
   }
 }
 
-export function displayPosts(posts, includeEditButtons = false) {
+export function displayPosts(posts, isEditPage = false) {
   const postContainer = document.querySelector(".post-container");
   if (!postContainer) {
     console.error("post-container does not exist in the DOM.");
     return;
   }
-  // postContainer.innerHTML = ""; // Clear existing posts to prevent duplication
+  // Clear existing posts to prevent duplication
+  postContainer.innerHTML = "";
 
   if (posts && posts.length > 0) {
     posts.slice(0, 12).forEach((post) => {
-      const postElement = createPostElement(post, includeEditButtons);
-      postContainer.appendChild(postElement);
+      const postElement = createPostElement(post, isEditPage);
 
-      if (includeEditButtons) {
+      if (isEditPage) {
         postElement
           .querySelector(".edit-post")
           .addEventListener("click", () => {
-            // const postId = post.id; // Retrieve the post ID from the data-id attribute
-            handleEditClick(post); // Pass the event object and the post ID
-            console.log("Clicked id", post.id)
-            
+            handleEditClick(post);
+            console.log("Clicked id", post.id);
           });
         postElement
           .querySelector(".delete-post")
@@ -89,12 +87,14 @@ export function displayPosts(posts, includeEditButtons = false) {
             redirectToPostPage(post.id);
           });
       }
-      
+
+      postContainer.appendChild(postElement);
     });
   } else {
     console.log("No posts to display");
   }
 }
+
 console.log("displayPosts module loaded");
 
 function createPostElement(post, includeEditButtons = false) {
@@ -250,8 +250,11 @@ function createFormHandler() {
   });
 }
 
+// maybe this part on create.index.js?
+
 export function initCreatePage() {
   loadCreatedPosts();
+  displayPosts(locallyCreatedPosts, false);
   createFormHandler();
 }
 
