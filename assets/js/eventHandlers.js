@@ -2,11 +2,11 @@ import { displayPosts, saveCreatedPosts } from "./createBlogPost.js";
 import { sortPostByNewest, sortPostsByOldest } from "./sort.js";
 import { redirectToPostPage } from "./routingUtils.js";
 import { apiUrlUser } from "./api.mjs";
-import { getName } from "./userName.js";
+import { getName } from "./userName.js"; // Import the isLoggedIn function
 import { editPostApi } from "./editApi.js";
 import { deletePostApi } from "./deleteApi.js";
-// import { logout } from "./login.js";
-// import { logout } from "./login.js";
+import { isLoggedIn } from "./login.js";
+import { getSinglePost } from "./get.js";
 
 export function addSortButtonsEventListener(posts) {
   const sortNew = document.querySelector(".sort-newest");
@@ -90,21 +90,36 @@ export function handlePostClick(post) {
   redirectToPostPage(postId);
   console.log("Clicked post ID:", postId);
 }
-
 export async function handleEditClick(post) {
+  if (!isLoggedIn(true)) {
+    // The user will be alerted and redirected if not logged in
+    return;
+  }
+
   try {
     // Get the ID attached to the post
     const postId = post.id;
     const name = getName(); // Assuming getName() is defined elsewhere
 
+    console.log("Fetching post data for edit:", { name, postId });
+
     // Fetch the post data using the postId
     const response = await fetch(`${apiUrlUser}/${name}/${postId}`);
+    console.log("API response status:", response.status);
+
     if (!response.ok) {
+      const errorMessage = await response.text();
+      console.error("Error response text:", errorMessage);
       throw new Error("Failed to fetch post data for the post edit ID");
     }
 
     const postData = await response.json();
-    console.log("The post data found", postData);
+    console.log("The post data found:", postData);
+
+    // Ensure the expected structure is available
+    if (!postData || !postData.data) {
+      throw new Error("Invalid post data structure");
+    }
 
     // Populate the edit form fields with the post data
     document.getElementById("postId").value = postData.data.id;
@@ -116,7 +131,7 @@ export async function handleEditClick(post) {
     document.getElementById("postContent").value = postData.data.body;
     document.getElementById("postCountry").value = postData.data.country;
 
-    // Show/dislay edit form after clicked edit form - otherwise hide
+    // Show/display edit form after clicked edit form - otherwise hide
     const editForm = document.getElementById("editPostForm");
     editForm.classList.remove("editFormHidden");
 
@@ -132,6 +147,7 @@ export async function handleEditClick(post) {
     // Handle error appropriately, such as displaying an error message to the user
   }
 }
+
 export async function setupEditFormEventHandler() {
   const editPostForm = document.getElementById("editPostForm");
 
@@ -174,6 +190,11 @@ export async function setupEditFormEventHandler() {
 }
 
 export async function handleDeleteClick(post, locallyCreatedPosts) {
+  if (!isLoggedIn(true)) {
+    // The user will be alerted and redirected if not logged in
+    return;
+  }
+
   const postId = post.id;
 
   if (confirm("Are you sure you want to delete this post?")) {
@@ -194,48 +215,3 @@ export async function handleDeleteClick(post, locallyCreatedPosts) {
     }
   }
 }
-
-// export function addRegisterButtonListener() {
-//   const registerButtonListener = () => {
-//     // Redirect to the register page
-//     window.location.href = "/register.html"; // Replace 'register.html' with the actual URL of your register page
-//   };
-
-//   // Add event listener for the register button
-//   document.addEventListener("DOMContentLoaded", () => {
-//     const registerButton = document.querySelector(".register-button");
-//     if (registerButton) {
-//       registerButton.addEventListener("click", registerButtonListener);
-//     }
-//   });
-// }
-
-// export function handleLogoutClicked() {
-//   const logoutButton = document.querySelector(".logout-button");
-//   if (logoutButton) {
-//     logoutButton.addEventListener("click", logout);
-//   }
-// }
-
-// // // based on this https://css-tricks.com/how-to-use-the-web-share-api/
-
-// export function handleShareButton() {
-//   const shareButton = document.querySelectorAll(".share-button");
-//   shareButton.addEventListener("mouseenter", () => {});
-// }
-
-//     if (navigator.share) {
-//       navigator
-//         .share({
-//           title: "post",
-//           url: "",
-//         })
-//         .then(() => {
-//           console.log("Thanks for sharing!");
-//         })
-//         .catch(console.error);
-//     } else {
-//       // fallback
-//     }
-//   });
-// }

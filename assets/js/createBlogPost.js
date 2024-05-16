@@ -1,18 +1,15 @@
-// createBlogPost.js
 import { apiUrlUser } from "./api.mjs";
 import { handlePostClick } from "./eventHandlers.js";
 import { redirectToPostPage } from "./routingUtils.js";
-import { handleEditClick } from "./eventHandlers.js";
-import { handleDeleteClick } from "./eventHandlers.js";
-import { getName } from "./userName.js";
+import { handleEditClick, handleDeleteClick } from "./eventHandlers.js";
+import { getName } from "./userName.js"; // Import the isLoggedIn function
+import { isLoggedIn } from "./login.js";
 import { editPostApi } from "./editApi.js";
 console.log(apiUrlUser);
 
 const name = getName();
 
 let locallyCreatedPosts = [];
-
-// let locallyCreatedPosts = loadCreatedPosts(); // Ensure locallyCreatedPosts is loaded
 
 export function saveCreatedPosts(posts) {
   localStorage.setItem("posts", JSON.stringify(posts));
@@ -30,6 +27,11 @@ export function loadCreatedPosts() {
 console.log("loadCreatedPosts module loaded");
 
 export async function createPost(name, postData) {
+  if (!isLoggedIn(true)) {
+    // The user will be alerted and redirected if not logged in
+    return;
+  }
+
   const accessToken = localStorage.getItem("token");
   if (!accessToken) {
     throw new Error("No access token found, please login.");
@@ -164,35 +166,8 @@ function createPostElement(post, includeEditButtons = false) {
   </div>
 `;
 
-  // // Add event listeners for edit and delete buttons if includeEditButtons is true
-  // if (includeEditButtons) {
-  //   // const postData = post.data || post;
-  //   const editButton = postElement.querySelector(".edit-post");
-  //   const deleteButton = postElement.querySelector(".delete-post");
-
-  //   editButton.addEventListener("click", () => {
-  //     handleEditClick(); // Call handleEditClick function with post ID
-  //   });
-
-  //   deleteButton.addEventListener("click", () => {
-  //     handleDeleteClick(); // Call handleDeleteClick function with post ID
-  //   });
-  // }
-
   return postElement;
 }
-
-// Implement the logic to edit the post or redirect to an edit form
-
-// DET ER HER!!!!
-
-// function deletePost(postId) {
-//   locallyCreatedPosts = locallyCreatedPosts.filter(
-//     (post) => post.id !== postId
-//   );
-//   saveCreatedPosts(locallyCreatedPosts);
-//   displayPosts(locallyCreatedPosts, true);
-// }
 
 function createFormHandler() {
   const form = document.getElementById("createPostForm");
@@ -249,15 +224,13 @@ function createFormHandler() {
       });
 
       saveCreatedPosts(locallyCreatedPosts);
-      displayPosts(postData);
+      displayPosts(locallyCreatedPosts, false); // Ensure displayPosts is called with correct parameter
     } catch (error) {
       console.error("Failed to create post:", error);
       alert("Failed to create post. Please try again.");
     }
   });
 }
-
-// maybe this part on create.index.js?
 
 export function initCreatePage() {
   loadCreatedPosts();

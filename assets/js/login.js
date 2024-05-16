@@ -73,6 +73,30 @@ export async function saveLogin(loginData) {
   }
 }
 
+export function isLoggedIn(redirectIfNotLoggedIn = false) {
+  try {
+    console.log("Checking if user is logged in...");
+
+    const accessToken = localStorage.getItem("token"); // Retrieve access token from localStorage
+    if (accessToken) {
+      console.log("Access token found and user is logged in:", accessToken);
+      return true; // User is logged in
+    } else {
+      console.log("No access token found. User is not logged in.");
+    }
+  } catch (error) {
+    console.error("Error checking login status from localStorage:", error);
+  }
+
+  if (redirectIfNotLoggedIn) {
+    alert("You are not logged in. Redirecting to login page.");
+    window.location.href = "../account/login.html"; // Replace with the actual path to your login page
+  }
+
+  return false; // User is not logged in
+}
+
+
 
 
 

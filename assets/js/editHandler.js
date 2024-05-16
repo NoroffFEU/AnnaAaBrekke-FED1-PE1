@@ -2,11 +2,18 @@
 import { editPostApi } from "./editApi.js";
 import { getName } from "./userName.js";
 import { editPostApi } from "./editApi.js";
+import { isLoggedIn } from "./login.js";
 
 export function setupEditFormEventHandler() {
   const editPostForm = document.getElementById("editPostForm");
   editPostForm.addEventListener("submit", async (event) => {
     event.preventDefault(); // Prevent the default form submission
+
+    if (!isLoggedIn()) {
+      alert("You need to be logged in to edit posts.");
+      //redirect to login page
+      return;
+    }
 
     const postId = document.getElementById("postId").value; // Get the post ID from the form
     const formData = {
