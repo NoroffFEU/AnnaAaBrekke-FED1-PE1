@@ -1,6 +1,9 @@
 import { displayPosts } from "./createBlogPost.js";
 import { sortPostByNewest, sortPostsByOldest } from "./sort.js";
 import { redirectToPostPage } from "./routingUtils.js";
+import { apiUrlUser } from "./api.mjs";
+import { getName } from "./userName.js";
+import { editPostApi } from "./editApi.js";
 // import { logout } from "./login.js";
 // import { logout } from "./login.js";
 
@@ -85,6 +88,85 @@ export function handlePostClick(post) {
   const postId = post.id; // Assuming each post has an 'id' property
   redirectToPostPage(postId);
   console.log("Clicked post ID:", postId);
+}
+
+export async function handleEditClick(post) {
+  try {
+    // Get the ID attached to the post
+    const postId = post.id;
+    const name = getName(); // Assuming getName() is defined elsewhere
+
+    // Fetch the post data using the postId
+    const response = await fetch(`${apiUrlUser}/${name}/${postId}`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch post data for the post edit ID");
+    }
+
+    const postData = await response.json();
+    console.log("The post data found", postData);
+
+    // Populate the edit form fields with the post data
+    document.getElementById("postId").value = postData.data.id;
+    document.getElementById("postTitle").value = postData.data.title;
+    document.getElementById("postImage").value = postData.data.media.url;
+    document.getElementById("postImageAlt").value = postData.data.media.alt;
+    document.getElementById("postAuthor").value = postData.data.author.name;
+    document.getElementById("postTags").value = postData.data.tags.join(", ");
+    document.getElementById("postContent").value = postData.data.body;
+    document.getElementById("postCountry").value = postData.data.country;
+
+    // Show/dislay edit form after clicked edit form - otherwise hide
+    const editForm = document.getElementById("editPostForm");
+    editForm.classList.remove("editFormHidden");
+
+    // Smooth scroll to the top of the page
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+
+    console.log("Edit form fields populated with post data:", postData);
+  } catch (error) {
+    console.error("Error handling edit click:", error);
+    // Handle error appropriately, such as displaying an error message to the user
+  }
+}
+
+export function setupEditFormEventHandler() {
+  const editPostForm = document.getElementById("editPostForm");
+  editPostForm.addEventListener("submit", async (event) => {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Update/edit the post
+    const postId = document.getElementById("postId").value; // Get the post ID from the form
+    const formData = {
+      title: document.getElementById("postTitle").value,
+      media: {
+        url: document.getElementById("postImage").value,
+        alt: document.getElementById("postImageAlt").value,
+      },
+      author: {
+        name: document.getElementById("postAuthor").value,
+      },
+      tags: document
+        .getElementById("postTags")
+        .value.split(",")
+        .map((tag) => tag.trim()),
+      body: document.getElementById("postContent").value,
+      country: document.getElementById("postCountry").value,
+    };
+
+    try {
+      await editPostApi(postId, formData); // Call the editPostApi function to update the post
+      editPostForm.classList.add("editFormHidden");
+
+      console.log("Post updated successfully");
+      // Optionally, you can perform further actions after the post is updated
+    } catch (error) {
+      console.error("Failed to update post:", error);
+      // Handle error appropriately, such as displaying an error message to the user
+    }
+  });
 }
 
 // export function addRegisterButtonListener() {

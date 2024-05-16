@@ -730,6 +730,10 @@ form h1 {
   text-align: center;
 }
 
+.editFormHidden {
+  display: none;
+}
+
 /* Components?*/
 
 button[type="submit"] {

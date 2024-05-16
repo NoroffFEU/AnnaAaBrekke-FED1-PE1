@@ -2,9 +2,10 @@
 import { apiUrlUser } from "./api.mjs";
 import { handlePostClick } from "./eventHandlers.js";
 import { redirectToPostPage } from "./routingUtils.js";
-import { handleEditClick } from "./editHandler.js";
-import { handleDeleteClick } from "./deleteHandler.js";
+import { handleEditClick } from "./eventHandlers.js";
+// import { handleDeleteClick } from "./deleteHandler.js";
 import { getName } from "./userName.js";
+import { editPostApi } from "./editApi.js";
 console.log(apiUrlUser);
 
 const name = getName();
@@ -69,14 +70,16 @@ export function displayPosts(posts, includeEditButtons = false) {
       if (includeEditButtons) {
         postElement
           .querySelector(".edit-post")
-          .addEventListener("click", (event) => {
-            const postId = post.id; // Retrieve the post ID from the data-id attribute
-            handleEditClick(event, postId); // Pass the event object and the post ID
+          .addEventListener("click", () => {
+            // const postId = post.id; // Retrieve the post ID from the data-id attribute
+            handleEditClick(post); // Pass the event object and the post ID
+            console.log("Clicked id", post.id)
+            
           });
         postElement
           .querySelector(".delete-post")
           .addEventListener("click", () => {
-            handleDeleteClick(post.id);
+            // handleDeleteClick(post.id);
           });
       } else {
         postElement
@@ -129,14 +132,14 @@ function createPostElement(post, includeEditButtons = false) {
 
   let moreButtonsHtml = `
     <div class="more-buttons">
-      <button class="read-more" data-id="${post.id}">Check it out!</button>
+      <button class="read-more" data-id="${postData.id}">Check it out!</button>
     </div>`;
 
   if (includeEditButtons) {
     moreButtonsHtml = `
       <div class="more-buttons">
-        <button class="edit-post" data-id="${post.id}">Edit</button>
-        <button class="delete-post" data-id="${post.id}">Delete</button>
+        <button class="edit-post" data-id="${postData.id}">Edit</button>
+        <button class="delete-post" data-id="${postData.id}">Delete</button>
       </div>`;
   }
 
@@ -154,19 +157,20 @@ function createPostElement(post, includeEditButtons = false) {
   </div>
 `;
 
-  // Add event listeners for edit and delete buttons if includeEditButtons is true
-  if (includeEditButtons) {
-    const editButton = postElement.querySelector(".edit-post");
-    const deleteButton = postElement.querySelector(".delete-post");
+  // // Add event listeners for edit and delete buttons if includeEditButtons is true
+  // if (includeEditButtons) {
+  //   // const postData = post.data || post;
+  //   const editButton = postElement.querySelector(".edit-post");
+  //   const deleteButton = postElement.querySelector(".delete-post");
 
-    editButton.addEventListener("click", () => {
-      handleEditClick(post.id); // Call handleEditClick function with post ID
-    });
+  //   editButton.addEventListener("click", () => {
+  //     handleEditClick(); // Call handleEditClick function with post ID
+  //   });
 
-    deleteButton.addEventListener("click", () => {
-      handleDeleteClick(post.id); // Call handleDeleteClick function with post ID
-    });
-  }
+  //   deleteButton.addEventListener("click", () => {
+  //     handleDeleteClick(); // Call handleDeleteClick function with post ID
+  //   });
+  // }
 
   return postElement;
 }

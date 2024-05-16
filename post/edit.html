@@ -33,18 +33,16 @@
     CLICKS ON DELETE BUTTON - THEN REMOVES IT - GIVE ALERT TO USER - REMOVER
     FROM LOCALSTROAGE.
 
-    <form id="fetchIdEdit">
+    <!-- <form id="fetchIdEdit">
       <label for="pasteId">Insert ID of post you want to edit</label>
       <input type="text" id="id" name="id" placeholder="Post ID" required />
 
       <button type="submit">Confirm</button>
-    </form>
+    </form> -->
 
-    <div class="post-container">
-      <div class="grid-post"></div>
-    </div>
+    SEARCH FIELD??? TITLE??? MATCHES = ..
 
-    <form id="editPostForm" method="PUT">
+    <form id="editPostForm" method="PUT" class="editFormHidden">
       <h1>Edit Post</h1>
 
       <label for="postImage">Image URL:</label>
@@ -65,6 +63,15 @@
         required
       />
 
+      <label for="postId">Post ID:</label>
+      <input
+        type="text"
+        id="postId"
+        name="postId"
+        placeholder="Post ID"
+        required
+      />
+
       <label for="postTitle">Post Title:</label>
       <input
         type="text"
@@ -73,8 +80,6 @@
         placeholder="Post Title"
         required
       />
-
-      <!-- <input type="hidden" id="postId" name="postId" value="123"> -->
 
       <label for="postAuthor">Author Name:</label>
       <input
@@ -121,12 +126,18 @@
       <button type="submit">Update Post</button>
     </form>
 
-    <form id="delete">
+
+    <div class="post-container">
+      <div class="grid-post"></div>
+    </div>
+
+
+    <!-- <form id="delete">
       <label for="pasteId">Insert ID of post you want to delete</label>
       <input type="text" id="id" name="id" placeholder="Post ID" required />
 
       <button type="submit">DELETE</button>
-    </form>
+    </form> -->
 
     <!-- <form id="editPostForm">
       <h1>edit Post</h1>

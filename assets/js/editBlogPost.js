@@ -7,14 +7,18 @@
 import { loadCreatedPosts, displayPosts } from "./createBlogPost.js";
 import { sortPostByNewest } from "./sort.js";
 // import { populateEditForm } from "./populateForm.js";
-import { setupEditFormEventHandler } from "./editHandler.js";
+import { setupEditFormEventHandler } from "./eventHandlers.js";
+
+// after populateform, then editpostapi - uodate. 
+
+
 // Fetch and display posts to select for editing
-async function fetchAndDisplayPostsForEdit() {
+export async function fetchAndDisplayPostsForEdit() {
   try {
     let editPosts = await loadCreatedPosts();
     if (!editPosts || editPosts.length === 0) {
       console.log("No posts in local storage");
-      document.getElementById('post-container').innerHTML = '<p>No posts available for editing.</p>';
+      document.getElementById("post-container").innerHTML = '<p>No posts available for editing.</p>';
     } else {
       console.log("Posts on edit page loaded");
       editPosts = sortPostByNewest(editPosts);
@@ -22,14 +26,15 @@ async function fetchAndDisplayPostsForEdit() {
     }
   } catch (error) {
     console.error("Failed to load posts:", error);
-    document.getElementById('post-container').innerHTML = '<p>Error loading posts. Please try again later.</p>';
+    document.getElementById("post-container").innerHTML = '<p>Error loading posts. Please try again later.</p>';
   }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  fetchAndDisplayPostsForEdit(); // This might be conditional based on page role
   // populateEditForm();
   setupEditFormEventHandler();
+  fetchAndDisplayPostsForEdit(); // This might be conditional based on page role
+
 });
 
 
