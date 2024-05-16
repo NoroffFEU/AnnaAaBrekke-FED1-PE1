@@ -3,7 +3,7 @@ import { apiUrlUser } from "./api.mjs";
 import { handlePostClick } from "./eventHandlers.js";
 import { redirectToPostPage } from "./routingUtils.js";
 import { handleEditClick } from "./eventHandlers.js";
-// import { handleDeleteClick } from "./deleteHandler.js";
+import { handleDeleteClick } from "./eventHandlers.js";
 import { getName } from "./userName.js";
 import { editPostApi } from "./editApi.js";
 console.log(apiUrlUser);
@@ -11,6 +11,8 @@ console.log(apiUrlUser);
 const name = getName();
 
 let locallyCreatedPosts = [];
+
+// let locallyCreatedPosts = loadCreatedPosts(); // Ensure locallyCreatedPosts is loaded
 
 export function saveCreatedPosts(posts) {
   localStorage.setItem("posts", JSON.stringify(posts));
@@ -71,13 +73,18 @@ export function displayPosts(posts, isEditPage = false) {
         postElement
           .querySelector(".edit-post")
           .addEventListener("click", () => {
-            handleEditClick(post);
+            handleEditClick(post, locallyCreatedPosts);
             console.log("Clicked id", post.id);
           });
         postElement
           .querySelector(".delete-post")
           .addEventListener("click", () => {
-            // handleDeleteClick(post.id);
+            handleDeleteClick(post, locallyCreatedPosts); // Pass locallyCreatedPosts here
+            console.log(
+              "Clicked delete button, name and id:",
+              getName(),
+              post.id
+            );
           });
       } else {
         postElement

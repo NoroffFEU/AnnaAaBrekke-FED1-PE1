@@ -19,6 +19,8 @@
 //   return userData ? userData.name : null; // Corrected to access name property from userData
 // }
 
+// add access token here to??
+
 export function getName() {
   try {
     const storedData = JSON.parse(localStorage.getItem("user")); // Retrieve user data from localStorage

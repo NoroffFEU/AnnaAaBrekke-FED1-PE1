@@ -26,21 +26,11 @@
 
     <button class="logout-button" type="submit">Logout</button>
 
-    DISPLAY ALL THE POSTS ON EDIT.HTML ADD EDIT BUTTON AND DELETE BUTTON TO THE
-    grid-post INNERHTML IF USER CLICKS EDIT THEN EDIT FORMS DISPLAYS ON SCREEN
-    AND FETCHES THE INPUT VALUE FROM CREATEFORM AND INSERT IT AND THEN USER CAN
-    EDIT INPUT AND WHEN CLICK UPDATES IT WILL UPDATE THAT SPESIFIC POST IF USER
-    CLICKS ON DELETE BUTTON - THEN REMOVES IT - GIVE ALERT TO USER - REMOVER
-    FROM LOCALSTROAGE.
-
-    <!-- <form id="fetchIdEdit">
-      <label for="pasteId">Insert ID of post you want to edit</label>
-      <input type="text" id="id" name="id" placeholder="Post ID" required />
-
-      <button type="submit">Confirm</button>
-    </form> -->
-
-    SEARCH FIELD??? TITLE??? MATCHES = ..
+    <div class="search-container">
+      <label for="searchInput">Search by Title:</label>
+      <input type="text" id="searchInput" name="searchInput" placeholder="Search by Title" />
+      <button id="searchButton">Search</button>
+    </div>
 
     <form id="editPostForm" method="PUT" class="editFormHidden">
       <h1>Edit Post</h1>

@@ -1,27 +1,27 @@
-// import { apiUrlUser } from "./api.mjs";
+import { apiUrlUser } from "./api.mjs";
+import { getName } from "./userName.js";
 
-// export async function deletePostApi(name, postId) {
-//   const accessToken = localStorage.getItem("token");
-//   if (!accessToken) {
-//     throw new Error("No access token found, please login.");
-//   }
+export async function deletePostApi(postId) {
+  try {
+    const name = getName();
+    const accessToken = localStorage.getItem("token");
 
-//   try {
-//     const response = await fetch(`${apiUrlUser}/${name}/${postId}`, {
-//       method: "DELETE",
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${accessToken}`,
-//       },
-//     });
+    const response = await fetch(`${apiUrlUser}/${name}/${postId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
 
-//     if (!response.ok) {
-//       throw new Error(`HTTP error! Status: ${response.status}`);
-//     }
-
-//     console.log(`Post with ID ${postId} deleted successfully.`);
-//   } catch (error) {
-//     console.error(`Error deleting post with ID ${postId}:`, error);
-//     throw error;
-//   }
-// }
+    if (response.status === 204) {
+      console.log("Post deleted successfully");
+      return true; // Indicate successful deletion
+    } else {
+      const errorMessage = await response.text();
+      throw new Error(`Failed to delete post: ${errorMessage}`);
+    }
+  } catch (error) {
+    console.error("Error deleting post:", error);
+    throw error;
+  }
+}

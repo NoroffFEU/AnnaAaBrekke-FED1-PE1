@@ -1,9 +1,10 @@
-import { displayPosts } from "./createBlogPost.js";
+import { displayPosts, saveCreatedPosts } from "./createBlogPost.js";
 import { sortPostByNewest, sortPostsByOldest } from "./sort.js";
 import { redirectToPostPage } from "./routingUtils.js";
 import { apiUrlUser } from "./api.mjs";
 import { getName } from "./userName.js";
 import { editPostApi } from "./editApi.js";
+import { deletePostApi } from "./deleteApi.js";
 // import { logout } from "./login.js";
 // import { logout } from "./login.js";
 
@@ -172,6 +173,27 @@ export async function setupEditFormEventHandler() {
   }
 }
 
+export async function handleDeleteClick(post, locallyCreatedPosts) {
+  const postId = post.id;
+
+  if (confirm("Are you sure you want to delete this post?")) {
+    try {
+      const isDeleted = await deletePostApi(postId);
+      if (isDeleted) {
+        console.log(`Post with ID: ${postId} deleted successfully.`);
+        // Update local state and UI
+        locallyCreatedPosts = locallyCreatedPosts.filter(
+          (p) => p.id !== postId
+        );
+        saveCreatedPosts(locallyCreatedPosts);
+        displayPosts(locallyCreatedPosts, true);
+      }
+    } catch (error) {
+      console.error(`Failed to delete post with ID ${postId}:`, error);
+      alert("Failed to delete post. Please try again.");
+    }
+  }
+}
 
 // export function addRegisterButtonListener() {
 //   const registerButtonListener = () => {

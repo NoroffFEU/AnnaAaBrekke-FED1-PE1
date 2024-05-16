@@ -9,8 +9,7 @@ import { sortPostByNewest } from "./sort.js";
 // import { populateEditForm } from "./populateForm.js";
 import { setupEditFormEventHandler } from "./eventHandlers.js";
 
-// after populateform, then editpostapi - uodate. 
-
+// after populateform, then editpostapi - uodate.
 
 // Fetch and display posts to select for editing
 export async function fetchAndDisplayPostsForEdit() {
@@ -18,15 +17,17 @@ export async function fetchAndDisplayPostsForEdit() {
     let editPosts = await loadCreatedPosts();
     if (!editPosts || editPosts.length === 0) {
       console.log("No posts in local storage");
-      document.getElementById("post-container").innerHTML = '<p>No posts available for editing.</p>';
+      document.getElementById("post-container").innerHTML =
+        "<p>No posts available for editing.</p>";
     } else {
       console.log("Posts on edit page loaded");
       editPosts = sortPostByNewest(editPosts);
-      displayPosts(editPosts, true);  // Assuming displayPosts handles edit button setup
+      displayPosts(editPosts, true); // Assuming displayPosts handles edit button setup
     }
   } catch (error) {
     console.error("Failed to load posts:", error);
-    document.getElementById("post-container").innerHTML = '<p>Error loading posts. Please try again later.</p>';
+    document.getElementById("post-container").innerHTML =
+      "<p>Error loading posts. Please try again later.</p>";
   }
 }
 
@@ -34,9 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // populateEditForm();
   setupEditFormEventHandler();
   fetchAndDisplayPostsForEdit(); // This might be conditional based on page role
-
 });
-
 
 // document.getElementById("editPostForm").style.display = "none";
 
