@@ -36,7 +36,7 @@ export async function fetchAndDisplayPosts() {
     homePosts.data = sortPostByNewest(homePosts.data);
 
     console.log("Displaying posts...");
-    displayPosts(homePosts.data); // Assuming displayPosts can handle and limit the posts on its own
+    displayPosts(homePosts.data, false, 12); // Limit to 12 posts on the home page
     console.log("Posts displayed");
 
     console.log("Creating carousel for latest posts...");

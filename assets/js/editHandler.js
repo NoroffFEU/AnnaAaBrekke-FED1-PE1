@@ -33,10 +33,11 @@ export function setupEditFormEventHandler() {
     try {
       await editPostApi(postId, formData); // Call the editPostApi function to update the post
       console.log("Post updated successfully");
+      alert("Post updated successfully!");
       // Optionally, you can perform further actions after the post is updated
     } catch (error) {
       console.error("Failed to update post:", error);
-      // Handle error appropriately, such as displaying an error message to the user
+      alert("Failed to update post. Please try again.");
     }
   });
 }
