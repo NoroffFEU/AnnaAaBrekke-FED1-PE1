@@ -186,14 +186,7 @@ export function isLoggedIn(redirectIfNotLoggedIn = false) {
 // // Add the login form event listener
 // document.getElementById("loginForm").addEventListener("submit", loginFormSubmit);
 
-// // Add event listener for the register button
-// document.addEventListener("DOMContentLoaded", () => {
-//   const registerButton = document.querySelector(".register-button");
-//   if (registerButton) {
-//     registerButton.addEventListener("click", () => {
-//       window.location.href = "/account/register.html";
-//     });
-//   }
+
 
 //   // Prefill the login form with the last registered email and password if available
 //   const lastRegisteredEmail = localStorage.getItem("email");

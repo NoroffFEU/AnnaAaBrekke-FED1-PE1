@@ -5,6 +5,8 @@ import { handleEditClick, handleDeleteClick } from "./eventHandlers.js";
 import { getName } from "./userName.js"; // Import the isLoggedIn function
 import { isLoggedIn } from "./login.js";
 import { editPostApi } from "./editApi.js";
+import { showSuccessAlert, showErrorAlert } from "./alerts.js"; // Import the alert functions
+
 console.log(apiUrlUser);
 
 const name = getName();
@@ -225,9 +227,18 @@ function createFormHandler() {
 
       saveCreatedPosts(locallyCreatedPosts);
       displayPosts(locallyCreatedPosts, false); // Ensure displayPosts is called with correct parameter
+
+      showSuccessAlert("Post created successfully!");
+
+      // Scroll to the post container
+      const postContainer = document.querySelector(".post-container");
+      if (postContainer) {
+        postContainer.scrollIntoView({ behavior: "smooth" });
+      }
+      // then loading indicator...until post shows
     } catch (error) {
       console.error("Failed to create post:", error);
-      alert("Failed to create post. Please try again.");
+      showErrorAlert("Failed to create post. Please try again.");
     }
   });
 }

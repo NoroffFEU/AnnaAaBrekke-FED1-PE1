@@ -7,6 +7,7 @@ import { editPostApi } from "./editApi.js";
 import { deletePostApi } from "./deleteApi.js";
 import { isLoggedIn } from "./login.js";
 import { getSinglePost } from "./get.js";
+import { showErrorAlert, showSuccessAlert } from "./alerts.js";
 
 export function addSortButtonsEventListener(posts) {
   const sortNew = document.querySelector(".sort-newest");
@@ -90,6 +91,8 @@ export function handlePostClick(post) {
   redirectToPostPage(postId);
   console.log("Clicked post ID:", postId);
 }
+
+
 export async function handleEditClick(post) {
   if (!isLoggedIn(true)) {
     // The user will be alerted and redirected if not logged in
@@ -144,7 +147,7 @@ export async function handleEditClick(post) {
     console.log("Edit form fields populated with post data:", postData);
   } catch (error) {
     console.error("Error handling edit click:", error);
-    // Handle error appropriately, such as displaying an error message to the user
+    showErrorAlert("Failed to load post data for editing. Please try again.");
   }
 }
 
@@ -179,11 +182,12 @@ export async function setupEditFormEventHandler() {
         await editPostApi(postId, formData); // Call the editPostApi function to update the post
         editPostForm.classList.add("editFormHidden");
 
+        showSuccessAlert("Post updated successfully!");
         console.log("Post updated successfully");
         // Optionally, you can perform further actions after the post is updated
       } catch (error) {
         console.error("Failed to update post:", error);
-        // Handle error appropriately, such as displaying an error message to the user
+        showErrorAlert("Failed to update post. Please try again.");
       }
     });
   }
@@ -202,6 +206,8 @@ export async function handleDeleteClick(post, locallyCreatedPosts) {
       const isDeleted = await deletePostApi(postId);
       if (isDeleted) {
         console.log(`Post with ID: ${postId} deleted successfully.`);
+        showSuccessAlert("Post deleted successfully!");
+
         // Update local state and UI
         locallyCreatedPosts = locallyCreatedPosts.filter(
           (p) => p.id !== postId
@@ -211,7 +217,7 @@ export async function handleDeleteClick(post, locallyCreatedPosts) {
       }
     } catch (error) {
       console.error(`Failed to delete post with ID ${postId}:`, error);
-      alert("Failed to delete post. Please try again.");
+      showErrorAlert("Failed to delete post. Please try again.");
     }
   }
 }

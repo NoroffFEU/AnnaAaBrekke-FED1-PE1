@@ -1,12 +1,29 @@
+:root {
+  --primary-color: rgb(164, 236, 212);
+  --secondary-color: rgba(204, 204, 204, 0.5);
+  --highlight-color: rgb(255, 203, 250);
+  --error-color: rgb(140, 134, 134);
+  --success-color: rgb(114, 216, 107);
+  --header-bg: rgba(204, 204, 204, 0.5);
+  --button-hover-bg: rgb(255, 203, 250);
+  --login-button-bg: #ff96de;
+  --login-button-hover-bg: #ff73ef;
+  --register-button-bg: rgb(255, 203, 250);
+  --register-button-hover-bg: #b4f3f7;
+  --alert-success-bg: rgb(114, 216, 107);
+  --alert-error-bg: rgb(140, 134, 134);
+  --input-invalid-border: #eeb5bb;
+  --input-valid-border: #28a745;
+}
+
 body {
-  background-color: rgb(164, 236, 212);
+  background-color: var(--primary-color);
   font-family: "Montserrat", sans-serif;
   background-image: url(/assets/images/DALL·E\ 2024-05-02\ 14.44.46\ -\ A\ realistic\ travel\ photo\ capturing\ the\ back\ of\ a\ girl\ walking\ through\ a\ vibrant\ spring\ field\ of\ flowers\ towards\ an\ ocean\ horizon\ at\ sunset.\ The\ sky\ ab.webp);
   background-position: center top;
   background-repeat: no-repeat;
   background-size: contain;
   background-color: hsla(180, 100%, 96%, 0.526);
-  /* padding: 1rem; */
 }
 
 #loginBody,
@@ -28,7 +45,6 @@ body {
   justify-content: center;
 }
 
-
 #createBody {
   background-image: url(/assets/images/beach-water.webp);
 }
@@ -36,7 +52,7 @@ body {
 /* Header */
 
 header {
-  background-color: rgba(204, 204, 204, 0.5);
+  background-color: var(--header-bg);
   text-align: center;
   display: flex;
   flex-direction: row;
@@ -57,38 +73,15 @@ nav a {
   color: black;
 }
 
-.app-nav ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-}
-
-.website-nav {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.website-nav ul {
-  list-style: none;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1rem;
-}
-
 .headline {
   height: 250px;
 }
 
 .headline h1 {
-  margin-top: 2rem;
+  margin-top: 3rem;
 }
 
 .headline h2 {
-  font-family: cursive; /* fix latrr */
   font-weight: 600;
 }
 
@@ -112,13 +105,13 @@ nav a {
   margin-top: 1rem;
 }
 
-/* Carousel based somewhat on:https://www.youtube.com/watch?v=9HcxHDS2w1s & https://webdesign.tutsplus.com/how-to-build-a-simple-carousel-with-vanilla-javascript--cms-41734t */
+/* Carousel */
 
 #latestPostCarousel {
   position: relative;
   margin: 1rem auto;
   overflow: hidden;
-  width: 100%; /* or a specific max-width */
+  width: 100%;
 }
 
 .slides-container {
@@ -130,17 +123,13 @@ nav a {
   padding: 0;
   margin: 0;
   width: 100%;
-  height: auto; /* Adjust based on content */
+  height: auto;
   background-color: #c4a4bf88;
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
 }
 
 .slide {
-  display: flex;
   flex: 0 0 100%;
-  /* max-width: 1000px; */
-  /* gap: 0;
-  margin-left: 0; */
   scroll-snap-align: start;
   display: flex;
   flex-direction: column;
@@ -159,7 +148,7 @@ nav a {
 .slide img {
   max-width: 100%;
   max-height: 50vh;
-  width: auto; /* Ensure the image keeps its aspect ratio */
+  width: auto;
   height: auto;
 }
 
@@ -195,38 +184,8 @@ nav a {
   right: 1rem;
   border-radius: 0 2rem 2rem 0;
 }
-/* 
-/* Define 3D transformations for each slide */ /*
-.slide:nth-child(1) /*{
-  transform: rotateY(0deg) translateZ(300px);
-}
-.slide:nth-child(2) {
-  transform: rotateY(45deg) translateZ(300px);
-}
-.slide:nth-child(3) {
-  transform: rotateY(90deg) translateZ(300px);
-} */
-/* Add more transformations for additional slides as needed */
 
-/* 
-
-.slide img {
-  height: calc(100% - 12rem);
-  object-fit: cover;
-}
-
-.slide h3 {
-  font-size: 30px;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Added for text readability */
-/* } */
-
-/* .slide p {
-  font-size: 24px;
-  font-weight: 500;
-  margin-top: 0;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Added for text readability */
-
-/* Sort (based on this: https://www.jeffastor.com/blog/building-a-dropdown-menu-in-10-lines-of-javascript/ */
+/* Sort */
 
 #sortByDate {
   box-sizing: border-box;
@@ -300,7 +259,7 @@ nav a {
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .country:hover,
@@ -315,31 +274,37 @@ nav a {
   color: #333;
   border: none;
   border-radius: 20px;
-  padding: 10px 20px;
+  padding: 12px 24px;
   font-size: 18px;
   font-weight: 600;
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .edit-post:hover {
-  background-color: #93d4ff; /* Lighter shade when hovered */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Slightly deeper shadow for depth */
+  background-color: #93d4ff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .delete-post {
-  background-color: #ea463ae2;
+  background-color: #e8665ce2;
   color: #333;
   border: none;
-  border-radius: 10px;
-  padding: 5px 10px;
+  border-radius: 20px;
+  padding: 7px 10px;
   font-size: 14px;
   font-weight: 600;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  text-transform: uppercase;
 }
 
+.delete-post:hover {
+  background-color: #f93131;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
 
 .post-container {
   display: grid;
@@ -357,14 +322,26 @@ nav a {
   flex-direction: column;
   align-items: center;
   border-radius: 4px;
+  height: 100%; /* Ensure all grid posts have the same height */
+  box-sizing: border-box;
 }
 
 .grid-post img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto; /* Ensure the image keeps its aspect ratio */
-  height: auto;
-  margin-bottom: 0.25rem;
+  width: 100%;
+  height: 300px; /* Set a fixed height for the images */
+  object-fit: cover; /* Ensure images cover the area without distorting */
+  margin-bottom: 0.5rem; /* Add margin for spacing */
+}
+
+.grid-post .post-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  flex-grow: 1; /* Ensure the content fills the remaining space */
+  width: 100%;
+  height: 100%; /* Make the content fill the height of the grid post */
 }
 
 #aboutBoxes,
@@ -411,10 +388,14 @@ nav a {
   font-weight: 600;
 }
 
+#homeBody form {
+  background-image: url(/assets/images/beach-water.webp);
+}
+
 .contact-form,
 .contact-image {
   flex: 1;
-  min-width: 300px; /* Ensures that the form and image do not get too small */
+  min-width: 300px;
   padding: 20px;
 }
 
@@ -428,15 +409,15 @@ nav a {
 
 .main-post,
 .body-after-login-container {
-  max-width: 600px; /* Makes the container narrow */
-  margin: 3rem auto; /* Centers the container on the page */
-  padding: 1.5rem; /* Adds some padding inside the container */
-  background-color: #f8f9faf0; /* Light grey background */
-  border: 1px solid #dee2e6; /* Subtle border */
-  border-radius: 8px; /* Rounded corners for a modern look */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-  color: #333; /* Dark grey text for readability */
-  line-height: 1.6; /* Improves readability of the text */
+  max-width: 600px;
+  margin: 3rem auto;
+  padding: 1.5rem;
+  background-color: #f8f9faf0;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #333;
+  line-height: 1.6;
   text-align: center;
 }
 
@@ -453,14 +434,8 @@ nav a {
   cursor: pointer;
 }
 
-.post-img :hover {
-  border: 1px solid #ccc;
-  border-radius: 12px;
-  box-shadow: inset;
-}
-
 .post-info {
-  max-width: 400px; /* Adjusts the width of the column */
+  max-width: 400px;
   margin: auto;
   padding: 20px;
   border: 1px solid #ccc;
@@ -520,158 +495,18 @@ nav a {
   width: 100vw;
 }
 
-/* .prices {
-  background-color: #f2f2f2e2;
-  border-radius: 10px;
-  padding: 5px 10px;
-  font-weight: 400;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  border-color: greenyellow;
-  margin: 2px;
-} */
-
-/* Post Page */
-
-.main-post {
-  display: flex;
-  flex-direction: column;
-  padding: 2rem;
-  box-shadow: o 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.post-header {
-  text-align: center;
-  padding: 1rem;
-}
-
-#post .post-title {
-  font-size: 42px;
-  margin: 1rem;
-}
-
-#post h2,
-h3,
-h4 {
-  font-size: 28px;
-}
-
-#post p {
-  font-size: 22px;
-}
-
-/* .share-button a {
-  text-decoration: none;
-  color: #000000;
-} */
-
-.copy-button:hover {
-  background-color: #f5f4adbc;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-.share-title {
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-}
-
-.share-link {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #f9f9f9;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-.copy-button {
-  background-color: #f1ed7dc4;
-  color: #000000;
-  border: 1px solid grey;
-  border-radius: 4px;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-/* 
-.memory {
-  background-color: linear-gradient(to bottom, #ffffff 0%, #f9e9f6b6 100%);
-  color: #272220;
-  padding: 1rem;
-  text-align: center;
-  border: 1px #ccc;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 2rem;
-  margin-left: 5rem;
-  margin-right: 5rem;
-}
-
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.2rem;
-}
-
-.gallery-grid img {
-  width: 100%;
-  height: auto;
-}
-
-#intro,
-#activities,
-#places-to-see,
-#food {
-  margin: 1rem;
-  padding: 0.5rem;
-} */
-
-/* .editNavButton {
-  background-color: #719ce5e2;
-  color: #333;
-  border: none;
-  border-radius: 20px;
-  padding: 10px 20px;
-  font-size: 18px;
-  font-weight: 600;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-/* } */
-
-/* .createNavButton {
-  background-color: #eed563e2;
-  color: #333;
-  border: none;
-  border-radius: 20px;
-  padding: 10px 20px;
-  font-size: 18px;
-  font-weight: 600;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-/* } */
-*/ */
-
 /* Footer */
 .footer-nav {
-  background-color: rgba(204, 204, 204, 0.5);
-  text-align: center;
-  margin-bottom: 20px;
+  background-color: var(--secondary-color);
+  padding: 1rem 2rem;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-top: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  margin-top: 4rem;
 }
 
 .footer-nav ul {
@@ -694,7 +529,7 @@ form {
   background-color: #fff;
   padding: 3rem;
   border-radius: 8px;
-  border: 1px solid pink;
+  border: 1px solid rgb(214, 234, 246);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   margin-top: 1rem;
   justify-content: center;
@@ -713,12 +548,15 @@ label {
 input[type="text"],
 input[type="email"],
 input[type="password"],
-textarea {
+input[type="url"],
+textarea,
+select {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin-top: 0.5rem;
+  box-sizing: border-box;
+  margin-bottom: 0.8rem;
 }
 
 textarea {
@@ -736,44 +574,47 @@ form h1 {
 
 /* Components?*/
 
-button[type="submit"] {
-  color: #221f1f;
+button {
+  padding: 10px 20px;
+  background-color: var(--highlight-color);
+  color: rgb(0, 0, 0);
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 18px;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
   margin-top: 1rem;
-  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+button:hover {
+  background-color: var(--button-hover-bg);
 }
 
 .login-button {
-  background-color: #ff96de;
+  background-color: var(--login-button-bg);
   padding: 10px 20px;
 }
 
 .login-button:hover {
-  background-color: #ff73ef;
+  background-color: var(--login-button-hover-bg);
 }
 
 .register-button {
-  background-color: rgb(255, 203, 250);
+  background-color: var(--register-button-bg);
   padding: 5px 10px;
 }
 
 .register-button:hover {
-  background-color: #b4f3f7;
+  background-color: var(--register-button-hover-bg);
 }
 
 /* After logged in */
 
-/*h1*/
 .greeting-message {
   font-weight: bold;
   text-align: center;
   margin: 20px 0;
-  color: #2c3e50; /* Example color */
+  color: #2c3e50;
 }
 
 /* Container for navigation buttons */
@@ -793,15 +634,16 @@ button[type="submit"] {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  background-color: #0f9cfb; /* Example background color */
+  background-color: #0f9cfb;
   color: white;
   transition: background-color 0.3s;
   width: 200px;
 }
 
 .choose-container button:hover {
-  background-color: #8cbfe1; /* Example hover effect */
+  background-color: #8cbfe1;
 }
+
 /* Styles for login messages */
 .login-message {
   font-size: 1em;
@@ -810,12 +652,41 @@ button[type="submit"] {
   margin-top: 20px;
 }
 
+/* Messages/ Alerts */
+.alert {
+  padding: 1rem;
+  border-radius: 7px;
+  font-size: 20px;
+  color: white;
+  text-align: center;
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: 50%;
+  max-width: 600px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.alert-success {
+  background-color: var(--alert-success-bg);
+}
+
+.alert-error {
+  background-color: var(--alert-error-bg);
+}
+
+.alert.show {
+  opacity: 1;
+}
+
 /* Media Queries */
 
-/* Media query for smaller screens */
 @media (max-width: 768px) {
   .post-container {
-    grid-template-columns: 1fr; /* Makes the columns stack vertically */
+    grid-template-columns: 1fr;
   }
 }
 
