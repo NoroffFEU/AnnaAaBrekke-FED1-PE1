@@ -279,7 +279,7 @@ nav a {
   padding: 20px;
 }
 
-.country,
+.tag,
 .read-more {
   background-color: #f2f2f2e2;
   color: #333;
@@ -294,7 +294,7 @@ nav a {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.country:hover,
+.tag:hover,
 .read-more:hover {
   background-color: #f2d8efbc;
   color: #fff;

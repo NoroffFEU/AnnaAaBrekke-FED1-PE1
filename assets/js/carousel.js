@@ -11,7 +11,6 @@
 // import { setupCarouselEvents } from "./eventHandlers.js";
 
 // import { redirectToPostPage } from "./routingUtils.js";
-
 import { handlePostClick } from "./eventHandlers.js";
 import { redirectToPostPage } from "./routingUtils.js";
 
@@ -19,7 +18,6 @@ export function latestPostsCarousel(posts) {
   try {
     console.log("Latest posts selected:", posts);
 
-    // Get the carousel container element
     const carouselContainer = document.getElementById("slidesContainer");
     carouselContainer.innerHTML = ""; // Clear existing content
     console.log("Carousel container cleared");
@@ -30,34 +28,18 @@ export function latestPostsCarousel(posts) {
       truncatedBody += post.body.split(" ").length > 20 ? "..." : "";
 
       const li = document.createElement("li");
-
       li.className = `slide ${index === 0 ? "active" : ""}`;
 
-      // Handle author safely
-      const author =
-        typeof post.author === "object"
-          ? post.author.name || "Anonymous"
-          : post.author || "Anonymous";
+      const author = typeof post.author === "object"
+        ? post.author.name || "Anonymous"
+        : post.author || "Anonymous";
 
-      // Handle country safely
-      const country =
-        typeof post.country === "object"
-          ? post.country.name || "No country specified"
-          : post.country || "No country specified";
-          
       li.innerHTML = `
         <div class="post-info">
-          <img src="${
-            post.media.url
-          }" onError="this.onerror=null; this.src='${defaultImage}'" alt="${
-        post.media.alt
-      }" class="post-img">
+          <img src="${post.media.url}" onError="this.onerror=null; this.src='${defaultImage}'" alt="${post.media.alt}" class="post-img">
           <h2>${post.title}</h2>
-          <div class="post-country">${country}</div>
           <p>${truncatedBody}</p>
-          <p><small>Posted on: ${new Date(
-            post.created
-          ).toLocaleDateString()}</small></p>
+          <p><small>Posted on: ${new Date(post.created).toLocaleDateString()}</small></p>
           <div class="post-author">${author}</div>
           <button class="read-more">Read More</button>
         </div>
@@ -69,7 +51,6 @@ export function latestPostsCarousel(posts) {
       const readMoreButton = li.querySelector(".read-more");
       readMoreButton.addEventListener("click", () => {
         handlePostClick(post);
-        redirectToPostPage(post.id);
       });
     });
     console.log("Carousel has been created");

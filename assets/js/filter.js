@@ -1,28 +1,47 @@
-import { displayPosts, loadCreatedPosts } from "./createBlogPost.js";
+import { displayPosts, loadCreatedPosts, fetchAndDisplayPosts } from "./createBlogPost.js";
 
-export function addFilterButtonsEventListener() {
-  const countryButtons = document.querySelectorAll(".country");
-  countryButtons.forEach(button => {
-      button.addEventListener("click", () => {
-          console.log(`Button clicked: ${button.value}`);
+export async function createFilterButtons() {
+  const allPosts = await fetchAndDisplayPosts();
+  const postTags = new Set();
+
+  // Collect all the different tags
+  allPosts.forEach(post => {
+    post.tags.forEach(tag => postTags.add(tag));
+  });
+
+  // Get the filter buttons container
+  const filterButtonsContainer = document.querySelector(".filter-buttons");
+  filterButtonsContainer.innerHTML = ""; // Clear existing buttons
+
+  // Create buttons for each unique tag
+  postTags.forEach(tag => {
+    const button = document.createElement("button");
+    button.classList.add("tag");
+    button.value = tag;
+    button.textContent = tag;
+    button.addEventListener("click", () => {
+      console.log(`Button clicked: ${tag}`);
       try {
-        filterPostsByCountry(button.value);
+        filterPostsByTag(tag);
       } catch (error) {
-        console.error("Error filtering posts by country", error);
+        console.error("Error filtering posts by tag", error);
       }
     });
+    filterButtonsContainer.appendChild(button);
   });
 }
 
-// Function to filter products by gender
-export async function filterPostsByCountry(country) {
+export function addFilterButtonsEventListener() {
+  createFilterButtons(); // Ensure buttons are created based on tags created
+}
+
+// Function to filter posts by tag
+export async function filterPostsByTag(tag) {
   try {
     const allPosts = await loadCreatedPosts();
-    const filteredPosts = allPosts.filter
-      (posts => country => posts.country === country);
-      await displayPosts(filteredPosts);
+    const filteredPosts = allPosts.filter(post => post.tags.includes(tag));
+    await displayPosts(filteredPosts);
   } catch (error) {
-    console.error("Error filtering products by country:", error);
-    // alert("Error filtering products by gender. Please try again later.");
+    console.error("Error filtering posts by tag:", error);
   }
 }

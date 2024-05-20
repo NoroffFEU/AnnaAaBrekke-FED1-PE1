@@ -3,6 +3,7 @@ import { editPostApi } from "./editApi.js";
 import { getName } from "./userName.js";
 import { editPostApi } from "./editApi.js";
 import { isLoggedIn } from "./login.js";
+import { showErrorAlert, showSuccessAlert } from "./alerts.js";
 
 export function setupEditFormEventHandler() {
   const editPostForm = document.getElementById("editPostForm");
@@ -26,18 +27,17 @@ export function setupEditFormEventHandler() {
         name: document.getElementById("postAuthor").value
       },
       tags: document.getElementById("postTags").value.split(",").map(tag => tag.trim()),
-      body: document.getElementById("postContent").value,
-      country: document.getElementById("postCountry").value
+      body: document.getElementById("postContent").value
     };
 
     try {
       await editPostApi(postId, formData); // Call the editPostApi function to update the post
       console.log("Post updated successfully");
-      alert("Post updated successfully!");
+      showSuccessAlert("Post updated successfully!");
       // Optionally, you can perform further actions after the post is updated
     } catch (error) {
       console.error("Failed to update post:", error);
-      alert("Failed to update post. Please try again.");
+      showErrorAlert("Failed to update post. Please try again.");
     }
   });
 }

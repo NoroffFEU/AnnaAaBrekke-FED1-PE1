@@ -13,6 +13,7 @@ import {
 } from "./eventHandlers.js";
 import { getName } from "./userName.js";
 import { hideLoader, showLoader } from "./loading.js";
+import { addFilterButtonsEventListener } from "./filter.js";
 
 const name = getName();
 
@@ -69,6 +70,7 @@ async function init() {
   // Call addSortButtonsEventListener with the returned homePosts object
   addSortButtonsEventListener(homePosts);
   console.log("Sort buttons event listeners added.");
+  addFilterButtonsEventListener();
 
   const posts = document.querySelectorAll(".post");
   posts.forEach((post) => {
@@ -79,8 +81,6 @@ async function init() {
 
   hideLoader();
 
-  // addFilterButtonsEventListener(); // Assume filters don't need posts directly
-  // console.log("Filter buttons event listeners added.");
 }
 
 console.log(document.readyState);

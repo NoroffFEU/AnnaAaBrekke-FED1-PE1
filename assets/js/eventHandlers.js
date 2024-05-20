@@ -153,7 +153,6 @@ export async function handleEditClick(post) {
     document.getElementById("postAuthor").value = postData.data.author.name;
     document.getElementById("postTags").value = postData.data.tags.join(", ");
     document.getElementById("postContent").value = postData.data.body;
-    document.getElementById("postCountry").value = postData.data.country;
 
     const editForm = document.getElementById("editPostForm");
     editForm.classList.remove("editFormHidden");
@@ -194,8 +193,7 @@ export async function setupEditFormEventHandler() {
           .getElementById("postTags")
           .value.split(",")
           .map((tag) => tag.trim()),
-        body: document.getElementById("postContent").value,
-        country: document.getElementById("postCountry").value,
+        body: document.getElementById("postContent").value
       };
 
       try {

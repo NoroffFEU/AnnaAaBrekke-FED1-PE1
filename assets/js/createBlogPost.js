@@ -1,23 +1,27 @@
 import { apiUrlUser } from "./api.mjs";
-import { handlePostClick } from "./eventHandlers.js";
-import { handleEditClick, handleDeleteClick } from "./eventHandlers.js";
-import { getName } from "./userName.js"; // Import the isLoggedIn function
+import {
+  handlePostClick,
+  handleEditClick,
+  handleDeleteClick,
+  addSortButtonsEventListener,
+} from "./eventHandlers.js";
+import { getName } from "./userName.js";
 import { isLoggedIn } from "./login.js";
-import { editPostApi } from "./editApi.js";
-import { showSuccessAlert, showErrorAlert } from "./alerts.js"; // Import the alert functions
+import { showSuccessAlert, showErrorAlert } from "./alerts.js";
 import { hideLoader, showLoader } from "./loading.js";
+import { getPosts } from "./get.js";
+import { latestPostsCarousel } from "./carousel.js";
+import { sortPostByNewest } from "./sort.js";
 
 console.log(apiUrlUser);
 
 const name = getName();
-
 let locallyCreatedPosts = [];
 
 export function saveCreatedPosts(posts) {
   localStorage.setItem("posts", JSON.stringify(posts));
   locallyCreatedPosts = posts;
 }
-console.log("saveCreatedPosts module loaded");
 
 export function loadCreatedPosts() {
   const storedPosts = localStorage.getItem("posts");
@@ -26,7 +30,6 @@ export function loadCreatedPosts() {
   }
   return locallyCreatedPosts;
 }
-console.log("loadCreatedPosts module loaded");
 
 export async function createPost(name, postData) {
   if (!isLoggedIn(true)) {
@@ -69,8 +72,7 @@ export function displayPosts(posts, isEditPage = false) {
     console.error("post-container does not exist in the DOM.");
     return;
   }
-  // Clear existing posts to prevent duplication
-  postContainer.innerHTML = "";
+  postContainer.innerHTML = ""; // Clear existing posts to prevent duplication
 
   if (posts && posts.length > 0) {
     posts.slice(0, 12).forEach((post) => {
@@ -86,7 +88,7 @@ export function displayPosts(posts, isEditPage = false) {
         postElement
           .querySelector(".delete-post")
           .addEventListener("click", () => {
-            handleDeleteClick(post, locallyCreatedPosts); // Pass locallyCreatedPosts here
+            handleDeleteClick(post, locallyCreatedPosts);
             console.log(
               "Clicked delete button, name and id:",
               getName(),
@@ -108,8 +110,6 @@ export function displayPosts(posts, isEditPage = false) {
   }
 }
 
-console.log("displayPosts module loaded");
-
 function createPostElement(post, includeEditButtons = false) {
   const postData = post.data || post;
 
@@ -117,7 +117,6 @@ function createPostElement(post, includeEditButtons = false) {
   postElement.classList.add("grid-post");
 
   const defaultImage = `https://placehold.co/600x400`;
-
   const imageSrc =
     postData.media && postData.media.url ? postData.media.url : defaultImage;
   const imageAlt =
@@ -137,7 +136,6 @@ function createPostElement(post, includeEditButtons = false) {
     console.log("No tags to display or tags are not in expected format.");
   }
 
-  const country = postData.country || "No country specified";
   const author =
     typeof postData.author === "object"
       ? postData.author.name || "Anonymous"
@@ -157,18 +155,17 @@ function createPostElement(post, includeEditButtons = false) {
   }
 
   postElement.innerHTML = `
-  <div class="post-info">
-    <img src="${imageSrc}" onError="this.onerror=null; this.src='${defaultImage}';" alt="${imageAlt}" class="post-img">
-    <h3 class="post-title">${postData.title}</h3>
-    <div class="post-author">${author}</div>
-    <time class="post-date" datetime="${post.created}">${new Date(
+    <div class="post-info">
+      <img src="${imageSrc}" onError="this.onerror=null; this.src='${defaultImage}';" alt="${imageAlt}" class="post-img">
+      <h3 class="post-title">${postData.title}</h3>
+      <div class="post-author">${author}</div>
+      <time class="post-date" datetime="${post.created}">${new Date(
     post.updated
   ).toLocaleDateString()}</time>
-    <div class="tags">${tagsHtml}</div>
-    <div class="post-country">${country}</div>
-    ${moreButtonsHtml}
-  </div>
-`;
+      <div class="tags">${tagsHtml}</div>
+      ${moreButtonsHtml}
+    </div>
+  `;
 
   return postElement;
 }
@@ -186,11 +183,7 @@ function createFormHandler() {
 
     const mediaUrl = document.getElementById("postImage").value;
     const mediaAlt = document.getElementById("postImageAlt").value;
-
-    const media = {
-      url: mediaUrl,
-      alt: mediaAlt,
-    };
+    const media = { url: mediaUrl, alt: mediaAlt };
     const title = document.getElementById("postTitle").value;
     const author = document.getElementById("postAuthor").value;
     const tags = document
@@ -198,17 +191,8 @@ function createFormHandler() {
       .value.split(",")
       .map((tag) => tag.trim());
     const body = document.getElementById("postContent").value;
-    const country = document.getElementById("postCountry").value;
 
-    const postData = {
-      media,
-      title,
-      author,
-      tags,
-      body,
-      country,
-    };
-
+    const postData = { media, title, author, tags, body };
     console.log("Submitting post data:", postData);
 
     try {
@@ -225,20 +209,16 @@ function createFormHandler() {
         created: response.data.created,
         updated: response.data.updated,
         tags: response.data.tags.map((tag) => tag.label || tag),
-        country: response.data.country || country,
       });
 
       saveCreatedPosts(locallyCreatedPosts);
-      displayPosts(locallyCreatedPosts, false); // Ensure displayPosts is called with correct parameter
-
+      displayPosts(locallyCreatedPosts, false);
       showSuccessAlert("Post created successfully!");
 
-      // Scroll to the post container
       const postContainer = document.querySelector(".post-container");
       if (postContainer) {
         postContainer.scrollIntoView({ behavior: "smooth" });
       }
-      // then loading indicator...until post shows
     } catch (error) {
       console.error("Failed to create post:", error);
       showErrorAlert("Failed to create post. Please try again.");
@@ -246,6 +226,33 @@ function createFormHandler() {
       hideLoader();
     }
   });
+}
+
+export async function fetchAndDisplayPosts() {
+  console.log("fetchAndDisplayPosts started");
+  let homePosts = [];
+  try {
+    showLoader();
+    homePosts = loadCreatedPosts();
+
+    if (!homePosts || homePosts.length === 0) {
+      console.log("No posts in local storage, fetching from server...");
+      homePosts = await getPosts(name);
+      saveCreatedPosts(homePosts.data);
+    } else {
+      console.log("Loaded posts from local storage");
+    }
+
+    homePosts = sortPostByNewest(homePosts);
+    displayPosts(homePosts, false, 12);
+    latestPostsCarousel(homePosts.slice(0, 3));
+  } catch (error) {
+    console.error("Failed to fetch posts:", error);
+  } finally {
+    hideLoader();
+  }
+
+  return homePosts;
 }
 
 export function initCreatePage() {
