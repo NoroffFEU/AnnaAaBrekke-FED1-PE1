@@ -1,4 +1,5 @@
 // src/handlers/register.mjs
+import { hideLoader } from "./loading.js";
 import { register } from "./register.js";
 
 export function setRegisterFormListener() {
@@ -14,28 +15,29 @@ export function setRegisterFormListener() {
 
       // Confirm Password validation
       if (registerData.password !== registerData.confirmPassword) {
-        document.getElementsByClassName("register-message")[0].textContent =
-          "Registration failed: Passwords do not match.";
+        showErrorAlert("Registration failed: Passwords do not match.");
         return;
       }
 
       // Remove confirmPassword from the data being sent to the API
       delete registerData.confirmPassword;
 
+      showLoader(); // Show loader
+
       try {
         await register(registerData);
-        document.getElementsByClassName("register-message")[0].textContent =
-          "Registration successful! Log in with your new account.";
+        showSuccessAlert(
+          "Registration successful! Log in with your new account."
+        );
 
-        // // Store relevant data in local storage for login purposes
-        // localStorage.setItem("email", registerData.email);
-        // localStorage.setItem("password", registerData.password);
-
-        // Redirect to login page
-        window.location.href = "../account/login.html";
+        // Redirect to login page after some time
+        setTimeout(() => {
+          window.location.href = "../account/login.html";
+        }, 2000);
       } catch (error) {
-        document.getElementsByClassName("register-message")[0].textContent =
-          "Registration failed: " + error.message;
+        showErrorAlert("Registration failed: " + error.message);
+      } finally {
+        hideLoader();
       }
     });
   }

@@ -18,6 +18,11 @@
   </head>
 
   <body id="homeBody">
+
+    <div id="loadingInd" class="loader-hidden">
+      <div class="loader"></div>
+    </div>
+
     <header>
       <nav class="logo">
         <a href="index.html">Wherever Forever</a>
@@ -29,6 +34,7 @@
         </ul>
       </nav> -->
     </header>
+
 
     <section id="home-header">
       <div class="headline">
@@ -62,14 +68,15 @@
       </div>
 
       <section id="sortByDate">
-        <div class="dropdown-sort">
-          <h2 class="dropdown-title">Sort<span>∆</span></h2>
+        <div class="dropdown-sort closed">
+          <h2 class="dropdown-title">Sort<span><i class="fa-solid fa-sort-up"></i></span></h2>
           <ul class="sort-opt">
             <li class="sort-newest">Newest First</li>
             <li class="sort-oldest">Oldest First</li>
           </ul>
         </div>
       </section>
+      
 
       <div class="post-container">
         <div class="grid-post"></div>

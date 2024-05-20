@@ -18,6 +18,11 @@
   </head>
 
   <body id="createBody">
+    
+    <div id="loadingInd" class="loader-hidden">
+      <div class="loader"></div>
+    </div>
+
     <header>
       <nav class="logo">
         <a href="/index.html">Wherever Forever</a>
@@ -25,6 +30,8 @@
     </header>
 
     <button class="logout-button" type="submit">Logout</button>
+
+
 
     <form id="createPostForm">
       <h1>Create Post</h1>
@@ -102,8 +109,6 @@
 
       <button type="submit">Create Post</button>
     </form>
-
-    <div class="create-message"></div>
 
     <div class="create-headline">
       <h1>All posts you have created are stored here</h1>

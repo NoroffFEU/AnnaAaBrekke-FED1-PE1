@@ -18,6 +18,11 @@
   </head>
 
   <body id="registerBody">
+
+    <div id="loadingInd" class="loader-hidden">
+      <div class="loader"></div>
+    </div>
+
     <form id="registerForm" method="post">
       <h1>Register new account</h1>
       <label for="name">Name:</label>
@@ -57,8 +62,6 @@
       />
       <button class="new-account" type="submit">Register</button>
     </form>
-
-    <div class="register-message"></div>
 
     <script type="module" src="../assets/js/account.js"></script>
   </body>

@@ -1,8 +1,3 @@
-// export async function displayError(message) {
-//   const errorContainer = 
-// }
-
-
 export function showSuccessAlert(message) {
   showAlert(message, "success");
 }
@@ -17,11 +12,6 @@ function showAlert(message, type) {
   alertContainer.textContent = message;
 
   document.body.appendChild(alertContainer);
-
-  // Automatically show the alert and remove it after 3 seconds
-  setTimeout(() => {
-    alertContainer.classList.add("show");
-  }, 10);
 
   setTimeout(() => {
     alertContainer.classList.remove("show");

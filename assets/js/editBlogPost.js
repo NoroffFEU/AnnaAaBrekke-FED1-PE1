@@ -8,12 +8,15 @@ import { loadCreatedPosts, displayPosts } from "./createBlogPost.js";
 import { sortPostByNewest } from "./sort.js";
 // import { populateEditForm } from "./populateForm.js";
 import { setupEditFormEventHandler } from "./eventHandlers.js";
+import { hideLoader, showLoader } from "./loading.js";
 
 // after populateform, then editpostapi - uodate.
 
 // Fetch and display posts to select for editing
 export async function fetchAndDisplayPostsForEdit() {
   try {
+    console.log("Showing loading indicator");
+    showLoader();
     let editPosts = await loadCreatedPosts();
     if (!editPosts || editPosts.length === 0) {
       console.log("No posts in local storage");
@@ -28,6 +31,9 @@ export async function fetchAndDisplayPostsForEdit() {
     console.error("Failed to load posts:", error);
     document.getElementById("post-container").innerHTML =
       "<p>Error loading posts. Please try again later.</p>";
+  } finally {
+    console.log("Hiding loading indicator");
+    hideLoader();
   }
 }
 

@@ -13,6 +13,7 @@
 // import { redirectToPostPage } from "./routingUtils.js";
 
 import { handlePostClick } from "./eventHandlers.js";
+import { redirectToPostPage } from "./routingUtils.js";
 
 export function latestPostsCarousel(posts) {
   try {

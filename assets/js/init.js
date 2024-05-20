@@ -12,6 +12,7 @@ import {
   setupCarouselClickEvents,
 } from "./eventHandlers.js";
 import { getName } from "./userName.js";
+import { hideLoader, showLoader } from "./loading.js";
 
 const name = getName();
 
@@ -20,6 +21,9 @@ export async function fetchAndDisplayPosts() {
   console.log("fetchAndDisplayPosts started");
   let homePosts = [];
   try {
+
+    showLoader();
+
     console.log("Loading posts from local storage...");
     homePosts = await loadCreatedPosts(); // First try to load posts from local storage
     // console.log("Loaded from local storage:", homePosts.data);
@@ -45,12 +49,15 @@ export async function fetchAndDisplayPosts() {
   } catch (error) {
     console.error("Failed to fetch posts:", error);
     // alert("Failed to load posts. Please try again.");
+  } finally {
+    hideLoader();
   }
 
   return homePosts;
 }
 
 async function init() {
+  showLoader();
   console.log("Initializing application...");
   const homePosts = await fetchAndDisplayPosts(); // Call fetchAndDisplayPosts and wait for it to finish
   console.log("Posts fetched and displayed:", homePosts);
@@ -69,6 +76,8 @@ async function init() {
       handlePostClick(post);
     });
   });
+
+  hideLoader();
 
   // addFilterButtonsEventListener(); // Assume filters don't need posts directly
   // console.log("Filter buttons event listeners added.");

@@ -202,12 +202,12 @@ nav a {
 }
 
 .dropdown-sort {
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
   overflow: hidden;
   margin: 1rem;
-  background: rgb(248, 248, 248);
-  border: solid 2px rgb(222, 222, 222);
-  width: 140px;
+  background: var(--secondary-color);
+  border: 2px solid var(--secondary-color);
+  width: 100px;
   cursor: pointer;
   border-radius: 10px;
 }
@@ -215,23 +215,55 @@ nav a {
 .dropdown-title {
   display: flex;
   justify-content: space-between;
-  padding: 0 20px 0 10px;
+  align-items: center;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--font-color);
+  background: #fffffff5;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.dropdown-title:hover,
+.sort-opt li:hover {
+  background: var(--button-hover-bg);
+}
+
+.dropdown-title span {
+  transition: transform 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-title span i {
+  transform: translateY(3px); /* Adjust this value to move the icon up */
 }
 
 .sort-opt {
-  height: 114px;
+  height: auto;
+  max-height: 0;
+  transition: max-height 0.3s ease-in-out;
 }
 
 .sort-opt li {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
-  padding: 14px 10px;
-  border-top: solid 1px rgb(202, 202, 202);
+  padding: 10px 20px;
+  border-top: 1px solid var(--border-top-color);
+  background: var(--item-background);
+  transition: background 0.3s;
 }
 
 .dropdown-sort.closed .sort-opt {
-  height: 0px;
+  max-height: 0;
 }
+
+.dropdown-sort .sort-opt {
+  max-height: 200px; /* Adjust based on number of items */
+  overflow: hidden;
+}
+
 .dropdown-sort.closed .dropdown-title span {
   transform: rotate(180deg);
 }
@@ -493,6 +525,63 @@ nav a {
 
 .gallery img {
   width: 100vw;
+}
+
+/* Loader -- Somewhat based on https://css-loaders.com/spinner/ */
+/* Loader */
+#loadingInd {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex; /* Default to hidden */
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.loader {
+  width: 100px; /* Increased size */
+  height: 100px; /* Ensures aspect-ratio */
+  display: grid;
+  -webkit-mask: conic-gradient(from 15deg, #0000, #000);
+  animation: l26 1s infinite steps(12);
+}
+
+.loader,
+.loader:before,
+.loader:after {
+  background: radial-gradient(
+        closest-side at 50% 12.5%,
+        var(--highlight-color) 96%,
+        #0000
+      )
+      50% 0/20% 80% repeat-y,
+    radial-gradient(
+        closest-side at 12.5% 50%,
+        var(--highlight-color) 96%,
+        #0000
+      )
+      0 50%/80% 20% repeat-x;
+}
+
+.loader:before,
+.loader:after {
+  content: "";
+  grid-area: 1/1;
+  transform: rotate(30deg);
+}
+
+.loader:after {
+  transform: rotate(60deg);
+}
+
+@keyframes l26 {
+  100% {
+    transform: rotate(1turn);
+  }
 }
 
 /* Footer */

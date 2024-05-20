@@ -18,6 +18,10 @@
   </head>
 
   <body id="loginBody">
+    <div id="loadingInd" class="loader-hidden">
+      <div class="loader"></div>
+    </div>
+
     <form id="loginForm" method="post">
       <h1>Login</h1>
       <input type="email" id="ownerEmail" placeholder="Email" required />
@@ -31,11 +35,6 @@
       <button class="register-button" type="submit">Register</button>
     </form>
 
-    <div class="login-message"></div>
-
     <script type="module" src="../assets/js/account.js"></script>
-
-
-    
   </body>
 </html>

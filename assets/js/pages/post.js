@@ -1,4 +1,6 @@
+import { showErrorAlert } from "../alerts.js";
 import { getSinglePost } from "../get.js";
+import { hideLoader, showLoader } from "../loading.js";
 import { getName } from "../userName.js";
 // import { apiUrl } from "../api.mjs";
 
@@ -6,18 +8,23 @@ const urlParams = new URLSearchParams(window.location.search);
 console.log("The URL:", urlParams);
 const postId = urlParams.get("id");
 console.log("The link", postId);
-const name = getName(); // need to fix this - because i created post with user SerenaTravel (but do not work to log in with... - and new user is "Serena" - may have to create new...
+const name = getName(); 
 
-if (!postId) {
-  console.error("No post ID in URL parameters");
-  // alert("No post ID provided. Please check the URL and try again.");
-} else {
-  console.log("Fetching single post with ID:", postId);
-  fetchAndDisplaySinglePost(postId);
+// Check if the script is running on the post page
+if (window.location.pathname.includes("post/index.html")) {
+  if (!postId) {
+    console.error("No post ID in URL parameters");
+    showErrorAlert("No post ID provided. Please check the URL and try again.");
+  } else {
+    console.log("Fetching single post with ID:", postId);
+    fetchAndDisplaySinglePost(postId);
+  }
 }
 
-async function fetchAndDisplaySinglePost(postId) {
+
+export async function fetchAndDisplaySinglePost(postId) {
   try {
+    showLoader();
     const response = await getSinglePost(name, postId);
     const post = response.data;
 
@@ -25,7 +32,10 @@ async function fetchAndDisplaySinglePost(postId) {
     displaySinglePost(post);
   } catch (error) {
     console.error("Error fetching or displaying single post:", error);
-    // alert("Failed to fetch post details. Please refresh the page or try again later.");
+    showErrorAlert("Failed to load post. Please try again later.");
+  } finally {
+    console.log("Calling hideLoader");
+    hideLoader();
   }
 }
 

@@ -1,11 +1,11 @@
 import { apiUrlUser } from "./api.mjs";
 import { handlePostClick } from "./eventHandlers.js";
-import { redirectToPostPage } from "./routingUtils.js";
 import { handleEditClick, handleDeleteClick } from "./eventHandlers.js";
 import { getName } from "./userName.js"; // Import the isLoggedIn function
 import { isLoggedIn } from "./login.js";
 import { editPostApi } from "./editApi.js";
 import { showSuccessAlert, showErrorAlert } from "./alerts.js"; // Import the alert functions
+import { hideLoader, showLoader } from "./loading.js";
 
 console.log(apiUrlUser);
 
@@ -40,6 +40,7 @@ export async function createPost(name, postData) {
   }
 
   try {
+    showLoader();
     const response = await fetch(`${apiUrlUser}/${name}`, {
       method: "POST",
       headers: {
@@ -57,6 +58,8 @@ export async function createPost(name, postData) {
   } catch (error) {
     console.error("Error creating post:", error);
     throw error;
+  } finally {
+    hideLoader();
   }
 }
 
@@ -95,7 +98,6 @@ export function displayPosts(posts, isEditPage = false) {
           .querySelector(".read-more")
           .addEventListener("click", () => {
             handlePostClick(post);
-            redirectToPostPage(post.id);
           });
       }
 
@@ -210,6 +212,7 @@ function createFormHandler() {
     console.log("Submitting post data:", postData);
 
     try {
+      showLoader();
       const response = await createPost(name, postData);
       console.log("Post created successfully:", response);
 
@@ -239,14 +242,18 @@ function createFormHandler() {
     } catch (error) {
       console.error("Failed to create post:", error);
       showErrorAlert("Failed to create post. Please try again.");
+    } finally {
+      hideLoader();
     }
   });
 }
 
 export function initCreatePage() {
+  showLoader();
   loadCreatedPosts();
   displayPosts(locallyCreatedPosts, false);
   createFormHandler();
+  hideLoader();
 }
 
 document.addEventListener("DOMContentLoaded", initCreatePage);

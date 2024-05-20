@@ -39,10 +39,13 @@
 
 import { apiUrlUser } from "./api.mjs";
 import { fetchAndDisplayPostsForEdit } from "./editBlogPost.js";
+import { hideLoader, showLoader } from "./loading.js";
 import { getName } from "./userName.js";
 
 export async function editPostApi(postId, formData) {
   try {
+    showLoader();
+
     const name = getName();
     const accessToken = localStorage.getItem("token"); // Retrieve access token from localStorage
 
@@ -67,5 +70,7 @@ export async function editPostApi(postId, formData) {
   } catch (error) {
     console.error("Error updating post:", error);
     // Handle error appropriately, such as displaying an error message to the user
+  } finally {
+    hideLoader();
   }
 }

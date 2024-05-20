@@ -1,4 +1,6 @@
 import { saveLogin } from "./login.js";
+import { showLoader, hideLoader } from "./loading.js";
+import { showErrorAlert } from "./alerts.js";
 
 export function setLoginFormListener() {
   const form = document.getElementById("loginForm");
@@ -13,13 +15,14 @@ export function setLoginFormListener() {
 
       if (!email || !password) {
         console.error("Email and password are required");
-        document.getElementsByClassName("login-message")[0].textContent =
-          "Email and password are required";
+        showErrorAlert("Email and password are required"); // Use showErrorAlert
         return;
       }
 
       const loginData = { email, password };
       console.log("Login Data:", loginData);
+
+      showLoader(); // Show loader
 
       try {
         const loginResponse = await saveLogin(loginData);
@@ -27,8 +30,15 @@ export function setLoginFormListener() {
         // Remove the login form
         form.style.display = "none";
 
-        // const name = loginResponse.name;
+        // Remove any existing body-after-login-container (maybe reomve later)
+        const existingContainer = document.querySelector(
+          ".body-after-login-container"
+        );
+        if (existingContainer) {
+          existingContainer.remove();
+        }
 
+        // Create a new body-after-login-container
         const bodyContainer = document.createElement("div");
         bodyContainer.classList.add("body-after-login-container");
 
@@ -67,8 +77,9 @@ export function setLoginFormListener() {
         document.body.appendChild(bodyContainer);
       } catch (error) {
         console.error("Login failed:", error);
-        document.querySelector(".login-message").textContent =
-          "Login failed: " + error.message;
+        showErrorAlert("Login failed: " + error.message); // Use showErrorAlert
+      } finally {
+        hideLoader(); // Hide loader
       }
     });
   }

@@ -1,13 +1,15 @@
 import { displayPosts, saveCreatedPosts } from "./createBlogPost.js";
 import { sortPostByNewest, sortPostsByOldest } from "./sort.js";
-import { redirectToPostPage } from "./routingUtils.js";
+import { redirectToPostPage, redirectToPostPageFromCreate } from "./routingUtils.js";
 import { apiUrlUser } from "./api.mjs";
-import { getName } from "./userName.js"; // Import the isLoggedIn function
+import { getName } from "./userName.js";
 import { editPostApi } from "./editApi.js";
 import { deletePostApi } from "./deleteApi.js";
 import { isLoggedIn } from "./login.js";
 import { getSinglePost } from "./get.js";
 import { showErrorAlert, showSuccessAlert } from "./alerts.js";
+import { hideLoader, showLoader } from "./loading.js";
+import { fetchAndDisplaySinglePost } from "./pages/post.js";
 
 export function addSortButtonsEventListener(posts) {
   const sortNew = document.querySelector(".sort-newest");
@@ -18,27 +20,41 @@ export function addSortButtonsEventListener(posts) {
     return;
   }
 
-  sortNew.addEventListener("click", () => {
+  sortNew.addEventListener("click", async () => {
     console.log("Sorting posts by newest");
+    showLoader(); // Show loading indicator
 
-    if (Array.isArray(posts.data)) {
-      const sortedPosts = sortPostByNewest([...posts.data]); // Sort homePosts directly
-      displayPosts(sortedPosts);
-      console.log("Displayed posts sorted by newest");
-    } else {
-      console.error("Posts data is not an array.");
+    try {
+      if (Array.isArray(posts.data)) {
+        const sortedPosts = sortPostByNewest([...posts.data]);
+        displayPosts(sortedPosts);
+        console.log("Displayed posts sorted by newest");
+      } else {
+        console.error("Posts data is not an array.");
+      }
+    } catch (error) {
+      console.error("Error sorting posts:", error);
+    } finally {
+      hideLoader(); // Hide loading indicator
     }
   });
 
-  sortOld.addEventListener("click", () => {
+  sortOld.addEventListener("click", async () => {
     console.log("Sorting posts by oldest");
+    showLoader(); // Show loading indicator
 
-    if (Array.isArray(posts.data)) {
-      const sortedPosts = sortPostsByOldest([...posts.data]); // Sort homePosts directly
-      displayPosts(sortedPosts);
-      console.log("Displayed posts sorted by oldest");
-    } else {
-      console.error("Posts data is not an array.");
+    try {
+      if (Array.isArray(posts.data)) {
+        const sortedPosts = sortPostsByOldest([...posts.data]);
+        displayPosts(sortedPosts);
+        console.log("Displayed posts sorted by oldest");
+      } else {
+        console.error("Posts data is not an array.");
+      }
+    } catch (error) {
+      console.error("Error sorting posts:", error);
+    } finally {
+      hideLoader(); // Hide loading indicator
     }
   });
 
@@ -53,8 +69,6 @@ export function addSortButtonsEventListener(posts) {
   });
 }
 
-// Click on next and previous button
-
 export function setupCarouselClickEvents() {
   const slidesContainer = document.getElementById("slidesContainer");
   const slideWidth = document.querySelector(".slide").clientWidth;
@@ -64,7 +78,6 @@ export function setupCarouselClickEvents() {
 
   nextButton.addEventListener("click", () => {
     slidesContainer.scrollLeft += slideWidth;
-    // If at the end, scroll back to the beginning
     if (slidesContainer.scrollLeft >= (slideCount - 1) * slideWidth) {
       slidesContainer.scrollTo({
         left: 0,
@@ -75,7 +88,6 @@ export function setupCarouselClickEvents() {
 
   prevButton.addEventListener("click", () => {
     slidesContainer.scrollLeft -= slideWidth;
-    // If at the beginning, scroll to the end
     if (slidesContainer.scrollLeft <= 0) {
       slidesContainer.scrollTo({
         left: (slideCount - 1) * slideWidth,
@@ -85,28 +97,39 @@ export function setupCarouselClickEvents() {
   });
 }
 
-// When click on read more/check it out button redirect to post main page
-export function handlePostClick(post) {
-  const postId = post.id; // Assuming each post has an 'id' property
-  redirectToPostPage(postId);
+export async function handlePostClick(post) {
+  const postId = post.id;
+  try {
+    showLoader();
+    await fetchAndDisplaySinglePost(postId);
+
+    if (window.location.pathname.includes("create.html")) {
+      redirectToPostPageFromCreate(postId);
+    } else {
+      redirectToPostPage(postId);
+    }
+  } catch (error) {
+    console.error("Error fetching post:", error);
+    showErrorAlert("Failed to load post. Please try again later.");
+  } finally {
+    hideLoader();
+  }
   console.log("Clicked post ID:", postId);
 }
 
-
 export async function handleEditClick(post) {
   if (!isLoggedIn(true)) {
-    // The user will be alerted and redirected if not logged in
     return;
   }
 
   try {
-    // Get the ID attached to the post
+    console.log("Showing loading indicator");
+    showLoader();
     const postId = post.id;
-    const name = getName(); // Assuming getName() is defined elsewhere
+    const name = getName();
 
     console.log("Fetching post data for edit:", { name, postId });
 
-    // Fetch the post data using the postId
     const response = await fetch(`${apiUrlUser}/${name}/${postId}`);
     console.log("API response status:", response.status);
 
@@ -119,12 +142,10 @@ export async function handleEditClick(post) {
     const postData = await response.json();
     console.log("The post data found:", postData);
 
-    // Ensure the expected structure is available
     if (!postData || !postData.data) {
       throw new Error("Invalid post data structure");
     }
 
-    // Populate the edit form fields with the post data
     document.getElementById("postId").value = postData.data.id;
     document.getElementById("postTitle").value = postData.data.title;
     document.getElementById("postImage").value = postData.data.media.url;
@@ -134,11 +155,9 @@ export async function handleEditClick(post) {
     document.getElementById("postContent").value = postData.data.body;
     document.getElementById("postCountry").value = postData.data.country;
 
-    // Show/display edit form after clicked edit form - otherwise hide
     const editForm = document.getElementById("editPostForm");
     editForm.classList.remove("editFormHidden");
 
-    // Smooth scroll to the top of the page
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -148,19 +167,20 @@ export async function handleEditClick(post) {
   } catch (error) {
     console.error("Error handling edit click:", error);
     showErrorAlert("Failed to load post data for editing. Please try again.");
+  } finally {
+    hideLoader();
   }
 }
 
 export async function setupEditFormEventHandler() {
   const editPostForm = document.getElementById("editPostForm");
 
-  // Check if the edit form element exists before proceeding
   if (editPostForm) {
     editPostForm.addEventListener("submit", async (event) => {
-      event.preventDefault(); // Prevent the default form submission
+      event.preventDefault();
+      showLoader(); // Show loader on form submission
 
-      // Update/edit the post
-      const postId = document.getElementById("postId").value; // Get the post ID from the form
+      const postId = document.getElementById("postId").value;
       const formData = {
         title: document.getElementById("postTitle").value,
         media: {
@@ -179,15 +199,16 @@ export async function setupEditFormEventHandler() {
       };
 
       try {
-        await editPostApi(postId, formData); // Call the editPostApi function to update the post
+        await editPostApi(postId, formData);
         editPostForm.classList.add("editFormHidden");
 
         showSuccessAlert("Post updated successfully!");
         console.log("Post updated successfully");
-        // Optionally, you can perform further actions after the post is updated
       } catch (error) {
         console.error("Failed to update post:", error);
         showErrorAlert("Failed to update post. Please try again.");
+      } finally {
+        hideLoader(); // Hide loader after operation is complete
       }
     });
   }
@@ -195,7 +216,6 @@ export async function setupEditFormEventHandler() {
 
 export async function handleDeleteClick(post, locallyCreatedPosts) {
   if (!isLoggedIn(true)) {
-    // The user will be alerted and redirected if not logged in
     return;
   }
 
@@ -203,21 +223,21 @@ export async function handleDeleteClick(post, locallyCreatedPosts) {
 
   if (confirm("Are you sure you want to delete this post?")) {
     try {
+      showLoader();
       const isDeleted = await deletePostApi(postId);
       if (isDeleted) {
         console.log(`Post with ID: ${postId} deleted successfully.`);
         showSuccessAlert("Post deleted successfully!");
 
-        // Update local state and UI
-        locallyCreatedPosts = locallyCreatedPosts.filter(
-          (p) => p.id !== postId
-        );
+        locallyCreatedPosts = locallyCreatedPosts.filter((p) => p.id !== postId);
         saveCreatedPosts(locallyCreatedPosts);
         displayPosts(locallyCreatedPosts, true);
       }
     } catch (error) {
       console.error(`Failed to delete post with ID ${postId}:`, error);
       showErrorAlert("Failed to delete post. Please try again.");
+    } finally {
+      hideLoader();
     }
   }
 }
