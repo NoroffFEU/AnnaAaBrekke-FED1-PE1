@@ -5,10 +5,10 @@
 // editBlogPosts.js
 // editBlogPosts.js
 import { loadCreatedPosts, displayPosts } from "./createBlogPost.js";
-import { sortPostByNewest } from "./sort.js";
+import { sortPostByNewest } from "../utils/sort.js";
 // import { populateEditForm } from "./populateForm.js";
-import { setupEditFormEventHandler } from "./eventHandlers.js";
-import { hideLoader, showLoader } from "./loading.js";
+import { setupEditFormEventHandler } from "../handlers/eventHandlers.js";
+import { hideLoader, showLoader } from "../utils/loading.js";
 
 // after populateform, then editpostapi - uodate.
 

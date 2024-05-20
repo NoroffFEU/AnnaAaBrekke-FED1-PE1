@@ -1,17 +1,17 @@
-import { apiUrlUser } from "./api.mjs";
+import { apiUrlUser } from "../api/apiUrl.mjs";
 import {
   handlePostClick,
   handleEditClick,
   handleDeleteClick,
   addSortButtonsEventListener,
-} from "./eventHandlers.js";
-import { getName } from "./userName.js";
-import { isLoggedIn } from "./login.js";
-import { showSuccessAlert, showErrorAlert } from "./alerts.js";
-import { hideLoader, showLoader } from "./loading.js";
-import { getPosts } from "./get.js";
-import { latestPostsCarousel } from "./carousel.js";
-import { sortPostByNewest } from "./sort.js";
+} from "../handlers/eventHandlers.js";
+import { getName } from "../auth/userName.js";
+import { isLoggedIn } from "../api/loginApi.js";
+import { showSuccessAlert, showErrorAlert } from "../utils/alerts.js";
+import { hideLoader, showLoader } from "../utils/loading.js";
+import { getPosts } from "../api/getApi.js";
+import { latestPostsCarousel } from "../utils/carousel.js";
+import { sortPostByNewest } from "../utils/sort.js";
 
 console.log(apiUrlUser);
 

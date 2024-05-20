@@ -1,6 +1,5 @@
-import { saveLogin } from "./login.js";
-import { showLoader, hideLoader } from "./loading.js";
-import { showErrorAlert } from "./alerts.js";
+import { saveLogin } from "../api/loginApi.js";
+import { showErrorAlert } from "../utils/alerts.js";
 
 export function setLoginFormListener() {
   const form = document.getElementById("loginForm");
@@ -30,7 +29,7 @@ export function setLoginFormListener() {
         // Remove the login form
         form.style.display = "none";
 
-        // Remove any existing body-after-login-container (maybe reomve later)
+        // Remove any existing body-after-login-container (maybe remove later)
         const existingContainer = document.querySelector(
           ".body-after-login-container"
         );
@@ -78,8 +77,6 @@ export function setLoginFormListener() {
       } catch (error) {
         console.error("Login failed:", error);
         showErrorAlert("Login failed: " + error.message); // Use showErrorAlert
-      } finally {
-        hideLoader(); // Hide loader
       }
     });
   }
@@ -94,6 +91,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Initialize login form listener
   setLoginFormListener();
 });

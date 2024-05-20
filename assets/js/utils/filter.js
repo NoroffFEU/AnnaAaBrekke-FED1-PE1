@@ -1,12 +1,16 @@
-import { displayPosts, loadCreatedPosts, fetchAndDisplayPosts } from "./createBlogPost.js";
+import {
+  displayPosts,
+  loadCreatedPosts,
+  fetchAndDisplayPosts,
+} from "../pages/createBlogPost.js";
 
 export async function createFilterButtons() {
   const allPosts = await fetchAndDisplayPosts();
   const postTags = new Set();
 
   // Collect all the different tags
-  allPosts.forEach(post => {
-    post.tags.forEach(tag => postTags.add(tag));
+  allPosts.forEach((post) => {
+    post.tags.forEach((tag) => postTags.add(tag));
   });
 
   // Get the filter buttons container
@@ -14,7 +18,7 @@ export async function createFilterButtons() {
   filterButtonsContainer.innerHTML = ""; // Clear existing buttons
 
   // Create buttons for each unique tag
-  postTags.forEach(tag => {
+  postTags.forEach((tag) => {
     const button = document.createElement("button");
     button.classList.add("tag");
     button.value = tag;
@@ -39,7 +43,7 @@ export function addFilterButtonsEventListener() {
 export async function filterPostsByTag(tag) {
   try {
     const allPosts = await loadCreatedPosts();
-    const filteredPosts = allPosts.filter(post => post.tags.includes(tag));
+    const filteredPosts = allPosts.filter((post) => post.tags.includes(tag));
     await displayPosts(filteredPosts);
   } catch (error) {
     console.error("Error filtering posts by tag:", error);

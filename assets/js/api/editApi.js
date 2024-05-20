@@ -37,10 +37,10 @@
 // Call the updatePost function with postId and formData
 // updatePost('your-post-id', yourFormDataObject);
 
-import { apiUrlUser } from "./api.mjs";
-import { fetchAndDisplayPostsForEdit } from "./editBlogPost.js";
-import { hideLoader, showLoader } from "./loading.js";
-import { getName } from "./userName.js";
+import { apiUrlUser } from "./apiUrl.mjs";
+import { fetchAndDisplayPostsForEdit } from "../pages/editBlogPost.js";
+import { hideLoader, showLoader } from "../utils/loading.js";
+import { getName } from "../auth/userName.js";
 
 export async function editPostApi(postId, formData) {
   try {

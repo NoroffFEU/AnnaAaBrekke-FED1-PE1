@@ -1,5 +1,5 @@
-import { setRegisterFormListener } from "./registerHandler.js";
-import { setLoginFormListener } from "./loginHandler.js";
+import { setRegisterFormListener } from "../handlers/registerHandler.js";
+import { setLoginFormListener } from "../handlers/loginHandler.js";
 
 // Set listeners for login and register forms
 if (document.getElementById("loginForm")) {

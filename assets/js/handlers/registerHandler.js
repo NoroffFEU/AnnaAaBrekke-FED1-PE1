@@ -1,6 +1,5 @@
-// src/handlers/register.mjs
-import { hideLoader } from "./loading.js";
-import { register } from "./register.js";
+import { register } from "../api/registerApi.js";
+import { showErrorAlert, showSuccessAlert } from "../utils/alerts.js";
 
 export function setRegisterFormListener() {
   const form = document.getElementById("registerForm");
@@ -22,8 +21,6 @@ export function setRegisterFormListener() {
       // Remove confirmPassword from the data being sent to the API
       delete registerData.confirmPassword;
 
-      showLoader(); // Show loader
-
       try {
         await register(registerData);
         showSuccessAlert(
@@ -36,12 +33,11 @@ export function setRegisterFormListener() {
         }, 2000);
       } catch (error) {
         showErrorAlert("Registration failed: " + error.message);
-      } finally {
-        hideLoader();
       }
     });
   }
 }
+
 
 // import { register } from "/register.js";
 // import { loginOwner } from "/login.js";

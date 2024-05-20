@@ -1,4 +1,4 @@
-import { apiUrlRegister } from "./api.mjs";
+import { apiUrlRegister } from "./apiUrl.mjs";
 
 // const registerData = {
 //   name: "SerenaTravel",
@@ -31,12 +31,9 @@ export async function register(registerData) {
   return data;
 }
 
-
 // (make  file later)
 
-
 // import { getPosts } from "./getBlogPosts.js";
-
 
 // const registerData = {
 //     name: "SerenaTravel",

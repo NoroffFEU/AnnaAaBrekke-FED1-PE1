@@ -1,11 +1,12 @@
-import { apiUrlUser } from "./api.mjs";
+import { apiUrlUser } from "./apiUrl.mjs";
 // import { getName } from "./userName";
 
 export async function getPosts(name, queryParams = {}) {
   const queryString = new URLSearchParams(queryParams).toString();
 
   try {
-    const response = await fetch(`${apiUrlUser}/${name}${queryString ? "?" + queryString : ""}`,
+    const response = await fetch(
+      `${apiUrlUser}/${name}${queryString ? "?" + queryString : ""}`,
       {
         method: "GET",
       }
@@ -29,8 +30,6 @@ export async function getPosts(name, queryParams = {}) {
   }
 }
 
-
-
 export async function getSinglePost(name, id) {
   // Define the headers inside the function to ensure they are used in the fetch call
   const headers = {
@@ -47,14 +46,15 @@ export async function getSinglePost(name, id) {
     // Check if the response was successful
     if (!response.ok) {
       const errorDetails = await response.text();
-      throw new Error(`HTTP error! Status: ${response.status} - ${errorDetails}`);
+      throw new Error(
+        `HTTP error! Status: ${response.status} - ${errorDetails}`
+      );
     }
 
     // Parse the response into JSON
     return await response.json();
   } catch (error) {
     console.error("Error fetching the selected post:", error);
-    throw error;  // Rethrowing the error to be handled by the caller
+    throw error; // Rethrowing the error to be handled by the caller
   }
 }
-

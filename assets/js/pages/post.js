@@ -1,14 +1,14 @@
-import { showErrorAlert } from "../alerts.js";
-import { getSinglePost } from "../get.js";
-import { hideLoader, showLoader } from "../loading.js";
-import { getName } from "../userName.js";
+import { showErrorAlert } from "../utils/alerts.js";
+import { getSinglePost } from "../api/getApi.js";
+import { hideLoader, showLoader } from "../utils/loading.js";
+import { getName } from "../auth/userName.js";
 // import { apiUrl } from "../api.mjs";
 
 const urlParams = new URLSearchParams(window.location.search);
 console.log("The URL:", urlParams);
 const postId = urlParams.get("id");
 console.log("The link", postId);
-const name = getName(); 
+const name = getName();
 
 // Check if the script is running on the post page
 if (window.location.pathname.includes("post/index.html")) {
@@ -20,7 +20,6 @@ if (window.location.pathname.includes("post/index.html")) {
     fetchAndDisplaySinglePost(postId);
   }
 }
-
 
 export async function fetchAndDisplaySinglePost(postId) {
   try {

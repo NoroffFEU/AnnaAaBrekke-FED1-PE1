@@ -11,8 +11,8 @@
 // import { setupCarouselEvents } from "./eventHandlers.js";
 
 // import { redirectToPostPage } from "./routingUtils.js";
-import { handlePostClick } from "./eventHandlers.js";
-import { redirectToPostPage } from "./routingUtils.js";
+import { handlePostClick } from "../handlers/eventHandlers.js";
+import { redirectToPostPage } from "./routing.js";
 
 export function latestPostsCarousel(posts) {
   try {
@@ -30,16 +30,23 @@ export function latestPostsCarousel(posts) {
       const li = document.createElement("li");
       li.className = `slide ${index === 0 ? "active" : ""}`;
 
-      const author = typeof post.author === "object"
-        ? post.author.name || "Anonymous"
-        : post.author || "Anonymous";
+      const author =
+        typeof post.author === "object"
+          ? post.author.name || "Anonymous"
+          : post.author || "Anonymous";
 
       li.innerHTML = `
         <div class="post-info">
-          <img src="${post.media.url}" onError="this.onerror=null; this.src='${defaultImage}'" alt="${post.media.alt}" class="post-img">
+          <img src="${
+            post.media.url
+          }" onError="this.onerror=null; this.src='${defaultImage}'" alt="${
+        post.media.alt
+      }" class="post-img">
           <h2>${post.title}</h2>
           <p>${truncatedBody}</p>
-          <p><small>Posted on: ${new Date(post.created).toLocaleDateString()}</small></p>
+          <p><small>Posted on: ${new Date(
+            post.created
+          ).toLocaleDateString()}</small></p>
           <div class="post-author">${author}</div>
           <button class="read-more">Read More</button>
         </div>

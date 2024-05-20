@@ -1,15 +1,18 @@
-import { displayPosts, saveCreatedPosts } from "./createBlogPost.js";
-import { sortPostByNewest, sortPostsByOldest } from "./sort.js";
-import { redirectToPostPage, redirectToPostPageFromCreate } from "./routingUtils.js";
-import { apiUrlUser } from "./api.mjs";
-import { getName } from "./userName.js";
-import { editPostApi } from "./editApi.js";
-import { deletePostApi } from "./deleteApi.js";
-import { isLoggedIn } from "./login.js";
-import { getSinglePost } from "./get.js";
-import { showErrorAlert, showSuccessAlert } from "./alerts.js";
-import { hideLoader, showLoader } from "./loading.js";
-import { fetchAndDisplaySinglePost } from "./pages/post.js";
+import { displayPosts, saveCreatedPosts } from "../pages/createBlogPost.js";
+import { sortPostByNewest, sortPostsByOldest } from "../utils/sort.js";
+import {
+  redirectToPostPage,
+  redirectToPostPageFromCreate,
+} from "../utils/routing.js";
+import { apiUrlUser } from "../api/apiUrl.mjs";
+import { getName } from "../auth/userName.js";
+import { editPostApi } from "../api/editApi.js";
+import { deletePostApi } from "../api/deleteApi.js";
+import { isLoggedIn } from "../api/loginApi.js";
+import { getSinglePost } from "../api/getApi.js";
+import { showErrorAlert, showSuccessAlert } from "../utils/alerts.js";
+import { hideLoader, showLoader } from "../utils/loading.js";
+import { fetchAndDisplaySinglePost } from "../pages/post.js";
 
 export function addSortButtonsEventListener(posts) {
   const sortNew = document.querySelector(".sort-newest");
@@ -193,7 +196,7 @@ export async function setupEditFormEventHandler() {
           .getElementById("postTags")
           .value.split(",")
           .map((tag) => tag.trim()),
-        body: document.getElementById("postContent").value
+        body: document.getElementById("postContent").value,
       };
 
       try {
@@ -227,7 +230,9 @@ export async function handleDeleteClick(post, locallyCreatedPosts) {
         console.log(`Post with ID: ${postId} deleted successfully.`);
         showSuccessAlert("Post deleted successfully!");
 
-        locallyCreatedPosts = locallyCreatedPosts.filter((p) => p.id !== postId);
+        locallyCreatedPosts = locallyCreatedPosts.filter(
+          (p) => p.id !== postId
+        );
         saveCreatedPosts(locallyCreatedPosts);
         displayPosts(locallyCreatedPosts, true);
       }

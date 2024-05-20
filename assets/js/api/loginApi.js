@@ -1,4 +1,4 @@
-import { apiUrlLogin } from "./api.mjs";
+import { apiUrlLogin } from "./apiUrl.mjs";
 
 // import { register } from "./register.js";
 
@@ -9,7 +9,6 @@ import { apiUrlLogin } from "./api.mjs";
 //   email: "annaas00208@stud.noroff.no",
 //   password: "HereYouGo",
 // };
-
 
 //serena@...
 //HereYouGo
@@ -24,7 +23,6 @@ import { apiUrlLogin } from "./api.mjs";
 // }
 
 // HereYouGo
-
 
 const method = "post";
 
@@ -52,7 +50,10 @@ export async function loginOwner(loginData) {
   const { accessToken, ...user } = data;
 
   console.log("Received login response data:", data);
-  console.log("Extracted accessToken and user information:", { accessToken, user });
+  console.log("Extracted accessToken and user information:", {
+    accessToken,
+    user,
+  });
 
   return { accessToken, user };
 }
@@ -95,10 +96,6 @@ export function isLoggedIn(redirectIfNotLoggedIn = false) {
 
   return false; // User is not logged in
 }
-
-
-
-
 
 // // Check if the token has expired
 // export function isTokenExpired() {
@@ -185,8 +182,6 @@ export function isLoggedIn(redirectIfNotLoggedIn = false) {
 
 // // Add the login form event listener
 // document.getElementById("loginForm").addEventListener("submit", loginFormSubmit);
-
-
 
 //   // Prefill the login form with the last registered email and password if available
 //   const lastRegisteredEmail = localStorage.getItem("email");

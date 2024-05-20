@@ -1,5 +1,5 @@
-import { apiUrlUser } from "./api.mjs";
-import { getName } from "./userName.js";
+import { apiUrlUser } from "./apiUrl.mjs";
+import { getName } from "../auth/userName.js";
 
 export async function deletePostApi(postId) {
   try {

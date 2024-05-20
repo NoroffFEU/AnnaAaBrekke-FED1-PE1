@@ -1,9 +1,9 @@
 // editHandler.js
-import { editPostApi } from "./editApi.js";
-import { getName } from "./userName.js";
-import { editPostApi } from "./editApi.js";
-import { isLoggedIn } from "./login.js";
-import { showErrorAlert, showSuccessAlert } from "./alerts.js";
+import { editPostApi } from "../api/editApi.js";
+import { getName } from "../auth/userName.js";
+import { editPostApi } from "../api/editApi.js";
+import { isLoggedIn } from "../api/loginApi.js";
+import { showErrorAlert, showSuccessAlert } from "../utils/alerts.js";
 
 export function setupEditFormEventHandler() {
   const editPostForm = document.getElementById("editPostForm");
@@ -21,13 +21,16 @@ export function setupEditFormEventHandler() {
       title: document.getElementById("postTitle").value,
       media: {
         url: document.getElementById("postImage").value,
-        alt: document.getElementById("postImageAlt").value
+        alt: document.getElementById("postImageAlt").value,
       },
       author: {
-        name: document.getElementById("postAuthor").value
+        name: document.getElementById("postAuthor").value,
       },
-      tags: document.getElementById("postTags").value.split(",").map(tag => tag.trim()),
-      body: document.getElementById("postContent").value
+      tags: document
+        .getElementById("postTags")
+        .value.split(",")
+        .map((tag) => tag.trim()),
+      body: document.getElementById("postContent").value,
     };
 
     try {
@@ -65,4 +68,3 @@ export function setupEditFormEventHandler() {
 //   editButtons.forEach((button) => {
 //     button.addEventListener("click", handleEditClick);
 //   });
-
