@@ -157,12 +157,16 @@ function createPostElement(post, includeEditButtons = false) {
   postElement.innerHTML = `
     <div class="post-info">
       <img src="${imageSrc}" onError="this.onerror=null; this.src='${defaultImage}';" alt="${imageAlt}" class="post-img">
-      <h3 class="post-title">${postData.title}</h3>
+      <div class="post-title-container">
+        <h3 class="post-title">${postData.title}</h3>
+      </div>
       <div class="post-author">${author}</div>
       <time class="post-date" datetime="${post.created}">${new Date(
     post.updated
   ).toLocaleDateString()}</time>
-      <div class="tags">${tagsHtml}</div>
+      <div class="tags-container">
+        <div class="tags">${tagsHtml}</div>
+      </div>
       ${moreButtonsHtml}
     </div>
   `;

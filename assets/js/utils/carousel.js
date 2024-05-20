@@ -24,8 +24,8 @@ export function latestPostsCarousel(posts) {
     const defaultImage = `https://placehold.co/600x400`;
 
     posts.forEach((post, index) => {
-      let truncatedBody = post.body.split(" ").slice(0, 20).join(" ");
-      truncatedBody += post.body.split(" ").length > 20 ? "..." : "";
+      let contentBody = post.body.split(" ").slice(0, 20).join(" ");
+      contentBody += post.body.split(" ").length > 20 ? "..." : "";
 
       const li = document.createElement("li");
       li.className = `slide ${index === 0 ? "active" : ""}`;
@@ -43,11 +43,13 @@ export function latestPostsCarousel(posts) {
         post.media.alt
       }" class="post-img">
           <h2>${post.title}</h2>
-          <p>${truncatedBody}</p>
-          <p><small>Posted on: ${new Date(
-            post.created
-          ).toLocaleDateString()}</small></p>
+          <p>${contentBody}</p>
           <div class="post-author">${author}</div>
+          <p class="date-carousel">${new Date(
+            post.created
+          ).toLocaleDateString()}</p>
+
+
           <button class="read-more">Read More</button>
         </div>
       `;

@@ -1,5 +1,5 @@
 :root {
-  --primary-color: rgb(164, 236, 212);
+  --primary-color: rgb(246, 208, 126);
   --secondary-color: rgba(204, 204, 204, 0.5);
   --highlight-color: rgb(255, 203, 250);
   --error-color: rgb(140, 134, 134);
@@ -14,8 +14,28 @@
   --alert-error-bg: rgb(140, 134, 134);
   --input-invalid-border: #eeb5bb;
   --input-valid-border: #28a745;
+
+  --small-font-size: 14px;
+  --medium-font-size: 16px;
+  --large-font-size: 18px;
+  --small-padding: 8px 10px;
+  --medium-padding: 10px 20px;
+  --large-padding: 12px 24px;
+
+  --small-logo-size: 24px;
+  --medium-logo-size: 28px;
+  --large-logo-size: 32px;
+
+  --home-header-small-h1: 28px;
+  --home-header-medium-h1: 48px;
+  --home-header-large-h1: 60px;
+
+  --home-header-small-h2: 18px;
+  --home-header-medium-h2: 24px;
+  --home-header-large-h2: 32px;
 }
 
+/* Global Styles */
 body {
   background-color: var(--primary-color);
   font-family: "Montserrat", sans-serif;
@@ -50,7 +70,6 @@ body {
 }
 
 /* Header */
-
 header {
   background-color: var(--header-bg);
   text-align: center;
@@ -63,7 +82,7 @@ header {
 }
 
 .logo {
-  font-size: 36px;
+  font-size: var(--large-logo-size);
   font-weight: 600;
   padding: 0.5rem;
 }
@@ -92,21 +111,20 @@ nav a {
 
 .column h1 {
   text-align: center;
-  font-size: 70px;
+  font-size: var(--home-header-large-h1);
   color: rgba(11, 10, 10, 0.8);
   margin-bottom: 0;
 }
 
 .column h2 {
   text-align: center;
-  font-size: 40px;
+  font-size: var(--home-header-large-h2);
   font-weight: 600;
   color: rgba(11, 10, 10, 0.8);
   margin-top: 1rem;
 }
 
 /* Carousel */
-
 #latestPostCarousel {
   position: relative;
   margin: 1rem auto;
@@ -186,7 +204,6 @@ nav a {
 }
 
 /* Sort */
-
 #sortByDate {
   box-sizing: border-box;
 }
@@ -269,7 +286,6 @@ nav a {
 }
 
 /* Grid Layout */
-
 .filter-buttons,
 .more-buttons {
   display: flex;
@@ -279,14 +295,14 @@ nav a {
   padding: 20px;
 }
 
-.tag,
+.filter-buttons .tag,
 .read-more {
   background-color: #f2f2f2e2;
   color: #333;
   border: none;
   border-radius: 20px;
-  padding: 10px 20px;
-  font-size: 18px;
+  padding: var(--large-padding);
+  font-size: var(--large-font-size);
   font-weight: 600;
   text-transform: uppercase;
   cursor: pointer;
@@ -294,9 +310,14 @@ nav a {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.tag:hover,
 .read-more:hover {
-  background-color: #f2d8efbc;
+  background-color: var(--primary-color);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.tag:hover {
+  background-color: var(--register-button-bg);
   color: #fff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -306,8 +327,8 @@ nav a {
   color: #333;
   border: none;
   border-radius: 20px;
-  padding: 12px 24px;
-  font-size: 18px;
+  padding: var(--large-padding);
+  font-size: var(--large-font-size);
   font-weight: 600;
   text-transform: uppercase;
   cursor: pointer;
@@ -438,7 +459,6 @@ nav a {
 }
 
 /* Main Post */
-
 .main-post,
 .body-after-login-container {
   max-width: 600px;
@@ -454,9 +474,10 @@ nav a {
 }
 
 .main-post img {
-  width: 80%;
-  height: auto;
-  object-fit: contain;
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 5px;
 }
 
 .post-img {
@@ -485,12 +506,57 @@ nav a {
   padding: 5px 0;
 }
 
-.post-info .post-date {
+.post-info .post-date,
+.main-post .post-date,
+.date-carousel {
   display: block;
   color: #555;
-  font-size: 18px;
+  font-size: 16px;
   padding: 5px 0;
+  margin-top: 0.25rem;
   margin-bottom: 1rem;
+  background-color: #f8e4f5;
+}
+
+.main-post .post-title {
+  font-size: 32px;
+}
+
+.main-post .post-text {
+  padding: 1rem;
+  font-size: 20px;
+}
+
+.share-title {
+  margin-bottom: 0rem;
+  margin-top: 2rem;
+}
+
+.share-link {
+  border: 1px solid #ced4da; /* Subtle border for the share input */
+  padding: 10px 10px; /* Padding matching form inputs */
+  border-radius: 0.25rem; /* Rounded corners for input */
+}
+
+.copy-button {
+  background-color: rgb(255, 219, 90); /* Using theme's success color */
+  color: white;
+  border-radius: 0.25rem;
+  padding: 8px 10px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease-in-out;
+  margin-left: 0.2rem;
+}
+
+.copy-button:hover {
+  background-color: #e4af0f;
+}
+
+.post-title-container,
+#editBody .post-title-container {
+  min-height: 50px;
+  max-height: 50px;
 }
 
 .post-title {
@@ -498,11 +564,15 @@ nav a {
   margin-bottom: 5px;
 }
 
-.post-country {
-  color: #131212;
-  font-size: 15px;
-  margin-top: 1rem;
-  background-color: #f8e4f5;
+.tags-container {
+  min-height: 100px;
+  max-height: 100px;
+  overflow-y: auto;
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 10px;
 }
 
 .tag {
@@ -510,12 +580,13 @@ nav a {
   color: #333;
   border: none;
   border-radius: 10px;
-  padding: 5px 10px;
+  padding: var(--large-padding);
   font-weight: 400;
   margin: 2px;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  white-space: nowrap; /* Prevent tags from breaking into multiple lines */
 }
 
 .gallery {
@@ -528,7 +599,6 @@ nav a {
 }
 
 /* Loader -- Somewhat based on https://css-loaders.com/spinner/ */
-/* Loader */
 #loadingInd {
   position: fixed;
   top: 0;
@@ -609,7 +679,6 @@ nav a {
 }
 
 /* Form */
-
 form {
   display: flex;
   flex-direction: column;
@@ -661,17 +730,16 @@ form h1 {
   display: none;
 }
 
-/* Components?*/
-
+/* Components? */
 button {
-  padding: 10px 20px;
+  padding: var(--large-padding);
   background-color: var(--highlight-color);
   color: rgb(0, 0, 0);
   border: none;
   border-radius: 5px;
   cursor: pointer;
   margin-top: 1rem;
-  font-size: 16px;
+  font-size: var(--large-font-size);
   font-weight: 600;
 }
 
@@ -698,7 +766,6 @@ button:hover {
 }
 
 /* After logged in */
-
 .greeting-message {
   font-weight: bold;
   text-align: center;
@@ -773,15 +840,157 @@ button:hover {
 
 /* Media Queries */
 
-@media (max-width: 768px) {
-  .post-container {
+/* Smaller devices (phones, 600px and down) */
+@media (max-width: 600px) {
+  header,
+  footer,
+  #editBody {
+    padding: 10px;
+  }
+
+  header .logo {
+    font-size: var(--small-logo-size);
+  }
+
+  #homeBody .post-container {
     grid-template-columns: 1fr;
+  }
+
+  .choose-container {
+    flex-direction: column;
+  }
+
+  #home-header .headline {
+    padding: 10px;
+  }
+
+  #home-header .column h1 {
+    font-size: var(--home-header-small-h1);
+  }
+
+  #home-header .column h2 {
+    font-size: var(--home-header-small-h2);
+    margin-top: 0.5rem;
+  }
+
+  .read-more,
+  .tag,
+  .copy-button,
+  .more-buttons,
+  .filter-buttons .tag {
+    font-size: var(--small-font-size);
+    padding: var(--small-padding);
+  }
+
+  .post-title-container,
+  #editBody .post-title-container {
+    min-height: 0;
+    max-height: 100%;
+  }
+
+  .choose-container button {
+    width: 100%;
+    margin-bottom: 10px;
   }
 }
 
-@media (max-width: 950px) {
+/* Medium devices (tablets, 601px to 992px) */
+@media (max-width: 992px) {
   body {
     background-size: cover;
     background-position: bottom;
+  }
+
+  .post-title-container,
+  #editBody .post-title-container {
+    min-height: 90px;
+    max-height: 90px;
+  }
+
+  header,
+  footer,
+  #editBody {
+    padding: 20px;
+  }
+
+  header .logo {
+    font-size: var(--medium-logo-size);
+  }
+
+  .choose-container {
+    flex-direction: column;
+  }
+
+  #editBody .post-container,
+  .post-container {
+    grid-template-columns: 1fr;
+  }
+
+  #home-header .headline {
+    padding: 20px;
+  }
+
+  #home-header .column h1 {
+    font-size: var(--home-header-medium-h1);
+  }
+
+  #home-header .column h2 {
+    font-size: var(--home-header-medium-h2);
+    margin-top: 0.75rem;
+  }
+
+  .read-more,
+  .tag {
+    font-size: var(--medium-font-size);
+    padding: var(--medium-padding);
+  }
+
+  .choose-container button {
+    width: 80%;
+  }
+}
+
+/* Large devices (desktops, 993px and up) */
+@media (min-width: 993px) {
+  header,
+  footer,
+  #editBody {
+    padding: 30px;
+  }
+
+  header .logo {
+    font-size: var(--large-logo-size);
+  }
+
+  .choose-container {
+    flex-direction: row;
+  }
+
+  #editBody .post-container,
+  .post-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  #home-header .headline {
+    padding: 30px;
+  }
+
+  #home-header .column h1 {
+    font-size: var(--home-header-large-h1);
+  }
+
+  #home-header .column h2 {
+    font-size: var(--home-header-large-h2);
+    margin-top: 1rem;
+  }
+
+  .read-more,
+  .tag {
+    font-size: var(--large-font-size);
+    padding: var(--large-padding);
+  }
+
+  .choose-container button {
+    width: 200px;
   }
 }
