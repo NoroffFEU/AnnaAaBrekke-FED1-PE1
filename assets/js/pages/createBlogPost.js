@@ -3,7 +3,6 @@ import {
   handlePostClick,
   handleEditClick,
   handleDeleteClick,
-  addSortButtonsEventListener,
 } from "../handlers/eventHandlers.js";
 import { getName } from "../auth/userName.js";
 import { isLoggedIn } from "../api/loginApi.js";
@@ -13,16 +12,20 @@ import { getPosts } from "../api/getApi.js";
 import { latestPostsCarousel } from "../utils/carousel.js";
 import { sortPostByNewest } from "../utils/sort.js";
 
+// Logging the API URL for debugging
 console.log(apiUrlUser);
 
+// Get the user's name
 const name = getName();
 let locallyCreatedPosts = [];
 
+// Save created posts to local storage
 export function saveCreatedPosts(posts) {
   localStorage.setItem("posts", JSON.stringify(posts));
   locallyCreatedPosts = posts;
 }
 
+// Load created posts from local storage
 export function loadCreatedPosts() {
   const storedPosts = localStorage.getItem("posts");
   if (storedPosts) {
@@ -31,6 +34,7 @@ export function loadCreatedPosts() {
   return locallyCreatedPosts;
 }
 
+// Function to create a new post
 export async function createPost(name, postData) {
   if (!isLoggedIn(true)) {
     // The user will be alerted and redirected if not logged in
@@ -66,13 +70,14 @@ export async function createPost(name, postData) {
   }
 }
 
+// Function to display posts in the DOM
 export function displayPosts(posts, isEditPage = false) {
   const postContainer = document.querySelector(".post-container");
   if (!postContainer) {
     console.error("post-container does not exist in the DOM.");
     return;
   }
-  postContainer.innerHTML = ""; // Clear existing posts to prevent duplication
+  postContainer.innerHTML = ""; 
 
   if (posts && posts.length > 0) {
     posts.slice(0, 12).forEach((post) => {
@@ -110,6 +115,7 @@ export function displayPosts(posts, isEditPage = false) {
   }
 }
 
+// Function to create a single post element
 function createPostElement(post, includeEditButtons = false) {
   const postData = post.data || post;
 
@@ -174,6 +180,7 @@ function createPostElement(post, includeEditButtons = false) {
   return postElement;
 }
 
+// Function to handle form submission for creating a post
 function createFormHandler() {
   const form = document.getElementById("createPostForm");
   if (!form) {
@@ -232,6 +239,7 @@ function createFormHandler() {
   });
 }
 
+// Function to fetch and display posts
 export async function fetchAndDisplayPosts() {
   console.log("fetchAndDisplayPosts started");
   let homePosts = [];
@@ -259,6 +267,7 @@ export async function fetchAndDisplayPosts() {
   return homePosts;
 }
 
+// Function to initialize the create page
 export function initCreatePage() {
   showLoader();
   loadCreatedPosts();
@@ -267,6 +276,7 @@ export function initCreatePage() {
   hideLoader();
 }
 
+// Event listener for DOMContentLoaded
 document.addEventListener("DOMContentLoaded", initCreatePage);
 
 if (document.readyState === "loading") {

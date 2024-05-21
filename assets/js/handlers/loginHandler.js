@@ -1,35 +1,36 @@
 import { saveLogin } from "../api/loginApi.js";
 import { showErrorAlert } from "../utils/alerts.js";
 
+// Function to set the event listener for the login form
 export function setLoginFormListener() {
   const form = document.getElementById("loginForm");
   console.log("Login form found.");
 
   if (form) {
     form.addEventListener("submit", async (event) => {
-      event.preventDefault(); // Prevent the default form submission behavior
+      event.preventDefault();
 
       const email = document.getElementById("ownerEmail").value;
       const password = document.getElementById("ownerPassword").value;
 
       if (!email || !password) {
         console.error("Email and password are required");
-        showErrorAlert("Email and password are required"); // Use showErrorAlert
+        showErrorAlert("Email and password are required");
         return;
       }
 
-      const loginData = { email, password };
+      const loginData = { email, password }; // Creating an object with login data
       console.log("Login Data:", loginData);
 
-      showLoader(); // Show loader
+      showLoader();
 
       try {
-        const loginResponse = await saveLogin(loginData);
+        const loginResponse = await saveLogin(loginData); // Call saveLogin with the login data
 
         // Remove the login form
         form.style.display = "none";
 
-        // Remove any existing body-after-login-container (maybe remove later)
+        // Remove any existing body-after-login-container because duplicates (maybe remove later)
         const existingContainer = document.querySelector(
           ".body-after-login-container"
         );
@@ -51,14 +52,14 @@ export function setLoginFormListener() {
         const chooseWhereNext = document.createElement("div");
         chooseWhereNext.classList.add("choose-container");
 
-        // Create "Edit Post" button
+        // Create "Edit Post" nav button
         const editNavButton = document.createElement("button");
         editNavButton.textContent = "Edit Your Posts";
         editNavButton.addEventListener("click", () => {
           window.location.href = "../post/edit.html";
         });
 
-        // Create "Create New Post" button
+        // Create "Create New Post" nav button
         const createNavButton = document.createElement("button");
         createNavButton.textContent = "Create New Post";
         createNavButton.addEventListener("click", () => {
@@ -69,20 +70,18 @@ export function setLoginFormListener() {
         chooseWhereNext.appendChild(editNavButton);
         chooseWhereNext.appendChild(createNavButton);
 
-        // Append the navigation div to the body container
+        // Append
         bodyContainer.appendChild(chooseWhereNext);
-
-        // Append the body container to the document body
         document.body.appendChild(bodyContainer);
       } catch (error) {
         console.error("Login failed:", error);
-        showErrorAlert("Login failed: " + error.message); // Use showErrorAlert
+        showErrorAlert("Login failed: " + error.message);
       }
     });
   }
 }
 
-// Add event listener for the register button
+// Add event listener for the register button on the login page
 document.addEventListener("DOMContentLoaded", () => {
   const registerButton = document.querySelector(".register-button");
   if (registerButton) {

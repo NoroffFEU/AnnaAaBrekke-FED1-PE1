@@ -9,11 +9,11 @@ import { getName } from "../auth/userName.js";
 import { editPostApi } from "../api/editApi.js";
 import { deletePostApi } from "../api/deleteApi.js";
 import { isLoggedIn } from "../api/loginApi.js";
-import { getSinglePost } from "../api/getApi.js";
 import { showErrorAlert, showSuccessAlert } from "../utils/alerts.js";
 import { hideLoader, showLoader } from "../utils/loading.js";
 import { fetchAndDisplaySinglePost } from "../pages/post.js";
 
+// Add event listeners to sort buttons
 export function addSortButtonsEventListener(posts) {
   const sortNew = document.querySelector(".sort-newest");
   const sortOld = document.querySelector(".sort-oldest");
@@ -23,9 +23,10 @@ export function addSortButtonsEventListener(posts) {
     return;
   }
 
+  // Event listener for sorting by newest
   sortNew.addEventListener("click", async () => {
     console.log("Sorting posts by newest");
-    showLoader(); // Show loading indicator
+    showLoader();
 
     try {
       if (Array.isArray(posts.data)) {
@@ -38,13 +39,14 @@ export function addSortButtonsEventListener(posts) {
     } catch (error) {
       console.error("Error sorting posts:", error);
     } finally {
-      hideLoader(); // Hide loading indicator
+      hideLoader();
     }
   });
 
+  // Event listener for sorting by oldest
   sortOld.addEventListener("click", async () => {
     console.log("Sorting posts by oldest");
-    showLoader(); // Show loading indicator
+    showLoader();
 
     try {
       if (Array.isArray(posts.data)) {
@@ -57,10 +59,11 @@ export function addSortButtonsEventListener(posts) {
     } catch (error) {
       console.error("Error sorting posts:", error);
     } finally {
-      hideLoader(); // Hide loading indicator
+      hideLoader();
     }
   });
 
+  // Dropdown for sorting options
   let dropdown = document.querySelector(".dropdown-sort");
 
   dropdown.addEventListener("click", (e) => {
@@ -72,6 +75,7 @@ export function addSortButtonsEventListener(posts) {
   });
 }
 
+// Setup event listeners for carousel navigation
 export function setupCarouselClickEvents() {
   const slidesContainer = document.getElementById("slidesContainer");
   const slideWidth = document.querySelector(".slide").clientWidth;
@@ -79,6 +83,7 @@ export function setupCarouselClickEvents() {
   const prevButton = document.getElementById("slideArrowPrev");
   const nextButton = document.getElementById("slideArrowNext");
 
+  // Event listener for next button
   nextButton.addEventListener("click", () => {
     slidesContainer.scrollLeft += slideWidth;
     if (slidesContainer.scrollLeft >= (slideCount - 1) * slideWidth) {
@@ -89,6 +94,7 @@ export function setupCarouselClickEvents() {
     }
   });
 
+  // Event listener for previous button
   prevButton.addEventListener("click", () => {
     slidesContainer.scrollLeft -= slideWidth;
     if (slidesContainer.scrollLeft <= 0) {
@@ -100,6 +106,7 @@ export function setupCarouselClickEvents() {
   });
 }
 
+// Handle post click events to view or edit post
 export async function handlePostClick(post) {
   const postId = post.id;
   try {
@@ -120,6 +127,7 @@ export async function handlePostClick(post) {
   console.log("Clicked post ID:", postId);
 }
 
+// Handle edit click events to edit post
 export async function handleEditClick(post) {
   if (!isLoggedIn(true)) {
     return;
@@ -149,6 +157,7 @@ export async function handleEditClick(post) {
       throw new Error("Invalid post data structure");
     }
 
+    // Populate edit form fields with post data
     document.getElementById("postId").value = postData.data.id;
     document.getElementById("postTitle").value = postData.data.title;
     document.getElementById("postImage").value = postData.data.media.url;
@@ -174,13 +183,14 @@ export async function handleEditClick(post) {
   }
 }
 
+// Setup event handler for edit form submission
 export async function setupEditFormEventHandler() {
   const editPostForm = document.getElementById("editPostForm");
 
   if (editPostForm) {
     editPostForm.addEventListener("submit", async (event) => {
       event.preventDefault();
-      showLoader(); // Show loader on form submission
+      showLoader();
 
       const postId = document.getElementById("postId").value;
       const formData = {
@@ -209,12 +219,13 @@ export async function setupEditFormEventHandler() {
         console.error("Failed to update post:", error);
         showErrorAlert("Failed to update post. Please try again.");
       } finally {
-        hideLoader(); // Hide loader after operation is complete
+        hideLoader();
       }
     });
   }
 }
 
+// Handle delete click events to delete post
 export async function handleDeleteClick(post, locallyCreatedPosts) {
   if (!isLoggedIn(true)) {
     return;

@@ -15,9 +15,9 @@ export async function createFilterButtons() {
 
   // Get the filter buttons container
   const filterButtonsContainer = document.querySelector(".filter-buttons");
-  filterButtonsContainer.innerHTML = ""; // Clear existing buttons
+  filterButtonsContainer.innerHTML = "";
 
-  // Create buttons for each unique tag
+  // Create buttons for each tag
   postTags.forEach((tag) => {
     const button = document.createElement("button");
     button.classList.add("tag");
@@ -36,7 +36,7 @@ export async function createFilterButtons() {
 }
 
 export function addFilterButtonsEventListener() {
-  createFilterButtons(); // Ensure buttons are created based on tags created
+  createFilterButtons();
 }
 
 // Function to filter posts by tag

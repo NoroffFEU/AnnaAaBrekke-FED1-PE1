@@ -1,89 +1,91 @@
-import { getPosts } from "../api/getApi.js"; // Handles fetching posts from the server
+import { getPosts } from "../api/getApi.js"; 
 import {
   saveCreatedPosts,
   loadCreatedPosts,
   displayPosts,
-} from "./createBlogPost.js"; // Handles local storage and displaying posts
-import { latestPostsCarousel } from "../utils/carousel.js"; // Displays a carousel of the latest posts
-import { sortPostByNewest } from "../utils/sort.js"; // Import the sorting function
+} from "./createBlogPost.js"; 
+import { latestPostsCarousel } from "../utils/carousel.js"; 
+import { sortPostByNewest } from "../utils/sort.js"; 
 import {
   addSortButtonsEventListener,
   handlePostClick,
   setupCarouselClickEvents,
-} from "../handlers/eventHandlers.js";
-import { getName } from "../auth/userName.js";
-import { hideLoader, showLoader } from "../utils/loading.js";
-import { addFilterButtonsEventListener } from "../utils/filter.js";
+} from "../handlers/eventHandlers.js"; 
+import { getName } from "../auth/userName.js"; 
+import { hideLoader, showLoader } from "../utils/loading.js"; 
+import { addFilterButtonsEventListener } from "../utils/filter.js"; 
+import { showErrorAlert } from "../utils/alerts.js"; 
 
-const name = getName();
+const name = getName(); 
 
 // Function to fetch posts from the server and display them
 export async function fetchAndDisplayPosts() {
   console.log("fetchAndDisplayPosts started");
   let homePosts = [];
   try {
-    showLoader();
+    showLoader(); 
 
     console.log("Loading posts from local storage...");
-    homePosts = await loadCreatedPosts(); // First try to load posts from local storage
-    // console.log("Loaded from local storage:", homePosts.data);
+    homePosts = await loadCreatedPosts(); // Load posts from local storage
 
+    // If no posts found in local storage, fetch from server
     if (!homePosts || !homePosts.data || homePosts.data.length === 0) {
       console.log("No posts in local storage, fetching from server...");
-      homePosts = await getPosts(name); // Fetch posts (NEED TO FIX A VARIABLE FOR SERENATRAVEL DATA.NAME)
+      homePosts = await getPosts(name);
       saveCreatedPosts(homePosts.data); // Save fetched posts to local storage
       console.log("Posts saved to local storage");
     } else {
       console.log(`Loaded posts from local storage`);
     }
 
-    homePosts.data = sortPostByNewest(homePosts.data);
+    homePosts.data = sortPostByNewest(homePosts.data); // Sort posts by newest
 
     console.log("Displaying posts...");
-    displayPosts(homePosts.data, false, 12); // Limit to 12 posts on the home page
+    displayPosts(homePosts.data, false, 12); // Display posts, limit to 12 on the home page
     console.log("Posts displayed");
 
     console.log("Creating carousel for latest posts...");
-    latestPostsCarousel(homePosts.data.slice(0, 3));
+    latestPostsCarousel(homePosts.data.slice(0, 3)); // Create carousel for the latest posts
     console.log("Latest posts carousel created");
   } catch (error) {
     console.error("Failed to fetch posts:", error);
-    // alert("Failed to load posts. Please try again.");
+    showErrorAlert("Failed to load posts. Please try again."); 
   } finally {
-    hideLoader();
+    hideLoader(); 
   }
 
   return homePosts;
 }
 
+// Initialize the application
 async function init() {
-  showLoader();
+  showLoader(); 
   console.log("Initializing application...");
-  const homePosts = await fetchAndDisplayPosts(); // Call fetchAndDisplayPosts and wait for it to finish
+  const homePosts = await fetchAndDisplayPosts(); // Fetch and display posts
   console.log("Posts fetched and displayed:", homePosts);
 
-  setupCarouselClickEvents(); // Assuming latestPostsCarousel can handle and limit the posts on its own
+  setupCarouselClickEvents(); // Set up event listeners for carousel navigation
   console.log("Next and prev buttons event listeners added.");
-  // navigateCarousel();
 
-  // Call addSortButtonsEventListener with the returned homePosts object
-  addSortButtonsEventListener(homePosts);
+  addSortButtonsEventListener(homePosts); // Add event listeners for sort buttons
   console.log("Sort buttons event listeners added.");
-  addFilterButtonsEventListener();
+  addFilterButtonsEventListener(); // Add event listeners for filter buttons
 
+  // Add click event listeners to each post
   const posts = document.querySelectorAll(".post");
   posts.forEach((post) => {
     post.addEventListener("click", () => {
-      handlePostClick(post);
+      handlePostClick(post); // Handle post click
     });
   });
 
-  hideLoader();
+  hideLoader(); 
 }
 
+// Check if document is still loading and initialize accordingly
 console.log(document.readyState);
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", init);
+  document.addEventListener("DOMContentLoaded", init); // Initialize when DOM content is loaded
 } else {
-  init();
+  init(); // Initialize immediately if DOM is already loaded
 }
