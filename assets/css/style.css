@@ -1,9 +1,8 @@
 :root {
+  /* Color Variables */
   --primary-color: rgb(246, 208, 126);
   --secondary-color: rgba(204, 204, 204, 0.861);
   --highlight-color: rgb(255, 203, 250);
-  --error-color: rgb(140, 134, 134);
-  --success-color: rgb(114, 216, 107);
   --header-bg: rgba(204, 204, 204, 0.5);
   --button-hover-bg: rgb(255, 203, 250);
   --login-button-bg: #ff96de;
@@ -12,34 +11,27 @@
   --register-button-hover-bg: #b4f3f7;
   --alert-success-bg: rgb(114, 216, 107);
   --alert-error-bg: rgb(140, 134, 134);
-  --input-invalid-border: #eeb5bb;
-  --input-valid-border: #28a745;
 
-  --small-font-size: 14px;
-  --medium-font-size: 16px;
-  --large-font-size: 18px;
+  /* Padding */
   --small-padding: 8px 10px;
   --medium-padding: 10px 20px;
   --large-padding: 12px 24px;
+  /* Another one?*/
 
-  --small-logo-size: 24px;
-  --medium-logo-size: 28px;
-  --large-logo-size: 32px;
-
-  --home-header-small-h1: 28px;
-  --home-header-medium-h1: 48px;
-  --home-header-large-h1: 60px;
-
-  --home-header-small-h2: 18px;
-  --home-header-medium-h2: 24px;
-  --home-header-large-h2: 32px;
+  /* Font Sizes */
+  --font-size-xxs: 16px;
+  --font-size-xs: 18px;
+  --font-size-sm: 20px;
+  --font-size-md: 24px;
+  --font-size-lg: 32px;
+  --font-size-xl: 40px;
+  --font-size-xxl: 56px;
 }
 
-/* Global Styles */
 body {
   background-color: var(--primary-color);
   font-family: "Montserrat", sans-serif;
-  background-image: url(/assets/images/DALL·E\ 2024-05-02\ 14.44.46\ -\ A\ realistic\ travel\ photo\ capturing\ the\ back\ of\ a\ girl\ walking\ through\ a\ vibrant\ spring\ field\ of\ flowers\ towards\ an\ ocean\ horizon\ at\ sunset.\ The\ sky\ ab.webp);
+  background-image: url(/assets/images/background-serena.webp);
   background-position: center top;
   background-repeat: no-repeat;
   background-size: contain;
@@ -76,20 +68,23 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 1rem;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   border-radius: 3px;
+  color: var(--header-text-color);
+  max-height: 10px;
 }
 
-.logo {
-  font-size: var(--large-logo-size);
-  font-weight: 600;
-  padding: 0.5rem;
-}
-
-nav a {
+z .logo a {
+  color: var(--link-color);
   text-decoration: none;
-  color: black;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.logo a:hover {
+  color: var(--link-hover-color);
 }
 
 #home-header {
@@ -130,8 +125,23 @@ nav a {
 }
 
 .headline p {
-  font-size: var(--home-header-medium-h2);
+  font-size: var(--font-size-md);
   margin: 10px 0 0;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  padding: var(--large-padding);
+  margin-bottom: 1rem;
+}
+
+.gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Carousel */
@@ -295,7 +305,32 @@ nav a {
   transform: rotate(180deg);
 }
 
-/* Grid Layout */
+.tags-container {
+  min-height: 100px;
+  max-height: 100px;
+  overflow-y: auto;
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 10px;
+}
+
+.tag {
+  background-color: #f2f2f2e2;
+  color: #333;
+  border: none;
+  border-radius: 10px;
+  padding: var(--small-padding);
+  font-weight: 400;
+  margin: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  white-space: nowrap; /* Prevent tags from breaking into multiple lines */
+}
+
+/* Buttons */
 .filter-buttons,
 .more-buttons {
   display: flex;
@@ -312,7 +347,7 @@ nav a {
   border: none;
   border-radius: 20px;
   padding: var(--large-padding);
-  font-size: var(--large-font-size);
+  font-size: var(--font-size-sm);
   font-weight: 600;
   text-transform: uppercase;
   cursor: pointer;
@@ -338,7 +373,7 @@ nav a {
   border: none;
   border-radius: 20px;
   padding: var(--large-padding);
-  font-size: var(--large-font-size);
+  font-size: var(--font-size-sm);
   font-weight: 600;
   text-transform: uppercase;
   cursor: pointer;
@@ -369,6 +404,42 @@ nav a {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+/*(LOG OUT _ MAYBE REMOVE?) */
+button {
+  padding: var(--large-padding);
+  background-color: var(--highlight-color);
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 1rem;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+button:hover {
+  background-color: var(--button-hover-bg);
+}
+
+.login-button {
+  background-color: var(--login-button-bg);
+  padding: 10px 20px;
+}
+
+.login-button:hover {
+  background-color: var(--login-button-hover-bg);
+}
+
+.register-button {
+  background-color: var(--register-button-bg);
+  padding: 5px 10px;
+}
+
+.register-button:hover {
+  background-color: var(--register-button-hover-bg);
+}
+
+/* Post container */
 .post-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -385,15 +456,15 @@ nav a {
   flex-direction: column;
   align-items: center;
   border-radius: 4px;
-  height: 100%; /* Ensure all grid posts have the same height */
+  height: 100%;
   box-sizing: border-box;
 }
 
 .grid-post img {
   width: 100%;
-  height: 300px; /* Set a fixed height for the images */
-  object-fit: cover; /* Ensure images cover the area without distorting */
-  margin-bottom: 0.5rem; /* Add margin for spacing */
+  height: 300px;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
 }
 
 .grid-post .post-content {
@@ -404,11 +475,10 @@ nav a {
   text-align: center;
   flex-grow: 1; /* Ensure the content fills the remaining space */
   width: 100%;
-  height: 100%; /* Make the content fill the height of the grid post */
+  height: 100%;
 }
 
 /* Contact */
-
 #contact {
   display: flex;
   justify-content: space-around;
@@ -416,36 +486,6 @@ nav a {
   flex-wrap: wrap;
   padding: 20px;
 }
-
-/* .box {
-  background: white;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 20px;
-  margin: 10px;
-  width: 300px;
-}
-
-.box img {
-  width: 100%;
-  border-radius: 8px;
-  margin-bottom: 10px;
-}
-
-.box li {
-  margin-bottom: 5px;
-  font-size: 20px;
-  list-style: none;
-}
-
-.box ul {
-  padding-left: 0.25rem;
-}
-
-.box h3,
-.box h4 {
-  margin-top: 0;
-} */
 
 #contact h2 {
   padding-left: 1rem;
@@ -470,8 +510,7 @@ nav a {
   margin-top: 5rem;
 }
 
-/* Create*/
-
+/* Create headline*/
 .create-headline {
   background-color: var(--primary-color);
   color: var(--text-on-primary);
@@ -489,7 +528,7 @@ nav a {
   font-weight: 700;
 }
 
-/* Main Post */
+/* Main Post ++ */
 .main-post,
 .body-after-login-container {
   max-width: 600px;
@@ -570,7 +609,7 @@ nav a {
 }
 
 .copy-button {
-  background-color: rgb(255, 219, 90); /* Using theme's success color */
+  background-color: rgb(255, 219, 90); /* change to var root øater */
   color: white;
   border-radius: 0.25rem;
   padding: 8px 10px;
@@ -593,46 +632,6 @@ nav a {
 .post-title {
   font-weight: bold;
   margin-bottom: 5px;
-}
-
-.tags-container {
-  min-height: 100px;
-  max-height: 100px;
-  overflow-y: auto;
-  margin-top: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  padding: 10px;
-}
-
-.tag {
-  background-color: #f2f2f2e2;
-  color: #333;
-  border: none;
-  border-radius: 10px;
-  padding: var(--small-padding);
-  font-weight: 400;
-  margin: 2px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  white-space: nowrap; /* Prevent tags from breaking into multiple lines */
-}
-
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  padding: var(--large-padding);
-  margin-bottom: 1rem;
-}
-
-.gallery img {
-  width: 100%;
-  height: auto;
-  border-radius: 5px;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Loader -- Somewhat based on https://css-loaders.com/spinner/ */
@@ -692,7 +691,6 @@ nav a {
 }
 
 /* Footer */
-
 #homeBody footer,
 #editBody footer,
 #createBody footer {
@@ -718,7 +716,7 @@ nav a {
   justify-content: space-between;
   border-radius: 5px;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-  width: 80vw; /* Ensures the footer spans the full viewport width */
+  width: 80vw;
 }
 
 .footer-nav ul {
@@ -731,7 +729,12 @@ nav a {
   gap: 0.8rem;
 }
 
-/* Form */
+nav a {
+  text-decoration: none;
+  color: var(--font-color);
+}
+
+/* Other forms */
 form {
   display: flex;
   flex-direction: column;
@@ -783,42 +786,7 @@ form h1 {
   display: none;
 }
 
-/* Components? */
-button {
-  padding: var(--large-padding);
-  background-color: var(--highlight-color);
-  color: rgb(0, 0, 0);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 1rem;
-  font-size: var(--large-font-size);
-  font-weight: 600;
-}
-
-button:hover {
-  background-color: var(--button-hover-bg);
-}
-
-.login-button {
-  background-color: var(--login-button-bg);
-  padding: 10px 20px;
-}
-
-.login-button:hover {
-  background-color: var(--login-button-hover-bg);
-}
-
-.register-button {
-  background-color: var(--register-button-bg);
-  padding: 5px 10px;
-}
-
-.register-button:hover {
-  background-color: var(--register-button-hover-bg);
-}
-
-/* After logged in */
+/* After logged in - DO I NEED THOS???*/
 .greeting-message {
   font-weight: bold;
   text-align: center;
@@ -853,7 +821,8 @@ button:hover {
   background-color: #8cbfe1;
 }
 
-/* Styles for login messages */
+/* Messages / Alerts */
+
 .login-message {
   font-size: 1em;
   text-align: center;
@@ -861,7 +830,6 @@ button:hover {
   margin-top: 20px;
 }
 
-/* Messages/ Alerts */
 .alert {
   padding: 1rem;
   border-radius: 7px;
@@ -902,7 +870,7 @@ button:hover {
   }
 
   header .logo {
-    font-size: var(--small-logo-size);
+    font-size: 24px;
   }
 
   #homeBody .post-container {
@@ -913,25 +881,12 @@ button:hover {
     flex-direction: column;
   }
 
-  /* #home-header .headline {
-    padding: 10px;
-  }
-
-  #home-header .column h1 {
-    font-size: var(--home-header-small-h1);
-  }
-
-  #home-header .column h2 {
-    font-size: var(--home-header-small-h2);
-    margin-top: 0.5rem;
-  } */
-
   .read-more,
   .tag,
   .copy-button,
   .more-buttons,
   .filter-buttons .tag {
-    font-size: var(--small-font-size);
+    font-size: var(--font-size-xxs);
     padding: var(--small-padding);
   }
 
@@ -967,7 +922,7 @@ button:hover {
   }
 
   header .logo {
-    font-size: var(--medium-logo-size);
+    font-size: var(--font-size-sm);
   }
 
   .choose-container {
@@ -998,7 +953,7 @@ button:hover {
 
   .read-more,
   .tag {
-    font-size: var(--medium-font-size);
+    font-size: var(--font-size-xs);
     padding: var(--medium-padding);
   }
 
@@ -1007,16 +962,12 @@ button:hover {
   }
 }
 
-/* Large devices (desktops, 993px and up) */
+/* Large devices (desktops, 993px and up) - DO I NEED THIS??? */
 @media (min-width: 993px) {
   header,
   footer,
   #editBody {
     padding: 30px;
-  }
-
-  header .logo {
-    font-size: var(--large-logo-size);
   }
 
   .choose-container {
@@ -1030,12 +981,6 @@ button:hover {
 
   #home-header .headline {
     padding: 30px;
-  }
-
-  .read-more,
-  .tag {
-    font-size: var(--large-font-size);
-    padding: var(--large-padding);
   }
 
   .choose-container button {
