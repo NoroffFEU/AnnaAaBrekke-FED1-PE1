@@ -93,13 +93,14 @@ function displaySinglePost(post) {
   const sharePost = document.createElement("div");
   sharePost.classList.add("share");
   sharePost.innerHTML = `
-      <h3 class = "share-title">Share this post</h3>
+      <h2 class = "share-title">Share this post</h2>
     `;
 
   const shareInput = document.createElement("input");
   shareInput.classList.add("share-link");
   shareInput.value = shareUrl;
   shareInput.readOnly = true; // Make the input read-only
+  shareInput.setAttribute("aria-label", "Share link");
 
   const copyButton = document.createElement("button");
   copyButton.classList.add("copy-button");

@@ -570,7 +570,7 @@ button:hover {
 .post-info .post-author {
   display: block;
   font-style: italic;
-  color: #c396bc;
+  color: #760e68;
   font-size: 18px;
   margin-top: 5px;
   padding: 5px 0;
@@ -598,21 +598,33 @@ button:hover {
 }
 
 .share-title {
+  font-size: var(--font-size-sm);
   margin-bottom: 0rem;
   margin-top: 2rem;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
 .share-link {
   border: 1px solid #ced4da; /* Subtle border for the share input */
-  padding: 10px 10px; /* Padding matching form inputs */
+  padding: 9px 10px; /* Padding matching form inputs */
   border-radius: 0.25rem; /* Rounded corners for input */
 }
 
 .copy-button {
-  background-color: rgb(255, 219, 90); /* change to var root øater */
-  color: white;
+  background-color: rgb(252, 229, 113); /* change to var root øater */
+  color: rgb(58, 58, 58);
   border-radius: 0.25rem;
-  padding: 8px 10px;
+  padding: 6px 8px;
   cursor: pointer;
   border: none;
   transition: background-color 0.3s ease-in-out;
@@ -808,17 +820,17 @@ form h1 {
 .choose-container button {
   font-size: 22px;
   padding: 10px 20px;
-  border: none;
+  border: 1px solid grey;
   border-radius: 5px;
   cursor: pointer;
-  background-color: #0f9cfb;
-  color: white;
+  background-color: rgb(251, 183, 81); /* change to var root øater */
+  color: black;
   transition: background-color 0.3s;
   width: 200px;
 }
 
 .choose-container button:hover {
-  background-color: #8cbfe1;
+  background-color: rgb(247, 151, 7); /* change to var root øater */
 }
 
 /* Messages / Alerts */

@@ -22,8 +22,6 @@ export function setLoginFormListener() {
       const loginData = { email, password }; // Creating an object with login data
       console.log("Login Data:", loginData);
 
-      showLoader();
-
       try {
         const loginResponse = await saveLogin(loginData); // Call saveLogin with the login data
 
