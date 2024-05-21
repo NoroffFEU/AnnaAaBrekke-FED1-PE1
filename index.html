@@ -16,9 +16,7 @@
       crossorigin="anonymous"
     ></script>
   </head>
-
   <body id="homeBody">
-
     <div id="loadingInd" class="loader-hidden">
       <div class="loader"></div>
     </div>
@@ -27,184 +25,113 @@
       <nav class="logo">
         <a href="index.html">Wherever Forever</a>
       </nav>
-      <!-- <nav class="website-nav">
-        <ul>
-          <li><a href="/account/login.html">Log in</a></li>
-          <li><a href="/post/create.html">Create Post</a></li>
-        </ul>
-      </nav> -->
     </header>
 
-
-    <section id="home-header">
-      <div class="headline">
-        <div class="column">
-          <h1>Serena Travel</h1>
-          <h2>Experience 'My Travel Diaries' Spring to Life</h2>
-        </div>
-      </div>
-    </section>
-
-    <section id="latestPostCarousel">
-      <button class="slide-arrow" id="slideArrowPrev"></button>
-      <button class="slide-arrow" id="slideArrowNext"></button>
-      <ul class="slides-container" id="slidesContainer"></ul>
-    </section>
-
-    <section id="homePostsHTML"> 
-      <div class="filter-buttons">
-        <!-- <button class="tag" value="beach">Beach</button>
-        <button class="tag" value="mountains">Mountains</button>
-        <button class="tag" value="tropical">Tropical Paradise</button>
-        <button class="tag" value="surf">Surf</button>
-        <button class="tag" value="food">Food</button>
-        <button class="tag" value="snorkel">Snorkel</button>
-        <button class="tag" value="skiing">Skiing</button> -->
-      </div>
-      
-
-      <section id="sortByDate">
-        <div class="dropdown-sort closed">
-          <h2 class="dropdown-title">Sort<span><i class="fa-solid fa-sort-up"></i></span></h2>
-          <ul class="sort-opt">
-            <li class="sort-newest">Newest First</li>
-            <li class="sort-oldest">Oldest First</li>
-          </ul>
+    <main>
+      <section id="home-header">
+        <div class="headline">
+          <div class="column">
+            <img src="/assets/images/serena.png" alt="Serena" />
+          </div>
+          <div class="column">
+            <h1>Experience 'My Travel Diaries' spring to life!</h1>
+            <p>
+              I'm Serena, a travel enthusiast sharing my adventures and
+              experiences with you.
+            </p>
+          </div>
         </div>
       </section>
-      
 
-      <div class="post-container">
-        <div class="grid-post"></div>
-      </div>
+      <section id="latestPostCarousel">
+        <button
+          class="slide-arrow"
+          id="slideArrowPrev"
+          aria-label="Previous Slide"
+        ></button>
+        <button
+          class="slide-arrow"
+          id="slideArrowNext"
+          aria-label="Next Slide"
+        ></button>
+        <ul class="slides-container" id="slidesContainer"></ul>
+      </section>
 
-      <!-- <div class="post-container">
-        <div class="grid-post">
-          <img
-            class="post-img"
-            src="assets/images/snorkel_whale.webp"
-            alt=""
-            id=""
-          />
-          <div class="post-info">
-            <h3 class="post-title">Lombok Paradise</h3>
-            <p class="post-text">
-              Discover pristine white beaches, catch the perfect surf, and
-              embrace the ultimate chill vibes.
-            </p>
-            <div class="tags">
-              <button class="tag" value="beach">Beach</button>
-              <button class="tag" value="tropical">Tropical Paradise</button>
-              <button class="tag" value="surf">Surf</button>
-              <button class="tag" value="food">Food</button>
-              <button class="prices" value="cheap">$$</button>
-            </div>
-            <div class="more-buttons">
-              <button class="read-more">Read More</button>
-            </div>
+      <section>
+        <div class="filter-buttons"></div>
+
+        <div id="sortByDate">
+          <div class="dropdown-sort closed">
+            <h2 class="dropdown-title">
+              Sort <span><i class="fa-solid fa-sort-up"></i></span>
+            </h2>
+            <ul class="sort-opt">
+              <li class="sort-newest">Newest First</li>
+              <li class="sort-oldest">Oldest First</li>
+            </ul>
           </div>
         </div>
-        <div class="grid-post">
-          <img
-            class="post-img"
-            src="assets/images/snorkel_whale.webp"
-            alt=""
-            id=""
-          />
-          <div class="post-info">
-            <h3 class="post-title">The White Alps</h3>
-            <p class="post-text">
-              Skiing down the majestic snow-clad slopes of the Alps, where every
-              turn has stunning winter panoramas.
-            </p>
-            <div class="tags">
-              <button class="tag" value="mountains">Mountains</button>
-              <button class="tag" value="skiing">Skiing</button>
-              <button class="prices" value="expensive">$$$$</button>
-            </div>
-            <div class="more-buttons">
-              <button class="read-more">Read More</button>
-            </div>
-          </div>
-        </div>
-        <div class="grid-post">
-          <img
-            class="post-img"
-            src="assets/images/snorkel_whale.webp"
-            alt=""
-            id=""
-          />
-          <div class="post-info">
-            <h3 class="post-title">Coron Underwater Magic</h3>
-            <p class="post-text">
-              Snorkel above thriving coral gardens and swim alongside a
-              kaleidoscope of tropical fish.
-            </p>
-            <div class="tags">
-              <button class="tag" value="beach">Beach</button>
-              <button class="tag" value="tropical">Tropical Paradise</button>
-              <button class="tag" value="surf">Surf</button>
-              <button class="tag" value="snorkel">Snorkel</button>
-              <button class="prices" value="cheap">$$</button>
-            </div>
-            <div class="more-buttons">
-              <button class="read-more">Read More</button>
-            </div>
-          </div>
-        </div>
-      </div> -->
-    </section>
 
-    <section id="contact">
-      <div class="contact-image">
-        <img
-          src="/assets/images/serena.png"
-          alt="Serena"
-        />
-      </div>
-      <div class="contact-form">
-        <h2>Contact Me</h2>
-        <form action="submit_form.php" method="POST">
-          <div class="input-group">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required />
-          </div>
-          <div class="input-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required />
-          </div>
-          <div class="input-group">
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-          </div>
+        <div class="post-container">
+          <div class="grid-post"></div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="contact-image">
+          <img
+            src="/assets/images/Firefly A surfer girl with wavy brown hair stands far away on a tropical beach, her figure framed by.jpg"
+            alt="Serena pointing"
+          />
+        </div>
+        <div class="contact-form">
+          <h2>Contact Me</h2>
+          <form action="submit_form.php" method="POST">
+            <div class="input-group">
+              <label for="name">Name:</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div class="input-group">
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="input-group">
+              <label for="message">Message:</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                required
+              ></textarea>
+            </div>
             <button type="submit">Send Message</button>
-        </form>
-      </div>
+          </form>
+        </div>
+      </section>
 
-      <!-- <section id="aboutBoxes">
-      <div class="box">
-        <h2>About Me</h2>
-        <p>Hi! I'm Serena, a travel enthusiast sharing my adventures and experiences with you.</p>
-        <img src="serena.jpg" alt="Serena">
-      </div>
-      <!-- <div class="box">
-        <h4>Top 3 memories</h4>
-        <li>
-          <ul>1.Magical Sunset at Weligama</ul>
-          <ul>2.Lost in the Labyrinthine Alleys of Petra</ul>
-          <ul>3.SurfCamp at Lombok</ul>
-        </li>
-      </div> -->
-      <!-- </section> - -->
-
-      <!-- <section>
-      <div class="gallery">
-      <img class="other-image" src="/assets/images/DALL·E 2024-05-02 14.44.46 - A realistic travel photo capturing the back of a girl walking through a vibrant spring field of flowers towards an ocean horizon at sunset. The sky ab.webp" alt="Snorkle under water with whale">
-      </div>
-    </section> -->
-    </section>
-
-    <!-- // add someting more with only html thoug.  -->
+      <section class="gallery">
+        <img
+          class="other-image"
+          src="/assets/images/snorkel_whale.webp"
+          alt="Snorkeling with a whale"
+        />
+        <img
+          class="other-image"
+          src="/assets/images/city-gril.jpg"
+          alt="Firefly A woman with wavy brown hair explores a bustling city street. She wears a stylish outfit, bl"
+        />
+        <img
+          class="other-image"
+          src="/assets/images/vietnman.png"
+          alt="A charming outdoor café in Vietnam street."
+        />
+        <img
+          class="other-image"
+          src="/assets/images/field-woman.png"
+          alt="A woman sitting in a flower field watching the sunset"
+        />
+      </section>
+    </main>
 
     <footer>
       <nav class="footer-nav">

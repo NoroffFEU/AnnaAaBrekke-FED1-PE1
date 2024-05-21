@@ -1,6 +1,6 @@
 :root {
   --primary-color: rgb(246, 208, 126);
-  --secondary-color: rgba(204, 204, 204, 0.5);
+  --secondary-color: rgba(204, 204, 204, 0.861);
   --highlight-color: rgb(255, 203, 250);
   --error-color: rgb(140, 134, 134);
   --success-color: rgb(114, 216, 107);
@@ -92,36 +92,46 @@ nav a {
   color: black;
 }
 
+#home-header {
+  display: flex;
+  justify-content: center;
+  padding: 10px 10px;
+  background-color: #f4f4f471;
+}
+
 .headline {
-  height: 250px;
+  display: flex;
+  align-items: center;
+  max-width: 90vw;
+  background-color: #ffffffe2;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.headline .column {
+  flex: 1;
+  padding: 20px;
+}
+
+.headline img {
+  border-radius: 7px;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  object-fit: cover;
 }
 
 .headline h1 {
-  margin-top: 3rem;
+  font-size: 44px;
+  margin-bottom: 0.5rem;
+  color: #333;
+  margin-top: 0;
 }
 
-.headline h2 {
-  font-weight: 600;
-}
-
-.column {
-  display: flex;
-  flex-direction: column;
-}
-
-.column h1 {
-  text-align: center;
-  font-size: var(--home-header-large-h1);
-  color: rgba(11, 10, 10, 0.8);
-  margin-bottom: 0;
-}
-
-.column h2 {
-  text-align: center;
-  font-size: var(--home-header-large-h2);
-  font-weight: 600;
-  color: rgba(11, 10, 10, 0.8);
-  margin-top: 1rem;
+.headline p {
+  font-size: var(--home-header-medium-h2);
+  margin: 10px 0 0;
 }
 
 /* Carousel */
@@ -456,6 +466,7 @@ nav a {
   width: 100%;
   height: auto;
   border-radius: 8px;
+  margin-top: 5rem;
 }
 
 /* Main Post */
@@ -555,8 +566,8 @@ nav a {
 
 .post-title-container,
 #editBody .post-title-container {
-  min-height: 50px;
-  max-height: 50px;
+  min-height: 60px;
+  max-height: 60px;
 }
 
 .post-title {
@@ -580,7 +591,7 @@ nav a {
   color: #333;
   border: none;
   border-radius: 10px;
-  padding: var(--large-padding);
+  padding: var(--small-padding);
   font-weight: 400;
   margin: 2px;
   cursor: pointer;
@@ -590,12 +601,18 @@ nav a {
 }
 
 .gallery {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  padding: var(--large-padding);
+  margin-bottom: 1rem;
 }
 
 .gallery img {
-  width: 100vw;
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Loader -- Somewhat based on https://css-loaders.com/spinner/ */
@@ -655,17 +672,33 @@ nav a {
 }
 
 /* Footer */
+
+#homeBody footer,
+#editBody footer,
+#createBody footer {
+  background-image: url(/assets/images/5a5c0349-2da6-4c91-bf6e-0af91d39a8e9.png);
+  background-size: cover; 
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0; 
+  padding: 2rem; 
+  width: 100vw; 
+  height: auto; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .footer-nav {
   background-color: var(--secondary-color);
-  padding: 1rem 2rem;
+  padding: 1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  margin-top: 4rem;
+  width: 80vw; /* Ensures the footer spans the full viewport width */
 }
 
 .footer-nav ul {
@@ -860,7 +893,7 @@ button:hover {
     flex-direction: column;
   }
 
-  #home-header .headline {
+  /* #home-header .headline {
     padding: 10px;
   }
 
@@ -871,7 +904,7 @@ button:hover {
   #home-header .column h2 {
     font-size: var(--home-header-small-h2);
     margin-top: 0.5rem;
-  }
+  } */
 
   .read-more,
   .tag,
@@ -926,17 +959,21 @@ button:hover {
     grid-template-columns: 1fr;
   }
 
-  #home-header .headline {
-    padding: 20px;
+  #home-header {
+    padding: 40px 10px;
   }
 
-  #home-header .column h1 {
-    font-size: var(--home-header-medium-h1);
+  .headline {
+    flex-direction: column;
+    text-align: center;
   }
 
-  #home-header .column h2 {
-    font-size: var(--home-header-medium-h2);
-    margin-top: 0.75rem;
+  .headline img {
+    margin-bottom: 20px;
+  }
+
+  .headline .column {
+    padding: 0;
   }
 
   .read-more,
@@ -973,15 +1010,6 @@ button:hover {
 
   #home-header .headline {
     padding: 30px;
-  }
-
-  #home-header .column h1 {
-    font-size: var(--home-header-large-h1);
-  }
-
-  #home-header .column h2 {
-    font-size: var(--home-header-large-h2);
-    margin-top: 1rem;
   }
 
   .read-more,
