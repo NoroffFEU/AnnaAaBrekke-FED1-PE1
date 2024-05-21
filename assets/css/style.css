@@ -407,7 +407,8 @@ nav a {
   height: 100%; /* Make the content fill the height of the grid post */
 }
 
-#aboutBoxes,
+/* Contact */
+
 #contact {
   display: flex;
   justify-content: space-around;
@@ -416,7 +417,7 @@ nav a {
   padding: 20px;
 }
 
-.box {
+/* .box {
   background: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
@@ -444,7 +445,7 @@ nav a {
 .box h3,
 .box h4 {
   margin-top: 0;
-}
+} */
 
 #contact h2 {
   padding-left: 1rem;
@@ -467,6 +468,25 @@ nav a {
   height: auto;
   border-radius: 8px;
   margin-top: 5rem;
+}
+
+/* Create*/
+
+.create-headline {
+  background-color: var(--primary-color);
+  color: var(--text-on-primary);
+  padding: 1.5rem;
+  margin: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: "Montserrat", sans-serif;
+}
+
+.create-headline h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
 }
 
 /* Main Post */
@@ -677,13 +697,13 @@ nav a {
 #editBody footer,
 #createBody footer {
   background-image: url(/assets/images/5a5c0349-2da6-4c91-bf6e-0af91d39a8e9.png);
-  background-size: cover; 
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  margin: 0; 
-  padding: 2rem; 
-  width: 100vw; 
-  height: auto; 
+  margin: 0;
+  padding: 2rem;
+  width: 100vw;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -22,148 +22,96 @@
       <nav class="logo">
         <a href="/index.html">Wherever Forever</a>
       </nav>
+      <button class="logout-button" type="submit">Logout</button>
     </header>
 
-    <button class="logout-button" type="submit">Logout</button>
+    <main>
+      <div class="search-container">
+        <label for="searchInput">Search by Title:</label>
+        <input
+          type="text"
+          id="searchInput"
+          name="searchInput"
+          placeholder="Search by Title"
+        />
+        <button id="searchButton">Search</button>
+      </div>
 
-    <div class="search-container">
-      <label for="searchInput">Search by Title:</label>
-      <input
-        type="text"
-        id="searchInput"
-        name="searchInput"
-        placeholder="Search by Title"
-      />
-      <button id="searchButton">Search</button>
-    </div>
+      <div id="loadingInd" class="loader-hidden">
+        <div class="loader"></div>
+      </div>
 
-    <div id="loadingInd" class="loader-hidden">
-      <div class="loader"></div>
-    </div>
+      <form id="editPostForm" method="PUT" class="editFormHidden">
+        <h1>Edit Post</h1>
 
-    <form id="editPostForm" method="PUT" class="editFormHidden">
-      <h1>Edit Post</h1>
+        <label for="postImage">Image URL:</label>
+        <input
+          type="url"
+          id="postImage"
+          name="postImage"
+          placeholder="Image URL"
+          required
+        />
 
-      <label for="postImage">Image URL:</label>
-      <input
-        type="url"
-        id="postImage"
-        name="postImage"
-        placeholder="Image URL"
-        required
-      />
+        <label for="postImageAlt">Image Alt Text:</label>
+        <input
+          type="text"
+          id="postImageAlt"
+          name="postImageAlt"
+          placeholder="Image Alt Text"
+          required
+        />
 
-      <label for="postImageAlt">Image Alt Text:</label>
-      <input
-        type="text"
-        id="postImageAlt"
-        name="postImageAlt"
-        placeholder="Image Alt Text"
-        required
-      />
+        <label for="postId">Post ID:</label>
+        <input
+          type="text"
+          id="postId"
+          name="postId"
+          placeholder="Post ID"
+          required
+        />
 
-      <label for="postId">Post ID:</label>
-      <input
-        type="text"
-        id="postId"
-        name="postId"
-        placeholder="Post ID"
-        required
-      />
+        <label for="postTitle">Post Title:</label>
+        <input
+          type="text"
+          id="postTitle"
+          name="postTitle"
+          placeholder="Post Title"
+          required
+        />
 
-      <label for="postTitle">Post Title:</label>
-      <input
-        type="text"
-        id="postTitle"
-        name="postTitle"
-        placeholder="Post Title"
-        required
-      />
+        <label for="postAuthor">Author Name:</label>
+        <input
+          type="text"
+          id="postAuthor"
+          name="postAuthor"
+          placeholder="Author Name"
+          required
+        />
 
-      <label for="postAuthor">Author Name:</label>
-      <input
-        type="text"
-        id="postAuthor"
-        name="postAuthor"
-        placeholder="Author Name"
-        required
-      />
+        <label for="postTags">Tags (comma-separated):</label>
+        <input
+          type="text"
+          id="postTags"
+          name="postTags"
+          placeholder="Tags (comma-separated)"
+        />
 
-      <label for="postTags">Tags (comma-separated):</label>
-      <input
-        type="text"
-        id="postTags"
-        name="postTags"
-        placeholder="Tags (comma-separated)"
-      />
+        <label for="postContent">Post Content:</label>
+        <textarea
+          id="postContent"
+          name="postContent"
+          placeholder="Post Content"
+          required
+        ></textarea>
 
-      <label for="postContent">Post Content:</label>
-      <textarea
-        id="postContent"
-        name="postContent"
-        placeholder="Post Content"
-        required
-      ></textarea>
+        <button type="submit">Update Post</button>
+      </form>
 
-      <button type="submit">Update Post</button>
-    </form>
-
-    <div class="post-container">
-      <div class="grid-post"></div>
-    </div>
-
-    <!-- <form id="delete">
-      <label for="pasteId">Insert ID of post you want to delete</label>
-      <input type="text" id="id" name="id" placeholder="Post ID" required />
-
-      <button type="submit">DELETE</button>
-    </form> -->
-
-    <!-- <form id="editPostForm">
-      <h1>edit Post</h1>
-
-      <input
-        type="text"
-        id="postImage"
-        accept="image/*"
-        placeholder="Image URL"
-        required
-      />
-      <input
-        type="text"
-        id="postImageAlt"
-        placeholder="Image Alt Text"
-        required
-      />
-      <input type="text" id="postTitle" placeholder="Post Title" required />
-      <input type="text" id="postAuthor" placeholder="Author Name" required />
-      <input type="text" id="postTags" placeholder="Tags (comma-separated)" />
-      <textarea id="postContent" placeholder="Post Content" required></textarea>
-      <label for="postCountry">Country:</label>
-      <select id="postCountry" id="postCountry" name="country" required>
-        <option value="">Select Country</option>
-        <option value="Denmark">Denmark</option>
-        <option value="France">France</option>
-        <option value="Greece">Greece</option>
-        <option value="Indonesia">Indonesia</option>
-        <option value="Jordan">Jordan</option>
-        <option value="Norway">Norway</option>
-        <option value="Philippines">Philippines</option>
-        <option value="Portugal">Portugal</option>
-        <option value="Sri Lanka">Sri Lanka</option>
-        <option value="Thailand">Thailand</option>
-        <option value="USA">USA</option>
-        <option value="Vietnam">Vietnam</option>
-      </select>
-
-      <button type="submit">edit Post</button>
-    </form>
-
-    <div class="edit-message"></div>
-
-    <div class="edit-headline">
-      <h1>All posts you have editd is stored here</h1>
-    </div> -->
+      <div class="post-container">
+        <div class="grid-post"></div>
+      </div>
+    </main>
 
     <footer>
       <nav class="footer-nav">

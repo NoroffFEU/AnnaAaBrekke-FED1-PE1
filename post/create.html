@@ -26,101 +26,78 @@
       <nav class="logo">
         <a href="/index.html">Wherever Forever</a>
       </nav>
+      <button class="logout-button" type="submit">Logout</button>
     </header>
 
-    <button class="logout-button" type="submit">Logout</button>
+    <main>
+      <form id="createPostForm">
+        <h1>Create Post</h1>
 
-    <form id="createPostForm">
-      <h1>Create Post</h1>
+        <label for="postImage">Image URL:</label>
+        <input
+          type="url"
+          id="postImage"
+          name="postImage"
+          placeholder="Image URL"
+          required
+        />
 
-      <label for="postImage">Image URL:</label>
-      <input
-        type="url"
-        id="postImage"
-        name="postImage"
-        placeholder="Image URL"
-        required
-      />
+        <label for="postImageAlt">Image Alt Text:</label>
+        <input
+          type="text"
+          id="postImageAlt"
+          name="postImageAlt"
+          placeholder="Image Alt Text"
+          required
+        />
 
-      <label for="postImageAlt">Image Alt Text:</label>
-      <input
-        type="text"
-        id="postImageAlt"
-        name="postImageAlt"
-        placeholder="Image Alt Text"
-        required
-      />
+        <label for="postTitle">Post Title:</label>
+        <input
+          type="text"
+          id="postTitle"
+          name="postTitle"
+          placeholder="Post Title"
+          required
+        />
 
-      <label for="postTitle">Post Title:</label>
-      <input
-        type="text"
-        id="postTitle"
-        name="postTitle"
-        placeholder="Post Title"
-        required
-      />
+        <label for="postAuthor">Author Name:</label>
+        <input
+          type="text"
+          id="postAuthor"
+          name="postAuthor"
+          placeholder="Author Name"
+          required
+        />
 
-      <!-- <input type="hidden" id="postId" name="postId" value="123"> -->
+        <label for="postTags">Tags (comma-separated):</label>
+        <input
+          type="text"
+          id="postTags"
+          name="postTags"
+          placeholder="Tags (comma-separated)"
+        />
 
-      <label for="postAuthor">Author Name:</label>
-      <input
-        type="text"
-        id="postAuthor"
-        name="postAuthor"
-        placeholder="Author Name"
-        required
-      />
+        <label for="postContent">Post Content:</label>
+        <textarea
+          id="postContent"
+          name="postContent"
+          placeholder="Post Content"
+          required
+        ></textarea>
 
-      <label for="postTags">Tags (comma-separated):</label>
-      <input
-        type="text"
-        id="postTags"
-        name="postTags"
-        placeholder="Tags (comma-separated)"
-      />
+        <button type="submit">Create Post</button>
+      </form>
 
-      <label for="postContent">Post Content:</label>
-      <textarea
-        id="postContent"
-        name="postContent"
-        placeholder="Post Content"
-        required
-      ></textarea>
+      <section class="created-posts">
+        <div class="create-headline">
+          <h2>All posts you have created are stored here</h2>
+        </div>
 
-      <button type="submit">Create Post</button>
-    </form>
-
-    <div class="create-headline">
-      <h1>All posts you have created are stored here</h1>
-    </div>
-
-    <div class="post-container">
-      <div class="grid-post">
-        <!-- <img
-        class="post-img"
-        src="/assets/images/snorkel_whale.webp"
-        alt=""
-        id=""
-      />
-      <div class="post-info">
-        <h3 class="post-title">Lombok Paradise</h3>
-        <p class="post-text">
-          Discover pristine white beaches, catch the perfect surf, and
-          embrace the ultimate chill vibes.
-        </p>
-        <!-- <div class="tags">
-          <button class="tag" value="beach">Beach</button>
-          <button class="tag" value="tropical">Tropical Paradise</button>
-          <button class="tag" value="surf">Surf</button>
-          <button class="tag" value="food">Food</button>
-          <button class="prices" value="cheap">$$</button>
-        </div> -->
-        <!-- <div class="more-buttons">
-          <button class="read-more">Read More</button>
-        </div> -->
-        -->
-      </div>
-    </div>
+        <div class="post-container">
+          <div class="grid-post"></div>
+        </div>
+      </section>
+    </main>
 
     <footer>
       <nav class="footer-nav">
