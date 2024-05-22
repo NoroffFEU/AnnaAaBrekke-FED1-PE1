@@ -1,16 +1,30 @@
 :root {
   /* Color Variables */
-  --primary-color: rgb(246, 208, 126);
-  --secondary-color: rgba(204, 204, 204, 0.861);
-  --highlight-color: rgb(255, 203, 250);
-  --header-bg: rgba(204, 204, 204, 0.5);
-  --button-hover-bg: rgb(255, 203, 250);
+  --yellow-hover-color: rgb(246, 208, 126);
+  --pink-highlight-color: rgb(255, 203, 250);
+  --header-footer-bg: rgba(204, 204, 204, 0.5);
   --login-button-bg: #ff96de;
   --login-button-hover-bg: #ff73ef;
-  --register-button-bg: rgb(255, 203, 250);
-  --register-button-hover-bg: #b4f3f7;
   --alert-success-bg: rgb(114, 216, 107);
   --alert-error-bg: rgb(140, 134, 134);
+  --lighter-font-color: #333;
+  --tag-read-button-bg: #f2f2f2e2;
+
+  --edit-button-bg: rgb(117, 193, 223, 0.89);
+  --edit-button-hover-bg: rgb(147, 212, 255);
+  --delete-button-bg: rgb(232, 102, 92, 0.89);
+  --delete-button-hover-bg: rgb(249, 49, 49);
+
+  --search-button-bg: rgb(125, 186, 208);
+  --search-button-hover-bg: rgb(101, 159, 220);
+
+  --choose-button-bg: rgb(251, 183, 81);
+  --choose-button-hover-bg: rgb(247, 151, 7);
+
+  --headline-bg: rgba(255, 255, 255, 0.89);
+  --slide-container-bg: rgba(196, 164, 191, 0.53);
+
+  --font-color: #000000;
 
   /* Padding */
   --main-padding: 20px;
@@ -34,9 +48,7 @@
   --font-size-xl: 40px;
   --font-size-xxl: 56px;
 }
-
 body {
-  background-color: var(--primary-color);
   font-family: "Montserrat", sans-serif;
   background-image: url(/assets/images/background-serena.webp);
   background-position: center top;
@@ -70,7 +82,7 @@ body {
 
 /* Header */
 header {
-  background-color: var(--header-bg);
+  background-color: var(--header-footer-bg);
   text-align: center;
   display: flex;
   flex-direction: row;
@@ -84,28 +96,28 @@ header {
 }
 
 .logo a {
-  color: var(--link-color);
+  color: var(--font-color);
   text-decoration: none;
   font-size: 1.5rem;
   font-weight: bold;
 }
 
 .logo a:hover {
-  color: var(--link-hover-color);
+  color: var(--lighter-font-color);
 }
 
 #home-header {
   display: flex;
   justify-content: center;
   padding: var(--other-main-padding);
-  background-color: #f4f4f471;
+  background-color: var(--header-footer-bg);
 }
 
 .headline {
   display: flex;
   align-items: center;
   max-width: 90vw;
-  background-color: #ffffffe2;
+  background-color: var(--headline-bg);
   padding: var(--main-padding);
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -127,7 +139,7 @@ header {
 .headline h1 {
   font-size: var(--font-size-xl);
   margin-bottom: 0.5rem;
-  color: #333;
+  color: var(--lighter-font-color);
   margin-top: 0;
 }
 
@@ -169,7 +181,7 @@ header {
   margin: 0;
   width: 100%;
   height: auto;
-  background-color: #c4a4bf88;
+  background-color: var(--slide-container-bg);
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
 }
 
@@ -203,7 +215,7 @@ header {
   bottom: 0;
   margin: auto;
   height: 4rem;
-  background-color: white;
+  background-color: var(--font-color);
   border: none;
   width: 3rem;
   font-size: 3rem;
@@ -271,7 +283,7 @@ header {
 
 .dropdown-title:hover,
 .sort-opt li:hover {
-  background: var(--button-hover-bg);
+  background: var(--pink-highlight-color);
 }
 
 .dropdown-title span {
@@ -326,8 +338,8 @@ header {
 }
 
 .tag {
-  background-color: #f2f2f2e2;
-  color: #333;
+  background-color: var(--tag-read-button-bg);
+  color: var(--lighter-font-color);
   border: none;
   border-radius: 10px;
   padding: var(--small-padding);
@@ -351,8 +363,8 @@ header {
 
 .filter-buttons .tag,
 .read-more {
-  background-color: #f2f2f2e2;
-  color: #333;
+  background-color: var(--tag-read-button-bg);
+  color: var(--lighter-font-color);
   border: none;
   border-radius: 20px;
   padding: var(--large-padding);
@@ -365,20 +377,20 @@ header {
 }
 
 .read-more:hover {
-  background-color: var(--primary-color);
+  background-color: var(--yellow-hover-color);
   color: #fff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .tag:hover {
-  background-color: var(--register-button-bg);
+  background-color: var(--pink-highlight-color);
   color: #fff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .edit-post {
-  background-color: #75c1dfe2;
-  color: #333;
+  background-color: var(--edit-button-bg);
+  color: var(--lighter-font-color);
   border: none;
   border-radius: 20px;
   padding: var(--large-padding);
@@ -391,13 +403,13 @@ header {
 }
 
 .edit-post:hover {
-  background-color: #93d4ff;
+  background-color: var(--edit-button-hover-bg);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .delete-post {
-  background-color: #e8665ce2;
-  color: #333;
+  background-color: var(--delete-button-bg);
+  color: var(--lighter-font-color);
   border: none;
   border-radius: 20px;
   padding: var(--extra-small-padding);
@@ -409,20 +421,20 @@ header {
 }
 
 .delete-post:hover {
-  background-color: #f93131;
+  background-color: var(--delete-button-hover-bg);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .search-button {
-  background-color: rgb(125, 186, 208);
-  color: black;
+  background-color: var(--search-button-bg);
+  color: var(--font-color);
   font-size: var(--font-size-xxs);
   margin: 0;
   padding: var(--other-main-padding);
 }
 
 .search-button:hover {
-  background-color: rgb(101, 159, 220);
+  background-color: var(--search-button-hover-bg);
   transform: translateY(-2px);
 }
 
@@ -432,7 +444,7 @@ header {
 
 button {
   padding: var(--large-padding);
-  background-color: var(--highlight-color);
+  background-color: var(--pink-highlight-color);
   color: rgb(0, 0, 0);
   border: none;
   border-radius: 5px;
@@ -443,7 +455,7 @@ button {
 }
 
 button:hover {
-  background-color: var(--button-hover-bg);
+  background-color: var(--yellow-hover-color);
 }
 
 .logout-button {
@@ -462,12 +474,12 @@ button:hover {
 }
 
 .register-button {
-  background-color: var(--register-button-bg);
+  background-color: var(--pink-highlight-color);
   padding: var(--extra-small-padding);
 }
 
 .register-button:hover {
-  background-color: var(--register-button-hover-bg);
+  background-color: var(--yellow-hover-color);
 }
 
 /* Post container */
@@ -543,7 +555,7 @@ button:hover {
 
 /* Create headline*/
 .create-headline {
-  background-color: var(--primary-color);
+  background-color: var(--yellow-hover-color);
   color: var(--text-on-primary);
   padding: var(--extra-large-padding);
   margin: 1rem;
@@ -569,7 +581,7 @@ button:hover {
   border: 1px solid #dee2e6;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  color: #333;
+  color: var(--lighter-font-color);
   line-height: 1.6;
   text-align: center;
 }
@@ -652,7 +664,7 @@ button:hover {
 }
 
 .copy-button {
-  background-color: rgb(252, 229, 113); /* change to var root øater */
+  background-color: var(--yellow-hover-color);
   color: rgb(58, 58, 58);
   border-radius: 0.25rem;
   padding: var(--extra-small-padding);
@@ -663,7 +675,7 @@ button:hover {
 }
 
 .copy-button:hover {
-  background-color: #e4af0f;
+  background-color: var(--choose-button-hover-bg);
 }
 
 .post-title-container,
@@ -704,13 +716,13 @@ button:hover {
 .loader:after {
   background: radial-gradient(
         closest-side at 50% 12.5%,
-        var(--highlight-color) 96%,
+        var(--pink-highlight-color) 96%,
         #0000
       )
       50% 0/20% 80% repeat-y,
     radial-gradient(
         closest-side at 12.5% 50%,
-        var(--highlight-color) 96%,
+        var(--pink-highlight-color) 96%,
         #0000
       )
       0 50%/80% 20% repeat-x;
@@ -751,7 +763,7 @@ button:hover {
 }
 
 .footer-nav {
-  background-color: var(--secondary-color);
+  background-color: var(--header-footer-bg);
   padding: var(--other-padding);
   display: flex;
   flex-direction: row;
@@ -842,7 +854,7 @@ form h1 {
   flex-direction: row;
   padding: 2rem;
   background-color: rgba(254, 253, 253, 0.49);
-  color: white;
+  color: var(--font-color);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   justify-content: space-around;
 }
@@ -853,14 +865,14 @@ form h1 {
   border: 1px solid grey;
   border-radius: 5px;
   cursor: pointer;
-  background-color: rgb(251, 183, 81); /* change to var root øater */
-  color: black;
+  background-color: var(--choose-button-bg);
+  color: var(--font-color);
   transition: background-color 0.3s;
   width: 200px;
 }
 
 .choose-container button:hover {
-  background-color: rgb(247, 151, 7); /* change to var root øater */
+  background-color: var(--choose-button-hover-bg);
 }
 
 /* Messages / Alerts */
@@ -869,7 +881,7 @@ form h1 {
   padding: var(--other-padding);
   border-radius: 7px;
   font-size: var(--font-size-sm);
-  color: white;
+  color: var(--font-color);
   text-align: center;
   position: fixed;
   top: 2rem;
