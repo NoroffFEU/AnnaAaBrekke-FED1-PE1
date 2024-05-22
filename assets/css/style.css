@@ -13,16 +13,23 @@
   --alert-error-bg: rgb(140, 134, 134);
 
   /* Padding */
+  --main-padding: 20px;
+  --other-main-padding: 10px;
+  --other-padding: 16px;
+  --extra-extra-small-padding: 5px;
+  --extra-small-padding: 6px 9px;
   --small-padding: 8px 10px;
   --medium-padding: 10px 20px;
   --large-padding: 12px 24px;
-  /* Another one?*/
+  --extra-large-padding: 24px;
+  /* Different names?*/
 
   /* Font Sizes */
   --font-size-xxs: 16px;
   --font-size-xs: 18px;
   --font-size-sm: 20px;
   --font-size-md: 24px;
+  --font-size-l: 28px;
   --font-size-lg: 32px;
   --font-size-xl: 40px;
   --font-size-xxl: 56px;
@@ -70,13 +77,13 @@ header {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
-  padding: 0.5rem 1rem;
+  padding: var(--small-padding);
   border-radius: 3px;
   color: var(--header-text-color);
   max-height: 10px;
 }
 
-z .logo a {
+.logo a {
   color: var(--link-color);
   text-decoration: none;
   font-size: 1.5rem;
@@ -90,7 +97,7 @@ z .logo a {
 #home-header {
   display: flex;
   justify-content: center;
-  padding: 10px 10px;
+  padding: var(--other-main-padding);
   background-color: #f4f4f471;
 }
 
@@ -99,14 +106,14 @@ z .logo a {
   align-items: center;
   max-width: 90vw;
   background-color: #ffffffe2;
-  padding: 20px;
+  padding: var(--main-padding);
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .headline .column {
   flex: 1;
-  padding: 20px;
+  padding: var(--main-padding);
 }
 
 .headline img {
@@ -118,7 +125,7 @@ z .logo a {
 }
 
 .headline h1 {
-  font-size: 44px;
+  font-size: var(--font-size-xl);
   margin-bottom: 0.5rem;
   color: #333;
   margin-top: 0;
@@ -173,7 +180,7 @@ z .logo a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: var(--main-padding);
   box-sizing: border-box;
   transition: transform 0.5s ease-in-out;
   transition-delay: 200ms;
@@ -242,8 +249,8 @@ z .logo a {
   transition: all 0.3s ease-in-out;
   overflow: hidden;
   margin: 1rem;
-  background: var(--secondary-color);
-  border: 2px solid var(--secondary-color);
+  background: rgba(255, 255, 255, 0.088);
+  border: 1px solid pink;
   width: 100px;
   cursor: pointer;
   border-radius: 10px;
@@ -253,11 +260,11 @@ z .logo a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  font-size: 18px;
+  padding: var(--small-padding);
+  font-size: var(--font-size-xs);
   font-weight: 600;
   color: var(--font-color);
-  background: #fffffff5;
+  background: rgba(255, 255, 255, 0.575);
   border-radius: 4px;
   transition: background 0.3s;
 }
@@ -284,9 +291,9 @@ z .logo a {
 }
 
 .sort-opt li {
-  font-size: 16px;
+  font-size: var(--font-size-xxs);
   font-weight: 500;
-  padding: 10px 20px;
+  padding: var(--medium-padding);
   border-top: 1px solid var(--border-top-color);
   background: var(--item-background);
   transition: background 0.3s;
@@ -304,6 +311,8 @@ z .logo a {
 .dropdown-sort.closed .dropdown-title span {
   transform: rotate(180deg);
 }
+
+/* Tags */
 
 .tags-container {
   min-height: 100px;
@@ -337,7 +346,7 @@ z .logo a {
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
-  padding: 20px;
+  padding: var(--main-padding);
 }
 
 .filter-buttons .tag,
@@ -391,7 +400,7 @@ z .logo a {
   color: #333;
   border: none;
   border-radius: 20px;
-  padding: 7px 10px;
+  padding: var(--extra-small-padding);
   font-size: 14px;
   font-weight: 600;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -404,7 +413,23 @@ z .logo a {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-/*(LOG OUT _ MAYBE REMOVE?) */
+.search-button {
+  background-color: rgb(125, 186, 208);
+  color: black;
+  font-size: var(--font-size-xxs);
+  margin: 0;
+  padding: var(--other-main-padding);
+}
+
+.search-button:hover {
+  background-color: rgb(101, 159, 220);
+  transform: translateY(-2px);
+}
+
+.search-button i {
+  margin-left: 8px;
+}
+
 button {
   padding: var(--large-padding);
   background-color: var(--highlight-color);
@@ -421,9 +446,15 @@ button:hover {
   background-color: var(--button-hover-bg);
 }
 
+.logout-button {
+  padding: var(--other-main-padding);
+  font-size: var(--font-size-xxs);
+  margin: 0;
+}
+
 .login-button {
   background-color: var(--login-button-bg);
-  padding: 10px 20px;
+  padding: var(--medium-padding);
 }
 
 .login-button:hover {
@@ -432,7 +463,7 @@ button:hover {
 
 .register-button {
   background-color: var(--register-button-bg);
-  padding: 5px 10px;
+  padding: var(--extra-small-padding);
 }
 
 .register-button:hover {
@@ -484,7 +515,7 @@ button:hover {
   justify-content: space-around;
   align-items: flex-start;
   flex-wrap: wrap;
-  padding: 20px;
+  padding: var(--main-padding);
 }
 
 #contact h2 {
@@ -500,7 +531,7 @@ button:hover {
 .contact-image {
   flex: 1;
   min-width: 300px;
-  padding: 20px;
+  padding: var(--main-padding);
 }
 
 .contact-image img {
@@ -514,7 +545,7 @@ button:hover {
 .create-headline {
   background-color: var(--primary-color);
   color: var(--text-on-primary);
-  padding: 1.5rem;
+  padding: var(--extra-large-padding);
   margin: 1rem;
   border-radius: 8px;
   text-align: center;
@@ -524,7 +555,7 @@ button:hover {
 
 .create-headline h2 {
   margin: 0;
-  font-size: 1.8rem;
+  font-size: var(--font-size-l);
   font-weight: 700;
 }
 
@@ -533,7 +564,7 @@ button:hover {
 .body-after-login-container {
   max-width: 600px;
   margin: 3rem auto;
-  padding: 1.5rem;
+  padding: var(--extra-large-padding);
   background-color: #f8f9faf0;
   border: 1px solid #dee2e6;
   border-radius: 8px;
@@ -560,7 +591,7 @@ button:hover {
 .post-info {
   max-width: 400px;
   margin: auto;
-  padding: 20px;
+  padding: var(--main-padding);
   border: 1px solid #ccc;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   background-color: #f9f9f9;
@@ -571,9 +602,9 @@ button:hover {
   display: block;
   font-style: italic;
   color: #760e68;
-  font-size: 18px;
+  font-size: var(--font-size-xs);
   margin-top: 5px;
-  padding: 5px 0;
+  padding: var(--extra-extra-small-padding);
 }
 
 .post-info .post-date,
@@ -581,20 +612,20 @@ button:hover {
 .date-carousel {
   display: block;
   color: #555;
-  font-size: 16px;
-  padding: 5px 0;
+  font-size: var(--font-size-xxs);
+  padding: var(--extra-extra-small-padding);
   margin-top: 0.25rem;
   margin-bottom: 1rem;
   background-color: #f8e4f5;
 }
 
 .main-post .post-title {
-  font-size: 32px;
+  font-size: var(--font-size-lg);
 }
 
 .main-post .post-text {
-  padding: 1rem;
-  font-size: 20px;
+  padding: var(--other-padding);
+  font-size: var(--font-size-sm);
 }
 
 .share-title {
@@ -616,7 +647,7 @@ button:hover {
 
 .share-link {
   border: 1px solid #ced4da; /* Subtle border for the share input */
-  padding: 9px 10px; /* Padding matching form inputs */
+  padding: var(--other-main-padding); /* Padding matching form inputs */
   border-radius: 0.25rem; /* Rounded corners for input */
 }
 
@@ -624,7 +655,7 @@ button:hover {
   background-color: rgb(252, 229, 113); /* change to var root øater */
   color: rgb(58, 58, 58);
   border-radius: 0.25rem;
-  padding: 6px 8px;
+  padding: var(--extra-small-padding);
   cursor: pointer;
   border: none;
   transition: background-color 0.3s ease-in-out;
@@ -711,7 +742,7 @@ button:hover {
   background-position: center;
   background-repeat: no-repeat;
   margin: 0;
-  padding: 2rem;
+  padding: var(--extra-large-padding);
   width: 100vw;
   height: auto;
   display: flex;
@@ -721,7 +752,7 @@ button:hover {
 
 .footer-nav {
   background-color: var(--secondary-color);
-  padding: 1rem;
+  padding: var(--other-padding);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -733,7 +764,7 @@ button:hover {
 
 .footer-nav ul {
   list-style: none;
-  padding: 0.5rem;
+  padding: var(--small-padding);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -778,7 +809,7 @@ input[type="url"],
 textarea,
 select {
   width: 100%;
-  padding: 10px;
+  padding: var(--other-main-padding);
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
@@ -798,7 +829,6 @@ form h1 {
   display: none;
 }
 
-/* After logged in - DO I NEED THOS???*/
 .greeting-message {
   font-weight: bold;
   text-align: center;
@@ -818,8 +848,8 @@ form h1 {
 }
 
 .choose-container button {
-  font-size: 22px;
-  padding: 10px 20px;
+  font-size: var(--font-size-sm);
+  padding: var(--medium-padding);
   border: 1px solid grey;
   border-radius: 5px;
   cursor: pointer;
@@ -835,17 +865,10 @@ form h1 {
 
 /* Messages / Alerts */
 
-.login-message {
-  font-size: 1em;
-  text-align: center;
-  color: red;
-  margin-top: 20px;
-}
-
 .alert {
-  padding: 1rem;
+  padding: var(--other-padding);
   border-radius: 7px;
-  font-size: 20px;
+  font-size: var(--font-size-sm);
   color: white;
   text-align: center;
   position: fixed;
@@ -878,11 +901,11 @@ form h1 {
   header,
   footer,
   #editBody {
-    padding: 10px;
+    padding: var(--other-main-padding);
   }
 
   header .logo {
-    font-size: 24px;
+    font-size: var(--font-size-md);
   }
 
   #homeBody .post-container {
@@ -930,7 +953,7 @@ form h1 {
   header,
   footer,
   #editBody {
-    padding: 20px;
+    padding: var(--main-padding);
   }
 
   header .logo {
@@ -944,10 +967,6 @@ form h1 {
   #editBody .post-container,
   .post-container {
     grid-template-columns: 1fr;
-  }
-
-  #home-header {
-    padding: 40px 10px;
   }
 
   .headline {
@@ -979,7 +998,7 @@ form h1 {
   header,
   footer,
   #editBody {
-    padding: 30px;
+    padding: var(--extra-large-padding);
   }
 
   .choose-container {
@@ -989,10 +1008,6 @@ form h1 {
   #editBody .post-container,
   .post-container {
     grid-template-columns: 1fr 1fr 1fr;
-  }
-
-  #home-header .headline {
-    padding: 30px;
   }
 
   .choose-container button {

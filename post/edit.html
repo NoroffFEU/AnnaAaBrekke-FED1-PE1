@@ -26,6 +26,7 @@
     </header>
 
     <main>
+      <h1>Edit your posts</h1>
       <div class="search-container">
         <label for="searchInput">Search by Title:</label>
         <input
@@ -34,15 +35,15 @@
           name="searchInput"
           placeholder="Search by Title"
         />
-        <button id="searchButton">Search</button>
-      </div>
+        <button id="searchButton" class="search-button">Search<i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
 
       <div id="loadingInd" class="loader-hidden">
         <div class="loader"></div>
       </div>
 
       <form id="editPostForm" method="PUT" class="editFormHidden">
-        <h1>Edit Post</h1>
+        <h2>Edit selected post</h2>
 
         <label for="postImage">Image URL:</label>
         <input
