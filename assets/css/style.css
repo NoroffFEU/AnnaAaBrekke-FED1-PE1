@@ -46,15 +46,17 @@
   --font-size-l: 28px;
   --font-size-lg: 32px;
   --font-size-xl: 40px;
-  --font-size-xxl: 56px;
+  --font-size-xxl: 52px;
+
 }
+
 body {
   font-family: "Montserrat", sans-serif;
   background-image: url(/assets/images/background-serena.webp);
   background-position: center top;
   background-repeat: no-repeat;
   background-size: contain;
-  background-color: hsla(180, 100%, 96%, 0.526);
+  background-color: var(--headline-bg);
 }
 
 #loginBody,
@@ -76,6 +78,7 @@ body {
   justify-content: center;
 }
 
+
 #createBody {
   background-image: url(/assets/images/beach-water.webp);
 }
@@ -91,7 +94,7 @@ header {
   margin-bottom: 1rem;
   padding: var(--small-padding);
   border-radius: 3px;
-  color: var(--header-text-color);
+  color: var(--font-color);
   max-height: 10px;
 }
 
@@ -103,7 +106,7 @@ header {
 }
 
 .logo a:hover {
-  color: var(--lighter-font-color);
+  color: var(--lighter-font-color);++
 }
 
 #home-header {
@@ -136,16 +139,19 @@ header {
   object-fit: cover;
 }
 
-.headline h1 {
-  font-size: var(--font-size-xl);
+.headline h1,
+#editBody h1 {
+  font-size: var(--font-size-xxl);
   margin-bottom: 0.5rem;
   color: var(--lighter-font-color);
   margin-top: 0;
+  font-weight: 800;
+  padding: 0.5rem;
 }
 
 .headline p {
   font-size: var(--font-size-md);
-  margin: 10px 0 0;
+  font-weight: 400;
 }
 
 .gallery {
@@ -215,7 +221,7 @@ header {
   bottom: 0;
   margin: auto;
   height: 4rem;
-  background-color: var(--font-color);
+  background-color: var(--lighter-font-color);
   border: none;
   width: 3rem;
   font-size: 3rem;
@@ -262,7 +268,6 @@ header {
   overflow: hidden;
   margin: 1rem;
   background: rgba(255, 255, 255, 0.088);
-  border: 1px solid pink;
   width: 100px;
   cursor: pointer;
   border-radius: 10px;
@@ -273,7 +278,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: var(--small-padding);
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-md);
   font-weight: 600;
   color: var(--font-color);
   background: rgba(255, 255, 255, 0.575);
@@ -306,8 +311,7 @@ header {
   font-size: var(--font-size-xxs);
   font-weight: 500;
   padding: var(--medium-padding);
-  border-top: 1px solid var(--border-top-color);
-  background: var(--item-background);
+  border-top: 2px solid var(--pink-highlight-color);
   transition: background 0.3s;
 }
 
@@ -404,7 +408,7 @@ header {
 
 .edit-post:hover {
   background-color: var(--edit-button-hover-bg);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .delete-post {
@@ -422,7 +426,7 @@ header {
 
 .delete-post:hover {
   background-color: var(--delete-button-hover-bg);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .search-button {
@@ -445,7 +449,7 @@ header {
 button {
   padding: var(--large-padding);
   background-color: var(--pink-highlight-color);
-  color: rgb(0, 0, 0);
+  color: var(--font-color);
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -458,6 +462,14 @@ button:hover {
   background-color: var(--yellow-hover-color);
 }
 
+#editBody form button {
+background-color: var(--edit-button-bg);
+}
+
+#editBody form button:hover {
+  background-color: var(--edit-button-hover-bg)
+}
+
 .logout-button {
   padding: var(--other-main-padding);
   font-size: var(--font-size-xxs);
@@ -466,7 +478,6 @@ button:hover {
 
 .login-button {
   background-color: var(--login-button-bg);
-  padding: var(--medium-padding);
 }
 
 .login-button:hover {
@@ -505,7 +516,7 @@ button:hover {
 
 .grid-post img {
   width: 100%;
-  height: 300px;
+  height: 500px;
   object-fit: cover;
   margin-bottom: 0.5rem;
 }
@@ -530,8 +541,9 @@ button:hover {
   padding: var(--main-padding);
 }
 
-#contact h2 {
+#contact h3 {
   padding-left: 1rem;
+  font-size: var(--font-size-sm);
   font-weight: 600;
 }
 
@@ -556,13 +568,12 @@ button:hover {
 /* Create headline*/
 .create-headline {
   background-color: var(--yellow-hover-color);
-  color: var(--text-on-primary);
+  color: var(--lighter-font-color);
   padding: var(--extra-large-padding);
   margin: 1rem;
   border-radius: 8px;
   text-align: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  font-family: "Montserrat", sans-serif;
 }
 
 .create-headline h2 {
@@ -614,7 +625,7 @@ button:hover {
   display: block;
   font-style: italic;
   color: #760e68;
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-xxs);
   margin-top: 5px;
   padding: var(--extra-extra-small-padding);
 }
@@ -633,6 +644,7 @@ button:hover {
 
 .main-post .post-title {
   font-size: var(--font-size-lg);
+  font-weight: 700;
 }
 
 .main-post .post-text {
@@ -644,6 +656,7 @@ button:hover {
   font-size: var(--font-size-sm);
   margin-bottom: 0rem;
   margin-top: 2rem;
+  font-weight: 600;
 }
 
 .sr-only {
@@ -665,13 +678,15 @@ button:hover {
 
 .copy-button {
   background-color: var(--yellow-hover-color);
-  color: rgb(58, 58, 58);
-  border-radius: 0.25rem;
+  color: var(--lighter-font-color);
+  border-radius: 4px;
   padding: var(--extra-small-padding);
   cursor: pointer;
   border: none;
   transition: background-color 0.3s ease-in-out;
   margin-left: 0.2rem;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
 }
 
 .copy-button:hover {
@@ -685,8 +700,9 @@ button:hover {
 }
 
 .post-title {
-  font-weight: bold;
+  font-weight: 700;
   margin-bottom: 5px;
+  font-size: var(--font-size-sm);
 }
 
 /* Loader -- Somewhat based on https://css-loaders.com/spinner/ */
@@ -793,7 +809,7 @@ nav a {
 form {
   display: flex;
   flex-direction: column;
-  max-width: 500px;
+  max-width: 475px;
   margin: 0 auto;
   background-color: #fff;
   padding: 3rem;
@@ -832,9 +848,11 @@ textarea {
   height: 150px;
 }
 
-form h1 {
+form h1, form h2 {
   margin: 0.5rem;
   text-align: center;
+  font-size: var(--font-size-l);
+  font-weight: 700;
 }
 
 .editFormHidden {
@@ -852,6 +870,7 @@ form h1 {
 .choose-container {
   display: flex;
   flex-direction: row;
+  align-items: center;
   padding: 2rem;
   background-color: rgba(254, 253, 253, 0.49);
   color: var(--font-color);
@@ -865,14 +884,13 @@ form h1 {
   border: 1px solid grey;
   border-radius: 5px;
   cursor: pointer;
-  background-color: var(--choose-button-bg);
+  background-color: var(--search-button-bg);
   color: var(--font-color);
   transition: background-color 0.3s;
-  width: 200px;
 }
 
 .choose-container button:hover {
-  background-color: var(--choose-button-hover-bg);
+  background-color: var(--search-button-hover-bg);
 }
 
 /* Messages / Alerts */
@@ -1024,5 +1042,13 @@ form h1 {
 
   .choose-container button {
     width: 200px;
+  }
+
+  .headline h1 {
+    margin-right: 2rem;
+  }
+
+  .headline p {
+    margin-left: 0.5rem;
   }
 }
