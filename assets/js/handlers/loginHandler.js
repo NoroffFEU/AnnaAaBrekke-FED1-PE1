@@ -70,7 +70,12 @@ export function setLoginFormListener() {
 
         // Append
         bodyContainer.appendChild(chooseWhereNext);
-        document.body.appendChild(bodyContainer);
+
+        // Insert bodyContainer before the footer
+        document.body.insertBefore(
+          bodyContainer,
+          document.querySelector("footer")
+        );
       } catch (error) {
         console.error("Login failed:", error);
         showErrorAlert("Login failed: " + error.message);

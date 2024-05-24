@@ -31,6 +31,7 @@ export async function fetchAndDisplaySinglePost(postId) {
     const post = response.data;
 
     console.log("Post data received:", post);
+    updateMeta(post);
     displaySinglePost(post); // Display the fetched post
   } catch (error) {
     console.error("Error fetching or displaying single post:", error);
@@ -39,6 +40,11 @@ export async function fetchAndDisplaySinglePost(postId) {
     console.log("Calling hideLoader");
     hideLoader();
   }
+}
+
+// Function to chenge or update the meta dynamiccaly
+function updateMeta(post) {
+  document.title = `${post.title} - Wherever Forever`;
 }
 
 // Function to display a single post in the DOM
@@ -50,6 +56,11 @@ function displaySinglePost(post) {
   const imgSrc = post.media && post.media.url ? post.media.url : defaultImage;
   const imgAlt =
     post.media && post.media.alt ? post.media.alt : "Default image description";
+
+  const author =
+    typeof post.author === "object"
+      ? post.author.name || "Anonymous"
+      : post.author || "Anonymous";
 
   // Generate HTML for tags if available
   let tagsHtml = "";
@@ -70,7 +81,7 @@ function displaySinglePost(post) {
   postHeader.innerHTML = `
     <img class="post-img" src="${imgSrc}" alt="${imgAlt}" />
     <h1 class="post-title">${post.title}</h1>
-    <div class="post-author"${post.author}</div>
+    <div class="post-author">${author}</div>
     <time class="post-date" datetime="${post.created}">${new Date(
     post.updated
   ).toLocaleDateString()}</time>

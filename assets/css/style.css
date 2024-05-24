@@ -74,9 +74,7 @@ body {
 
 #editBody .post-container {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 1rem;
-  margin: 5rem;
+  grid-template-columns: repeat(3, 1fr);
   justify-content: center;
 }
 
@@ -116,7 +114,7 @@ footer img {
   background-color: var(--headline-bg);
   padding: var(--main-padding);
   border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px px rgba(0, 0, 0, 0.1);
 }
 
 .headline .column {
@@ -125,7 +123,7 @@ footer img {
 }
 
 .headline img {
-  border-radius: 7px;
+  border-radius: 8px;
   width: 100%;
   max-width: 500px;
   height: auto;
@@ -159,7 +157,7 @@ footer img {
   width: 100%;
   height: auto;
   border-radius: 5px;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Carousel */
@@ -182,6 +180,7 @@ footer img {
   height: auto;
   background-color: var(--slide-container-bg);
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
+  scroll-behavior: smooth;
 }
 
 .slide {
@@ -379,10 +378,21 @@ footer img {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-.tag:hover {
+.filter-buttons .tag:hover {
   background-color: var(--pink-highlight-color);
   color: #fff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.grid-post .tag:hover,
+.main-post .tag:hover {
+  background-color: var(--tag-read-button-bg);
+  color: var(--lighter-font-color);
+}
+
+.grid-post .tag,
+.main-post .tag {
+  pointer-events: none;
 }
 
 .edit-post {
@@ -581,10 +591,10 @@ button:hover {
   max-width: 700px;
   margin: 3rem auto;
   padding: var(--extra-large-padding);
-  background-color: #f8f9faf0;
-  border: 1px solid #dee2e6;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   color: var(--lighter-font-color);
   line-height: 1.6;
   text-align: center;
@@ -595,13 +605,6 @@ button:hover {
   height: 500px;
   object-fit: cover;
   border-radius: 5px;
-}
-
-.post-img {
-  width: 100%;
-  height: 200px;
-  object-fit: contain;
-  cursor: pointer;
 }
 
 .post-info {
@@ -913,19 +916,20 @@ form h2 {
 /* Media Queries */
 
 /* Smaller devices (phones, 600px and down) */
-@media (max-width: 600px) {
+@media (max-width: 601px) {
   header,
   footer,
   #editBody {
     padding: var(--other-main-padding);
   }
 
-  header .logo {
-    font-size: var(--font-size-md);
-  }
-
   #homeBody .post-container {
     grid-template-columns: 1fr;
+  }
+
+  .headline {
+    flex-direction: column;
+    text-align: center;
   }
 
   .choose-container {
@@ -951,10 +955,14 @@ form h2 {
     width: 100%;
     margin-bottom: 10px;
   }
+
+  #editBody .post-container {
+    grid-template-columns: 1fr; /* 1 column on small screens */
+  }
 }
 
 /* Medium devices (tablets, 601px to 992px) */
-@media (max-width: 992px) {
+@media (min-width: 601px) and (max-width: 992px) {
   body {
     background-size: cover;
     background-position: bottom;
@@ -972,17 +980,16 @@ form h2 {
     padding: var(--main-padding);
   }
 
-  header .logo {
-    font-size: var(--font-size-sm);
-  }
-
   .choose-container {
     flex-direction: column;
   }
 
-  #editBody .post-container,
   .post-container {
     grid-template-columns: 1fr;
+  }
+
+  #editBody .post-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
   }
 
   .headline {
@@ -1009,21 +1016,18 @@ form h2 {
   }
 }
 
-/* Large devices (desktops, 993px and up) - DO I NEED THIS??? */
-@media (min-width: 993px) {
+/* Large devices (desktops, 993px and up) */
+@media (min-width: 993px) and (max-width: 1200px){
   header,
   footer,
   #editBody {
     padding: var(--extra-large-padding);
   }
 
-  .choose-container {
-    flex-direction: row;
-  }
-
-  #editBody .post-container,
-  .post-container {
-    grid-template-columns: 1fr 1fr 1fr;
+  .post-title-container,
+  #editBody .post-title-container {
+    min-height: 90px;
+    max-height: 90px;
   }
 
   .choose-container button {
@@ -1037,4 +1041,5 @@ form h2 {
   .headline p {
     margin-left: 0.5rem;
   }
+
 }
