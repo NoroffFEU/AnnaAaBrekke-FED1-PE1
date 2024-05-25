@@ -9,3 +9,5 @@ export function redirectToPostPageFromCreate(postId) {
 export function redirectToLoginPage() {
   window.location.href = `../account/login.html`;
 }
+
+

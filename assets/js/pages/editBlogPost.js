@@ -3,6 +3,8 @@ import { sortPostByNewest } from "../utils/sort.js";
 import { setupEditFormEventHandler } from "../handlers/eventHandlers.js";
 import { hideLoader, showLoader } from "../utils/loading.js";
 import { showErrorAlert } from "../utils/alerts.js";
+import { isLoggedIn } from "../api/loginApi.js";
+import { redirectToLoginPage } from "../utils/routing.js";
 
 let editPosts = [];
 
@@ -52,12 +54,27 @@ function setupSearch(posts) {
       );
       return titleSearch || tagsSearch;
     });
-    displayPosts(filteredPosts, true); // Reuse your existing function to display filtered posts
+    displayPosts(filteredPosts, true);
   });
 }
 
-// Setup event handlers and fetch posts for editing on DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {
+  // Check if the user is on the register, edit or create page
+  const currentPage = window.location.pathname;
+  if (
+    currentPage.includes("edit.html") ||
+    currentPage.includes("create.html") ||
+    currentPage.includes("register.html")
+  ) {
+    // Redirect to login page if not logged in
+    if (!isLoggedIn()) {
+      showErrorAlert("You need to be logged in to access this page");
+      redirectToLoginPage();
+    }
+    return;
+  }
+
+  // Setup event handlers and fetch posts for editing on DOMContentLoaded
   setupEditFormEventHandler();
   fetchAndDisplayPostsForEdit();
 });

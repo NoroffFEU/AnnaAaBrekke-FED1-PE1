@@ -10,7 +10,7 @@
   --white-color: #ffffff;
 
   --alert-success-bg: rgb(114, 216, 107);
-  --alert-error-bg: rgb(140, 134, 134);
+  --alert-error-bg: rgb(251, 74, 74);
 
   --tag-read-button-bg: #f2f2f2e2;
   --edit-button-bg: rgb(117, 193, 223, 0.89);
@@ -874,20 +874,26 @@ form h2 {
 /* Messages / Alerts */
 
 .alert {
-  padding: var(--other-padding);
+  padding: var(--extra-large-padding);
   border-radius: 7px;
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
   color: var(--font-color);
   text-align: center;
   position: fixed;
-  top: 2rem;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   z-index: 1000;
-  width: 50%;
-  max-width: 600px;
+  height: auto;
+  width: 80vh;
+  max-width: 800px;
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity 0.3s, top 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
 }
 
 .alert-success {
@@ -895,11 +901,12 @@ form h2 {
 }
 
 .alert-error {
-  background-color: var(--alert-error-bg);
+  background-color: var(--delete-button-hover-bg);
 }
 
 .alert.show {
   opacity: 1;
+  top: 40%;
 }
 
 /* Media Queries */

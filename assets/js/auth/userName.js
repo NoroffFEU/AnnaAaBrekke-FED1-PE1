@@ -7,5 +7,6 @@ export function getName() {
   } catch (error) {
     console.error("Error reading user name from localStorage:", error);
   }
+  
   return "Serena"; // Default name
 }
