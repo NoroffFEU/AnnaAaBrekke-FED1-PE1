@@ -69,7 +69,7 @@ export function setLoginFormListener() {
         registerNewUserButton.textContent = "Register New User";
         registerNewUserButton.classList.add("register-button");
         registerNewUserButton.addEventListener("click", () => {
-          window.location.href = "/account/register.html";
+          window.location.href = "./register.html";
         });
 
         // Append buttons to the navigation div

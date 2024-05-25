@@ -5,11 +5,10 @@ import { hideLoader, showLoader } from "../utils/loading.js";
 import { showErrorAlert } from "../utils/alerts.js";
 import { checkLoginAndRedirect } from "../api/loginApi.js";
 
-
 let editPosts = [];
 
 function isEditPage() {
-  return document.body.id === "editBody";
+  return document.body.id === 'editBody';
 }
 
 // Fetch and display posts to select for editing
@@ -45,6 +44,7 @@ export async function fetchAndDisplayPostsForEdit() {
   }
 }
 
+
 // Sources used (https://www.youtube.com/watch?v=TlP5WIxVirU and https://blog.openreplay.com/implementing-live-search-functionality-in-javascript/)
 // Function to setup search functionality for title and tags
 function setupSearch(posts) {
@@ -69,6 +69,9 @@ function setupSearch(posts) {
     console.error("Search input element not found");
   }
 }
+
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
   if (!isEditPage()) return;

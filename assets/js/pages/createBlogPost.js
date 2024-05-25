@@ -292,7 +292,5 @@ export function initCreatePage() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  checkLoginAndRedirect();
-  // Initialize the create page
   initCreatePage();
 });
