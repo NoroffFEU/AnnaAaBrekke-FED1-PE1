@@ -1,5 +1,11 @@
 # FED1 Project Exam 1
 
+https://norofffeu.github.io/AnnaAaBrekke-FED1-PE1/
+https://norofffeu.github.io/AnnaAaBrekke-FED1-PE1/post/edit.html
+https://norofffeu.github.io/AnnaAaBrekke-FED1-PE1/post/create.html
+https://norofffeu.github.io/AnnaAaBrekke-FED1-PE1/account/login.html
+https://norofffeu.github.io/AnnaAaBrekke-FED1-PE1/account/register.html
+
 "Wherever Forever" Online Travel Blog
 
 Client

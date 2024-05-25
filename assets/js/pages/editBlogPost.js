@@ -8,6 +8,10 @@ import { checkLoginAndRedirect } from "../api/loginApi.js";
 
 let editPosts = [];
 
+function isEditPage() {
+  return document.body.id === "editBody";
+}
+
 // Fetch and display posts to select for editing
 export async function fetchAndDisplayPostsForEdit() {
   try {
@@ -44,21 +48,32 @@ export async function fetchAndDisplayPostsForEdit() {
 // Sources used (https://www.youtube.com/watch?v=TlP5WIxVirU and https://blog.openreplay.com/implementing-live-search-functionality-in-javascript/)
 // Function to setup search functionality for title and tags
 function setupSearch(posts) {
-  const searchInput = document.querySelector("[data-search]");
-  searchInput.addEventListener("input", (e) => {
-    const searchValue = e.target.value.toLowerCase();
-    const filteredPosts = posts.filter((post) => {
-      const titleSearch = post.title.toLowerCase().includes(searchValue);
-      const tagsSearch = post.tags.some((tag) =>
-        tag.toLowerCase().includes(searchValue)
-      );
-      return titleSearch || tagsSearch;
+  if (!isEditPage()) return;
+
+  console.log("Setting up search functionality");
+  const searchInput = document.getElementById("searchInput");
+  console.log("Search input element:", searchInput);
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      const searchValue = e.target.value.toLowerCase();
+      const filteredPosts = posts.filter((post) => {
+        const titleSearch = post.title.toLowerCase().includes(searchValue);
+        const tagsSearch = post.tags.some((tag) =>
+          tag.toLowerCase().includes(searchValue)
+        );
+        return titleSearch || tagsSearch;
+      });
+      displayPosts(filteredPosts, true);
     });
-    displayPosts(filteredPosts, true);
-  });
+  } else {
+    console.error("Search input element not found");
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  if (!isEditPage()) return;
+
+  console.log("DOM fully loaded and parsed");
   checkLoginAndRedirect();
   setupEditFormEventHandler();
   fetchAndDisplayPostsForEdit();

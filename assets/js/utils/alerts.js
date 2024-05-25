@@ -18,5 +18,5 @@ function showAlert(message, type) {
     setTimeout(() => {
       alertContainer.remove();
     }, 300); // Delay to allow the transition to complete
-  }, 3000);
+  }, 1000);
 }
