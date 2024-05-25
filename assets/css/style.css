@@ -609,6 +609,7 @@ button:hover {
   text-align: center;
 }
 
+.main-post .post-author,
 .post-info .post-author {
   display: block;
   font-style: italic;
