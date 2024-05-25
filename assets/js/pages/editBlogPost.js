@@ -3,8 +3,8 @@ import { sortPostByNewest } from "../utils/sort.js";
 import { setupEditFormEventHandler } from "../handlers/eventHandlers.js";
 import { hideLoader, showLoader } from "../utils/loading.js";
 import { showErrorAlert } from "../utils/alerts.js";
-import { isLoggedIn } from "../api/loginApi.js";
-import { redirectToLoginPage } from "../utils/routing.js";
+import { checkLoginAndRedirect } from "../api/loginApi.js";
+
 
 let editPosts = [];
 
