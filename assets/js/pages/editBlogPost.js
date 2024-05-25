@@ -15,9 +15,11 @@ function isEditPage() {
 export async function fetchAndDisplayPostsForEdit() {
   try {
     showLoader();
+    console.log("Fetching and displaying posts for edit..."); // Debug log
 
     // Load posts from local storage
     editPosts = await loadCreatedPosts();
+    console.log("Loaded posts for edit:", editPosts); // Debug log
 
     // Check if there are any posts
     if (!editPosts || editPosts.length === 0) {
@@ -40,7 +42,6 @@ export async function fetchAndDisplayPostsForEdit() {
   }
 }
 
-// Sources used (https://www.youtube.com/watch?v=TlP5WIxVirU and https://blog.openreplay.com/implementing-live-search-functionality-in-javascript/)
 // Function to setup search functionality for title and tags
 function setupSearch(posts) {
   if (!isEditPage()) return;
@@ -64,9 +65,11 @@ function setupSearch(posts) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  if (!isEditPage()) return;
-
-  checkLoginAndRedirect();
-  setupEditFormEventHandler();
-  fetchAndDisplayPostsForEdit();
+  if (isEditPage()) {
+    console.log("Edit page loaded"); // Debug log
+    checkLoginAndRedirect().then(() => {
+      setupEditFormEventHandler();
+      fetchAndDisplayPostsForEdit();
+    });
+  }
 });

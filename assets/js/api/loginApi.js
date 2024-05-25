@@ -62,18 +62,24 @@ export function isLoggedIn(redirectIfNotLoggedIn = false) {
   return false; // User is not logged in
 }
 
-// Function to initialize the create page
 export function checkLoginAndRedirect() {
-  const currentPage = window.location.pathname;
-  if (
-    currentPage.includes("edit.html") ||
-    currentPage.includes("create.html") ||
-    currentPage.includes("register.html")
-  ) {
-    // Redirect to login page if not logged in
-    if (!isLoggedIn()) {
-      showErrorAlert("You need to be logged in to access this page");
-      redirectToLoginPage();
+  return new Promise((resolve, reject) => {
+    const currentPage = window.location.pathname;
+    if (
+      currentPage.includes("edit.html") ||
+      currentPage.includes("create.html") ||
+      currentPage.includes("register.html")
+    ) {
+      // Redirect to login page if not logged in
+      if (!isLoggedIn()) {
+        showErrorAlert("You need to be logged in to access this page");
+        redirectToLoginPage();
+        reject("User not logged in");
+      } else {
+        resolve("User logged in");
+      }
+    } else {
+      resolve("No login required for this page");
     }
-  }
+  });
 }

@@ -265,14 +265,15 @@ export async function fetchAndDisplayPosts() {
 
 // Function to initialize the create page
 export function initCreatePage() {
-  checkLoginAndRedirect();
-  showLoader();
-  loadCreatedPosts();
-  displayPosts(locallyCreatedPosts, false, -1);
-  createFormHandler();
-  hideLoader();
+  checkLoginAndRedirect().then(() => {
+    showLoader();
+    const posts = loadCreatedPosts();
+    console.log("Loaded posts for create page:", posts); // Debug log
+    displayPosts(posts, false, -1);
+    createFormHandler();
+    hideLoader();
+  });
 }
-
 document.addEventListener("DOMContentLoaded", () => {
   initCreatePage();
 });
