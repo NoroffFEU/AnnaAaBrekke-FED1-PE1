@@ -15,6 +15,9 @@ export async function deletePostApi(postId) {
 
     if (response.status === 204) {
       return true; // Indicate successful delete
+    } else if (response.status === 404) {
+      console.warn("Post not found. It might have been deleted already.");
+      return false; // Indicate post was not found
     } else {
       const errorMessage = await response.text();
       throw new Error(`Failed to delete post: ${errorMessage}`);

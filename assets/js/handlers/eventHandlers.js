@@ -230,13 +230,14 @@ export async function handleDeleteClick(post, locallyCreatedPosts) {
       const isDeleted = await deletePostApi(postId);
       if (isDeleted) {
         showSuccessAlert("Post deleted successfully!");
-
-        locallyCreatedPosts = locallyCreatedPosts.filter(
-          (p) => p.id !== postId
-        );
-        saveCreatedPosts(locallyCreatedPosts);
-        displayPosts(locallyCreatedPosts, true, -1);
+      } else {
+        showErrorAlert("Post not found. It might have been deleted already.");
       }
+
+      // Update locally created posts regardless of whether the post was found or not
+      locallyCreatedPosts = locallyCreatedPosts.filter((p) => p.id !== postId);
+      saveCreatedPosts(locallyCreatedPosts);
+      displayPosts(locallyCreatedPosts, true, -1);
     } catch (error) {
       console.error(`Failed to delete post with ID ${postId}:`, error);
       showErrorAlert("Failed to delete post. Please try again.");
