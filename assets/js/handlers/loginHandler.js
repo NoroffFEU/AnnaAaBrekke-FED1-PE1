@@ -4,7 +4,6 @@ import { showErrorAlert } from "../utils/alerts.js";
 // Function to set the event listener for the login form
 export function setLoginFormListener() {
   const form = document.getElementById("loginForm");
-  console.log("Login form found.");
 
   if (form) {
     form.addEventListener("submit", async (event) => {
@@ -20,7 +19,6 @@ export function setLoginFormListener() {
       }
 
       const loginData = { email, password }; // Creating an object with login data
-      console.log("Login Data:", loginData);
 
       try {
         const loginResponse = await saveLogin(loginData); // Call saveLogin with the login data

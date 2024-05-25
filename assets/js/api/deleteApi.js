@@ -14,7 +14,6 @@ export async function deletePostApi(postId) {
     });
 
     if (response.status === 204) {
-      console.log("Post deleted successfully");
       return true; // Indicate successful delete
     } else {
       const errorMessage = await response.text();

@@ -1,12 +1,16 @@
-# FED1 Project Exam 1
+# FED1 Project Exam 1: "Wherever Forever" Online Travel Blog
 
-https://norofffeu.github.io/AnnaAaBrekke-FED1-PE1/
-https://norofffeu.github.io/AnnaAaBrekke-FED1-PE1/post/edit.html
-https://norofffeu.github.io/AnnaAaBrekke-FED1-PE1/post/create.html
-https://norofffeu.github.io/AnnaAaBrekke-FED1-PE1/account/login.html
-https://norofffeu.github.io/AnnaAaBrekke-FED1-PE1/account/register.html
+- https://norofffeu.github.io/AnnaAaBrekke-FED1-PE1/
 
-"Wherever Forever" Online Travel Blog
+- https://norofffeu.github.io/AnnaAaBrekke-FED1-PE1/post/edit.html
+
+- https://norofffeu.github.io/AnnaAaBrekke-FED1-PE1/post/create.html
+
+- https://norofffeu.github.io/AnnaAaBrekke-FED1-PE1/account/login.html
+
+- https://norofffeu.github.io/AnnaAaBrekke-FED1-PE1/account/register.html
+
+Project to transform Serena's personal travel diaries into an engaging online platform for sharing her travel experiences, complete with interactive features and user-friendly design.
 
 Client
 
@@ -36,7 +40,7 @@ Blog Post Public Page (/post/index.html):
 
 Blog Post Edit Page (/post/edit.html):
 
-- Accessible only when the owner is logged in.
+- Accessible only when the owner is logged in.✅
 - Includes a delete button that sends a DELETE request to an API.✅
 - Contains an edit form to update the title, body, and image via PUT request.✅
 
@@ -47,5 +51,3 @@ Account Login Page (/account/login.html):
 Account Register Page (/account/register.html):
 
 - Register form for creating a new account with name, email, and password. (Registration system for future team members to create accounts and post content.) ✅
-
-For the user (public visitor), there's no need for them to log in. They will simply access the public endpoints, such as fetching posts, without authentication. For the owner (manager of the blog), they need to log in to access certain features like creating or managing posts. After logging in, they will receive an access token that they can use to authenticate their requests to protected endpoints, such as creating or updating posts.

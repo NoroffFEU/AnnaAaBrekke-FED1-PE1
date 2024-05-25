@@ -25,14 +25,12 @@ export function addSortButtonsEventListener(posts) {
 
   // Event listener for sorting by newest
   sortNew.addEventListener("click", async () => {
-    console.log("Sorting posts by newest");
     showLoader();
 
     try {
       if (Array.isArray(posts.data)) {
         const sortedPosts = sortPostByNewest([...posts.data]);
         displayPosts(sortedPosts);
-        console.log("Displayed posts sorted by newest");
       } else {
         console.error("Posts data is not an array.");
       }
@@ -45,14 +43,12 @@ export function addSortButtonsEventListener(posts) {
 
   // Event listener for sorting by oldest
   sortOld.addEventListener("click", async () => {
-    console.log("Sorting posts by oldest");
     showLoader();
 
     try {
       if (Array.isArray(posts.data)) {
         const sortedPosts = sortPostsByOldest([...posts.data]);
         displayPosts(sortedPosts);
-        console.log("Displayed posts sorted by oldest");
       } else {
         console.error("Posts data is not an array.");
       }
@@ -124,7 +120,6 @@ export async function handlePostClick(post) {
   } finally {
     hideLoader();
   }
-  console.log("Clicked post ID:", postId);
 }
 
 // Handle edit click events to edit post
@@ -134,16 +129,11 @@ export async function handleEditClick(post) {
   }
 
   try {
-    console.log("Showing loading indicator");
     showLoader();
     const postId = post.id;
     const name = getName();
 
-    console.log("Fetching post data for edit:", { name, postId });
-
     const response = await fetch(`${apiUrlUser}/${name}/${postId}`);
-    console.log("API response status:", response.status);
-
     if (!response.ok) {
       const errorMessage = await response.text();
       console.error("Error response text:", errorMessage);
@@ -151,7 +141,6 @@ export async function handleEditClick(post) {
     }
 
     const postData = await response.json();
-    console.log("The post data found:", postData);
 
     if (!postData || !postData.data) {
       throw new Error("Invalid post data structure");
@@ -173,8 +162,6 @@ export async function handleEditClick(post) {
       top: 0,
       behavior: "smooth",
     });
-
-    console.log("Edit form fields populated with post data:", postData);
   } catch (error) {
     console.error("Error handling edit click:", error);
     showErrorAlert("Failed to load post data for editing. Please try again.");
@@ -214,7 +201,6 @@ export async function setupEditFormEventHandler() {
         editPostForm.classList.add("editFormHidden");
 
         showSuccessAlert("Post updated successfully!");
-        console.log("Post updated successfully");
       } catch (error) {
         console.error("Failed to update post:", error);
         showErrorAlert("Failed to update post. Please try again.");
@@ -238,7 +224,6 @@ export async function handleDeleteClick(post, locallyCreatedPosts) {
       showLoader();
       const isDeleted = await deletePostApi(postId);
       if (isDeleted) {
-        console.log(`Post with ID: ${postId} deleted successfully.`);
         showSuccessAlert("Post deleted successfully!");
 
         locallyCreatedPosts = locallyCreatedPosts.filter(

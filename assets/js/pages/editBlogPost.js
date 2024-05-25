@@ -8,13 +8,12 @@ import { checkLoginAndRedirect } from "../api/loginApi.js";
 let editPosts = [];
 
 function isEditPage() {
-  return document.body.id === 'editBody';
+  return document.body.id === "editBody";
 }
 
 // Fetch and display posts to select for editing
 export async function fetchAndDisplayPostsForEdit() {
   try {
-    console.log("Showing loading indicator");
     showLoader();
 
     // Load posts from local storage
@@ -22,10 +21,8 @@ export async function fetchAndDisplayPostsForEdit() {
 
     // Check if there are any posts
     if (!editPosts || editPosts.length === 0) {
-      console.log("No posts in local storage");
       showErrorAlert("No posts available for editing.");
     } else {
-      console.log("Posts on edit page loaded");
       // Sort posts by newest
       editPosts = sortPostByNewest(editPosts);
       // Display posts with edit options
@@ -39,20 +36,16 @@ export async function fetchAndDisplayPostsForEdit() {
     // Display error message if posts fail to load
     showErrorAlert("Error loading posts. Please try again later.");
   } finally {
-    console.log("Hiding loading indicator");
     hideLoader();
   }
 }
-
 
 // Sources used (https://www.youtube.com/watch?v=TlP5WIxVirU and https://blog.openreplay.com/implementing-live-search-functionality-in-javascript/)
 // Function to setup search functionality for title and tags
 function setupSearch(posts) {
   if (!isEditPage()) return;
 
-  console.log("Setting up search functionality");
   const searchInput = document.getElementById("searchInput");
-  console.log("Search input element:", searchInput);
   if (searchInput) {
     searchInput.addEventListener("input", (e) => {
       const searchValue = e.target.value.toLowerCase();
@@ -70,13 +63,9 @@ function setupSearch(posts) {
   }
 }
 
-
-
-
 document.addEventListener("DOMContentLoaded", () => {
   if (!isEditPage()) return;
 
-  console.log("DOM fully loaded and parsed");
   checkLoginAndRedirect();
   setupEditFormEventHandler();
   fetchAndDisplayPostsForEdit();

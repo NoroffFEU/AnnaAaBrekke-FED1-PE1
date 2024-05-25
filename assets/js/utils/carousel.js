@@ -5,11 +5,8 @@ import { handlePostClick } from "../handlers/eventHandlers.js";
 // Function to create a carousel of the latest posts
 export function latestPostsCarousel(posts) {
   try {
-    console.log("Latest posts selected:", posts);
-
     const carouselContainer = document.getElementById("slidesContainer");
     carouselContainer.innerHTML = "";
-    console.log("Carousel container cleared");
     const defaultImage = `https://placehold.co/600x400`;
 
     // Iterate over each post to create carousel slides
@@ -47,7 +44,6 @@ export function latestPostsCarousel(posts) {
 
       // Append the slide to the carousel container
       carouselContainer.appendChild(li);
-      console.log(`Slides added for post: ${post.id}`);
 
       // Add event listener for "Read More" button
       const readMoreButton = li.querySelector(".read-more");
@@ -55,7 +51,6 @@ export function latestPostsCarousel(posts) {
         handlePostClick(post); // Handle the post click event
       });
     });
-    console.log("Carousel has been created");
   } catch (error) {
     console.error("Error creating latest posts carousel:", error);
   }

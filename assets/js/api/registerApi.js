@@ -17,9 +17,7 @@ export async function register(registerData) {
     console.error(`Registration failed: ${errorText}`);
     throw new Error(`HTTP error! Status: ${response.status}`);
   }
+
   const { data } = await response.json();
-  console.log("Received registration response data:", data);
   return data;
 }
-
-// HereYouGo

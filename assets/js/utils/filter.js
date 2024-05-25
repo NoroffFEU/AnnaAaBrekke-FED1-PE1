@@ -24,7 +24,6 @@ export async function createFilterButtons() {
     button.value = tag;
     button.textContent = tag;
     button.addEventListener("click", () => {
-      console.log(`Button clicked: ${tag}`);
       try {
         filterPostsByTag(tag);
       } catch (error) {

@@ -25,7 +25,6 @@ export async function editPostApi(postId, formData) {
     }
 
     const editedPost = await response.json();
-    console.log("Updated post:", editedPost);
     await fetchAndDisplayPostsForEdit();
   } catch (error) {
     console.error("Error updating post:", error);

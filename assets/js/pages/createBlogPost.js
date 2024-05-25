@@ -13,9 +13,6 @@ import { latestPostsCarousel } from "../utils/carousel.js";
 import { sortPostByNewest } from "../utils/sort.js";
 import { checkLoginAndRedirect } from "../api/loginApi.js";
 
-// Logging the API URL for debugging
-console.log(apiUrlUser);
-
 // Get the user's name
 const name = getName();
 let locallyCreatedPosts = [];
@@ -37,7 +34,6 @@ export function loadCreatedPosts() {
       localStorage.removeItem("posts"); // Clear invalid data from localStorage
     }
   } else {
-    console.log("No posts found in local storage.");
     locallyCreatedPosts = [];
   }
   return locallyCreatedPosts;
@@ -98,13 +94,11 @@ export function displayPosts(posts, isEditPage = false, limit = 12) {
           .querySelector(".edit-post")
           .addEventListener("click", () => {
             handleEditClick(post);
-            console.log("Clicked id", post.id);
           });
         postElement
           .querySelector(".delete-post")
           .addEventListener("click", () => {
             handleDeleteClick(post);
-            console.log("Clicked delete button, name and id:", post.id);
           });
       } else {
         postElement
@@ -116,8 +110,6 @@ export function displayPosts(posts, isEditPage = false, limit = 12) {
 
       postContainer.appendChild(postElement);
     });
-  } else {
-    console.log("No posts to display");
   }
 }
 
@@ -144,8 +136,6 @@ function createPostElement(post, isEditPage = false) {
         return `<button class="tag" value="${tagLabel}">${tagLabel}</button>`;
       })
       .join("");
-  } else {
-    console.log("No tags to display or tags are not in expected format.");
   }
 
   const author =
@@ -198,13 +188,11 @@ function createPostElement(post, isEditPage = false) {
 function createFormHandler() {
   const form = document.getElementById("createPostForm");
   if (!form) {
-    console.log("No form expected on this page, none found.");
     return;
   }
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    console.log("Form submission prevented.");
 
     const mediaUrl = document.getElementById("postImage").value;
     const mediaAlt = document.getElementById("postImageAlt").value;
@@ -218,12 +206,10 @@ function createFormHandler() {
     const body = document.getElementById("postContent").value;
 
     const postData = { media, title, author, tags, body };
-    console.log("Submitting post data:", postData);
 
     try {
       showLoader();
       const response = await createPost(name, postData);
-      console.log("Post created successfully:", response);
 
       locallyCreatedPosts.push({
         id: response.data.id,
@@ -255,18 +241,14 @@ function createFormHandler() {
 
 // Function to fetch and display posts
 export async function fetchAndDisplayPosts() {
-  console.log("fetchAndDisplayPosts started");
   let homePosts = [];
   try {
     showLoader();
     homePosts = loadCreatedPosts();
 
     if (!homePosts || homePosts.length === 0) {
-      console.log("No posts in local storage, fetching from server...");
       homePosts = await getPosts(name);
       saveCreatedPosts(homePosts.data);
-    } else {
-      console.log("Loaded posts from local storage");
     }
 
     homePosts = sortPostByNewest(homePosts);

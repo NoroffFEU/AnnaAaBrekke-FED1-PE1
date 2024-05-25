@@ -5,9 +5,7 @@ import { getName } from "../auth/userName.js";
 
 // Get URL parameters and extract post ID
 const urlParams = new URLSearchParams(window.location.search);
-console.log("The URL:", urlParams);
 const postId = urlParams.get("id");
-console.log("The link", postId);
 const name = getName();
 
 // Check if the script is running on the post page
@@ -18,7 +16,6 @@ if (window.location.pathname.includes("post/index.html")) {
     showErrorAlert("No post ID provided. Please check the URL and try again.");
   } else {
     // If post ID is found, fetch and display the post
-    console.log("Fetching single post with ID:", postId);
     fetchAndDisplaySinglePost(postId);
   }
 }
@@ -30,19 +27,17 @@ export async function fetchAndDisplaySinglePost(postId) {
     const response = await getSinglePost(name, postId); // Fetch single post data
     const post = response.data;
 
-    console.log("Post data received:", post);
     updateMeta(post);
     displaySinglePost(post); // Display the fetched post
   } catch (error) {
     console.error("Error fetching or displaying single post:", error);
     showErrorAlert("Failed to load post. Please try again later.");
   } finally {
-    console.log("Calling hideLoader");
     hideLoader();
   }
 }
 
-// Function to chenge or update the meta dynamiccaly
+// Function to change or update the meta dynamically
 function updateMeta(post) {
   document.title = `${post.title} - Wherever Forever`;
 }
@@ -71,8 +66,6 @@ function displaySinglePost(post) {
         return `<button class="tag" value="${tagLabel}">${tagLabel}</button>`;
       })
       .join("");
-  } else {
-    console.log("No tags to display or tags are not in expected format.");
   }
 
   // Create and append post header to the main content
@@ -107,7 +100,7 @@ function displaySinglePost(post) {
   const sharePost = document.createElement("div");
   sharePost.classList.add("share");
   sharePost.innerHTML = `
-      <h2 class = "share-title">Share this post</h2>
+      <h2 class="share-title">Share this post</h2>
     `;
 
   const shareInput = document.createElement("input");

@@ -12,8 +12,6 @@ export function setRegisterFormListener() {
       const formData = new FormData(event.target); // Get form data
       const registerData = Object.fromEntries(formData.entries()); // Convert form data to an object
 
-      console.log("Profile Data:", registerData);
-
       // Confirm Password validation
       if (registerData.password !== registerData.confirmPassword) {
         showErrorAlert("Registration failed: Passwords do not match.");
