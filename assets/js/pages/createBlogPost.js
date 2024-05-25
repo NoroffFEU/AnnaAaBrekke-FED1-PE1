@@ -11,6 +11,7 @@ import { hideLoader, showLoader } from "../utils/loading.js";
 import { getPosts } from "../api/getApi.js";
 import { latestPostsCarousel } from "../utils/carousel.js";
 import { sortPostByNewest } from "../utils/sort.js";
+import { checkLoginAndRedirect } from "../api/loginApi.js";
 
 // Logging the API URL for debugging
 console.log(apiUrlUser);
@@ -282,6 +283,7 @@ export async function fetchAndDisplayPosts() {
 
 // Function to initialize the create page
 export function initCreatePage() {
+  checkLoginAndRedirect();
   showLoader();
   loadCreatedPosts();
   displayPosts(locallyCreatedPosts, false, -1);
@@ -289,11 +291,8 @@ export function initCreatePage() {
   hideLoader();
 }
 
-// Event listener for DOMContentLoaded
-document.addEventListener("DOMContentLoaded", initCreatePage);
-
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initCreatePage);
-} else {
+document.addEventListener("DOMContentLoaded", () => {
+  checkLoginAndRedirect();
+  // Initialize the create page
   initCreatePage();
-}
+});

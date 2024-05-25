@@ -59,22 +59,7 @@ function setupSearch(posts) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Check if the user is on the register, edit or create page
-  const currentPage = window.location.pathname;
-  if (
-    currentPage.includes("edit.html") ||
-    currentPage.includes("create.html") ||
-    currentPage.includes("register.html")
-  ) {
-    // Redirect to login page if not logged in
-    if (!isLoggedIn()) {
-      showErrorAlert("You need to be logged in to access this page");
-      redirectToLoginPage();
-    }
-    return;
-  }
-
-  // Setup event handlers and fetch posts for editing on DOMContentLoaded
+  checkLoginAndRedirect();
   setupEditFormEventHandler();
   fetchAndDisplayPostsForEdit();
 });

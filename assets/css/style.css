@@ -461,6 +461,15 @@ button:hover {
   background-color: var(--login-button-hover-bg);
 }
 
+.body-after-login-container .register-button {
+  background-color: var(--pink-highlight-color);
+}
+
+.body-after-login-container .register-button:hover,
+.register-button:hover {
+  background-color: var(--yellow-hover-color);
+}
+
 .register-button {
   background-color: var(--pink-highlight-color);
   padding: var(--extra-small-padding);
@@ -757,6 +766,7 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 2rem;
 }
 
 .footer-nav {

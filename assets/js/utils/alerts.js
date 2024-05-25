@@ -14,12 +14,9 @@ function showAlert(message, type) {
   document.body.appendChild(alertContainer);
 
   setTimeout(() => {
-    alertContainer.classList.add("show");
+    alertContainer.classList.remove("show");
     setTimeout(() => {
-      alertContainer.classList.remove("show");
-      setTimeout(() => {
-        alertContainer.remove();
-      }, 300); // Delay to allow the transition to complete
-    }, 3000);
-  }, 100); // Small delay to ensure the class 'show' is added
+      alertContainer.remove();
+    }, 300); // Delay to allow the transition to complete
+  }, 3000);
 }

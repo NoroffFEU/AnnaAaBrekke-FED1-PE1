@@ -64,9 +64,18 @@ export function setLoginFormListener() {
           window.location.href = "../post/create.html";
         });
 
+        // Create "Register New User" nav button
+        const registerNewUserButton = document.createElement("button");
+        registerNewUserButton.textContent = "Register New User";
+        registerNewUserButton.classList.add("register-button");
+        registerNewUserButton.addEventListener("click", () => {
+          window.location.href = "/account/register.html";
+        });
+
         // Append buttons to the navigation div
         chooseWhereNext.appendChild(editNavButton);
         chooseWhereNext.appendChild(createNavButton);
+        chooseWhereNext.appendChild(registerNewUserButton);
 
         // Append
         bodyContainer.appendChild(chooseWhereNext);
