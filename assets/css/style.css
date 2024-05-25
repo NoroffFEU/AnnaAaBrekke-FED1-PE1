@@ -52,7 +52,7 @@ body {
 }
 
 #homeBody {
-  background-image: url(../assets/images/bg.png);
+  background-image: url(./images/bg.png);
   background-position: center top;
   background-repeat: no-repeat;
   background-color: var(--white-color);
@@ -60,13 +60,13 @@ body {
 
 #registerBody,
 #loginBody {
-  background-image: url(../assets/images/background-serena.webp);
+  background-image: url(./images/background-serena.webp);
 }
 
 #postBody,
 #editBody,
 #createBody {
-  background-image: url(../assets/images/beach-water.webp);
+  background-image: url(./images/beach-water.webp);
 }
 
 #editBody .post-container {
@@ -534,7 +534,7 @@ button:hover {
 }
 
 #homeBody form {
-  background-image: url(../assets/images/beach-water.webp);
+  background-image: url(./images/beach-water.webp);
 }
 
 .contact-form,
