@@ -219,7 +219,12 @@ export async function handleDeleteClick(post, locallyCreatedPosts) {
 
   const postId = post.id;
 
-  if (confirm("Are you sure you want to delete this post?")) {
+  // Confirmation dialog
+  const confirmation = confirm(
+    `Are you sure you want to delete the post titled "${post.title}"? This action cannot be undone.`
+  );
+
+  if (confirmation) {
     try {
       showLoader();
       const isDeleted = await deletePostApi(postId);
@@ -230,7 +235,7 @@ export async function handleDeleteClick(post, locallyCreatedPosts) {
           (p) => p.id !== postId
         );
         saveCreatedPosts(locallyCreatedPosts);
-        displayPosts(locallyCreatedPosts, true);
+        displayPosts(locallyCreatedPosts, true, -1);
       }
     } catch (error) {
       console.error(`Failed to delete post with ID ${postId}:`, error);
