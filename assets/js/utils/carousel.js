@@ -32,7 +32,7 @@ export function latestPostsCarousel(posts) {
           }" onError="this.onerror=null; this.src='${defaultImage}'" alt="${
         post.media.alt
       }" class="post-img">
-          <h2>${post.title}</h2>
+          <h1>${post.title}</h1>
           <p>${contentBody}</p>
           <div class="post-author">${author}</div>
           <time class="date-carousel">${new Date(
