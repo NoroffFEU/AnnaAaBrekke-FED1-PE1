@@ -16,7 +16,7 @@ import { hideLoader, showLoader } from "../utils/loading.js";
 import { addFilterButtonsEventListener } from "../utils/filter.js";
 import { showErrorAlert } from "../utils/alerts.js";
 
-const name = getName();
+const name = getName(); 
 
 // Function to fetch posts from the server and display them
 export async function fetchAndDisplayPosts() {
@@ -56,18 +56,15 @@ async function init() {
   addFilterButtonsEventListener(); // Add event listeners for filter buttons
 
   // Add click event listeners to each post
-  document.querySelectorAll(".post").forEach((post) => {
-    if (!post.dataset.listenerAdded) { // Check if listener is already added
-      post.addEventListener("click", () => handlePostClick(post)); // Handle post click
-      post.dataset.listenerAdded = true; 
-    }
+  const posts = document.querySelectorAll(".post");
+  posts.forEach((post) => {
+    post.addEventListener("click", () => {
+      handlePostClick(post); // Handle post click
+    });
   });
+
   hideLoader();
 }
 
-// Check if document is still loading and initialize accordingly
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", init); // Initialize when DOM content is loaded
-} else {
-  init(); // Initialize immediately if DOM is already loaded
-}
+// Initialize when DOM content is loaded
+document.addEventListener("DOMContentLoaded", init);
