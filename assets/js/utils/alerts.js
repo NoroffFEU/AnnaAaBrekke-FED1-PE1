@@ -14,9 +14,13 @@ function showAlert(message, type) {
   document.body.appendChild(alertContainer);
 
   setTimeout(() => {
+    alertContainer.classList.add("show");
+  }, 10);
+
+  setTimeout(() => {
     alertContainer.classList.remove("show");
     setTimeout(() => {
       alertContainer.remove();
-    }, 300); // Delay to allow the transition to complete
-  }, 1000);
+    }, 300);
+  }, 2000);
 }

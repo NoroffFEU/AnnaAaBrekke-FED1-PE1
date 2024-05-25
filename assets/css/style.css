@@ -897,14 +897,14 @@ form h2 {
   transform: translate(-50%, -50%);
   z-index: 1000;
   height: auto;
-  width: 80vh;
+  width: 50vh;
   max-width: 800px;
   opacity: 0;
   transition: opacity 0.3s, top 0.3s;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 3rem;
+  margin: 2rem;
 }
 
 .alert-success {

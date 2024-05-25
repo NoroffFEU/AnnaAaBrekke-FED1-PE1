@@ -239,7 +239,6 @@ export async function handleDeleteClick(post, locallyCreatedPosts) {
       saveCreatedPosts(locallyCreatedPosts);
       displayPosts(locallyCreatedPosts, true, -1);
     } catch (error) {
-      console.error(`Failed to delete post with ID ${postId}:`, error);
       showErrorAlert("Failed to delete post. Please try again.");
     } finally {
       hideLoader();
