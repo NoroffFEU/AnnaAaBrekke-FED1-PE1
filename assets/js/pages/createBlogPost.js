@@ -25,11 +25,19 @@ export function saveCreatedPosts(posts) {
   locallyCreatedPosts = posts;
 }
 
-// Load created posts from local storage
 export function loadCreatedPosts() {
   const storedPosts = localStorage.getItem("posts");
   if (storedPosts) {
-    locallyCreatedPosts = JSON.parse(storedPosts);
+    try {
+      locallyCreatedPosts = JSON.parse(storedPosts);
+    } catch (error) {
+      console.error("Error parsing posts from localStorage:", error);
+      locallyCreatedPosts = []; // Initialize as an empty array if parsing fails
+      localStorage.removeItem("posts"); // Clear invalid data from localStorage
+    }
+  } else {
+    console.log("No posts found in local storage.");
+    locallyCreatedPosts = [];
   }
   return locallyCreatedPosts;
 }

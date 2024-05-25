@@ -16,7 +16,7 @@ import { hideLoader, showLoader } from "../utils/loading.js";
 import { addFilterButtonsEventListener } from "../utils/filter.js";
 import { showErrorAlert } from "../utils/alerts.js";
 
-const name = getName();
+const name = getName(); 
 
 // Function to fetch posts from the server and display them
 export async function fetchAndDisplayPosts() {
