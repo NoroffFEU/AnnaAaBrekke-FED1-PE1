@@ -8,7 +8,7 @@ export function latestPostsCarousel(posts) {
     console.log("Latest posts selected:", posts);
 
     const carouselContainer = document.getElementById("slidesContainer");
-    carouselContainer.innerHTML = ""; 
+    carouselContainer.innerHTML = "";
     console.log("Carousel container cleared");
     const defaultImage = `https://placehold.co/600x400`;
 
@@ -38,9 +38,9 @@ export function latestPostsCarousel(posts) {
           <h2>${post.title}</h2>
           <p>${contentBody}</p>
           <div class="post-author">${author}</div>
-          <p class="date-carousel">${new Date(
+          <time class="date-carousel">${new Date(
             post.created
-          ).toLocaleDateString()}</p>
+          ).toLocaleDateString()}</time>
           <button class="read-more">Read More</button>
         </div>
       `;

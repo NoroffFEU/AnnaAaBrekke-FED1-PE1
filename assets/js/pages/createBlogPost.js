@@ -71,34 +71,31 @@ export async function createPost(name, postData) {
 }
 
 // Function to display posts in the DOM
-export function displayPosts(posts, isEditPage = false) {
+export function displayPosts(posts, isEditPage = false, limit = 12) {
   const postContainer = document.querySelector(".post-container");
   if (!postContainer) {
     console.error("post-container does not exist in the DOM.");
     return;
   }
-  postContainer.innerHTML = ""; 
+  postContainer.innerHTML = "";
 
   if (posts && posts.length > 0) {
-    posts.slice(0, 12).forEach((post) => {
+    const postsToDisplay = limit === -1 ? posts : posts.slice(0, limit);
+    postsToDisplay.forEach((post) => {
       const postElement = createPostElement(post, isEditPage);
 
       if (isEditPage) {
         postElement
           .querySelector(".edit-post")
           .addEventListener("click", () => {
-            handleEditClick(post, locallyCreatedPosts);
+            handleEditClick(post);
             console.log("Clicked id", post.id);
           });
         postElement
           .querySelector(".delete-post")
           .addEventListener("click", () => {
-            handleDeleteClick(post, locallyCreatedPosts);
-            console.log(
-              "Clicked delete button, name and id:",
-              getName(),
-              post.id
-            );
+            handleDeleteClick(post);
+            console.log("Clicked delete button, name and id:", post.id);
           });
       } else {
         postElement
@@ -116,7 +113,7 @@ export function displayPosts(posts, isEditPage = false) {
 }
 
 // Function to create a single post element
-function createPostElement(post, includeEditButtons = false) {
+function createPostElement(post, isEditPage = false) {
   const postData = post.data || post;
 
   const postElement = document.createElement("div");
@@ -152,13 +149,20 @@ function createPostElement(post, includeEditButtons = false) {
       <button class="read-more" data-id="${postData.id}">Check it out!</button>
     </div>`;
 
-  if (includeEditButtons) {
+  if (isEditPage) {
     moreButtonsHtml = `
       <div class="more-buttons">
         <button class="edit-post" data-id="${postData.id}">Edit</button>
         <button class="delete-post" data-id="${postData.id}">Delete</button>
       </div>`;
   }
+
+  const updatedTimeHtml = isEditPage
+    ? `
+    <time class="post-updated" datetime="${
+      postData.updated
+    }">Updated: ${new Date(postData.updated).toLocaleDateString()}</time>`
+    : "";
 
   postElement.innerHTML = `
     <div class="post-info">
@@ -167,9 +171,10 @@ function createPostElement(post, includeEditButtons = false) {
         <h3 class="post-title">${postData.title}</h3>
       </div>
       <div class="post-author">${author}</div>
-      <time class="post-date" datetime="${post.created}">${new Date(
-    post.updated
-  ).toLocaleDateString()}</time>
+      <time class="post-date" datetime="${
+        postData.created
+      }">Created: ${new Date(postData.created).toLocaleDateString()}</time>
+      ${updatedTimeHtml}
       <div class="tags-container">
         <div class="tags">${tagsHtml}</div>
       </div>
@@ -271,7 +276,7 @@ export async function fetchAndDisplayPosts() {
 export function initCreatePage() {
   showLoader();
   loadCreatedPosts();
-  displayPosts(locallyCreatedPosts, false);
+  displayPosts(locallyCreatedPosts, false, -1);
   createFormHandler();
   hideLoader();
 }

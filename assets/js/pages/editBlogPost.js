@@ -4,6 +4,8 @@ import { setupEditFormEventHandler } from "../handlers/eventHandlers.js";
 import { hideLoader, showLoader } from "../utils/loading.js";
 import { showErrorAlert } from "../utils/alerts.js";
 
+let editPosts = [];
+
 // Fetch and display posts to select for editing
 export async function fetchAndDisplayPostsForEdit() {
   try {
@@ -11,7 +13,7 @@ export async function fetchAndDisplayPostsForEdit() {
     showLoader();
 
     // Load posts from local storage
-    let editPosts = await loadCreatedPosts();
+    editPosts = await loadCreatedPosts();
 
     // Check if there are any posts
     if (!editPosts || editPosts.length === 0) {
@@ -22,7 +24,10 @@ export async function fetchAndDisplayPostsForEdit() {
       // Sort posts by newest
       editPosts = sortPostByNewest(editPosts);
       // Display posts with edit options
-      displayPosts(editPosts, true);
+      displayPosts(editPosts, true, -1);
+
+      // Search functionality
+      setupSearch(editPosts);
     }
   } catch (error) {
     console.error("Failed to load posts:", error);
@@ -32,6 +37,23 @@ export async function fetchAndDisplayPostsForEdit() {
     console.log("Hiding loading indicator");
     hideLoader();
   }
+}
+
+// Sources used (https://www.youtube.com/watch?v=TlP5WIxVirU and https://blog.openreplay.com/implementing-live-search-functionality-in-javascript/)
+// Function to setup search functionality for title and tags
+function setupSearch(posts) {
+  const searchInput = document.querySelector("[data-search]");
+  searchInput.addEventListener("input", (e) => {
+    const searchValue = e.target.value.toLowerCase();
+    const filteredPosts = posts.filter((post) => {
+      const titleSearch = post.title.toLowerCase().includes(searchValue);
+      const tagsSearch = post.tags.some((tag) =>
+        tag.toLowerCase().includes(searchValue)
+      );
+      return titleSearch || tagsSearch;
+    });
+    displayPosts(filteredPosts, true); // Reuse your existing function to display filtered posts
+  });
 }
 
 // Setup event handlers and fetch posts for editing on DOMContentLoaded

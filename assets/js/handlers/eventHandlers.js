@@ -1,5 +1,5 @@
 import { displayPosts, saveCreatedPosts } from "../pages/createBlogPost.js";
-import { sortPostByNewest, sortPostsByOldest } from "../utils/sort.js";
+import { sortPostsByOldest, sortPostByNewest } from "../utils/sort.js";
 import {
   redirectToPostPage,
   redirectToPostPageFromCreate,

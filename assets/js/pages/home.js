@@ -1,29 +1,29 @@
-import { getPosts } from "../api/getApi.js"; 
+import { getPosts } from "../api/getApi.js";
 import {
   saveCreatedPosts,
   loadCreatedPosts,
   displayPosts,
-} from "./createBlogPost.js"; 
-import { latestPostsCarousel } from "../utils/carousel.js"; 
-import { sortPostByNewest } from "../utils/sort.js"; 
+} from "./createBlogPost.js";
+import { latestPostsCarousel } from "../utils/carousel.js";
+import { sortPostByNewest } from "../utils/sort.js";
 import {
   addSortButtonsEventListener,
   handlePostClick,
   setupCarouselClickEvents,
-} from "../handlers/eventHandlers.js"; 
-import { getName } from "../auth/userName.js"; 
-import { hideLoader, showLoader } from "../utils/loading.js"; 
-import { addFilterButtonsEventListener } from "../utils/filter.js"; 
-import { showErrorAlert } from "../utils/alerts.js"; 
+} from "../handlers/eventHandlers.js";
+import { getName } from "../auth/userName.js";
+import { hideLoader, showLoader } from "../utils/loading.js";
+import { addFilterButtonsEventListener } from "../utils/filter.js";
+import { showErrorAlert } from "../utils/alerts.js";
 
-const name = getName(); 
+const name = getName();
 
 // Function to fetch posts from the server and display them
 export async function fetchAndDisplayPosts() {
   console.log("fetchAndDisplayPosts started");
   let homePosts = [];
   try {
-    showLoader(); 
+    showLoader();
 
     console.log("Loading posts from local storage...");
     homePosts = await loadCreatedPosts(); // Load posts from local storage
@@ -38,7 +38,7 @@ export async function fetchAndDisplayPosts() {
       console.log(`Loaded posts from local storage`);
     }
 
-    homePosts.data = sortPostByNewest(homePosts.data); // Sort posts by newest
+    sortPostByNewest(homePosts.data);
 
     console.log("Displaying posts...");
     displayPosts(homePosts.data, false, 12); // Display posts, limit to 12 on the home page
@@ -49,9 +49,9 @@ export async function fetchAndDisplayPosts() {
     console.log("Latest posts carousel created");
   } catch (error) {
     console.error("Failed to fetch posts:", error);
-    showErrorAlert("Failed to load posts. Please try again."); 
+    showErrorAlert("Failed to load posts. Please try again.");
   } finally {
-    hideLoader(); 
+    hideLoader();
   }
 
   return homePosts;
@@ -59,7 +59,7 @@ export async function fetchAndDisplayPosts() {
 
 // Initialize the application
 async function init() {
-  showLoader(); 
+  showLoader();
   console.log("Initializing application...");
   const homePosts = await fetchAndDisplayPosts(); // Fetch and display posts
   console.log("Posts fetched and displayed:", homePosts);
@@ -79,7 +79,7 @@ async function init() {
     });
   });
 
-  hideLoader(); 
+  hideLoader();
 }
 
 // Check if document is still loading and initialize accordingly

@@ -82,7 +82,10 @@ function displaySinglePost(post) {
     <img class="post-img" src="${imgSrc}" alt="${imgAlt}" />
     <h1 class="post-title">${post.title}</h1>
     <div class="post-author">${author}</div>
-    <time class="post-date" datetime="${post.created}">${new Date(
+    <time class="post-date" datetime="${post.created}">Created: ${new Date(
+    post.created
+  ).toLocaleDateString()}</time>
+    <time class="post-updated" datetime="${post.updated}">Updated: ${new Date(
     post.updated
   ).toLocaleDateString()}</time>
     <div class="tags">${tagsHtml}</div>
