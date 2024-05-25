@@ -263,17 +263,16 @@ export async function fetchAndDisplayPosts() {
   return homePosts;
 }
 
-// Function to initialize the create page
-export function initCreatePage() {
-  checkLoginAndRedirect().then(() => {
-    showLoader();
-    const posts = loadCreatedPosts();
-    console.log("Loaded posts for create page:", posts); // Debug log
-    displayPosts(posts, false, -1);
-    createFormHandler();
-    hideLoader();
-  });
-}
-document.addEventListener("DOMContentLoaded", () => {
-  initCreatePage();
-});
+// // Function to initialize the create page
+// export function initCreatePage() {
+//   checkLoginAndRedirect().then(() => {
+//     showLoader();
+//     const posts = loadCreatedPosts();
+//     displayPosts(posts, false, -1);
+//     createFormHandler();
+//     hideLoader();
+//   });
+// }
+// document.addEventListener("DOMContentLoaded", () => {
+//   initCreatePage();
+// });

@@ -1,9 +1,9 @@
 import { loadCreatedPosts, displayPosts } from "./createBlogPost.js";
 import { sortPostByNewest } from "../utils/sort.js";
-import { setupEditFormEventHandler } from "../handlers/eventHandlers.js";
+// import { setupEditFormEventHandler } from "../handlers/eventHandlers.js";
 import { hideLoader, showLoader } from "../utils/loading.js";
 import { showErrorAlert } from "../utils/alerts.js";
-import { checkLoginAndRedirect } from "../api/loginApi.js";
+// import { checkLoginAndRedirect } from "../api/loginApi.js";
 
 let editPosts = [];
 
@@ -15,11 +15,9 @@ function isEditPage() {
 export async function fetchAndDisplayPostsForEdit() {
   try {
     showLoader();
-    console.log("Fetching and displaying posts for edit..."); // Debug log
 
     // Load posts from local storage
     editPosts = await loadCreatedPosts();
-    console.log("Loaded posts for edit:", editPosts); // Debug log
 
     // Check if there are any posts
     if (!editPosts || editPosts.length === 0) {
@@ -64,12 +62,11 @@ function setupSearch(posts) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  if (isEditPage()) {
-    console.log("Edit page loaded"); // Debug log
-    checkLoginAndRedirect().then(() => {
-      setupEditFormEventHandler();
-      fetchAndDisplayPostsForEdit();
-    });
-  }
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//   if (isEditPage()) {
+//     checkLoginAndRedirect().then(() => {
+//       setupEditFormEventHandler();
+//       fetchAndDisplayPostsForEdit();
+//     });
+//   }
+// });
