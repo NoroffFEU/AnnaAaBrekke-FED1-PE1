@@ -62,11 +62,11 @@ function setupSearch(posts) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  if (isEditPage()) {
-    checkLoginAndRedirect().then(() => {
-      setupEditFormEventHandler();
-      fetchAndDisplayPostsForEdit();
-    });
-  }
-});
+// Function to initialize the edit page
+async function initializeEditPage() {
+  await checkLoginAndRedirect();
+  setupEditFormEventHandler();
+  await fetchAndDisplayPostsForEdit();
+}
+
+document.addEventListener("DOMContentLoaded", initializeEditPage);
