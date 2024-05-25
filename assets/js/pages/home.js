@@ -56,13 +56,12 @@ async function init() {
   addFilterButtonsEventListener(); // Add event listeners for filter buttons
 
   // Add click event listeners to each post
-  const posts = document.querySelectorAll(".post");
-  posts.forEach((post) => {
-    post.addEventListener("click", () => {
-      handlePostClick(post); // Handle post click
-    });
+  document.querySelectorAll(".post").forEach((post) => {
+    if (!post.dataset.listenerAdded) { // Check if listener is already added
+      post.addEventListener("click", () => handlePostClick(post)); // Handle post click
+      post.dataset.listenerAdded = true; 
+    }
   });
-
   hideLoader();
 }
 
