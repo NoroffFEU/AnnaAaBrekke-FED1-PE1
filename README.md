@@ -8,7 +8,7 @@ Client
 - Industry: Travel and Influencer Marketing
 - Business Size: Solo entrepreneur
 - Location: Global
-- Mission: To transform the personal travel diaries of Serena into an engaging travel blog that highlights places, activities, and unforgettable experiences. 
+- Mission: To transform the personal travel diaries of Serena into an engaging travel blog that highlights places, activities, and unforgettable experiences.
 
 Project Overview:
 Serena has approached us to digitize her written diaries and create an online platform where her adventures can be shared with a global audience. The envisioned blog will allow her to post her stories and experiences, complete with personal recommendations and reflections.
@@ -30,7 +30,7 @@ Blog Post Public Page (/post/index.html):
 
 Blog Post Edit Page (/post/edit.html):
 
-- Accessible only when the owner is logged in. 
+- Accessible only when the owner is logged in.
 - Includes a delete button that sends a DELETE request to an API.✅
 - Contains an edit form to update the title, body, and image via PUT request.✅
 
