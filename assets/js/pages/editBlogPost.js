@@ -1,9 +1,9 @@
 import { loadCreatedPosts, displayPosts } from "./createBlogPost.js";
 import { sortPostByNewest } from "../utils/sort.js";
-// import { setupEditFormEventHandler } from "../handlers/eventHandlers.js";
+import { setupEditFormEventHandler } from "../handlers/eventHandlers.js";
 import { hideLoader, showLoader } from "../utils/loading.js";
 import { showErrorAlert } from "../utils/alerts.js";
-// import { checkLoginAndRedirect } from "../api/loginApi.js";
+import { checkLoginAndRedirect } from "../api/loginApi.js";
 
 let editPosts = [];
 
@@ -62,11 +62,11 @@ function setupSearch(posts) {
   }
 }
 
-// document.addEventListener("DOMContentLoaded", () => {
-//   if (isEditPage()) {
-//     checkLoginAndRedirect().then(() => {
-//       setupEditFormEventHandler();
-//       fetchAndDisplayPostsForEdit();
-//     });
-//   }
-// });
+document.addEventListener("DOMContentLoaded", () => {
+  if (isEditPage()) {
+    checkLoginAndRedirect().then(() => {
+      setupEditFormEventHandler();
+      fetchAndDisplayPostsForEdit();
+    });
+  }
+});

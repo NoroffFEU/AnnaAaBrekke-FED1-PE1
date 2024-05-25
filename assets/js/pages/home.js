@@ -46,29 +46,29 @@ export async function fetchAndDisplayPosts() {
   return homePosts;
 }
 
-// // Initialize the application
-// async function init() {
-//   showLoader();
-//   const homePosts = await fetchAndDisplayPosts(); // Fetch and display posts
+// Initialize the application
+async function init() {
+  showLoader();
+  const homePosts = await fetchAndDisplayPosts(); // Fetch and display posts
 
-//   setupCarouselClickEvents(); // Set up event listeners for carousel navigation
-//   addSortButtonsEventListener(homePosts); // Add event listeners for sort buttons
-//   addFilterButtonsEventListener(); // Add event listeners for filter buttons
+  setupCarouselClickEvents(); // Set up event listeners for carousel navigation
+  addSortButtonsEventListener(homePosts); // Add event listeners for sort buttons
+  addFilterButtonsEventListener(); // Add event listeners for filter buttons
 
-//   // Add click event listeners to each post
-//   const posts = document.querySelectorAll(".post");
-//   posts.forEach((post) => {
-//     post.addEventListener("click", () => {
-//       handlePostClick(post); // Handle post click
-//     });
-//   });
+  // Add click event listeners to each post
+  const posts = document.querySelectorAll(".post");
+  posts.forEach((post) => {
+    post.addEventListener("click", () => {
+      handlePostClick(post); // Handle post click
+    });
+  });
 
-//   hideLoader();
-// }
+  hideLoader();
+}
 
-// // Check if document is still loading and initialize accordingly
-// if (document.readyState === "loading") {
-//   document.addEventListener("DOMContentLoaded", init); // Initialize when DOM content is loaded
-// } else {
-//   init(); // Initialize immediately if DOM is already loaded
-// }
+// Check if document is still loading and initialize accordingly
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", init); // Initialize when DOM content is loaded
+} else {
+  init(); // Initialize immediately if DOM is already loaded
+}
