@@ -62,16 +62,6 @@ function setupSearch(posts) {
   }
 }
 
-// Function to initialize the edit page
-async function initializeEditPage() {
-  await checkLoginAndRedirect();
-  setupEditFormEventHandler();
-  await fetchAndDisplayPostsForEdit();
-}
-
-// Initialize the application based on page type
-document.addEventListener("DOMContentLoaded", () => {
-  if (isEditPage()) {
-    initializeEditPage();
-  }
-});
+checkLoginAndRedirect();
+setupEditFormEventHandler();
+fetchAndDisplayPostsForEdit();
