@@ -19,25 +19,37 @@ let locallyCreatedPosts = [];
 
 // Save created posts to local storage
 export function saveCreatedPosts(posts) {
+  console.log("Saving posts to localStorage:", posts);
   localStorage.setItem("posts", JSON.stringify(posts));
   locallyCreatedPosts = posts;
 }
-
 export function loadCreatedPosts() {
   const storedPosts = localStorage.getItem("posts");
+  console.log("Loaded posts from localStorage:", storedPosts);
   if (storedPosts) {
     try {
-      locallyCreatedPosts = JSON.parse(storedPosts);
+      const parsedPosts = JSON.parse(storedPosts);
+      if (Array.isArray(parsedPosts)) {
+        // Handle new structure
+        locallyCreatedPosts = parsedPosts;
+      } else if (parsedPosts.data && Array.isArray(parsedPosts.data)) {
+        // Handle old structure
+        locallyCreatedPosts = parsedPosts.data;
+      } else {
+        console.error("Unexpected data structure:", parsedPosts);
+        locallyCreatedPosts = [];
+      }
+      console.log("Parsed posts from localStorage:", locallyCreatedPosts);
     } catch (error) {
       console.error("Error parsing posts from localStorage:", error);
       locallyCreatedPosts = []; // Initialize as an empty array if parsing fails
-      localStorage.removeItem("posts"); // Clear invalid data from localStorage
     }
   } else {
     locallyCreatedPosts = [];
   }
   return locallyCreatedPosts;
 }
+
 
 // Function to create a new post
 export async function createPost(name, postData) {
@@ -66,7 +78,12 @@ export async function createPost(name, postData) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    return await response.json();
+    const newPost = await response.json();
+    locallyCreatedPosts.push(newPost);
+    saveCreatedPosts(locallyCreatedPosts); // Save the updated posts list to local storage
+    console.log("New post created and saved:", locallyCreatedPosts);
+
+    return newPost;
   } catch (error) {
     console.error("Error creating post:", error);
     throw error;
@@ -84,7 +101,7 @@ export function displayPosts(posts, isEditPage = false, limit = 12) {
   }
   postContainer.innerHTML = "";
 
-  if (posts && posts.length > 0) {
+  if (Array.isArray(posts) && posts.length > 0) {
     const postsToDisplay = limit === -1 ? posts : posts.slice(0, limit);
     postsToDisplay.forEach((post) => {
       const postElement = createPostElement(post, isEditPage);
@@ -110,6 +127,8 @@ export function displayPosts(posts, isEditPage = false, limit = 12) {
 
       postContainer.appendChild(postElement);
     });
+  } else {
+    console.error("Expected posts to be a non-empty array but got:", posts);
   }
 }
 
@@ -170,9 +189,7 @@ function createPostElement(post, isEditPage = false) {
         <h3 class="post-title">${postData.title}</h3>
       </div>
       <div class="post-author">${author}</div>
-      <time class="post-date" datetime="${
-        postData.created
-      }">Created: ${new Date(postData.created).toLocaleDateString()}</time>
+      <time class="post-date" datetime="${postData.created}">Created: ${new Date(postData.created).toLocaleDateString()}</time>
       ${updatedTimeHtml}
       <div class="tags-container">
         <div class="tags">${tagsHtml}</div>
@@ -244,18 +261,32 @@ export async function fetchAndDisplayPosts() {
   let homePosts = [];
   try {
     showLoader();
-    homePosts = loadCreatedPosts();
+    console.log("Fetching posts for home page...");
+    homePosts = loadCreatedPosts(); // Load posts from local storage
+    console.log("Loaded posts from localStorage for home page:", homePosts);
 
+    // If no posts found in local storage, fetch from server
     if (!homePosts || homePosts.length === 0) {
+      console.log("No posts found in localStorage. Fetching from server...");
       homePosts = await getPosts(name);
-      saveCreatedPosts(homePosts.data);
+      saveCreatedPosts(homePosts); // Save fetched posts to local storage
+      console.log("Fetched posts from server and saved to localStorage:", homePosts);
     }
 
-    homePosts = sortPostByNewest(homePosts);
-    displayPosts(homePosts, false, 12);
-    latestPostsCarousel(homePosts.slice(0, 3));
+    // Ensure homePosts is an array before sorting and displaying
+    if (Array.isArray(homePosts)) {
+      homePosts = sortPostByNewest(homePosts);
+      console.log("Sorted posts for home page:", homePosts);
+
+      displayPosts(homePosts, false, 12); // Display posts, limit to 12 on the home page
+      latestPostsCarousel(homePosts.slice(0, 3)); // Create carousel for the latest posts
+      console.log("Displayed posts and setup carousel for home page.");
+    } else {
+      console.error("Expected homePosts to be an array but got:", homePosts);
+    }
   } catch (error) {
     console.error("Failed to fetch posts:", error);
+    showErrorAlert("Failed to load posts. Please try again.");
   } finally {
     hideLoader();
   }
@@ -273,6 +304,7 @@ export function initCreatePage() {
     hideLoader();
   });
 }
+
 document.addEventListener("DOMContentLoaded", () => {
   initCreatePage();
 });
