@@ -19,11 +19,16 @@ export async function fetchAndDisplayPosts() {
 
     homePosts = loadCreatedPosts(); // Load posts from local storage
 
-    // If no posts found in local storage, fetch from server
+    // Check if homePosts.data is an array and has posts
     if (!Array.isArray(homePosts) || homePosts.length === 0) {
       const response = await getPosts(name);
-      homePosts = response.data; // Extract data field from the response
-      saveCreatedPosts(homePosts); // Save fetched posts to local storage
+      if (response.data && Array.isArray(response.data) && response.data.length > 0) {
+        homePosts = response.data; // Extract data field from the response
+        saveCreatedPosts(homePosts); // Save fetched posts to local storage
+      } else {
+        console.error("Unexpected data structure:", response);
+        showErrorAlert("Failed to load posts. Invalid data format.");
+      }
     }
 
     // Ensure homePosts is an array before sorting and displaying

@@ -12,6 +12,7 @@ import { isLoggedIn } from "../api/loginApi.js";
 import { showErrorAlert, showSuccessAlert } from "../utils/alerts.js";
 import { hideLoader, showLoader } from "../utils/loading.js";
 import { fetchAndDisplaySinglePost } from "../pages/post.js";
+import { fetchAndDisplayPosts } from "../pages/home.js";
 
 // Add event listeners to sort buttons
 export function addSortButtonsEventListener(posts) {
@@ -201,6 +202,7 @@ export async function setupEditFormEventHandler() {
         editPostForm.classList.add("editFormHidden");
 
         showSuccessAlert("Post updated successfully!");
+        await fetchAndDisplayPosts(); // Refresh the home page posts
       } catch (error) {
         console.error("Failed to update post:", error);
         showErrorAlert("Failed to update post. Please try again.");

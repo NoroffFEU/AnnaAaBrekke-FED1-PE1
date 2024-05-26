@@ -22,11 +22,11 @@ const name = getName();
 async function initHomePage() {
   try {
     showLoader();
-    const homePosts = await fetchAndDisplayPosts();
+    const homePosts = await fetchAndDisplayPosts(); 
 
-    setupCarouselClickEvents();
-    addSortButtonsEventListener(homePosts);
-    addFilterButtonsEventListener();
+    setupCarouselClickEvents(); 
+    addSortButtonsEventListener(homePosts); 
+    addFilterButtonsEventListener(); 
 
     // Add click event listeners to each post
     const posts = document.querySelectorAll(".post");
