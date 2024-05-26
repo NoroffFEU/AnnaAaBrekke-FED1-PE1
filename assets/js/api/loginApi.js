@@ -67,7 +67,9 @@ export function checkLoginAndRedirect() {
   return new Promise((resolve, reject) => {
     const currentPage = window.location.pathname;
     const protectedPages = ["edit.html", "create.html", "register.html"];
-    const needsLogin = protectedPages.some(page => currentPage.includes(page));
+    const needsLogin = protectedPages.some((page) =>
+      currentPage.includes(page)
+    );
 
     if (needsLogin) {
       if (!isLoggedIn()) {

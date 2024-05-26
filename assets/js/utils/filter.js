@@ -1,7 +1,4 @@
-import {
-  displayPosts,
-  loadCreatedPosts
-} from "../pages/createBlogPost.js";
+import { displayPosts, loadCreatedPosts } from "../pages/createBlogPost.js";
 import { fetchAndDisplayPosts } from "../pages/home.js";
 
 export async function createFilterButtons() {

@@ -6,15 +6,14 @@ import { fetchAndDisplayPosts } from "./home.js";
 import {
   loadCreatedPosts,
   displayPosts,
-  createFormHandler
+  createFormHandler,
 } from "./createBlogPost.js";
 import {
   addSortButtonsEventListener,
   handlePostClick,
   setupCarouselClickEvents,
-  setupEditFormEventHandler
+  setupEditFormEventHandler,
 } from "../handlers/eventHandlers.js";
-import { latestPostsCarousel } from "../utils/carousel.js";
 import { addFilterButtonsEventListener } from "../utils/filter.js";
 import { fetchAndDisplayPostsForEdit } from "./editBlogPost.js";
 
@@ -23,11 +22,11 @@ const name = getName();
 async function initHomePage() {
   try {
     showLoader();
-    const homePosts = await fetchAndDisplayPosts(); // Fetch and display posts
+    const homePosts = await fetchAndDisplayPosts();
 
-    setupCarouselClickEvents(); // Set up event listeners for carousel navigation
-    addSortButtonsEventListener(homePosts); // Add event listeners for sort buttons
-    addFilterButtonsEventListener(); // Add event listeners for filter buttons
+    setupCarouselClickEvents();
+    addSortButtonsEventListener(homePosts);
+    addFilterButtonsEventListener();
 
     // Add click event listeners to each post
     const posts = document.querySelectorAll(".post");
@@ -43,7 +42,6 @@ async function initHomePage() {
     hideLoader();
   }
 }
-
 
 async function initCreatePage() {
   try {

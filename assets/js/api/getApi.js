@@ -1,7 +1,4 @@
 import { apiUrlUser } from "./apiUrl.mjs";
-// import { getName } from "./userName";
-
-//OLD
 
 export async function getPosts(name, queryParams = {}) {
   const queryString = new URLSearchParams(queryParams).toString();

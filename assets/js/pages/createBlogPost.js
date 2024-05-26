@@ -8,10 +8,6 @@ import { getName } from "../auth/userName.js";
 import { isLoggedIn } from "../api/loginApi.js";
 import { showSuccessAlert, showErrorAlert } from "../utils/alerts.js";
 import { hideLoader, showLoader } from "../utils/loading.js";
-import { getPosts } from "../api/getApi.js";
-import { latestPostsCarousel } from "../utils/carousel.js";
-import { sortPostByNewest } from "../utils/sort.js";
-import { checkLoginAndRedirect } from "../api/loginApi.js";
 
 // Get the user's name
 const name = getName();
@@ -19,7 +15,6 @@ let locallyCreatedPosts = [];
 
 // Save created posts to local storage
 export function saveCreatedPosts(posts) {
-  console.log("Saving posts to localStorage:", posts);
   localStorage.setItem("posts", JSON.stringify(posts));
   locallyCreatedPosts = posts;
 }
@@ -38,7 +33,6 @@ export function loadCreatedPosts() {
         console.error("Unexpected data structure:", parsedPosts);
         locallyCreatedPosts = [];
       }
-      console.log("Loaded posts from localStorage:", locallyCreatedPosts);
     }
   } catch (error) {
     console.error("Error parsing posts from localStorage:", error);
@@ -46,7 +40,6 @@ export function loadCreatedPosts() {
   }
   return locallyCreatedPosts;
 }
-
 
 // Function to create a new post
 export async function createPost(name, postData) {
@@ -78,7 +71,6 @@ export async function createPost(name, postData) {
     const newPost = await response.json();
     locallyCreatedPosts.push(newPost);
     saveCreatedPosts(locallyCreatedPosts); // Save the updated posts list to local storage
-    console.log("New post created and saved:", locallyCreatedPosts);
 
     return newPost;
   } catch (error) {
@@ -186,7 +178,9 @@ function createPostElement(post, isEditPage = false) {
         <h3 class="post-title">${postData.title}</h3>
       </div>
       <div class="post-author">${author}</div>
-      <time class="post-date" datetime="${postData.created}">Created: ${new Date(postData.created).toLocaleDateString()}</time>
+      <time class="post-date" datetime="${
+        postData.created
+      }">Created: ${new Date(postData.created).toLocaleDateString()}</time>
       ${updatedTimeHtml}
       <div class="tags-container">
         <div class="tags">${tagsHtml}</div>
@@ -252,20 +246,3 @@ export function createFormHandler() {
     }
   });
 }
-
-
-
-// // Function to initialize the create page
-// export function initCreatePage() {
-//   checkLoginAndRedirect().then(() => {
-//     showLoader();
-//     const posts = loadCreatedPosts();
-//     displayPosts(posts, false, -1);
-//     createFormHandler();
-//     hideLoader();
-//   });
-// }
-
-// document.addEventListener("DOMContentLoaded", () => {
-//   initCreatePage();
-// });
