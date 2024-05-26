@@ -5,11 +5,9 @@ import { hideLoader, showLoader } from "../utils/loading.js";
 import { showErrorAlert } from "../utils/alerts.js";
 import { checkLoginAndRedirect } from "../api/loginApi.js";
 
+
 let editPosts = [];
 
-function isEditPage() {
-  return document.body.dataset.page === "edit";
-}
 
 // Fetch and display posts to select for editing
 export async function fetchAndDisplayPostsForEdit() {
@@ -40,6 +38,11 @@ export async function fetchAndDisplayPostsForEdit() {
   }
 }
 
+function isEditPage() {
+  return document.body.dataset.page === "edit";
+}
+
+// Sources used (https://www.youtube.com/watch?v=TlP5WIxVirU and https://blog.openreplay.com/implementing-live-search-functionality-in-javascript/)
 // Function to setup search functionality for title and tags
 function setupSearch(posts) {
   if (!isEditPage()) return;
@@ -62,6 +65,16 @@ function setupSearch(posts) {
   }
 }
 
-checkLoginAndRedirect();
-setupEditFormEventHandler();
-fetchAndDisplayPostsForEdit();
+// Function to initialize the edit page
+async function initializeEditPage() {
+  await checkLoginAndRedirect();
+  setupEditFormEventHandler();
+  await fetchAndDisplayPostsForEdit();
+}
+
+// Initialize the application based on page type
+document.addEventListener("DOMContentLoaded", () => {
+  if (isEditPage()) {
+    initializeEditPage();
+  }
+});
