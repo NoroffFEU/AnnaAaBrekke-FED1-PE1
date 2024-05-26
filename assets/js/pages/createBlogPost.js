@@ -253,43 +253,7 @@ export function createFormHandler() {
   });
 }
 
-// Function to fetch and display posts
-export async function fetchAndDisplayPosts() {
-  let homePosts = [];
-  try {
-    showLoader();
-    console.log("Fetching posts for home page...");
-    homePosts = loadCreatedPosts(); // Load posts from local storage
-    console.log("Loaded posts from localStorage for home page:", homePosts);
 
-    // If no posts found in local storage, fetch from server
-    if (!homePosts || homePosts.length === 0) {
-      console.log("No posts found in localStorage. Fetching from server...");
-      homePosts = await getPosts(name);
-      saveCreatedPosts(homePosts); // Save fetched posts to local storage
-      console.log("Fetched posts from server and saved to localStorage:", homePosts);
-    }
-
-    // Ensure homePosts is an array before sorting and displaying
-    if (Array.isArray(homePosts)) {
-      homePosts = sortPostByNewest(homePosts);
-      console.log("Sorted posts for home page:", homePosts);
-
-      displayPosts(homePosts, false, 12); // Display posts, limit to 12 on the home page
-      latestPostsCarousel(homePosts.slice(0, 3)); // Create carousel for the latest posts
-      console.log("Displayed posts and setup carousel for home page.");
-    } else {
-      console.error("Expected homePosts to be an array but got:", homePosts);
-    }
-  } catch (error) {
-    console.error("Failed to fetch posts:", error);
-    showErrorAlert("Failed to load posts. Please try again.");
-  } finally {
-    hideLoader();
-  }
-
-  return homePosts;
-}
 
 // // Function to initialize the create page
 // export function initCreatePage() {

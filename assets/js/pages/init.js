@@ -2,10 +2,10 @@ import { checkLoginAndRedirect } from "../api/loginApi.js";
 import { hideLoader, showLoader } from "../utils/loading.js";
 import { showErrorAlert } from "../utils/alerts.js";
 import { getName } from "../auth/userName.js";
+import { fetchAndDisplayPosts } from "./home.js";
 import {
   loadCreatedPosts,
   displayPosts,
-  fetchAndDisplayPosts,
   createFormHandler
 } from "./createBlogPost.js";
 import {
@@ -23,16 +23,17 @@ const name = getName();
 async function initHomePage() {
   try {
     showLoader();
-    const homePosts = await fetchAndDisplayPosts();
-    latestPostsCarousel(homePosts);
-    setupCarouselClickEvents();
-    addSortButtonsEventListener(homePosts);
-    addFilterButtonsEventListener();
+    const homePosts = await fetchAndDisplayPosts(); // Fetch and display posts
 
+    setupCarouselClickEvents(); // Set up event listeners for carousel navigation
+    addSortButtonsEventListener(homePosts); // Add event listeners for sort buttons
+    addFilterButtonsEventListener(); // Add event listeners for filter buttons
+
+    // Add click event listeners to each post
     const posts = document.querySelectorAll(".post");
     posts.forEach((post) => {
       post.addEventListener("click", () => {
-        handlePostClick(post);
+        handlePostClick(post); // Handle post click
       });
     });
   } catch (error) {
@@ -42,6 +43,7 @@ async function initHomePage() {
     hideLoader();
   }
 }
+
 
 async function initCreatePage() {
   try {

@@ -6,36 +6,43 @@ import {
 } from "./createBlogPost.js";
 import { latestPostsCarousel } from "../utils/carousel.js";
 import { sortPostByNewest } from "../utils/sort.js";
-import {
-  addSortButtonsEventListener,
-  handlePostClick,
-  setupCarouselClickEvents,
-} from "../handlers/eventHandlers.js";
 import { getName } from "../auth/userName.js";
 import { hideLoader, showLoader } from "../utils/loading.js";
-import { addFilterButtonsEventListener } from "../utils/filter.js";
 import { showErrorAlert } from "../utils/alerts.js";
 
-const name = getName(); 
+const name = getName();
 
-// Function to fetch posts from the server and display them
 export async function fetchAndDisplayPosts() {
   let homePosts = [];
   try {
     showLoader();
 
-    homePosts = await loadCreatedPosts(); // Load posts from local storage
+    homePosts = loadCreatedPosts(); // Load posts from local storage
+    console.log("Loaded posts from localStorage for home page:", homePosts);
 
     // If no posts found in local storage, fetch from server
-    if (!homePosts || !homePosts.data || homePosts.data.length === 0) {
-      homePosts = await getPosts(name);
-      saveCreatedPosts(homePosts.data); // Save fetched posts to local storage
+    if (!Array.isArray(homePosts) || homePosts.length === 0) {
+      console.log("No posts found in local storage. Fetching from server...");
+      const response = await getPosts(name);
+      homePosts = response.data; // Extract data field from the response
+      saveCreatedPosts(homePosts); // Save fetched posts to local storage
+      console.log(
+        "Fetched posts from server and saved to localStorage:",
+        homePosts
+      );
     }
 
-    sortPostByNewest(homePosts.data);
+    // Ensure homePosts is an array before sorting and displaying
+    if (Array.isArray(homePosts)) {
+      sortPostByNewest(homePosts);
+      console.log("Sorted posts for home page:", homePosts);
 
-    displayPosts(homePosts.data, false, 12); // Display posts, limit to 12 on the home page
-    latestPostsCarousel(homePosts.data.slice(0, 3)); // Create carousel for the latest posts
+      displayPosts(homePosts, false, 12); // Display posts, limit to 12 on the home page
+      latestPostsCarousel(homePosts.slice(0, 3)); // Create carousel for the latest posts
+    } else {
+      console.error("Expected homePosts to be an array but got:", homePosts);
+      showErrorAlert("Failed to load posts. Invalid data format.");
+    }
   } catch (error) {
     console.error("Failed to fetch posts:", error);
     showErrorAlert("Failed to load posts. Please try again.");
