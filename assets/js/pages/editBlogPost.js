@@ -72,9 +72,14 @@ async function initializeEditPage() {
   await fetchAndDisplayPostsForEdit();
 }
 
-// Initialize the application based on page type
 document.addEventListener("DOMContentLoaded", () => {
-  if (isEditPage()) {
-    initializeEditPage();
-  }
+  checkLoginAndRedirect()
+    .then(() => {
+      if (isEditPage()) {
+        initializeEditPage();
+      }
+    })
+    .catch(error => {
+      console.error(error);
+    });
 });

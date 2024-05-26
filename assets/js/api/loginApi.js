@@ -62,15 +62,14 @@ export function isLoggedIn(redirectIfNotLoggedIn = false) {
   return false; // User is not logged in
 }
 
+// Function to check login and redirect if necessary
 export function checkLoginAndRedirect() {
   return new Promise((resolve, reject) => {
     const currentPage = window.location.pathname;
-    if (
-      currentPage.includes("edit.html") ||
-      currentPage.includes("create.html") ||
-      currentPage.includes("register.html")
-    ) {
-      // Redirect to login page if not logged in
+    const protectedPages = ["edit.html", "create.html", "register.html"];
+    const needsLogin = protectedPages.some(page => currentPage.includes(page));
+
+    if (needsLogin) {
       if (!isLoggedIn()) {
         showErrorAlert("You need to be logged in to access this page");
         redirectToLoginPage();
