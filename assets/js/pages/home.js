@@ -2,7 +2,7 @@ import { getPosts } from "../api/getApi.js";
 import {
   saveCreatedPosts,
   loadCreatedPosts,
-  displayPosts,
+  displayPosts
 } from "./createBlogPost.js";
 import { latestPostsCarousel } from "../utils/carousel.js";
 import { sortPostByNewest } from "../utils/sort.js";

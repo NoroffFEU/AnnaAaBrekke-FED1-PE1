@@ -202,7 +202,6 @@ export async function setupEditFormEventHandler() {
         editPostForm.classList.add("editFormHidden");
 
         showSuccessAlert("Post updated successfully!");
-        await fetchAndDisplayPosts(); // Refresh the home page posts
       } catch (error) {
         console.error("Failed to update post:", error);
         showErrorAlert("Failed to update post. Please try again.");

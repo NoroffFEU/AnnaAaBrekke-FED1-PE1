@@ -1,8 +1,7 @@
 import { apiUrlUser } from "./apiUrl.mjs";
-// import { fetchAndDisplayPostsForEdit } from "../pages/editBlogPost.js";
 import { hideLoader, showLoader } from "../utils/loading.js";
 import { getName } from "../auth/userName.js";
-import { fetchAndDisplayPosts } from "../pages/home.js";
+import { fetchAndDisplayPostsForEdit } from "../pages/editBlogPost.js";
 
 export async function editPostApi(postId, formData) {
   try {
@@ -26,7 +25,7 @@ export async function editPostApi(postId, formData) {
     }
 
     const editedPost = await response.json();
-    await fetchAndDisplayPosts();
+    await fetchAndDisplayPostsForEdit();
   } catch (error) {
     console.error("Error updating post:", error);
   } finally {

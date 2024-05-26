@@ -19,7 +19,7 @@ export async function fetchAndDisplayPostsForEdit() {
     showLoader();
 
     // Load posts from local storage
-    editPosts = loadCreatedPosts();
+    editPosts =  loadCreatedPosts();
 
     // Check if there are any posts
     if (!Array.isArray(editPosts) || editPosts.length === 0) {
