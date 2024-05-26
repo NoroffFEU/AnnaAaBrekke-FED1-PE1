@@ -8,7 +8,7 @@ import { checkLoginAndRedirect } from "../api/loginApi.js";
 let editPosts = [];
 
 function isEditPage() {
-  return document.body.id === "editBody";
+  return document.body.dataset.page === "edit";
 }
 
 // Fetch and display posts to select for editing
