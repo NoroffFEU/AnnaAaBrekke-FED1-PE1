@@ -23,29 +23,26 @@ export function saveCreatedPosts(posts) {
   localStorage.setItem("posts", JSON.stringify(posts));
   locallyCreatedPosts = posts;
 }
+
+// Load created posts from local storage
 export function loadCreatedPosts() {
-  const storedPosts = localStorage.getItem("posts");
-  console.log("Loaded posts from localStorage:", storedPosts);
-  if (storedPosts) {
-    try {
+  try {
+    const storedPosts = localStorage.getItem("posts");
+    if (storedPosts) {
       const parsedPosts = JSON.parse(storedPosts);
       if (Array.isArray(parsedPosts)) {
-        // Handle new structure
         locallyCreatedPosts = parsedPosts;
       } else if (parsedPosts.data && Array.isArray(parsedPosts.data)) {
-        // Handle old structure
         locallyCreatedPosts = parsedPosts.data;
       } else {
         console.error("Unexpected data structure:", parsedPosts);
         locallyCreatedPosts = [];
       }
-      console.log("Parsed posts from localStorage:", locallyCreatedPosts);
-    } catch (error) {
-      console.error("Error parsing posts from localStorage:", error);
-      locallyCreatedPosts = []; // Initialize as an empty array if parsing fails
+      console.log("Loaded posts from localStorage:", locallyCreatedPosts);
     }
-  } else {
-    locallyCreatedPosts = [];
+  } catch (error) {
+    console.error("Error parsing posts from localStorage:", error);
+    locallyCreatedPosts = []; // Initialize as an empty array if parsing fails
   }
   return locallyCreatedPosts;
 }
@@ -202,7 +199,7 @@ function createPostElement(post, isEditPage = false) {
 }
 
 // Function to handle form submission for creating a post
-function createFormHandler() {
+export function createFormHandler() {
   const form = document.getElementById("createPostForm");
   if (!form) {
     return;
@@ -294,17 +291,17 @@ export async function fetchAndDisplayPosts() {
   return homePosts;
 }
 
-// Function to initialize the create page
-export function initCreatePage() {
-  checkLoginAndRedirect().then(() => {
-    showLoader();
-    const posts = loadCreatedPosts();
-    displayPosts(posts, false, -1);
-    createFormHandler();
-    hideLoader();
-  });
-}
+// // Function to initialize the create page
+// export function initCreatePage() {
+//   checkLoginAndRedirect().then(() => {
+//     showLoader();
+//     const posts = loadCreatedPosts();
+//     displayPosts(posts, false, -1);
+//     createFormHandler();
+//     hideLoader();
+//   });
+// }
 
-document.addEventListener("DOMContentLoaded", () => {
-  initCreatePage();
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//   initCreatePage();
+// });

@@ -4,6 +4,10 @@ import { setupEditFormEventHandler } from "../handlers/eventHandlers.js";
 import { hideLoader, showLoader } from "../utils/loading.js";
 import { showErrorAlert } from "../utils/alerts.js";
 import { checkLoginAndRedirect } from "../api/loginApi.js";
+import { getPosts } from "../api/getApi.js";
+import { getName } from "../auth/userName.js";
+
+const name = getName();
 
 let editPosts = [];
 
@@ -18,10 +22,16 @@ export async function fetchAndDisplayPostsForEdit() {
     console.log("Loaded posts for editing:", editPosts);
 
     // Check if there are any posts
-    if (Array.isArray(editPosts) && editPosts.length === 0) {
-      showErrorAlert("No posts available for editing.");
-      console.log("No posts available for editing.");
-    } else if (Array.isArray(editPosts)) {
+    if (!Array.isArray(editPosts) || editPosts.length === 0) {
+      console.log("No posts found in local storage. Fetching from server...");
+      const response = await getPosts(name);
+      editPosts = response.data; // Extract data field from the response
+      saveCreatedPosts(editPosts); // Save fetched posts to local storage
+      console.log("Fetched posts from server and saved to localStorage:", editPosts);
+    }
+
+    // Ensure editPosts is an array before sorting and displaying
+    if (Array.isArray(editPosts)) {
       // Sort posts by newest
       editPosts = sortPostByNewest(editPosts);
       console.log("Sorted posts for editing:", editPosts);
@@ -39,7 +49,6 @@ export async function fetchAndDisplayPostsForEdit() {
     }
   } catch (error) {
     console.error("Failed to load posts:", error);
-    // Display error message if posts fail to load
     showErrorAlert("Error loading posts. Please try again later.");
   } finally {
     hideLoader();
@@ -50,7 +59,6 @@ function isEditPage() {
   return document.body.dataset.page === "edit";
 }
 
-// Sources used (https://www.youtube.com/watch?v=TlP5WIxVirU and https://blog.openreplay.com/implementing-live-search-functionality-in-javascript/)
 // Function to setup search functionality for title and tags
 function setupSearch(posts) {
   if (!isEditPage()) return;
@@ -73,23 +81,23 @@ function setupSearch(posts) {
   }
 }
 
-// Function to initialize the edit page
-async function initializeEditPage() {
-  console.log("Initializing edit page...");
-  await checkLoginAndRedirect();
-  setupEditFormEventHandler();
-  await fetchAndDisplayPostsForEdit();
-}
+// // Function to initialize the edit page
+// async function initializeEditPage() {
+//   console.log("Initializing edit page...");
+//   await checkLoginAndRedirect();
+//   setupEditFormEventHandler();
+//   await fetchAndDisplayPostsForEdit();
+// }
 
-document.addEventListener("DOMContentLoaded", () => {
-  checkLoginAndRedirect()
-    .then(() => {
-      if (isEditPage()) {
-        console.log("Edit page detected. Initializing...");
-        initializeEditPage();
-      }
-    })
-    .catch(error => {
-      console.error(error);
-    });
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//   checkLoginAndRedirect()
+//     .then(() => {
+//       if (isEditPage()) {
+//         console.log("Edit page detected. Initializing...");
+//         initializeEditPage();
+//       }
+//     })
+//     .catch(error => {
+//       console.error(error);
+//     });
+// });

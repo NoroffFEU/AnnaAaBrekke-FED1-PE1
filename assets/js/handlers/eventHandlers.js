@@ -28,8 +28,8 @@ export function addSortButtonsEventListener(posts) {
     showLoader();
 
     try {
-      if (Array.isArray(posts.data)) {
-        const sortedPosts = sortPostByNewest([...posts.data]);
+      if (Array.isArray(posts)) {
+        const sortedPosts = sortPostByNewest([...posts]);
         displayPosts(sortedPosts);
       } else {
         console.error("Posts data is not an array.");
@@ -46,8 +46,8 @@ export function addSortButtonsEventListener(posts) {
     showLoader();
 
     try {
-      if (Array.isArray(posts.data)) {
-        const sortedPosts = sortPostsByOldest([...posts.data]);
+      if (Array.isArray(posts)) {
+        const sortedPosts = sortPostsByOldest([...posts]);
         displayPosts(sortedPosts);
       } else {
         console.error("Posts data is not an array.");
