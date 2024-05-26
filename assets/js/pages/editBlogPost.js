@@ -69,4 +69,9 @@ async function initializeEditPage() {
   await fetchAndDisplayPostsForEdit();
 }
 
-document.addEventListener("DOMContentLoaded", initializeEditPage);
+// Initialize the application based on page type
+document.addEventListener("DOMContentLoaded", () => {
+  if (isEditPage()) {
+    initializeEditPage();
+  }
+});
