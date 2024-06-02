@@ -1,14 +1,14 @@
 # "Wherever Forever" Online Travel Blog
 
+## Overview
+Transforming Serena's personal travel diaries into an engaging online platform for sharing her travel experiences, complete with interactive features and user-friendly design.
+
+
 <img width="1261" alt="Skjermbilde 2024-06-02 kl  13 00 33" src="https://github.com/NoroffFEU/AnnaAaBrekke-FED1-PE1/assets/143593909/ab77cfdc-eea9-4bbf-9ac9-2758fb8ecd42">
 <img width="1267" alt="Skjermbilde 2024-06-02 kl  13 12 25" src="https://github.com/NoroffFEU/AnnaAaBrekke-FED1-PE1/assets/143593909/f570ad62-f45d-4520-88d2-4fbe9c169502">
 <img width="1267" alt="Skjermbilde 2024-06-02 kl  13 12 52" src="https://github.com/NoroffFEU/AnnaAaBrekke-FED1-PE1/assets/143593909/3c85960c-e982-41b9-a9a6-ead35086991e">
 <img width="1267" alt="Skjermbilde 2024-06-02 kl  13 13 08" src="https://github.com/NoroffFEU/AnnaAaBrekke-FED1-PE1/assets/143593909/bf2135d8-99f9-4542-8dc4-7d417b0a8e64">
 <img width="1267" alt="Skjermbilde 2024-06-02 kl  13 13 24" src="https://github.com/NoroffFEU/AnnaAaBrekke-FED1-PE1/assets/143593909/c2653fb7-ece5-4348-9f45-f7da092fc987">
-
-
-## Overview
-Transforming Serena's personal travel diaries into an engaging online platform for sharing her travel experiences, complete with interactive features and user-friendly design.
 
 ## Description
 "Wherever Forever" is a project to digitize the personal travel diaries of Serena, a travel blogger, and create an engaging travel blog that highlights places, activities, and unforgettable experiences. The blog allows Serena to share her stories and experiences with a global audience, featuring personal recommendations and reflections.
@@ -43,8 +43,7 @@ To view the project, you can access the following pages directly:
 - [Create Post Page](https://norofffeu.github.io/AnnaAaBrekke-FED1-PE1/post/create.html)
 - [Login Page](https://norofffeu.github.io/AnnaAaBrekke-FED1-PE1/account/login.html)
 - [Register Page](https://norofffeu.github.io/AnnaAaBrekke-FED1-PE1/account/register.html)
-
-
+- Specific Post Page
 To run the app locally, open the index.html file in your browser or use a local server like Live Server in VSCode.
 
 ## Contact Me
