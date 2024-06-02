@@ -5,8 +5,8 @@ Transforming Serena's personal travel diaries into an engaging online platform f
 
 
 <img width="1261" alt="Skjermbilde 2024-06-02 kl  13 00 33" src="https://github.com/NoroffFEU/AnnaAaBrekke-FED1-PE1/assets/143593909/ab77cfdc-eea9-4bbf-9ac9-2758fb8ecd42">
-<img width="1267" alt="Skjermbilde 2024-06-02 kl  13 12 25" src="https://github.com/NoroffFEU/AnnaAaBrekke-FED1-PE1/assets/143593909/f570ad62-f45d-4520-88d2-4fbe9c169502">
-<img width="1267" alt="Skjermbilde 2024-06-02 kl  13 12 52" src="https://github.com/NoroffFEU/AnnaAaBrekke-FED1-PE1/assets/143593909/3c85960c-e982-41b9-a9a6-ead35086991e">
+<img width="1244" alt="Skjermbilde 2024-06-02 kl  21 12 48" src="https://github.com/NoroffFEU/AnnaAaBrekke-FED1-PE1/assets/143593909/2b60010e-c8c2-4ca0-a905-eddcac409b87">
+<img width="1244" alt="Skjermbilde 2024-06-02 kl  21 13 03" src="https://github.com/NoroffFEU/AnnaAaBrekke-FED1-PE1/assets/143593909/f92ed44b-fc20-4d6d-8914-c0e5d97484ff">
 <img width="1267" alt="Skjermbilde 2024-06-02 kl  13 13 08" src="https://github.com/NoroffFEU/AnnaAaBrekke-FED1-PE1/assets/143593909/bf2135d8-99f9-4542-8dc4-7d417b0a8e64">
 <img width="1267" alt="Skjermbilde 2024-06-02 kl  13 13 24" src="https://github.com/NoroffFEU/AnnaAaBrekke-FED1-PE1/assets/143593909/c2653fb7-ece5-4348-9f45-f7da092fc987">
 
