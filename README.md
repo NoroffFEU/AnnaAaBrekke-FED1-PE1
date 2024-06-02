@@ -34,10 +34,6 @@ Clone the repo using HTTPS:
 ```bash
 git clone https://github.com/NoroffFEU/AnnaAaBrekke-FED1-PE1.git
 ```
-or using SSH:
-```bash
-git clone git@github.com:NoroffFEU/AnnaAaBrekke-FED1-PE1.git
-```
 
 ## Running
 To view the project, you can access the following pages directly:
