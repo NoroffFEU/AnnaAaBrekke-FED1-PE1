@@ -44,6 +44,7 @@ To view the project, you can access the following pages directly:
 - [Login Page](https://norofffeu.github.io/AnnaAaBrekke-FED1-PE1/account/login.html)
 - [Register Page](https://norofffeu.github.io/AnnaAaBrekke-FED1-PE1/account/register.html)
 - Specific Post Page
+
 To run the app locally, open the index.html file in your browser or use a local server like Live Server in VSCode.
 
 ## Contact Me
